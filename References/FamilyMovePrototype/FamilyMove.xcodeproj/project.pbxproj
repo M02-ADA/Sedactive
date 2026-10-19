@@ -1,0 +1,1014 @@
+// !$*UTF8*$!
+{
+	classes = {
+	};
+	objectVersion = 56;
+	archiveVersion = 1;
+	objects = {
+		13B65AF4D487CE139B227260 = {
+			path = App/AppCoordinator.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		8F69D2603037B23E80BB9FA3 = {
+			isa = PBXBuildFile;
+			fileRef = 890A6C6AC91737902635B620;
+		};
+		C5054CEF5847C766243FA088 = {
+			isa = PBXBuildFile;
+			fileRef = 77585AAA578F44EBDE4D03D2;
+		};
+		728FD7B16545D134DF784BEF = {
+			isa = PBXBuildFile;
+			fileRef = AC64DAC207B1AECF794D27BE;
+		};
+		9C5D8E6C4ED7B71D53CAA5D6 = {
+			isa = PBXBuildFile;
+			fileRef = DD237A98EADD080B008ED246;
+		};
+		BCE16DD0260827ECF338C787 = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BE4CDB718181C9903FAF6D9,
+				F633F51B3E1DCB7D2F1F50C4,
+				2C981230E6A157B7D9DEBB86,
+				9C82C4C689A2A527CABDECD8,
+				F47C23B07A9DA5EDBAD5B2E7,
+				BCBBB4FA8D2834C0EBA7A96D,
+				59CA586802D705758A6F134D,
+				8B5CE3797319D21514D0A723,
+				6C5A501922C1C437EDE1F7C5,
+				B9AE0F25A6BCC0FD6B134672,
+				B2F3506085EE7CC5E32B391F,
+				DA11CC41964154E28F0B94EB,
+				A3A54969B4DEAA43E2F6A63F,
+				9ABC53A658D8972B56C666A5,
+				16DC89E6A064EDEF1AB26ED8,
+				C5054CEF5847C766243FA088,
+				FB62AFDB59E311ECE97F5714,
+				78958303069B97500F7FEEBE,
+				CB1449139317404A1358327C,
+				8A91DD38AF2C02EA2241AED8,
+				C043072832137527D4E7DC40,
+				3FC23344E427E479AEDE6B42,
+				8A25EBB859BA3ACBD80430E3,
+				1DED24D9B7BF3D8CFBAA3035,
+				DC6B1172B4E1EB4AE17096CB,
+				6BE5874524634EB9D7433C6A,
+				26E9DC8BA51D00B12EF0F527,
+				80C871A15AD443E856B99F28,
+				B3C0A6219268A0B7A10FC8DA,
+				9C5D8E6C4ED7B71D53CAA5D6,
+				4E4D76A5EE9AEB841DD0D2E1,
+				FEDB66C7300C834D6595F401,
+				DCEED58F5004914A554BEA0B,
+				449D7F758F49F946160F9960,
+				92AC1D68B26FFFF81E61DF23,
+				F6F40ECE8AEFA35F421B9B22,
+				B3CAB37A4DF3FD052D415CEE,
+				128B7C4F3674F1E0A2D4F5AF,
+				2B71A92E6DB010E79B037BC3,
+				A58BAFCD236045F707BD284A,
+				78FDCD1C5A6684F2CBDE6C65,
+				017A5EB4625D1D8453807249,
+				FFE7539A301440B3433A9D3D,
+				EEB1885EC91842F11A66E93B,
+				D0DD1AC46A1EC4D349CADB7C,
+				931E50AA70383FB088EF06F9,
+				1E9AD7E8C7A8547813D01EFB,
+				E27BF50F3DF696C89551F76F,
+				81D8266066FBBFA7B63FD1F6,
+				F5EDEA09FEECA42E35CC54EA,
+				A707B0CE560BE67CE28202C2,
+				A9D835D799840334DB606B85,
+				728FD7B16545D134DF784BEF,
+				C54F779E7E87307BDAA2B85D,
+				B7F6DD3754860D74046DE57A,
+				CC0E037DFE5A1F8E46868EAB,
+				A3296C688941242B3D191FD2,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC6B1172B4E1EB4AE17096CB = {
+			isa = PBXBuildFile;
+			fileRef = A85909152D2AB3A76020AD53;
+		};
+		A707B0CE560BE67CE28202C2 = {
+			isa = PBXBuildFile;
+			fileRef = 9D297EC2912E1648E6F5E89E;
+		};
+		C8388EC4BF2B3B1FE9B869AD = {
+			path = Features/PlayerSelection/PlayerSelectionView.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		2B71A92E6DB010E79B037BC3 = {
+			isa = PBXBuildFile;
+			fileRef = B0720DD864F6AA721CDE5AB7;
+		};
+		D0DD1AC46A1EC4D349CADB7C = {
+			isa = PBXBuildFile;
+			fileRef = D3D043C2BD7ECCF26525C3CC;
+		};
+		A3A54969B4DEAA43E2F6A63F = {
+			isa = PBXBuildFile;
+			fileRef = 555ACA5F7DFDE59A893ECB91;
+		};
+		1D45A26CE1ACDF053F7DFB7D = {
+			path = BodyTracking/SimulatedBodyPose.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		FB62AFDB59E311ECE97F5714 = {
+			isa = PBXBuildFile;
+			fileRef = 1D45A26CE1ACDF053F7DFB7D;
+		};
+		C0D4367B54B22B0E06DB5D86 = {
+			path = BodyTracking/CalibrationSnapshot.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		E6DE6C99132752C914FEF632 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				CLANG_ENABLE_MODULES = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SDKROOT = iphoneos;
+				CLANG_ENABLE_OBJC_ARC = YES;
+			};
+			name = Release;
+		};
+		555ACA5F7DFDE59A893ECB91 = {
+			path = BodyTracking/HandFeedback.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		D480B2082822F1FA416A1811 = {
+			path = Games/Shared/GameConstants.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		449D7F758F49F946160F9960 = {
+			isa = PBXBuildFile;
+			fileRef = CF8A4E0E49F5614AE8974C96;
+		};
+		BCBBB4FA8D2834C0EBA7A96D = {
+			isa = PBXBuildFile;
+			fileRef = 21096547FAF8C7679F4DE869;
+		};
+		9DB3D9784617F16A30816881 = {
+			path = Games/Shared/SessionEnergyEstimator.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		931E50AA70383FB088EF06F9 = {
+			isa = PBXBuildFile;
+			fileRef = EEB98F95528B44F3A993ECAB;
+		};
+		655155E16B7E441A9189F8CC = {
+			isa = PBXTargetDependency;
+			target = 0E8A3AD980EC179856012B7E;
+			targetProxy = 0A4A430230822E35007B6441;
+		};
+		9ABC53A658D8972B56C666A5 = {
+			isa = PBXBuildFile;
+			fileRef = 79EB4DCF5048114720514BDC;
+		};
+		A85909152D2AB3A76020AD53 = {
+			path = Features/GameSession/GameSessionCoordinator.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		78293F5F89C0B81BE33E0257 = {
+			path = Camera/CameraManager.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		895A9159D1FCE95B4767740F = {
+			path = Games/WhackAMole/WhackAMoleView.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		B9AE0F25A6BCC0FD6B134672 = {
+			isa = PBXBuildFile;
+			fileRef = C0D4367B54B22B0E06DB5D86;
+		};
+		B3CAB37A4DF3FD052D415CEE = {
+			isa = PBXBuildFile;
+			fileRef = AD3F362A01C0E35588784275;
+		};
+		2C89FC06BA9452D155609FB8 = {
+			isa = XCConfigurationList;
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+			buildConfigurations = (
+				94C1D7A82E2F92E70C5BA5D8,
+				9609A256A79253DD705A918E,
+			);
+		};
+		551801DED5214BBAF67AA1A0 = {
+			path = BodyTracking/BodyObservation.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		0FCBF693C089BCDDB19C69A9 = {
+			path = Models/AppSettings.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		8B5CE3797319D21514D0A723 = {
+			isa = PBXBuildFile;
+			fileRef = 551801DED5214BBAF67AA1A0;
+		};
+		6C5A501922C1C437EDE1F7C5 = {
+			isa = PBXBuildFile;
+			fileRef = 90F500AA89C44915CBBD614F;
+		};
+		163D39D31938BBA478C0E98C = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F69D2603037B23E80BB9FA3,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		128B7C4F3674F1E0A2D4F5AF = {
+			isa = PBXBuildFile;
+			fileRef = D480B2082822F1FA416A1811;
+		};
+		8A25EBB859BA3ACBD80430E3 = {
+			isa = PBXBuildFile;
+			fileRef = BA9FBC0A1E912CD7C8D06556;
+		};
+		D66B3603D80A7F0E2F08B3BC = {
+			isa = XCConfigurationList;
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+			buildConfigurations = (
+				7082CC0B6FC1282FCEABD07A,
+				639A7CA24D39909E713B47F7,
+			);
+		};
+		0A4A430230822E35007B6441 = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 98F54143AB4E86B28C3AFEE0;
+			remoteGlobalIDString = 0E8A3AD980EC179856012B7E;
+			remoteInfo = FamilyMove;
+			proxyType = 1;
+		};
+		77585AAA578F44EBDE4D03D2 = {
+			path = BodyTracking/PositionSmoother.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		EEB1885EC91842F11A66E93B = {
+			isa = PBXBuildFile;
+			fileRef = 48BD1D2F1C108784E9830896;
+		};
+		8BE4CDB718181C9903FAF6D9 = {
+			isa = PBXBuildFile;
+			fileRef = 13B65AF4D487CE139B227260;
+		};
+		B7F6DD3754860D74046DE57A = {
+			isa = PBXBuildFile;
+			fileRef = 8249A5105EACC15603A3278C;
+		};
+		F47C23B07A9DA5EDBAD5B2E7 = {
+			isa = PBXBuildFile;
+			fileRef = ADBD8AEDF244C992E3FD31DA;
+		};
+		C148453791BA153E361A303C = {
+			path = Persistence/StatisticsService.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		FB82D759FB6CC8BAF965A9B2 = {
+			isa = XCConfigurationList;
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+			buildConfigurations = (
+				89E1FD6268CC0F221A2BE178,
+				E6DE6C99132752C914FEF632,
+			);
+		};
+		BA9FBC0A1E912CD7C8D06556 = {
+			path = Features/GameSession/GameHUDView.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		E54ED815E4F7D7A7177E9F81 = {
+			path = FamilyMove;
+			isa = PBXGroup;
+			children = (
+				13B65AF4D487CE139B227260,
+				702F2760F2B34FA5848A3516,
+				74B7B67212EAF9168B17A4F2,
+				D223B77A5391CF21BBE7C0C4,
+				ADBD8AEDF244C992E3FD31DA,
+				21096547FAF8C7679F4DE869,
+				F7B46627D8C202A9B7B9B422,
+				551801DED5214BBAF67AA1A0,
+				90F500AA89C44915CBBD614F,
+				C0D4367B54B22B0E06DB5D86,
+				FB38756E0A91F7D9520E509A,
+				3515BE60ADAFFDF7B0615A5F,
+				555ACA5F7DFDE59A893ECB91,
+				79EB4DCF5048114720514BDC,
+				64097E1743345E48866B26B3,
+				77585AAA578F44EBDE4D03D2,
+				1D45A26CE1ACDF053F7DFB7D,
+				EF4BC261CEA2A47B81BDB87D,
+				78293F5F89C0B81BE33E0257,
+				0D78092D29EB032EE8347D02,
+				2BCB5ED1492EBB0EE6F8F6B6,
+				8A2E25BEE2704440D85D198B,
+				BA9FBC0A1E912CD7C8D06556,
+				BC9FBE9DD030B59DE98BBC38,
+				A85909152D2AB3A76020AD53,
+				54316C445D84C3055FB66375,
+				27BD38AF09F2B0DDE00B2E4F,
+				64D9AC58F3660767665151D2,
+				DD49F4DB8CE954E084EDF83C,
+				DD237A98EADD080B008ED246,
+				6A5938BD9FDF94BCA12A1185,
+				C8388EC4BF2B3B1FE9B869AD,
+				FA2E6EC8FF22256BB063F074,
+				CF8A4E0E49F5614AE8974C96,
+				EC2FD5E60B0B4DE827075F61,
+				5476C7A87DA6DB2B3A884DB5,
+				AD3F362A01C0E35588784275,
+				D480B2082822F1FA416A1811,
+				B0720DD864F6AA721CDE5AB7,
+				EA9F61EB1AE3DC648C4781C0,
+				9DB3D9784617F16A30816881,
+				34744491C31C507672B6D23C,
+				4CA74FB5622ABB1B83C94F6F,
+				48BD1D2F1C108784E9830896,
+				D3D043C2BD7ECCF26525C3CC,
+				EEB98F95528B44F3A993ECAB,
+				A46591C76CBE840050461FEE,
+				895A9159D1FCE95B4767740F,
+				0FCBF693C089BCDDB19C69A9,
+				5818CE46E4C00434B8209F5F,
+				9D297EC2912E1648E6F5E89E,
+				7EE0DD41069C4C110F617E4B,
+				AC64DAC207B1AECF794D27BE,
+				DF69DD4D20659F65BBF41A07,
+				8249A5105EACC15603A3278C,
+				9067641E8247688D78FF0B6F,
+				C148453791BA153E361A303C,
+				5FA6AECFE23C52818DAFF8A1,
+				ECE1EC45001A88FEDA8AD920,
+				CDB8F225EAF6DF9D8B5085BB,
+			);
+			sourceTree = "<group>";
+		};
+		B0720DD864F6AA721CDE5AB7 = {
+			path = Games/Shared/GameSessionState.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		5476C7A87DA6DB2B3A884DB5 = {
+			path = Games/BirdsAndAlligators/MovementDetector.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		89E1FD6268CC0F221A2BE178 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				CLANG_ENABLE_MODULES = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SDKROOT = iphoneos;
+				CLANG_ENABLE_OBJC_ARC = YES;
+			};
+			name = Debug;
+		};
+		B58968AD397FA1A20599C9F3 = {
+			path = FamilyMoveUITests.xctest;
+			isa = PBXFileReference;
+			explicitFileType = wrapper.cfbundle;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FB38756E0A91F7D9520E509A = {
+			path = BodyTracking/CoordinateMapper.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		D223B77A5391CF21BBE7C0C4 = {
+			path = App/RootView.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		F5EDEA09FEECA42E35CC54EA = {
+			isa = PBXBuildFile;
+			fileRef = 5818CE46E4C00434B8209F5F;
+		};
+		CF8A4E0E49F5614AE8974C96 = {
+			path = Games/BirdsAndAlligators/BirdsAlligatorsEngine.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		7EE0DD41069C4C110F617E4B = {
+			path = Models/GameType.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		B2F3506085EE7CC5E32B391F = {
+			isa = PBXBuildFile;
+			fileRef = FB38756E0A91F7D9520E509A;
+		};
+		AC64DAC207B1AECF794D27BE = {
+			path = Models/ParticipantSessionStat.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		48BD1D2F1C108784E9830896 = {
+			path = Games/WhackAMole/Mole.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		A58BAFCD236045F707BD284A = {
+			isa = PBXBuildFile;
+			fileRef = EA9F61EB1AE3DC648C4781C0;
+		};
+		1E9AD7E8C7A8547813D01EFB = {
+			isa = PBXBuildFile;
+			fileRef = A46591C76CBE840050461FEE;
+		};
+		BC9FBE9DD030B59DE98BBC38 = {
+			path = Features/GameSession/GameOverView.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		A3296C688941242B3D191FD2 = {
+			isa = PBXBuildFile;
+			fileRef = C148453791BA153E361A303C;
+		};
+		7561BFB015D8F536760CB671 = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CA74FB5622ABB1B83C94F6F = {
+			path = Games/WhackAMole/CollisionDetector.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		92AC1D68B26FFFF81E61DF23 = {
+			isa = PBXBuildFile;
+			fileRef = EC2FD5E60B0B4DE827075F61;
+		};
+		ADBD8AEDF244C992E3FD31DA = {
+			path = App/SessionInputMode.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		702F2760F2B34FA5848A3516 = {
+			path = App/AppRootView.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		26E9DC8BA51D00B12EF0F527 = {
+			isa = PBXBuildFile;
+			fileRef = 27BD38AF09F2B0DDE00B2E4F;
+		};
+		ECE1EC45001A88FEDA8AD920 = {
+			path = Resources/Info.plist;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.xml;
+			sourceTree = "<group>";
+		};
+		59CA586802D705758A6F134D = {
+			isa = PBXBuildFile;
+			fileRef = F7B46627D8C202A9B7B9B422;
+		};
+		FBDC4F23F93125BBEEAE800C = {
+			isa = PBXGroup;
+			name = Products;
+			children = (
+				7D1043473D55BFA90E8530D3,
+				B58968AD397FA1A20599C9F3,
+			);
+			sourceTree = "<group>";
+		};
+		6BE5874524634EB9D7433C6A = {
+			isa = PBXBuildFile;
+			fileRef = 54316C445D84C3055FB66375;
+		};
+		EC2FD5E60B0B4DE827075F61 = {
+			path = Games/BirdsAndAlligators/BirdsAlligatorsView.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		8A2E25BEE2704440D85D198B = {
+			path = DesignSystem/SessionSoundPlayer.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		9609A256A79253DD705A918E = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GENERATE_INFOPLIST_FILE = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jevon.FamilyMoveUITests;
+				CODE_SIGN_STYLE = Automatic;
+				SWIFT_VERSION = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = FamilyMove;
+			};
+			name = Release;
+		};
+		27BD38AF09F2B0DDE00B2E4F = {
+			path = Features/GameSession/SimulatorControlsView.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		0E8A3AD980EC179856012B7E = {
+			productType = "com.apple.product-type.application";
+			productReference = 7D1043473D55BFA90E8530D3;
+			buildConfigurationList = D66B3603D80A7F0E2F08B3BC;
+			productName = FamilyMove;
+			isa = PBXNativeTarget;
+			buildPhases = (
+				BCE16DD0260827ECF338C787,
+				7561BFB015D8F536760CB671,
+				0189424A5A60FED329FA868E,
+			);
+			dependencies = (
+			);
+			name = FamilyMove;
+			buildRules = (
+			);
+		};
+		EEB98F95528B44F3A993ECAB = {
+			path = Games/WhackAMole/MoleSpawner.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		79EB4DCF5048114720514BDC = {
+			path = BodyTracking/HandFeedbackView.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		DF69DD4D20659F65BBF41A07 = {
+			path = Persistence/ProfileRepository.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		FEDB66C7300C834D6595F401 = {
+			isa = PBXBuildFile;
+			fileRef = C8388EC4BF2B3B1FE9B869AD;
+		};
+		0D78092D29EB032EE8347D02 = {
+			path = Camera/CameraPreview.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		3515BE60ADAFFDF7B0615A5F = {
+			path = BodyTracking/DebugOverlayView.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		98F54143AB4E86B28C3AFEE0 = {
+			buildConfigurationList = FB82D759FB6CC8BAF965A9B2;
+			targets = (
+				0E8A3AD980EC179856012B7E,
+				0AD4B07A83E05DBD45B7FC37,
+			);
+			developmentRegion = en;
+			knownRegions = (
+				en,
+				Base,
+			);
+			isa = PBXProject;
+			compatibilityVersion = "Xcode 14.0";
+			productRefGroup = FBDC4F23F93125BBEEAE800C;
+			projectDirPath = "";
+			attributes = {
+				LastUpgradeCheck = 1600;
+				BuildIndependentTargetsInParallel = YES;
+				TargetAttributes = {
+					0E8A3AD980EC179856012B7E = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			hasScannedForEncodings = 0;
+			projectRoot = "";
+			mainGroup = 64292B1C2B2E13EAD8788FC8;
+		};
+		64D9AC58F3660767665151D2 = {
+			path = Features/GameSession/TrackingTestView.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		EF4BC261CEA2A47B81BDB87D = {
+			path = BodyTracking/TrackedPlayer.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		639A7CA24D39909E713B47F7 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MARKETING_VERSION = 1.0;
+				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = FamilyMove/Resources/Mac.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jevon.FamilyMovePrototype;
+				"CODE_SIGN_STYLE[sdk=macosx*]" = Manual;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MACCATALYST = YES;
+				TARGETED_DEVICE_FAMILY = 2;
+				CODE_SIGN_STYLE = Automatic;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SWIFT_VERSION = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				INFOPLIST_FILE = FamilyMove/Resources/Info.plist;
+				GENERATE_INFOPLIST_FILE = NO;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = com.jevon.FamilyMovePrototype.mac;
+			};
+			name = Release;
+		};
+		34744491C31C507672B6D23C = {
+			path = Games/Shared/SimulatorInput.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		78958303069B97500F7FEEBE = {
+			isa = PBXBuildFile;
+			fileRef = EF4BC261CEA2A47B81BDB87D;
+		};
+		81D8266066FBBFA7B63FD1F6 = {
+			isa = PBXBuildFile;
+			fileRef = 0FCBF693C089BCDDB19C69A9;
+		};
+		0AD4B07A83E05DBD45B7FC37 = {
+			productType = "com.apple.product-type.bundle.ui-testing";
+			productReference = B58968AD397FA1A20599C9F3;
+			buildConfigurationList = 2C89FC06BA9452D155609FB8;
+			productName = FamilyMoveUITests;
+			isa = PBXNativeTarget;
+			buildPhases = (
+				163D39D31938BBA478C0E98C,
+			);
+			dependencies = (
+				655155E16B7E441A9189F8CC,
+			);
+			name = FamilyMoveUITests;
+			buildRules = (
+			);
+		};
+		21096547FAF8C7679F4DE869 = {
+			path = App/TrackingController.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		DD237A98EADD080B008ED246 = {
+			path = Features/Onboarding/AddMemberView.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		DD49F4DB8CE954E084EDF83C = {
+			path = Features/Home/HomeView.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		1DED24D9B7BF3D8CFBAA3035 = {
+			isa = PBXBuildFile;
+			fileRef = BC9FBE9DD030B59DE98BBC38;
+		};
+		80C871A15AD443E856B99F28 = {
+			isa = PBXBuildFile;
+			fileRef = 64D9AC58F3660767665151D2;
+		};
+		2BCB5ED1492EBB0EE6F8F6B6 = {
+			path = DesignSystem/AppTheme.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		64292B1C2B2E13EAD8788FC8 = {
+			isa = PBXGroup;
+			sourceTree = "<group>";
+			children = (
+				E54ED815E4F7D7A7177E9F81,
+				890A6C6AC91737902635B620,
+				FBDC4F23F93125BBEEAE800C,
+			);
+		};
+		5FA6AECFE23C52818DAFF8A1 = {
+			path = Resources/Assets.xcassets;
+			isa = PBXFileReference;
+			lastKnownFileType = folder.assetcatalog;
+			sourceTree = "<group>";
+		};
+		94C1D7A82E2F92E70C5BA5D8 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GENERATE_INFOPLIST_FILE = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jevon.FamilyMoveUITests;
+				CODE_SIGN_STYLE = Automatic;
+				SWIFT_VERSION = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = FamilyMove;
+			};
+			name = Debug;
+		};
+		890A6C6AC91737902635B620 = {
+			path = Tests/UITests/FamilyMoveUITests.swift;
+			isa = PBXFileReference;
+			explicitFileType = sourcecode.swift;
+			sourceTree = SOURCE_ROOT;
+		};
+		EA9F61EB1AE3DC648C4781C0 = {
+			path = Games/Shared/RoundClock.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		74B7B67212EAF9168B17A4F2 = {
+			path = App/FamilyMoveApp.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		D3D043C2BD7ECCF26525C3CC = {
+			path = Games/WhackAMole/MoleArenaLayout.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		CB1449139317404A1358327C = {
+			isa = PBXBuildFile;
+			fileRef = 78293F5F89C0B81BE33E0257;
+		};
+		AD3F362A01C0E35588784275 = {
+			path = Games/BirdsAndAlligators/Obstacle.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		6A5938BD9FDF94BCA12A1185 = {
+			path = Features/Onboarding/OnboardingView.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		CC0E037DFE5A1F8E46868EAB = {
+			isa = PBXBuildFile;
+			fileRef = 9067641E8247688D78FF0B6F;
+		};
+		2C981230E6A157B7D9DEBB86 = {
+			isa = PBXBuildFile;
+			fileRef = 74B7B67212EAF9168B17A4F2;
+		};
+		CF8A4D27E1C506A7C75A76BE = {
+			isa = PBXBuildFile;
+			fileRef = 5FA6AECFE23C52818DAFF8A1;
+		};
+		FFE7539A301440B3433A9D3D = {
+			isa = PBXBuildFile;
+			fileRef = 4CA74FB5622ABB1B83C94F6F;
+		};
+		64097E1743345E48866B26B3 = {
+			path = BodyTracking/PlayerTracker.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		7D1043473D55BFA90E8530D3 = {
+			path = FamilyMove.app;
+			isa = PBXFileReference;
+			explicitFileType = wrapper.application;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C043072832137527D4E7DC40 = {
+			isa = PBXBuildFile;
+			fileRef = 2BCB5ED1492EBB0EE6F8F6B6;
+		};
+		16DC89E6A064EDEF1AB26ED8 = {
+			isa = PBXBuildFile;
+			fileRef = 64097E1743345E48866B26B3;
+		};
+		FA2E6EC8FF22256BB063F074 = {
+			path = Features/Progress/FamilyProgressView.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		F7B46627D8C202A9B7B9B422 = {
+			path = App/UITestPoseSource.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		8A91DD38AF2C02EA2241AED8 = {
+			isa = PBXBuildFile;
+			fileRef = 0D78092D29EB032EE8347D02;
+		};
+		DCEED58F5004914A554BEA0B = {
+			isa = PBXBuildFile;
+			fileRef = FA2E6EC8FF22256BB063F074;
+		};
+		017A5EB4625D1D8453807249 = {
+			isa = PBXBuildFile;
+			fileRef = 34744491C31C507672B6D23C;
+		};
+		F6F40ECE8AEFA35F421B9B22 = {
+			isa = PBXBuildFile;
+			fileRef = 5476C7A87DA6DB2B3A884DB5;
+		};
+		9D297EC2912E1648E6F5E89E = {
+			path = Models/GameSession.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		78FDCD1C5A6684F2CBDE6C65 = {
+			isa = PBXBuildFile;
+			fileRef = 9DB3D9784617F16A30816881;
+		};
+		A46591C76CBE840050461FEE = {
+			path = Games/WhackAMole/WhackAMoleEngine.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		54316C445D84C3055FB66375 = {
+			path = Features/GameSession/GameSessionView.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		E27BF50F3DF696C89551F76F = {
+			isa = PBXBuildFile;
+			fileRef = 895A9159D1FCE95B4767740F;
+		};
+		7082CC0B6FC1282FCEABD07A = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MARKETING_VERSION = 1.0;
+				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = FamilyMove/Resources/Mac.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jevon.FamilyMovePrototype;
+				"CODE_SIGN_STYLE[sdk=macosx*]" = Manual;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MACCATALYST = YES;
+				TARGETED_DEVICE_FAMILY = 2;
+				CODE_SIGN_STYLE = Automatic;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SWIFT_VERSION = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				INFOPLIST_FILE = FamilyMove/Resources/Info.plist;
+				GENERATE_INFOPLIST_FILE = NO;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = com.jevon.FamilyMovePrototype.mac;
+			};
+			name = Debug;
+		};
+		9067641E8247688D78FF0B6F = {
+			path = Persistence/SessionRepository.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		9C82C4C689A2A527CABDECD8 = {
+			isa = PBXBuildFile;
+			fileRef = D223B77A5391CF21BBE7C0C4;
+		};
+		CDB8F225EAF6DF9D8B5085BB = {
+			path = Resources/Mac.entitlements;
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.entitlements;
+			sourceTree = "<group>";
+		};
+		8249A5105EACC15603A3278C = {
+			path = Persistence/SessionRecordMapping.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		DA11CC41964154E28F0B94EB = {
+			isa = PBXBuildFile;
+			fileRef = 3515BE60ADAFFDF7B0615A5F;
+		};
+		C54F779E7E87307BDAA2B85D = {
+			isa = PBXBuildFile;
+			fileRef = DF69DD4D20659F65BBF41A07;
+		};
+		90F500AA89C44915CBBD614F = {
+			path = BodyTracking/BodyPoseDetector.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		F633F51B3E1DCB7D2F1F50C4 = {
+			isa = PBXBuildFile;
+			fileRef = 702F2760F2B34FA5848A3516;
+		};
+		4E4D76A5EE9AEB841DD0D2E1 = {
+			isa = PBXBuildFile;
+			fileRef = 6A5938BD9FDF94BCA12A1185;
+		};
+		3FC23344E427E479AEDE6B42 = {
+			isa = PBXBuildFile;
+			fileRef = 8A2E25BEE2704440D85D198B;
+		};
+		0189424A5A60FED329FA868E = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF8A4D27E1C506A7C75A76BE,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5818CE46E4C00434B8209F5F = {
+			path = Models/FamilyMember.swift;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			sourceTree = "<group>";
+		};
+		B3C0A6219268A0B7A10FC8DA = {
+			isa = PBXBuildFile;
+			fileRef = DD49F4DB8CE954E084EDF83C;
+		};
+		A9D835D799840334DB606B85 = {
+			isa = PBXBuildFile;
+			fileRef = 7EE0DD41069C4C110F617E4B;
+		};
+	};
+	rootObject = 98F54143AB4E86B28C3AFEE0;
+}
