@@ -120,6 +120,7 @@ Butuh **Xcode 26** dan macOS. Nggak ada dependency, nggak butuh internet.
 | `StuntRun3D/` | Eksperimen versi 3D penuh pakai RealityKit (kesimpulannya: nggak sepadan dengan usahanya) |
 | `LogicTests/` | 47 tes logika deterministik |
 | `Evidence/` | Screenshot, video, dan log dari tiap revisi (foto kamera asli dan video besar nggak ikut di repo, lihat `Evidence/NOT_IN_REPO.md`) |
+| `ARCHITECTURE.md` | Panduan memahami arsitektur prototype dan merancang strukturmu sendiri |
 | `FINDINGS.md` | Laporan teknis lengkap: pengukuran, keputusan, risiko, dan riwayat revisi 1–11 |
 | `JUNGLE_ART_DIRECTION.md` | Panduan gaya visual dan animasi Jungle Drift, termasuk tabel lapisan kedalaman |
 | `DesignerKit/` | Spesifikasi dan panduan engsel buat desainer yang mau mengganti gambar buaya, burung, dan efek air |
@@ -135,4 +136,4 @@ App ini cuma minta izin kamera (tanpa mikrofon). Nggak ada yang direkam atau di-
 
 ---
 
-Detail teknis lengkapnya ada di [`FINDINGS.md`](FINDINGS.md).
+Detail teknis lengkapnya ada di [`FINDINGS.md`](FINDINGS.md). Untuk memahami struktur kodenya, baca [`ARCHITECTURE.md`](ARCHITECTURE.md).
