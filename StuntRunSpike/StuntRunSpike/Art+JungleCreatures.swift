@@ -41,6 +41,18 @@ extension Art {
         return texture
     }
 
+    /// Evaluation hook for designer deliveries (`-crocParts <folder>`): loads `<folder>/<name>@2x.png` in place of the
+    /// code-drawn part, so delivered PNGs can be checked in game with no code changes. The PNG's point size must match
+    /// the canvas in DesignerKit/ASSET_SPEC.md (pivots are derived from it). Without the argument nothing changes.
+    static func designerPart(_ name: String) -> SKTexture? {
+        guard let folder = UserDefaults.standard.string(forKey: "crocParts"),
+              let data = FileManager.default.contents(atPath: (folder as NSString).appendingPathComponent("\(name)@2x.png")),
+              let image = UIImage(data: data, scale: 2) else { return nil }
+        let texture = SKTexture(image: image)
+        texture.filteringMode = .linear
+        return texture
+    }
+
     /// Union outline: stroke every shape wide in ink first, then fill them all, so overlapping parts read as one
     /// drawing with a single outer line (the same edge weight on every part of a rig).
     private static func inked(_ ctx: CGContext, _ paths: [(UIBezierPath, UIColor)], outline: CGFloat) {
@@ -71,7 +83,7 @@ extension Art {
 
     /// Cranium + upper jaw. Hinge (jaw pivot) at (40, 130) in the canvas (UIKit coordinates).
     static let crocUpperHinge = CGPoint(x: 40, y: 130)
-    static let crocUpper = drawnHi(CGSize(width: 380, height: 200), scale: 1.5) { ctx, _ in
+    static let crocUpper = designerPart("croc-upper") ?? drawnHi(CGSize(width: 380, height: 200), scale: 1.5) { ctx, _ in
         let head = UIBezierPath()
         head.move(to: CGPoint(x: 24, y: 132))
         head.addCurve(to: CGPoint(x: 34, y: 66), controlPoint1: CGPoint(x: 12, y: 112), controlPoint2: CGPoint(x: 16, y: 80))
@@ -106,7 +118,7 @@ extension Art {
 
     /// Lower jaw. Hinge at (40, 8). Coral mouth floor and teeth show only when the jaw opens.
     static let crocLowerHinge = CGPoint(x: 40, y: 8)
-    static let crocLower = drawnHi(CGSize(width: 380, height: 90), scale: 1.5) { ctx, _ in
+    static let crocLower = designerPart("croc-lower") ?? drawnHi(CGSize(width: 380, height: 90), scale: 1.5) { ctx, _ in
         let jaw = UIBezierPath()
         jaw.move(to: CGPoint(x: 24, y: 6))
         jaw.addLine(to: CGPoint(x: 330, y: 12))
@@ -127,7 +139,7 @@ extension Art {
 
     /// Throat: fills the gap between the jaws. Anchored at the hinge (20, 6) and scaled vertically with the jaw.
     static let crocThroatHinge = CGPoint(x: 20, y: 6)
-    static let crocThroat = drawnHi(CGSize(width: 340, height: 200), scale: 1.0) { ctx, _ in
+    static let crocThroat = designerPart("croc-throat") ?? drawnHi(CGSize(width: 340, height: 200), scale: 1.0) { ctx, _ in
         let w = UIBezierPath()
         w.move(to: CGPoint(x: 20, y: 6))
         w.addLine(to: CGPoint(x: 316, y: 4))
@@ -145,7 +157,7 @@ extension Art {
 
     /// Body: neck at the right (anchor (420, 92)), scute ridge along the back, belly below.
     static let crocBodyAnchor = CGPoint(x: 420, y: 92)
-    static let crocBody = drawnHi(CGSize(width: 440, height: 170), scale: 1.25) { ctx, _ in
+    static let crocBody = designerPart("croc-body") ?? drawnHi(CGSize(width: 440, height: 170), scale: 1.25) { ctx, _ in
         let b = UIBezierPath()
         b.move(to: CGPoint(x: 424, y: 44))
         b.addCurve(to: CGPoint(x: 70, y: 52), controlPoint1: CGPoint(x: 320, y: 30), controlPoint2: CGPoint(x: 160, y: 36))
@@ -176,7 +188,7 @@ extension Art {
 
     /// Tail: base at the right (anchor (350, 56)), double crest, tapering to the tip.
     static let crocTailAnchor = CGPoint(x: 350, y: 56)
-    static let crocTail = drawnHi(CGSize(width: 360, height: 110), scale: 1.0) { ctx, _ in
+    static let crocTail = designerPart("croc-tail") ?? drawnHi(CGSize(width: 360, height: 110), scale: 1.0) { ctx, _ in
         let t = UIBezierPath()
         t.move(to: CGPoint(x: 352, y: 14))
         t.addCurve(to: CGPoint(x: 8, y: 64), controlPoint1: CGPoint(x: 220, y: 22), controlPoint2: CGPoint(x: 80, y: 44))
@@ -202,7 +214,7 @@ extension Art {
 
     /// Front leg reaching for the raft: shoulder anchor at (40, 18).
     static let crocLegAnchor = CGPoint(x: 40, y: 18)
-    static let crocLeg = drawnHi(CGSize(width: 150, height: 160), scale: 1.25) { ctx, _ in
+    static let crocLeg = designerPart("croc-leg") ?? drawnHi(CGSize(width: 150, height: 160), scale: 1.25) { ctx, _ in
         let limb = UIBezierPath()
         limb.move(to: CGPoint(x: 40, y: 18)); limb.addLine(to: CGPoint(x: 62, y: 84)); limb.addLine(to: CGPoint(x: 92, y: 116))
         ctx.setLineCap(.round); ctx.setLineJoin(.round)
@@ -223,30 +235,30 @@ extension Art {
 
     // MARK: - Crocodile eye (shared by both views): sclera + iris, pupil, lid, brow.
 
-    static let crocEye = drawnHi(CGSize(width: 80, height: 80), scale: 1.5) { ctx, _ in
+    static let crocEye = designerPart("croc-eye") ?? drawnHi(CGSize(width: 80, height: 80), scale: 1.5) { ctx, _ in
         let r = CGRect(x: 10, y: 10, width: 60, height: 60)
         ctx.setStrokeColor(JunglePalette.outline.cgColor); ctx.setLineWidth(crocOutline * 1.2)
         UIColor.white.setFill(); ctx.fillEllipse(in: r); ctx.strokeEllipse(in: r)
         CreaturePalette.iris.setFill(); ctx.fillEllipse(in: r.insetBy(dx: 9, dy: 9))
     }
-    static let crocPupil = drawnHi(CGSize(width: 16, height: 40), scale: 1.5) { ctx, size in
+    static let crocPupil = designerPart("croc-pupil") ?? drawnHi(CGSize(width: 16, height: 40), scale: 1.5) { ctx, size in
         JunglePalette.outline.setFill(); ctx.fillEllipse(in: CGRect(origin: .zero, size: size).insetBy(dx: 2, dy: 1))
     }
     /// A filled cap that slides over the eye from the top (anchor top-centre, scaled vertically).
-    static let crocLid = drawnHi(CGSize(width: 80, height: 70), scale: 1.5) { ctx, size in
+    static let crocLid = designerPart("croc-lid") ?? drawnHi(CGSize(width: 80, height: 70), scale: 1.5) { ctx, size in
         let r = CGRect(x: 6, y: -6, width: 68, height: size.height + 2)
         CreaturePalette.crocBase.setFill(); ctx.fillEllipse(in: r)
         ctx.setStrokeColor(JunglePalette.outline.cgColor); ctx.setLineWidth(crocOutline * 1.2)
         ctx.addArc(center: CGPoint(x: r.midX, y: r.midY), radius: r.width / 2, startAngle: 0.15, endAngle: .pi - 0.15, clockwise: false)
         ctx.strokePath()
     }
-    static let crocBrow = drawnHi(CGSize(width: 96, height: 40), scale: 1.5) { ctx, _ in
+    static let crocBrow = designerPart("croc-brow") ?? drawnHi(CGSize(width: 96, height: 40), scale: 1.5) { ctx, _ in
         let p = UIBezierPath(roundedRect: CGRect(x: 8, y: 10, width: 80, height: 20), cornerRadius: 10)
         inked(ctx, [(p, CreaturePalette.crocBase)], outline: crocOutline)
         CreaturePalette.crocLight.setFill(); ctx.fillEllipse(in: CGRect(x: 18, y: 12, width: 40, height: 7))
     }
     /// Specular dot: keeps the eye alive (always on top, never moves with the pupil).
-    static let crocGlint = drawnHi(CGSize(width: 16, height: 16), scale: 1.5) { ctx, size in
+    static let crocGlint = designerPart("croc-glint") ?? drawnHi(CGSize(width: 16, height: 16), scale: 1.5) { ctx, size in
         UIColor.white.setFill(); ctx.fillEllipse(in: CGRect(origin: .zero, size: size).insetBy(dx: 2, dy: 2))
     }
 
@@ -254,7 +266,7 @@ extension Art {
 
     static let crocFrontWaterline: CGFloat = 150
     static let crocFrontEyes: [CGPoint] = [CGPoint(x: 96, y: 92), CGPoint(x: 204, y: 92)]
-    static let crocFront = drawnHi(CGSize(width: 300, height: 170), scale: 1.25) { ctx, _ in
+    static let crocFront = designerPart("croc-front") ?? drawnHi(CGSize(width: 300, height: 170), scale: 1.25) { ctx, _ in
         // Low, wide and flat: the back of the skull barely breaks the surface, almond eye bumps under heavy brows,
         // and the snout runs toward the camera to a separate nostril pad at the waterline.
         let skull = UIBezierPath(ovalIn: CGRect(x: 22, y: 112, width: 256, height: 70))

@@ -219,7 +219,7 @@ extension Art {
 
     /// One tail segment seen side-on, lying low: crest scutes on top, cream belly underneath, ink only along the
     /// top and bottom (segments overlap end to end, so there are no seams). Anchor: the segment's centre.
-    static let tailSegment = drawnHi(CGSize(width: 120, height: 70), scale: 1.25) { ctx, size in
+    static let tailSegment = designerPart("tail-segment") ?? drawnHi(CGSize(width: 120, height: 70), scale: 1.25) { ctx, size in
         let body = CGRect(x: 0, y: 22, width: size.width, height: 40)
         CreaturePalette.crocBase.setFill(); ctx.fill(body)
         CreaturePalette.crocBelly.setFill(); ctx.fill(CGRect(x: 0, y: 50, width: size.width, height: 12))
@@ -238,7 +238,7 @@ extension Art {
     }
 
     /// The tail tip: tapers to a rounded point. Anchor: left middle (joins the last segment).
-    static let tailTip = drawnHi(CGSize(width: 140, height: 70), scale: 1.25) { ctx, _ in
+    static let tailTip = designerPart("tail-tip") ?? drawnHi(CGSize(width: 140, height: 70), scale: 1.25) { ctx, _ in
         let p = UIBezierPath()
         p.move(to: CGPoint(x: 0, y: 24)); p.addQuadCurve(to: CGPoint(x: 132, y: 44), controlPoint: CGPoint(x: 80, y: 26))
         p.addQuadCurve(to: CGPoint(x: 0, y: 62), controlPoint: CGPoint(x: 80, y: 62)); p.close()
