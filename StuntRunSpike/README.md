@@ -25,10 +25,16 @@ Parent dan Child terdampar di satu rakit yang hanyut di sungai Amazon yang nggak
 - **Condong (lean)** ke kiri/kanan untuk menjaga rakit tetap seimbang. Lean dua orang dijumlahkan, jadi kerja sama bikin rakit lebih cepat stabil.
 - **Jongkok (duck)** untuk menghindari kawanan burung yang menukik. Jongkok juga ikut meredam goyangan rakit.
 - **Buaya** menggigit pinggir rakit dan menariknya ke bawah, jadi semua harus condong ke sisi sebaliknya.
-- **Lompat (jump)** untuk menghindari **piranha** yang melompat rendah melintasi rakit, setinggi tulang kering. Diawali sirip dan air yang bergolak sebagai peringatan, lalu aba-aba **JUMP!** dan hitungan "3-2-1". Ikan lewat di depan pemain yang dekat duluan, lalu pemain satunya sekitar 0,5 detik kemudian. Kalau terlambat atau terlalu cepat, kakinya "digigit" (cuma lucu-lucuan, poin nggak berkurang).
-- Jadi tiap bahaya punya satu gerakan: **burung = jongkok, buaya = jaga keseimbangan, piranha = lompat.**
+- **Lompat (jump)** untuk tiga bahaya yang lewat rendah di kaki, masing-masing dengan bentuk gerakan berbeda:
+  - **Piranha** melompat melintasi rakit dari samping, setinggi tulang kering. Diawali sirip dan air bergolak, lalu aba-aba **JUMP!** dan hitungan "3-2-1".
+  - **Batang kayu hanyut (Log Sweep):** ombak mengangkat ujung depan rakit dan melempar batang kayu ke atasnya, lalu kayunya menggelinding turun ke arah pemain dan jatuh dari ujung belakang.
+  - **Kibasan ekor buaya (Tail Sweep):** buaya muncul di pojok depan rakit, menggulung ekornya ke atas, lalu mengibaskannya rendah melintasi rakit. Kalau semua berhasil lompat, buayanya pusing; kalau ada yang kena, dia senyum puas.
+  - Kalau terlambat atau terlalu cepat, kakinya kena (cuma lucu-lucuan, poin nggak berkurang). Satu lompatan baru dihitung setelah mendarat dan berdiri tenang lagi.
+- Jadi tiap bahaya punya satu gerakan: **burung = jongkok, buaya menyeruduk = jaga keseimbangan, piranha / kayu / ekor buaya = lompat.**
+- Ada juga kombo: buaya menyeruduk dulu (jaga keseimbangan), lalu setelah rakit stabil dia balik lagi dengan kibasan ekor (lompat).
 - Kalau rakit miring terlalu lama: **SPLASH**, Team Power berkurang, lalu rakitnya ditegakkan lagi.
-- Ada 4 bioma yang berganti pelan-pelan (Open River, Deep Canopy, Lost Ruins, Misty Backwater) plus landmark seperti kuil kuno dan pohon kapuk raksasa.
+- Dunianya hidup dan berlapis: gunung dan bukit di kejauhan, dinding hutan, pohon condong di atas air, angin yang terlihat bergerak menembus pepohonan, kupu-kupu, capung, ikan meloncat, dan bangau di tepi sungai.
+- Ada 4 bioma yang berganti pelan-pelan (Open River, Deep Canopy, Lost Ruins, Misty Backwater) dan 5 landmark bergiliran: kuil kuno, gerbang batu (rakit lewat di bawahnya), pohon kapuk raksasa, air terjun, dan pohon tumbang.
 
 ---
 
@@ -45,13 +51,15 @@ Di **iPad Pro 13" (M4)** dengan kamera depan dan 1–2 orang sungguhan (mode Stu
 | Suhu | normal sepanjang sesi |
 | Jarak main | 2,5–3 m, badan penuh kelihatan di atas pad |
 
-Jungle Drift (termasuk piranha) sejauh ini baru dicoba di **simulator** dengan pemain simulasi: 60 fps, dan 39 tes logika lolos.
+Jungle Drift (semua bahaya, termasuk kayu dan ekor buaya) sejauh ini baru dicoba di **simulator** dengan pemain simulasi: 60 fps stabil, dan 47 tes logika lolos.
 
 ## Yang belum terbukti
 
 - Belum ada tes 10 menit nonstop di iPad untuk cek panas.
 - Akurasi hitungan jongkok belum dibandingkan dengan hitungan manual.
 - Deteksi **lean** dan **lompat** dari pose asli belum dites dengan orang sungguhan (terutama anak-anak).
+- Apakah anak langsung paham kayu yang menggelinding dan ekor buaya artinya "lompat", tanpa membaca tulisan di layar.
+- Performa di iPad asli dengan dunia jungle yang sekarang lebih ramai, plus kamera dan Vision berjalan bersamaan.
 - Jungle Drift belum pernah jalan di iPad asli.
 - Kenyamanan buat anak: goyangan rakit dan tikungan sungai.
 - Buaya itu "seru-seram" atau malah terlalu seram buat anak kecil?
@@ -66,7 +74,7 @@ Butuh **Xcode 26** dan macOS. Nggak ada dependency, nggak butuh internet.
 1. Buka `StuntRunSpike.xcodeproj`.
 2. Di pengaturan *Signing & Capabilities*, ganti **Team** ke akunmu sendiri dan ubah **Bundle Identifier** (yang sekarang terdaftar di akun developer pembuatnya).
 3. Pilih tujuan run:
-   - **Simulator iPad:** kamera diganti test card dan dua pemain digerakkan otomatis. Tombol `1`, `2`, `3` untuk simulasi jongkok.
+   - **Simulator iPad:** kamera diganti test card dan dua pemain digerakkan otomatis. Tombol `1`, `2`, `3` untuk simulasi jongkok. Tombol **Run script** (`S`) menjalankan skrip skenario; di Jungle Drift ada juga **Jump script** (`G`) untuk skenario kayu dan ekor buaya.
    - **iPad asli:** kamera depan aktif dan autoplay mati otomatis. Taruh iPad landscape, lalu berdiri sekitar 2,5–3 m di depannya.
    - **My Mac (Mac Catalyst):** untuk tes cepat pakai kamera Mac.
 
@@ -78,7 +86,10 @@ Butuh **Xcode 26** dan macOS. Nggak ada dependency, nggak butuh internet.
 
 | Argumen | Fungsi |
 |---|---|
+| `-gameMode jungle` | langsung buka Jungle Drift |
 | `-scenario coop` | jalankan skrip deterministik (semua skenario berurutan) |
+| `-scenario sweeps` | skrip Jungle Drift khusus kayu hanyut dan ekor buaya (13 langkah) |
+| `-autoplay YES` | dua pemain digerakkan bot (buat lihat-lihat atau ukur performa) |
 | `-cleanUI YES` | sembunyikan panel developer (buat screenshot) |
 | `-mode camera` | Mode A: tampilkan kamera mentah + overlay |
 | `-reduceMotion YES` | paksa Reduce Motion |
@@ -100,13 +111,19 @@ Butuh **Xcode 26** dan macOS. Nggak ada dependency, nggak butuh internet.
 | `StuntRunSpike/SquatDetector.swift`, `Pose.swift` | Deteksi jongkok (logika murni, ada unit test) |
 | `StuntRunSpike/CoopLogic.swift`, `JungleLogic.swift` | Aturan kerja sama, rakit, buaya, dan burung (logika murni, ada unit test) |
 | `StuntRunSpike/PiranhaLogic.swift` | Deteksi lompat dan penilaian piranha (logika murni, ada unit test) |
+| `StuntRunSpike/JumpSweepLogic.swift` | Aturan dan animasi kayu hanyut dan kibasan ekor buaya, penilaian lompat bersama (logika murni, ada unit test) |
+| `StuntRunSpike/JungleAnimation.swift` | Akting buaya dan burung sebagai fungsi waktu (logika murni, ada unit test) |
 | `StuntRunSpike/WorldScene*.swift` | Dunia Stunt Run: proyeksi pseudo-3D, gameplay, HUD, efek |
-| `StuntRunSpike/*Jungle*.swift` | Dunia, animasi, makhluk, dan shader Jungle Drift |
+| `StuntRunSpike/*Jungle*.swift`, `WorldScene+Piranha.swift`, `WorldScene+JumpSweeps.swift` | Dunia, makhluk, bahaya, dan shader Jungle Drift |
+| `StuntRunSpike/JungleLife.swift`, `Art+JungleLife.swift` | Lapisan kedalaman dan kehidupan di sekitar sungai (gunung, angin, satwa, landmark) |
+| `StuntRunSpike/Art*.swift` | Semua gambar, digambar lewat kode |
 | `StuntRun3D/` | Eksperimen versi 3D penuh pakai RealityKit (kesimpulannya: nggak sepadan dengan usahanya) |
-| `LogicTests/` | 39 tes logika deterministik |
-| `Evidence/` | Screenshot, video, dan log dari tiap revisi |
-| `FINDINGS.md` | Laporan teknis lengkap: pengukuran, keputusan, risiko, dan riwayat revisi 1–9 |
-| `JUNGLE_ART_DIRECTION.md` | Panduan gaya visual dan animasi Jungle Drift |
+| `LogicTests/` | 47 tes logika deterministik |
+| `Evidence/` | Screenshot, video, dan log dari tiap revisi (foto kamera asli dan video besar nggak ikut di repo, lihat `Evidence/NOT_IN_REPO.md`) |
+| `FINDINGS.md` | Laporan teknis lengkap: pengukuran, keputusan, risiko, dan riwayat revisi 1–11 |
+| `JUNGLE_ART_DIRECTION.md` | Panduan gaya visual dan animasi Jungle Drift, termasuk tabel lapisan kedalaman |
+| `DesignerKit/` | Spesifikasi dan panduan engsel buat desainer yang mau mengganti gambar buaya, burung, dan efek air |
+| `Tools/BakeTeamDuck/` | Tool untuk membuat sprite sheet efek TEAM DUCK dari animasi 3D |
 
 ## Kenapa 2.5D, bukan 3D penuh?
 
@@ -114,7 +131,7 @@ Cutout pemain itu pada dasarnya gambar datar, renderer apa pun yang dipakai. Kam
 
 ## Privasi
 
-App ini cuma minta izin kamera (tanpa mikrofon). Nggak ada yang direkam atau di-upload, dan kamera berhenti begitu app masuk background.
+App ini cuma minta izin kamera (tanpa mikrofon). Nggak ada yang direkam atau di-upload, dan kamera berhenti begitu app masuk background. Foto dari tes kamera asli juga nggak dimasukkan ke repo ini.
 
 ---
 
