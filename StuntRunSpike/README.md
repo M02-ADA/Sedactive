@@ -121,6 +121,7 @@ Butuh **Xcode 26** dan macOS. Nggak ada dependency, nggak butuh internet.
 | `LogicTests/` | 47 tes logika deterministik |
 | `Evidence/` | Screenshot, video, dan log dari tiap revisi (foto kamera asli dan video besar nggak ikut di repo, lihat `Evidence/NOT_IN_REPO.md`) |
 | `ARCHITECTURE.md` | Panduan memahami arsitektur prototype dan merancang strukturmu sendiri |
+| `TECHNOLOGY_BREAKDOWN.md` | Brief tim: framework dan API yang dipakai, teknik animasi, pipeline aset desainer, status dan risiko |
 | `FINDINGS.md` | Laporan teknis lengkap: pengukuran, keputusan, risiko, dan riwayat revisi 1–11 |
 | `JUNGLE_ART_DIRECTION.md` | Panduan gaya visual dan animasi Jungle Drift, termasuk tabel lapisan kedalaman |
 | `DesignerKit/` | Spesifikasi dan panduan engsel buat desainer yang mau mengganti gambar buaya, burung, dan efek air |
