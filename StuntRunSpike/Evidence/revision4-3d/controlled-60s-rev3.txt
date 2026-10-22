@@ -1,0 +1,14 @@
+[METRICS] fps=51.5 frame=20.0/93.0ms hitch/min=120.0 vision=7.9fps pose=15.6ms seg=18.1ms comp=36.7ms cap→tex=81.0ms feedback(avg)=n/a dropped=0 mem=38MB thermal=nominal people=0 mask=— src=640×480
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=21.3 vision=25.2fps pose=5.3ms seg=0.3ms comp=33.4ms cap→tex=48.5ms feedback(avg)=n/a dropped=0 mem=39MB thermal=nominal people=0 mask=— src=640×480
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=11.2 vision=26.0fps pose=5.1ms seg=0.2ms comp=32.0ms cap→tex=45.8ms feedback(avg)=n/a dropped=0 mem=38MB thermal=nominal people=0 mask=— src=640×480
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=7.6 vision=27.1fps pose=5.1ms seg=0.3ms comp=31.0ms cap→tex=44.7ms feedback(avg)=n/a dropped=0 mem=39MB thermal=nominal people=0 mask=— src=640×480
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=5.7 vision=26.0fps pose=5.2ms seg=0.3ms comp=32.3ms cap→tex=46.2ms feedback(avg)=n/a dropped=0 mem=39MB thermal=nominal people=0 mask=— src=640×480
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=4.6 vision=18.0fps pose=6.5ms seg=0.4ms comp=47.7ms cap→tex=63.1ms feedback(avg)=n/a dropped=0 mem=40MB thermal=nominal people=0 mask=— src=640×480
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=3.9 vision=23.2fps pose=5.9ms seg=0.4ms comp=39.6ms cap→tex=53.0ms feedback(avg)=n/a dropped=0 mem=40MB thermal=nominal people=0 mask=— src=640×480
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=3.3 vision=21.3fps pose=6.0ms seg=0.3ms comp=41.5ms cap→tex=59.5ms feedback(avg)=n/a dropped=0 mem=40MB thermal=nominal people=0 mask=— src=640×480
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=2.9 vision=25.2fps pose=5.1ms seg=0.3ms comp=34.4ms cap→tex=48.7ms feedback(avg)=n/a dropped=0 mem=41MB thermal=nominal people=0 mask=— src=640×480
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=2.6 vision=16.0fps pose=7.4ms seg=0.4ms comp=51.2ms cap→tex=69.4ms feedback(avg)=n/a dropped=0 mem=41MB thermal=nominal people=0 mask=— src=640×480
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=2.3 vision=18.0fps pose=6.2ms seg=0.5ms comp=43.9ms cap→tex=60.9ms feedback(avg)=n/a dropped=0 mem=41MB thermal=nominal people=0 mask=— src=640×480
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=2.1 vision=21.3fps pose=5.8ms seg=0.3ms comp=41.3ms cap→tex=53.9ms feedback(avg)=n/a dropped=0 mem=41MB thermal=nominal people=0 mask=— src=640×480
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=20.0fps pose=5.9ms seg=0.4ms comp=40.2ms cap→tex=56.9ms feedback(avg)=n/a dropped=0 mem=41MB thermal=nominal people=0 mask=— src=640×480
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=24.0fps pose=5.2ms seg=0.3ms comp=33.3ms cap→tex=48.4ms feedback(avg)=n/a dropped=0 mem=41MB thermal=nominal people=0 mask=— src=640×480

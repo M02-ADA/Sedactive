@@ -1,0 +1,92 @@
+[GAME] t=   0.02 real=   0.08 s=1 state: countdown
+[GAME] t=   0.67 real=   1.41 s=2 replay (script start) → session 2
+[GAME] t=   0.68 real=   1.43 s=2 state: countdown
+[GAME] t=   3.07 real=   4.43 s=2 state: running
+[GAME] t=   9.37 real=  10.71 s=2 challenge #1 warning; participants: CHILD+PARENT
+[GAME] t=   9.37 real=  10.71 s=2 script step 1/9: both succeed, staggered
+[GAME] t=   9.94 real=  11.28 s=2 PARENT contributed to challenge #1 (+1 power)
+[GAME] t=  10.75 real=  12.73 s=2 PARENT rep completed (total 1)
+[GAME] t=  10.95 real=  12.93 s=2 CHILD contributed to challenge #1 (+1 power)
+[GAME] t=  11.77 real=  14.05 s=2 CHILD rep completed (total 1)
+[GAME] t=  11.87 real=  14.15 s=2 challenge #1 TEAM (+1 bonus); power 3/10
+[GAME] t=  17.43 real=  20.28 s=2 challenge #2 warning; participants: CHILD+PARENT
+[GAME] t=  17.43 real=  20.28 s=2 script step 2/9: parent only (child misses)
+[GAME] t=  18.20 real=  21.35 s=2 PARENT contributed to challenge #2 (+1 power)
+[GAME] t=  19.02 real=  22.48 s=2 PARENT rep completed (total 2)
+[GAME] t=  19.94 real=  23.40 s=2 challenge #2 partial: done [PARENT] missing [CHILD]; power 4/10
+[GAME] t=  29.24 real=  33.00 s=2 challenge #3 warning; participants: CHILD+PARENT
+[GAME] t=  29.24 real=  33.00 s=2 script step 3/9: child late but in time
+[GAME] t=  29.71 real=  33.47 s=2 PARENT contributed to challenge #3 (+1 power)
+[GAME] t=  30.53 real=  34.88 s=2 PARENT rep completed (total 3)
+[GAME] t=  31.41 real=  35.76 s=2 CHILD contributed to challenge #3 (+1 power)
+[GAME] t=  31.74 real=  36.37 s=2 challenge #3 TEAM (+1 bonus); power 7/10
+[GAME] t=  32.22 real=  37.40 s=2 CHILD rep completed (total 2)
+[GAME] t=  41.40 real=  46.58 s=2 challenge #4 warning; participants: CHILD+PARENT
+[GAME] t=  41.40 real=  46.58 s=2 script step 4/9: parent incomplete (too shallow)
+[GAME] t=  42.47 real=  47.95 s=2 CHILD contributed to challenge #4 (+1 power)
+[GAME] t=  42.79 real=  48.58 s=2 PARENT incomplete squat (not deep enough)
+[GAME] t=  43.29 real=  49.38 s=2 CHILD rep completed (total 3)
+[GAME] t=  43.90 real=  50.00 s=2 challenge #4 partial: done [CHILD] missing [PARENT]; power 8/10
+[GAME] t=  49.41 real=  55.78 s=2 challenge #5 warning; participants: CHILD+PARENT
+[GAME] t=  49.41 real=  55.78 s=2 script step 5/9: tracking lost mid-challenge
+[GAME] t=  49.98 real=  56.35 s=2 CHILD contributed to challenge #5 (+1 power)
+[GAME] t=  50.31 real=  57.28 s=2 debug: PARENT tracking OFF (simulated)
+[GAME] t=  50.80 real=  57.77 s=2 CHILD rep completed (total 4)
+[GAME] t=  50.90 real=  57.87 s=2 PARENT tracking LOST
+[GAME] t=  50.90 real=  57.88 s=2 challenge #5 withdrawn (game halted); banked contributions kept
+[GAME] t=  50.90 real=  57.88 s=2 state: tracking lost (PARENT)
+[GAME] t=  50.90 real=  59.90 s=2 debug: PARENT tracking ON (simulated)
+[GAME] t=  50.90 real=  59.90 s=2 PARENT tracking recovered
+[GAME] t=  50.90 real=  59.91 s=2 state: ready (waiting for explicit resume)
+[GAME] t=  50.90 real=  61.41 s=2 resume (script)
+[GAME] t=  50.90 real=  61.41 s=2 state: countdown
+[GAME] t=  53.56 real=  64.41 s=2 state: running
+[GAME] t=  59.88 real=  70.72 s=2 challenge #6 warning; participants: CHILD+PARENT
+[GAME] t=  59.88 real=  70.72 s=2 script step 6/9: pause mid-challenge
+[GAME] t=  60.58 real=  71.70 s=2 PARENT contributed to challenge #6 (+1 power)
+[GAME] t=  60.87 real=  72.28 s=2 pause (script)
+[GAME] t=  60.87 real=  72.28 s=2 challenge #6 withdrawn (game halted); banked contributions kept
+[GAME] t=  60.87 real=  72.28 s=2 state: paused
+[GAME] t=  60.87 real=  72.28 s=2 TURBO deferred (game halted)
+[GAME] t=  60.87 real=  74.28 s=2 resume (script)
+[GAME] t=  60.87 real=  74.28 s=2 state: countdown
+[GAME] t=  61.42 real=  75.13 s=2 ignored repCompleted from PARENT (state countdown(endsAt: 945094.9343770419))
+[GAME] t=  63.56 real=  77.28 s=2 state: running
+[GAME] t=  63.57 real=  77.28 s=2 TURBO (deferred, now running)
+[GAME] t=  70.82 real=  85.10 s=2 challenge #7 warning; participants: CHILD+PARENT
+[GAME] t=  70.82 real=  85.10 s=2 script step 7/9: both succeed
+[GAME] t=  71.38 real=  85.67 s=2 PARENT contributed to challenge #7 (+1 power)
+[GAME] t=  72.00 real=  86.88 s=2 CHILD contributed to challenge #7 (+1 power)
+[GAME] t=  72.28 real=  87.48 s=2 PARENT rep completed (total 4)
+[GAME] t=  72.81 real=  88.00 s=2 CHILD rep completed (total 5)
+[GAME] t=  73.32 real=  88.52 s=2 challenge #7 TEAM (+1 bonus); power 3/10
+[GAME] t=  78.91 real=  94.63 s=2 challenge #8 warning; participants: CHILD+PARENT
+[GAME] t=  78.91 real=  94.63 s=2 script step 8/9: both succeed, then replay
+[GAME] t=  79.69 real=  95.70 s=2 PARENT contributed to challenge #8 (+1 power)
+[GAME] t=  80.23 real=  96.56 s=2 CHILD contributed to challenge #8 (+1 power)
+[GAME] t=  80.54 real=  97.15 s=2 PARENT rep completed (total 5)
+[GAME] t=  81.05 real=  97.67 s=2 CHILD rep completed (total 6)
+[GAME] t=  81.42 real=  98.03 s=2 challenge #8 TEAM (+1 bonus); power 6/10
+[GAME] t=  83.37 real= 100.55 s=3 replay (script) → session 3
+[GAME] t=  83.37 real= 100.55 s=3 state: countdown
+[GAME] t=  85.69 real= 103.55 s=3 state: running
+[GAME] t=  91.99 real= 109.83 s=3 challenge #9 warning; participants: CHILD+PARENT
+[GAME] t=  91.99 real= 109.83 s=3 script step 9/9: new session: both succeed
+[GAME] t=  92.96 real= 111.10 s=3 PARENT contributed to challenge #9 (+1 power)
+[GAME] t=  92.98 real= 111.12 s=3 CHILD contributed to challenge #9 (+1 power)
+[GAME] t=  93.78 real= 112.50 s=3 PARENT rep completed (total 1)
+[GAME] t=  93.78 real= 112.50 s=3 CHILD rep completed (total 1)
+[GAME] t=  94.50 real= 113.21 s=3 challenge #9 TEAM (+1 bonus); power 3/10
+[GAME] t=  94.52 real= 113.23 s=3 script finished
+[GAME] t= 100.07 real= 119.33 s=3 challenge #10 warning; participants: CHILD+PARENT
+[GAME] t= 101.40 real= 121.00 s=3 CHILD contributed to challenge #10 (+1 power)
+[GAME] t= 101.46 real= 121.07 s=3 PARENT contributed to challenge #10 (+1 power)
+[GAME] t= 102.22 real= 122.45 s=3 CHILD rep completed (total 2)
+[GAME] t= 102.28 real= 122.52 s=3 PARENT rep completed (total 2)
+[GAME] t= 102.57 real= 122.80 s=3 challenge #10 TEAM (+1 bonus); power 6/10
+[GAME] t= 108.12 real= 128.93 s=3 challenge #11 warning; participants: CHILD+PARENT
+[GAME] t= 109.54 real= 130.72 s=3 CHILD contributed to challenge #11 (+1 power)
+[GAME] t= 109.71 real= 130.88 s=3 PARENT contributed to challenge #11 (+1 power)
+[GAME] t= 110.35 real= 132.15 s=3 CHILD rep completed (total 3)
+[GAME] t= 110.51 real= 132.31 s=3 PARENT rep completed (total 3)
+[GAME] t= 110.61 real= 132.42 s=3 challenge #11 TEAM (+1 bonus); power 9/10

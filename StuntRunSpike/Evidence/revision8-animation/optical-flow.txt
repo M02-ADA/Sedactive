@@ -1,0 +1,3 @@
+deck-under-players mean dx +0.00  dy +0.00 px/frame (half-res; +dy = toward bottom/camera)  zero-shift change 0.8
+left-side-ground mean dx -4.50  dy +1.46 px/frame (half-res; +dy = toward bottom/camera)  zero-shift change 2.6
+right-side-ground mean dx +5.00  dy +1.42 px/frame (half-res; +dy = toward bottom/camera)  zero-shift change 3.8

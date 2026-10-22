@@ -1,0 +1,126 @@
+[GAME] t=   0.02 real=   0.17 s=1 state: countdown
+[GAME] t=   1.01 real=   1.19 s=2 replay (script start) → session 2
+[GAME] t=   1.03 real=   1.20 s=2 state: countdown
+[GAME] t=   4.01 real=   4.20 s=2 state: running
+[GAME] t=   6.03 real=   6.20 s=2 encounter warning: DUCK INCOMING (obstacle not yet visible)
+[GAME] t=   6.03 real=   6.20 s=2 script step 1/11: both succeed, staggered
+[GAME] t=   7.63 real=   7.80 s=2 obstacle revealed at the horizon (z 51)
+[GAME] t=  10.01 real=  10.19 s=2 challenge #1 DUCK cue, window open; participants: CHILD+PARENT
+[GAME] t=  10.61 real=  10.79 s=2 PARENT contributed to challenge #1 (+1 power)
+[GAME] t=  11.43 real=  11.60 s=2 PARENT rep completed (total 1)
+[GAME] t=  11.61 real=  11.79 s=2 CHILD contributed to challenge #1 (+1 power)
+[GAME] t=  12.31 real=  12.49 s=2 hero TEAM DUCK (full)
+[GAME] t=  12.31 real=  12.49 s=2 challenge #1 TEAM (+1 bonus); power 3/10
+[GAME] t=  12.43 real=  12.60 s=2 CHILD rep completed (total 1)
+[GAME] t=  13.50 real=  13.69 s=2 [HERO] frames=71 maxFrame=16.7ms frames>17.5ms=0 mem=45MB
+[GAME] t=  15.31 real=  15.49 s=2 encounter warning: DUCK INCOMING (obstacle not yet visible)
+[GAME] t=  15.31 real=  15.49 s=2 script step 2/11: parent only (child misses)
+[GAME] t=  16.88 real=  17.05 s=2 obstacle revealed at the horizon (z 51)
+[GAME] t=  19.28 real=  19.45 s=2 challenge #2 DUCK cue, window open; participants: CHILD+PARENT
+[GAME] t=  20.08 real=  20.25 s=2 PARENT contributed to challenge #2 (+1 power)
+[GAME] t=  20.90 real=  21.07 s=2 PARENT rep completed (total 2)
+[GAME] t=  21.88 real=  22.05 s=2 challenge #2 partial: done [PARENT] missing [CHILD]; power 4/10
+[GAME] t=  27.08 real=  27.25 s=2 encounter warning: DUCK INCOMING (obstacle not yet visible)
+[GAME] t=  27.08 real=  27.25 s=2 script step 3/11: child late but in time
+[GAME] t=  28.68 real=  28.85 s=2 obstacle revealed at the horizon (z 51)
+[GAME] t=  31.06 real=  31.24 s=2 challenge #3 DUCK cue, window open; participants: CHILD+PARENT
+[GAME] t=  31.55 real=  31.72 s=2 PARENT contributed to challenge #3 (+1 power)
+[GAME] t=  32.36 real=  32.54 s=2 PARENT rep completed (total 3)
+[GAME] t=  33.35 real=  33.52 s=2 CHILD contributed to challenge #3 (+1 power)
+[GAME] t=  33.38 real=  33.55 s=2 hero TEAM DUCK (full)
+[GAME] t=  33.38 real=  33.55 s=2 challenge #3 TEAM (+1 bonus); power 7/10
+[GAME] t=  34.16 real=  34.34 s=2 CHILD rep completed (total 2)
+[GAME] t=  34.58 real=  34.77 s=2 [HERO] frames=72 maxFrame=16.7ms frames>17.5ms=0 mem=45MB
+[GAME] t=  38.70 real=  38.87 s=2 encounter warning: DUCK INCOMING (obstacle not yet visible)
+[GAME] t=  38.70 real=  38.87 s=2 script step 4/11: child LATE (bottom after the beam passed)
+[GAME] t=  40.28 real=  40.45 s=2 obstacle revealed at the horizon (z 51)
+[GAME] t=  42.68 real=  42.85 s=2 challenge #4 DUCK cue, window open; participants: CHILD+PARENT
+[GAME] t=  43.36 real=  43.54 s=2 PARENT contributed to challenge #4 (+1 power)
+[GAME] t=  44.18 real=  44.35 s=2 PARENT rep completed (total 4)
+[GAME] t=  45.28 real=  45.45 s=2 challenge #4 partial: done [PARENT] missing [CHILD]; power 8/10
+[GAME] t=  46.28 real=  46.45 s=2 CHILD rep completed (total 3)
+[GAME] t=  48.28 real=  48.45 s=2 encounter warning: DUCK INCOMING (obstacle not yet visible)
+[GAME] t=  48.28 real=  48.45 s=2 script step 5/11: parent EARLY during the warning
+[GAME] t=  49.88 real=  50.05 s=2 obstacle revealed at the horizon (z 51)
+[GAME] t=  49.98 real=  50.15 s=2 PARENT rep completed (total 5)
+[GAME] t=  52.26 real=  52.44 s=2 challenge #5 DUCK cue, window open; participants: CHILD+PARENT
+[GAME] t=  53.16 real=  53.34 s=2 CHILD contributed to challenge #5 (+1 power)
+[GAME] t=  53.98 real=  54.15 s=2 CHILD rep completed (total 4)
+[GAME] t=  54.88 real=  55.05 s=2 challenge #5 partial: done [CHILD] missing [PARENT]; power 9/10
+[GAME] t=  57.88 real=  58.05 s=2 encounter warning: DUCK INCOMING (obstacle not yet visible)
+[GAME] t=  57.88 real=  58.05 s=2 script step 6/11: parent EARLY during the approach
+[GAME] t=  59.46 real=  59.64 s=2 obstacle revealed at the horizon (z 51)
+[GAME] t=  61.36 real=  61.54 s=2 PARENT rep completed (total 6)
+[GAME] t=  61.86 real=  62.04 s=2 challenge #6 DUCK cue, window open; participants: CHILD+PARENT
+[GAME] t=  62.65 real=  62.82 s=2 CHILD contributed to challenge #6 (+1 power)
+[GAME] t=  63.00 real=  63.17 s=2 TURBO deferred (encounter in progress)
+[GAME] t=  63.46 real=  63.64 s=2 CHILD rep completed (total 5)
+[GAME] t=  64.46 real=  64.64 s=2 challenge #6 partial: done [CHILD] missing [PARENT]; power 0/10
+[GAME] t=  64.46 real=  64.64 s=2 TURBO (deferred until the encounter resolved)
+[GAME] t=  68.76 real=  68.94 s=2 encounter warning: DUCK INCOMING (obstacle not yet visible)
+[GAME] t=  68.76 real=  68.94 s=2 script step 7/11: parent incomplete (too shallow)
+[GAME] t=  70.20 real=  70.37 s=2 obstacle revealed at the horizon (z 51)
+[GAME] t=  72.58 real=  72.75 s=2 challenge #7 DUCK cue, window open; participants: CHILD+PARENT
+[GAME] t=  73.83 real=  74.00 s=2 CHILD contributed to challenge #7 (+1 power)
+[GAME] t=  74.15 real=  74.32 s=2 PARENT incomplete squat (not deep enough)
+[GAME] t=  74.65 real=  74.82 s=2 CHILD rep completed (total 6)
+[GAME] t=  75.18 real=  75.35 s=2 challenge #7 partial: done [CHILD] missing [PARENT]; power 1/10
+[GAME] t=  78.18 real=  78.35 s=2 encounter warning: DUCK INCOMING (obstacle not yet visible)
+[GAME] t=  78.18 real=  78.35 s=2 script step 8/11: tracking lost during the approach
+[GAME] t=  79.76 real=  79.94 s=2 obstacle revealed at the horizon (z 51)
+[GAME] t=  80.40 real=  80.57 s=2 debug: PARENT tracking OFF (simulated)
+[GAME] t=  80.98 real=  81.15 s=2 PARENT tracking LOST
+[GAME] t=  80.98 real=  81.17 s=2 encounter withdrawn (game halted)
+[GAME] t=  80.98 real=  81.17 s=2 state: tracking lost (PARENT)
+[GAME] t=  80.98 real=  83.17 s=2 debug: PARENT tracking ON (simulated)
+[GAME] t=  80.98 real=  83.17 s=2 PARENT tracking recovered
+[GAME] t=  80.98 real=  83.19 s=2 state: ready (waiting for explicit resume)
+[GAME] t=  80.98 real=  84.69 s=2 resume (script)
+[GAME] t=  80.98 real=  84.69 s=2 state: countdown
+[GAME] t=  83.98 real=  87.70 s=2 state: running
+[GAME] t=  86.00 real=  89.70 s=2 encounter warning: DUCK INCOMING (obstacle not yet visible)
+[GAME] t=  86.00 real=  89.70 s=2 script step 9/11: pause inside the DUCK window
+[GAME] t=  87.60 real=  91.30 s=2 obstacle revealed at the horizon (z 51)
+[GAME] t=  90.00 real=  93.70 s=2 challenge #8 DUCK cue, window open; participants: CHILD+PARENT
+[GAME] t=  90.66 real=  94.37 s=2 PARENT contributed to challenge #8 (+1 power)
+[GAME] t=  90.90 real=  94.60 s=2 pause (script)
+[GAME] t=  90.90 real=  94.60 s=2 challenge #8 withdrawn (game halted); banked contributions kept
+[GAME] t=  90.90 real=  94.60 s=2 encounter withdrawn (game halted)
+[GAME] t=  90.90 real=  94.60 s=2 state: paused
+[GAME] t=  90.90 real=  96.60 s=2 resume (script)
+[GAME] t=  90.90 real=  96.60 s=2 state: countdown
+[GAME] t=  91.48 real=  97.19 s=2 ignored repCompleted from PARENT (state countdown(endsAt: 1026136.5504600002))
+[GAME] t=  93.90 real=  99.62 s=2 state: running
+[GAME] t=  95.91 real= 101.62 s=2 encounter warning: DUCK INCOMING (obstacle not yet visible)
+[GAME] t=  95.91 real= 101.62 s=2 script step 10/11: both succeed, then replay
+[GAME] t=  97.51 real= 103.22 s=2 obstacle revealed at the horizon (z 51)
+[GAME] t=  99.91 real= 105.62 s=2 challenge #9 DUCK cue, window open; participants: CHILD+PARENT
+[GAME] t= 100.68 real= 106.39 s=2 PARENT contributed to challenge #9 (+1 power)
+[GAME] t= 101.18 real= 106.89 s=2 CHILD contributed to challenge #9 (+1 power)
+[GAME] t= 101.50 real= 107.20 s=2 PARENT rep completed (total 7)
+[GAME] t= 102.00 real= 107.70 s=2 CHILD rep completed (total 7)
+[GAME] t= 102.21 real= 107.92 s=2 hero TEAM DUCK (full)
+[GAME] t= 102.21 real= 107.92 s=2 challenge #9 TEAM (+1 bonus); power 5/10
+[GAME] t= 103.41 real= 109.14 s=2 [HERO] frames=72 maxFrame=16.7ms frames>17.5ms=0 mem=46MB
+[GAME] t= 104.71 real= 110.42 s=3 replay (script) → session 3
+[GAME] t= 104.71 real= 110.42 s=3 state: countdown
+[GAME] t= 107.71 real= 113.44 s=3 state: running
+[GAME] t= 109.73 real= 115.44 s=3 encounter warning: DUCK INCOMING (obstacle not yet visible)
+[GAME] t= 109.73 real= 115.44 s=3 script step 11/11: new session: both succeed
+[GAME] t= 111.31 real= 117.02 s=3 obstacle revealed at the horizon (z 51)
+[GAME] t= 113.71 real= 119.42 s=3 challenge #10 DUCK cue, window open; participants: CHILD+PARENT
+[GAME] t= 114.61 real= 120.32 s=3 PARENT contributed to challenge #10 (+1 power)
+[GAME] t= 114.70 real= 120.40 s=3 CHILD contributed to challenge #10 (+1 power)
+[GAME] t= 115.43 real= 121.14 s=3 PARENT rep completed (total 1)
+[GAME] t= 115.51 real= 121.22 s=3 CHILD rep completed (total 1)
+[GAME] t= 116.01 real= 121.72 s=3 hero TEAM DUCK (full)
+[GAME] t= 116.01 real= 121.72 s=3 challenge #10 TEAM (+1 bonus); power 3/10
+[GAME] t= 116.50 real= 122.20 s=3 script finished
+[GAME] t= 117.20 real= 122.92 s=3 [HERO] frames=71 maxFrame=16.7ms frames>17.5ms=0 mem=46MB
+[GAME] t= 119.01 real= 124.72 s=3 encounter warning: DUCK INCOMING (obstacle not yet visible)
+[GAME] t= 120.58 real= 126.29 s=3 obstacle revealed at the horizon (z 51)
+[GAME] t= 122.98 real= 128.69 s=3 challenge #11 DUCK cue, window open; participants: CHILD+PARENT
+[GAME] t= 123.65 real= 129.35 s=3 CHILD contributed to challenge #11 (+1 power)
+[GAME] t= 123.71 real= 129.42 s=3 PARENT contributed to challenge #11 (+1 power)
+[GAME] t= 124.46 real= 130.17 s=3 CHILD rep completed (total 2)
+[GAME] t= 124.53 real= 130.24 s=3 PARENT rep completed (total 2)

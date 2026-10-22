@@ -1,0 +1,241 @@
+[GAME] t=   0.00 real=-1025388.54 s=1 jungle art generated in 77 ms (93 textures)
+[GAME] t=   0.00 real=-1025388.54 s=1 mode: Jungle Drift
+[GAME] t=   0.02 real=   0.53 s=1 state: countdown
+[GAME] t=   1.03 real=   1.54 s=2 replay (jungle script start) → session 2
+[GAME] t=   1.03 real=   1.54 s=2 state: countdown
+[GAME] t=   4.03 real=   4.56 s=2 state: running
+[GAME] t=   5.53 real=   6.04 s=2 beat: logSweep
+[GAME] t=   5.53 real=   6.04 s=2 jungle script step 1/13: LOG: both jump on time → TEAM JUMP (warning, reveal, drift, the wave lifts it, roll, exit)
+[GAME] t=   5.53 real=   6.04 s=2 log: warning — rapids ahead, leaves swirling (nothing to jump yet)
+[GAME] t=   7.52 real=   8.03 s=2 log: revealed — it surfaces in the rapids and the current carries it at the raft
+[GAME] t=  10.17 real=  10.68 s=2 log: JUMP cue (#1); crossings at PARENT 1.40 s, CHILD 1.45 s
+[GAME] t=  10.72 real=  11.23 s=2 log: the standing wave lifts it onto the bow — the bow rises, the deck tilts toward you
+[GAME] t=  11.17 real=  11.68 s=2 log: lands on the deck and rolls at the players' feet
+[GAME] t=  11.33 real=  11.84 s=2 PARENT jump: takeoff
+[GAME] t=  11.33 real=  11.84 s=2 log: PARENT cleared (+1 power)
+[GAME] t=  11.40 real=  11.91 s=2 CHILD jump: takeoff
+[GAME] t=  11.40 real=  11.91 s=2 log: CHILD cleared (+1 power)
+[GAME] t=  11.40 real=  11.91 s=2 log: TEAM (+1 bonus); power 3/10
+[GAME] t=  11.72 real=  12.23 s=2 PARENT jump: landed (air 0.38 s)
+[GAME] t=  11.78 real=  12.29 s=2 CHILD jump: landed (air 0.38 s)
+[GAME] t=  11.88 real=  12.39 s=2 log: off the near edge — splash behind the raft
+[GAME] t=  11.93 real=  12.44 s=2 PARENT jump: cycle complete (jumps 1)
+[GAME] t=  11.98 real=  12.49 s=2 CHILD jump: cycle complete (jumps 1)
+[GAME] t=  13.68 real=  14.19 s=2 log: gone downstream (beat over)
+[GAME] t=  13.68 real=  14.19 s=2 beat done: logSweep
+[GAME] t=  16.68 real=  17.19 s=2 beat: calm(landmark: false)
+[GAME] t=  16.68 real=  17.19 s=2 jungle script step 2/13: calm: the bow settles, the river carries on
+[GAME] t=  16.68 real=  17.19 s=2 calm stretch
+[GAME] t=  19.03 real=  19.54 s=2 raft: steady streak (+1 power)
+[GAME] t=  22.67 real=  23.18 s=2 beat done: calm(landmark: false)
+[GAME] t=  25.03 real=  25.54 s=2 raft: steady streak (+1 power)
+[GAME] t=  25.67 real=  26.18 s=2 beat: tailSweep(StuntRunSpike.Zone.right)
+[GAME] t=  25.67 real=  26.18 s=2 jungle script step 3/13: TAIL RIGHT: both jump on time → TEAM; the croc overshoots and is dizzy
+[GAME] t=  25.67 real=  26.18 s=2 tail: warning, RIGHT — swirl at the bow corner (nothing to jump yet)
+[GAME] t=  27.25 real=  27.76 s=2 tail: the croc surfaces side-on beside the bow, eyes on the players
+[GAME] t=  28.25 real=  28.76 s=2 tail: coils — the tail lifts out of the water and winds back (anticipation)
+[GAME] t=  28.93 real=  29.44 s=2 tail: JUMP cue (#2); crossings at PARENT 1.40 s, CHILD 1.43 s
+[GAME] t=  29.55 real=  30.06 s=2 tail: SWEEP — low across the deck
+[GAME] t=  30.10 real=  30.61 s=2 PARENT jump: takeoff
+[GAME] t=  30.10 real=  30.61 s=2 tail: PARENT cleared (+1 power)
+[GAME] t=  30.13 real=  30.64 s=2 CHILD jump: takeoff
+[GAME] t=  30.13 real=  30.64 s=2 tail: CHILD cleared (+1 power)
+[GAME] t=  30.13 real=  30.64 s=2 tail: TEAM (+1 bonus); power 8/10
+[GAME] t=  30.35 real=  30.86 s=2 tail: overshoots, spins round — dizzy!
+[GAME] t=  30.48 real=  30.99 s=2 PARENT jump: landed (air 0.38 s)
+[GAME] t=  30.52 real=  31.03 s=2 CHILD jump: landed (air 0.38 s)
+[GAME] t=  30.68 real=  31.19 s=2 PARENT jump: cycle complete (jumps 2)
+[GAME] t=  30.72 real=  31.23 s=2 CHILD jump: cycle complete (jumps 2)
+[GAME] t=  32.85 real=  33.36 s=2 tail: the croc swims off (beat over)
+[GAME] t=  32.85 real=  33.36 s=2 beat done: tailSweep(StuntRunSpike.Zone.right)
+[GAME] t=  35.85 real=  36.36 s=2 beat: birds
+[GAME] t=  35.85 real=  36.36 s=2 jungle script step 4/13: birds: both duck (DUCK still works between jumps)
+[GAME] t=  35.85 real=  36.36 s=2 birds: warning (flock not yet visible)
+[GAME] t=  37.45 real=  37.96 s=2 birds: flock revealed above the canopy ahead
+[GAME] t=  39.83 real=  40.34 s=2 birds: DUCK cue, window open (#3)
+[GAME] t=  40.40 real=  40.91 s=2 birds: PARENT ducked (+1 power)
+[GAME] t=  40.90 real=  41.41 s=2 birds: CHILD ducked (+1 power)
+[GAME] t=  41.22 real=  41.73 s=2 PARENT rep completed (total 1)
+[GAME] t=  41.25 real=  41.76 s=2 TURBO (team power full)
+[GAME] t=  41.25 real=  41.76 s=2 RIVER SPIRIT (team power full)
+[GAME] t=  41.72 real=  42.23 s=2 CHILD rep completed (total 1)
+[GAME] t=  42.13 real=  42.64 s=2 birds: TEAM (+1 bonus); power 1/10
+[GAME] t=  42.95 real=  43.46 s=2 beat done: birds
+[GAME] t=  43.03 real=  43.54 s=2 raft: steady streak (+1 power)
+[GAME] t=  45.95 real=  46.46 s=2 beat: logSweep
+[GAME] t=  45.95 real=  46.46 s=2 jungle script step 5/13: LOG: Parent TOO EARLY, Child TOO LATE → both bumped, no power lost
+[GAME] t=  45.95 real=  46.46 s=2 log: warning — rapids ahead, leaves swirling (nothing to jump yet)
+[GAME] t=  47.93 real=  48.44 s=2 log: revealed — it surfaces in the rapids and the current carries it at the raft
+[GAME] t=  50.58 real=  51.09 s=2 log: JUMP cue (#4); crossings at PARENT 1.40 s, CHILD 1.45 s
+[GAME] t=  50.85 real=  51.36 s=2 PARENT jump: takeoff
+[GAME] t=  51.13 real=  51.64 s=2 log: the standing wave lifts it onto the bow — the bow rises, the deck tilts toward you
+[GAME] t=  51.23 real=  51.74 s=2 PARENT jump: landed (air 0.38 s)
+[GAME] t=  51.43 real=  51.94 s=2 PARENT jump: cycle complete (jumps 3)
+[GAME] t=  51.58 real=  52.09 s=2 log: lands on the deck and rolls at the players' feet
+[GAME] t=  52.18 real=  52.69 s=2 log: PARENT bumped — TOO EARLY
+[GAME] t=  52.18 real=  52.69 s=2 log: PARENT label TOO EARLY
+[GAME] t=  52.25 real=  52.76 s=2 log: CHILD bumped
+[GAME] t=  52.25 real=  52.76 s=2 log: partial: cleared [] hit [CHILD,PARENT]
+[GAME] t=  52.30 real=  52.81 s=2 log: off the near edge — splash behind the raft
+[GAME] t=  52.47 real=  52.98 s=2 CHILD jump: takeoff
+[GAME] t=  52.47 real=  52.98 s=2 log: CHILD jumped TOO LATE
+[GAME] t=  52.85 real=  53.36 s=2 CHILD jump: landed (air 0.38 s)
+[GAME] t=  53.05 real=  53.56 s=2 CHILD jump: cycle complete (jumps 3)
+[GAME] t=  54.10 real=  54.61 s=2 log: gone downstream (beat over)
+[GAME] t=  54.10 real=  54.61 s=2 beat done: logSweep
+[GAME] t=  55.03 real=  55.54 s=2 raft: steady streak (+1 power)
+[GAME] t=  57.10 real=  57.61 s=2 beat: tailSweep(StuntRunSpike.Zone.left)
+[GAME] t=  57.10 real=  57.61 s=2 jungle script step 6/13: TAIL LEFT: only the Child jumps → partial; the Parent is swept, the croc is pleased
+[GAME] t=  57.10 real=  57.61 s=2 tail: warning, LEFT — swirl at the bow corner (nothing to jump yet)
+[GAME] t=  58.70 real=  59.21 s=2 tail: the croc surfaces side-on beside the bow, eyes on the players
+[GAME] t=  59.70 real=  60.21 s=2 tail: coils — the tail lifts out of the water and winds back (anticipation)
+[GAME] t=  60.37 real=  60.88 s=2 tail: JUMP cue (#5); crossings at PARENT 1.43 s, CHILD 1.40 s
+[GAME] t=  60.98 real=  61.49 s=2 tail: SWEEP — low across the deck
+[GAME] t=  61.53 real=  62.04 s=2 CHILD jump: takeoff
+[GAME] t=  61.53 real=  62.04 s=2 tail: CHILD cleared (+1 power)
+[GAME] t=  61.78 real=  62.29 s=2 tail: overshoots, spins round — dizzy!
+[GAME] t=  61.92 real=  62.43 s=2 CHILD jump: landed (air 0.38 s)
+[GAME] t=  62.00 real=  62.51 s=2 tail: PARENT swept
+[GAME] t=  62.00 real=  62.51 s=2 tail: partial: cleared [CHILD] hit [PARENT]
+[GAME] t=  62.13 real=  62.64 s=2 CHILD jump: cycle complete (jumps 4)
+[GAME] t=  62.60 real=  63.11 s=2 tail: PARENT didn't jump
+[GAME] t=  64.28 real=  64.79 s=2 tail: the croc swims off (beat over)
+[GAME] t=  64.28 real=  64.79 s=2 beat done: tailSweep(StuntRunSpike.Zone.left)
+[GAME] t=  67.03 real=  67.54 s=2 raft: steady streak (+1 power)
+[GAME] t=  67.28 real=  67.79 s=2 beat: gatorThenTail(StuntRunSpike.Zone.right)
+[GAME] t=  67.28 real=  67.79 s=2 jungle script step 7/13: COMBO: gator RIGHT rams (both lean), the raft steadies, it comes back with the TAIL → both jump
+[GAME] t=  67.28 real=  67.79 s=2 gator: warning, RIGHT side (bubbles; not yet visible)
+[GAME] t=  68.88 real=  69.39 s=2 gator: eyes surface, swimming at the raft
+[GAME] t=  68.88 real=  69.39 s=2 croc: surfacing
+[GAME] t=  69.52 real=  70.03 s=2 croc: swimming
+[GAME] t=  70.70 real=  71.21 s=2 croc: anticipation
+[GAME] t=  71.30 real=  71.81 s=2 croc: lunging
+[GAME] t=  71.48 real=  71.99 s=2 gator: STRIKE on the right edge — raft dragged down
+[GAME] t=  71.48 real=  71.99 s=2 croc: impact
+[GAME] t=  71.62 real=  72.13 s=2 croc: clinging
+[GAME] t=  72.13 real=  72.64 s=2 gator: PARENT leaned away (+1 power)
+[GAME] t=  72.32 real=  72.83 s=2 gator: CHILD leaned away (+1 power)
+[GAME] t=  73.88 real=  74.39 s=2 gator: lets go and sinks
+[GAME] t=  73.88 real=  74.39 s=2 croc: retreat
+[GAME] t=  74.77 real=  75.28 s=2 croc: gone
+[GAME] t=  75.35 real=  75.86 s=2 gator: TEAM STEADY (+1 bonus); power 8/10
+[GAME] t=  76.35 real=  76.86 s=2 tail: warning, RIGHT — swirl at the bow corner (nothing to jump yet)
+[GAME] t=  77.97 real=  78.48 s=2 tail: the croc surfaces side-on beside the bow, eyes on the players
+[GAME] t=  78.97 real=  79.48 s=2 tail: coils — the tail lifts out of the water and winds back (anticipation)
+[GAME] t=  79.63 real=  80.14 s=2 tail: JUMP cue (#7); crossings at PARENT 1.40 s, CHILD 1.43 s
+[GAME] t=  80.25 real=  80.76 s=2 tail: SWEEP — low across the deck
+[GAME] t=  80.80 real=  81.31 s=2 PARENT jump: takeoff
+[GAME] t=  80.80 real=  81.31 s=2 tail: PARENT cleared (+1 power)
+[GAME] t=  80.88 real=  81.39 s=2 CHILD jump: takeoff
+[GAME] t=  80.88 real=  81.39 s=2 tail: CHILD cleared (+1 power)
+[GAME] t=  80.88 real=  81.39 s=2 tail: TEAM (+1 bonus); power 1/10
+[GAME] t=  81.07 real=  81.58 s=2 tail: overshoots, spins round — dizzy!
+[GAME] t=  81.18 real=  81.69 s=2 PARENT jump: landed (air 0.38 s)
+[GAME] t=  81.23 real=  81.74 s=2 TURBO (team power full)
+[GAME] t=  81.23 real=  81.74 s=2 RIVER SPIRIT (team power full)
+[GAME] t=  81.27 real=  81.78 s=2 CHILD jump: landed (air 0.38 s)
+[GAME] t=  81.40 real=  81.91 s=2 PARENT jump: cycle complete (jumps 4)
+[GAME] t=  81.48 real=  81.99 s=2 CHILD jump: cycle complete (jumps 5)
+[GAME] t=  83.57 real=  84.08 s=2 tail: the croc swims off (beat over)
+[GAME] t=  83.57 real=  84.08 s=2 beat done: gatorThenTail(StuntRunSpike.Zone.right)
+[GAME] t=  86.57 real=  87.08 s=2 beat: logSweep
+[GAME] t=  86.57 real=  87.08 s=2 jungle script step 8/13: LOG: pause during the WARNING → withdrawn, resume cleanly
+[GAME] t=  86.57 real=  87.08 s=2 log: warning — rapids ahead, leaves swirling (nothing to jump yet)
+[GAME] t=  87.57 real=  88.08 s=2 pause (jungle script)
+[GAME] t=  87.57 real=  88.09 s=2 log: withdrawn (game halted)
+[GAME] t=  87.57 real=  88.09 s=2 state: paused
+[GAME] t=  87.57 real=  90.08 s=2 resume (jungle script)
+[GAME] t=  87.58 real=  90.09 s=2 state: countdown
+[GAME] t=  90.57 real=  93.09 s=2 state: running
+[GAME] t=  90.58 real=  93.09 s=2 beat: tailSweep(StuntRunSpike.Zone.right)
+[GAME] t=  90.58 real=  93.09 s=2 jungle script step 9/13: TAIL RIGHT: Child's tracking lost during the coil → withdrawn → READY → resume
+[GAME] t=  90.58 real=  93.09 s=2 tail: warning, RIGHT — swirl at the bow corner (nothing to jump yet)
+[GAME] t=  92.18 real=  94.69 s=2 tail: the croc surfaces side-on beside the bow, eyes on the players
+[GAME] t=  93.18 real=  95.69 s=2 tail: coils — the tail lifts out of the water and winds back (anticipation)
+[GAME] t=  93.58 real=  96.09 s=2 debug: CHILD tracking OFF (simulated)
+[GAME] t=  93.85 real=  96.36 s=2 tail: JUMP cue (#8); crossings at PARENT 1.40 s, CHILD 1.43 s
+[GAME] t=  94.20 real=  96.71 s=2 CHILD tracking LOST
+[GAME] t=  94.20 real=  96.73 s=2 tail: withdrawn (game halted)
+[GAME] t=  94.20 real=  96.73 s=2 state: tracking lost (CHILD)
+[GAME] t=  94.20 real=  98.71 s=2 debug: CHILD tracking ON (simulated)
+[GAME] t=  94.20 real=  98.73 s=2 CHILD tracking recovered
+[GAME] t=  94.20 real=  98.74 s=2 state: ready (waiting for explicit resume)
+[GAME] t=  94.20 real= 100.23 s=2 resume (jungle script)
+[GAME] t=  94.22 real= 100.24 s=2 state: countdown
+[GAME] t=  97.18 real= 103.23 s=2 state: running
+[GAME] t=  97.20 real= 103.23 s=2 beat: piranhas(from: StuntRunSpike.Zone.left, count: 1)
+[GAME] t=  97.20 real= 103.23 s=2 jungle script step 10/13: piranhas LEFT ×1: both jump (piranhas unchanged)
+[GAME] t=  97.20 real= 103.23 s=2 piranhas: warning, LEFT side ×1 (fins circling; nothing leaps yet)
+[GAME] t=  99.00 real= 105.03 s=2 piranhas: revealed — fins race in along the raft, leap path glows across the deck
+[GAME] t=  99.42 real= 105.44 s=2 piranhas: JUMP cue, leap 1/1 (#9); crossings at PARENT 1.38 s, CHILD 1.85 s
+[GAME] t= 100.57 real= 106.59 s=2 PARENT jump: takeoff
+[GAME] t= 100.57 real= 106.59 s=2 piranhas: PARENT cleared (+1 power)
+[GAME] t= 100.60 real= 106.63 s=2 piranhas: leap 1/1 — out of the water
+[GAME] t= 100.95 real= 106.98 s=2 PARENT jump: landed (air 0.38 s)
+[GAME] t= 100.98 real= 107.01 s=2 CHILD jump: takeoff
+[GAME] t= 100.98 real= 107.01 s=2 piranhas: CHILD cleared (+1 power)
+[GAME] t= 100.98 real= 107.01 s=2 piranhas: TEAM (+1 bonus); power 4/10
+[GAME] t= 101.15 real= 107.18 s=2 PARENT jump: cycle complete (jumps 5)
+[GAME] t= 101.37 real= 107.39 s=2 CHILD jump: landed (air 0.38 s)
+[GAME] t= 101.57 real= 107.59 s=2 CHILD jump: cycle complete (jumps 6)
+[GAME] t= 102.10 real= 108.13 s=2 piranhas: gone (beat over)
+[GAME] t= 102.10 real= 108.13 s=2 beat done: piranhas(from: StuntRunSpike.Zone.left, count: 1)
+[GAME] t= 105.10 real= 111.13 s=2 beat: logSweep
+[GAME] t= 105.10 real= 111.13 s=2 jungle script step 11/13: LOG: nobody jumps → both bumped
+[GAME] t= 105.10 real= 111.13 s=2 log: warning — rapids ahead, leaves swirling (nothing to jump yet)
+[GAME] t= 107.10 real= 113.13 s=2 log: revealed — it surfaces in the rapids and the current carries it at the raft
+[GAME] t= 109.73 real= 115.76 s=2 log: JUMP cue (#10); crossings at PARENT 1.40 s, CHILD 1.45 s
+[GAME] t= 110.30 real= 116.33 s=2 log: the standing wave lifts it onto the bow — the bow rises, the deck tilts toward you
+[GAME] t= 110.75 real= 116.78 s=2 log: lands on the deck and rolls at the players' feet
+[GAME] t= 111.33 real= 117.36 s=2 log: PARENT bumped
+[GAME] t= 111.40 real= 117.43 s=2 log: CHILD bumped
+[GAME] t= 111.40 real= 117.43 s=2 log: partial: cleared [] hit [CHILD,PARENT]
+[GAME] t= 111.45 real= 117.48 s=2 log: off the near edge — splash behind the raft
+[GAME] t= 111.93 real= 117.96 s=2 log: PARENT didn't jump
+[GAME] t= 112.00 real= 118.03 s=2 log: CHILD didn't jump
+[GAME] t= 113.25 real= 119.28 s=2 log: gone downstream (beat over)
+[GAME] t= 113.25 real= 119.28 s=2 beat done: logSweep
+[GAME] t= 116.25 real= 122.28 s=2 beat: tailSweep(StuntRunSpike.Zone.left)
+[GAME] t= 116.25 real= 122.28 s=2 jungle script step 12/13: TAIL LEFT: both jump, then replay
+[GAME] t= 116.25 real= 122.28 s=2 tail: warning, LEFT — swirl at the bow corner (nothing to jump yet)
+[GAME] t= 117.85 real= 123.88 s=2 tail: the croc surfaces side-on beside the bow, eyes on the players
+[GAME] t= 118.85 real= 124.88 s=2 tail: coils — the tail lifts out of the water and winds back (anticipation)
+[GAME] t= 119.52 real= 125.54 s=2 tail: JUMP cue (#11); crossings at PARENT 1.43 s, CHILD 1.40 s
+[GAME] t= 120.15 real= 126.18 s=2 tail: SWEEP — low across the deck
+[GAME] t= 120.68 real= 126.71 s=2 CHILD jump: takeoff
+[GAME] t= 120.68 real= 126.71 s=2 tail: CHILD cleared (+1 power)
+[GAME] t= 120.72 real= 126.74 s=2 PARENT jump: takeoff
+[GAME] t= 120.72 real= 126.74 s=2 tail: PARENT cleared (+1 power)
+[GAME] t= 120.72 real= 126.74 s=2 tail: TEAM (+1 bonus); power 7/10
+[GAME] t= 120.95 real= 126.98 s=2 tail: overshoots, spins round — dizzy!
+[GAME] t= 121.07 real= 127.09 s=2 CHILD jump: landed (air 0.38 s)
+[GAME] t= 121.10 real= 127.13 s=2 PARENT jump: landed (air 0.38 s)
+[GAME] t= 121.27 real= 127.29 s=2 CHILD jump: cycle complete (jumps 7)
+[GAME] t= 121.30 real= 127.33 s=2 PARENT jump: cycle complete (jumps 6)
+[GAME] t= 123.45 real= 129.48 s=2 tail: the croc swims off (beat over)
+[GAME] t= 123.45 real= 129.48 s=2 beat done: tailSweep(StuntRunSpike.Zone.left)
+[GAME] t= 124.95 real= 130.98 s=3 replay (jungle script) → session 3
+[GAME] t= 124.97 real= 130.99 s=3 state: countdown
+[GAME] t= 127.95 real= 133.99 s=3 state: running
+[GAME] t= 129.45 real= 135.48 s=3 beat: logSweep
+[GAME] t= 129.45 real= 135.48 s=3 jungle script step 13/13: new session: LOG, both jump → fresh ids and counters
+[GAME] t= 129.45 real= 135.48 s=3 log: warning — rapids ahead, leaves swirling (nothing to jump yet)
+[GAME] t= 131.45 real= 137.48 s=3 log: revealed — it surfaces in the rapids and the current carries it at the raft
+[GAME] t= 134.08 real= 140.11 s=3 log: JUMP cue (#1); crossings at PARENT 1.40 s, CHILD 1.45 s
+[GAME] t= 134.65 real= 140.68 s=3 log: the standing wave lifts it onto the bow — the bow rises, the deck tilts toward you
+[GAME] t= 135.08 real= 141.11 s=3 log: lands on the deck and rolls at the players' feet
+[GAME] t= 135.20 real= 141.23 s=3 PARENT jump: takeoff
+[GAME] t= 135.20 real= 141.23 s=3 log: PARENT cleared (+1 power)
+[GAME] t= 135.37 real= 141.39 s=3 CHILD jump: takeoff
+[GAME] t= 135.37 real= 141.39 s=3 log: CHILD cleared (+1 power)
+[GAME] t= 135.37 real= 141.39 s=3 log: TEAM (+1 bonus); power 3/10
+[GAME] t= 135.58 real= 141.61 s=3 PARENT jump: landed (air 0.38 s)
+[GAME] t= 135.75 real= 141.78 s=3 CHILD jump: landed (air 0.38 s)
+[GAME] t= 135.78 real= 141.81 s=3 PARENT jump: cycle complete (jumps 1)
+[GAME] t= 135.80 real= 141.83 s=3 log: off the near edge — splash behind the raft
+[GAME] t= 135.97 real= 141.99 s=3 CHILD jump: cycle complete (jumps 1)
+[GAME] t= 137.60 real= 143.63 s=3 log: gone downstream (beat over)
+[GAME] t= 137.60 real= 143.63 s=3 beat done: logSweep
+[GAME] t= 137.60 real= 143.63 s=3 jungle script finished
+[GAME] t= 140.60 real= 146.63 s=3 beat: birds
+[GAME] t= 140.60 real= 146.63 s=3 birds: warning (flock not yet visible)

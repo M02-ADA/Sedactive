@@ -1,0 +1,10 @@
+[METRICS3D] fps=57.3 frame=17.4/177.6ms frames>17.5ms=23 models=627 mem=80MB liveUploads=71 upload=0.18/0.54ms
+[METRICS3D] fps=59.6 frame=16.8/32.7ms frames>17.5ms=7 models=627 mem=82MB liveUploads=147 upload=0.21/0.64ms
+[METRICS3D] fps=59.8 frame=16.7/33.3ms frames>17.5ms=37 models=627 mem=84MB liveUploads=223 upload=0.22/0.64ms
+[METRICS3D] fps=59.8 frame=16.7/33.2ms frames>17.5ms=1 models=627 mem=84MB liveUploads=307 upload=0.22/0.64ms
+[METRICS3D] fps=59.8 frame=16.7/33.3ms frames>17.5ms=23 models=627 mem=85MB liveUploads=393 upload=0.21/0.64ms
+[METRICS3D] fps=59.8 frame=16.7/32.1ms frames>17.5ms=1 models=627 mem=87MB liveUploads=478 upload=0.21/0.58ms
+[METRICS3D] fps=59.6 frame=16.8/33.3ms frames>17.5ms=9 models=627 mem=89MB liveUploads=577 upload=0.19/0.63ms
+[METRICS3D] fps=60.0 frame=16.7/16.7ms frames>17.5ms=0 models=627 mem=89MB liveUploads=658 upload=0.20/0.63ms
+[METRICS3D] fps=59.6 frame=16.8/33.3ms frames>17.5ms=18 models=627 mem=89MB liveUploads=743 upload=0.19/0.63ms
+[METRICS3D] fps=60.0 frame=16.7/16.7ms frames>17.5ms=0 models=627 mem=88MB liveUploads=826 upload=0.19/0.63ms

@@ -1,0 +1,4 @@
+[METRICS] fps=33.1 frame=21.0/100.0ms hitch/min=60.0 vision=0.0fps pose=0.0ms seg=0.0ms comp=0.0ms cap→tex=0.0ms feedback(avg)=n/a dropped=0 mem=408MB thermal=nominal people=0 mask= src=
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=10.7 vision=30.0fps pose=5.8ms seg=12.3ms comp=2.0ms cap→tex=70.9ms feedback(avg)=71ms dropped=4 mem=566MB thermal=nominal people=2 mask=512×384 src=640×480
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=28.0 vision=30.0fps pose=5.2ms seg=9.8ms comp=1.6ms cap→tex=66.2ms feedback(avg)=71ms dropped=4 mem=426MB thermal=nominal people=2 mask=512×384 src=640×480
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=19.0 vision=29.1fps pose=5.4ms seg=12.9ms comp=2.8ms cap→tex=72.4ms feedback(avg)=71ms dropped=4 mem=424MB thermal=nominal people=2 mask=512×384 src=640×480

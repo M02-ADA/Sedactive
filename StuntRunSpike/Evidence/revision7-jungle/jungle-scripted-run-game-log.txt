@@ -1,0 +1,198 @@
+[GAME] t=   0.00 real=-989736.28 s=1 mode: Jungle Drift
+[GAME] t=   0.02 real=   0.44 s=1 state: countdown
+[GAME] t=   1.03 real=   1.47 s=2 replay (jungle script start) → session 2
+[GAME] t=   1.05 real=   1.48 s=2 state: countdown
+[GAME] t=   4.03 real=   4.48 s=2 state: running
+[GAME] t=   5.53 real=   5.97 s=2 beat: birds
+[GAME] t=   5.53 real=   5.97 s=2 jungle script step 1/11: birds: both duck
+[GAME] t=   5.53 real=   5.97 s=2 birds: warning (flock not yet visible)
+[GAME] t=   7.11 real=   7.55 s=2 birds: flock revealed above the canopy ahead
+[GAME] t=   9.51 real=   9.95 s=2 birds: DUCK cue, window open (#1)
+[GAME] t=  10.08 real=  10.52 s=2 birds: PARENT ducked (+1 power)
+[GAME] t=  10.88 real=  11.32 s=2 birds: CHILD ducked (+1 power)
+[GAME] t=  10.90 real=  11.33 s=2 PARENT rep completed (total 1)
+[GAME] t=  11.70 real=  12.13 s=2 CHILD rep completed (total 1)
+[GAME] t=  11.81 real=  12.25 s=2 birds: TEAM (+1 bonus); power 3/10
+[GAME] t=  12.63 real=  13.07 s=2 beat done: birds
+[GAME] t=  13.03 real=  13.47 s=2 raft: steady streak (+1 power)
+[GAME] t=  15.63 real=  16.07 s=2 beat: gator(StuntRunSpike.Zone.left)
+[GAME] t=  15.63 real=  16.07 s=2 jungle script step 2/11: gator LEFT: both lean away
+[GAME] t=  15.63 real=  16.07 s=2 gator: warning, LEFT side (bubbles; not yet visible)
+[GAME] t=  17.23 real=  17.67 s=2 gator: eyes surface, swimming at the raft
+[GAME] t=  19.83 real=  20.27 s=2 gator: STRIKE on the left edge — raft dragged down
+[GAME] t=  20.30 real=  20.73 s=2 raft: DANGER (-16°)
+[GAME] t=  20.45 real=  20.88 s=2 gator: PARENT leaned away (+1 power)
+[GAME] t=  20.86 real=  21.30 s=2 gator: CHILD leaned away (+1 power)
+[GAME] t=  22.23 real=  22.67 s=2 gator: lets go and sinks
+[GAME] t=  22.71 real=  23.15 s=2 gator: TEAM STEADY (+1 bonus); power 7/10
+[GAME] t=  22.83 real=  23.27 s=2 beat done: gator(StuntRunSpike.Zone.left)
+[GAME] t=  25.83 real=  26.27 s=2 beat: calm(landmark: true)
+[GAME] t=  25.83 real=  26.27 s=2 jungle script step 3/11: calm stretch with a landmark (both keep balancing)
+[GAME] t=  25.83 real=  26.27 s=2 calm stretch: landmark ahead (Lost temple)
+[GAME] t=  27.65 real=  28.08 s=2 raft: steady streak (+1 power)
+[GAME] t=  31.81 real=  32.25 s=2 beat done: calm(landmark: true)
+[GAME] t=  33.65 real=  34.08 s=2 raft: steady streak (+1 power)
+[GAME] t=  34.81 real=  35.25 s=2 beat: gatorThenBirds(StuntRunSpike.Zone.right)
+[GAME] t=  34.81 real=  35.25 s=2 jungle script step 4/11: gator RIGHT + birds: only Parent leans; then both duck
+[GAME] t=  34.81 real=  35.25 s=2 gator: warning, RIGHT side (bubbles; not yet visible)
+[GAME] t=  36.40 real=  36.83 s=2 gator: eyes surface, swimming at the raft
+[GAME] t=  39.00 real=  39.43 s=2 gator: STRIKE on the right edge — raft dragged down
+[GAME] t=  39.48 real=  39.92 s=2 raft: DANGER (16°)
+[GAME] t=  39.73 real=  40.17 s=2 gator: PARENT leaned away (+1 power)
+[GAME] t=  40.08 real=  40.52 s=2 TURBO (team power full)
+[GAME] t=  40.08 real=  40.52 s=2 RIVER SPIRIT (team power full)
+[GAME] t=  40.20 real=  40.63 s=2 birds: warning (flock not yet visible)
+[GAME] t=  41.40 real=  41.83 s=2 gator: lets go and sinks
+[GAME] t=  41.81 real=  42.25 s=2 birds: flock revealed above the canopy ahead
+[GAME] t=  42.35 real=  42.78 s=2 gator: steady (partial: PARENT)
+[GAME] t=  44.20 real=  44.63 s=2 birds: DUCK cue, window open (#4)
+[GAME] t=  44.86 real=  45.30 s=2 birds: PARENT ducked (+1 power)
+[GAME] t=  45.36 real=  45.80 s=2 birds: CHILD ducked (+1 power)
+[GAME] t=  45.68 real=  46.12 s=2 PARENT rep completed (total 2)
+[GAME] t=  46.18 real=  46.62 s=2 CHILD rep completed (total 2)
+[GAME] t=  46.50 real=  46.93 s=2 birds: TEAM (+1 bonus); power 3/10
+[GAME] t=  47.31 real=  47.75 s=2 beat done: gatorThenBirds(StuntRunSpike.Zone.right)
+[GAME] t=  47.85 real=  48.28 s=2 raft: steady streak (+1 power)
+[GAME] t=  50.31 real=  50.75 s=2 beat: birds
+[GAME] t=  50.31 real=  50.75 s=2 jungle script step 5/11: birds: Child late → bonk wobble, then rebalance
+[GAME] t=  50.31 real=  50.75 s=2 birds: warning (flock not yet visible)
+[GAME] t=  51.90 real=  52.33 s=2 birds: flock revealed above the canopy ahead
+[GAME] t=  54.30 real=  54.73 s=2 birds: DUCK cue, window open (#5)
+[GAME] t=  54.96 real=  55.40 s=2 birds: PARENT ducked (+1 power)
+[GAME] t=  55.78 real=  56.22 s=2 PARENT rep completed (total 3)
+[GAME] t=  56.90 real=  57.33 s=2 birds: partial: done [PARENT] missing [CHILD] → raft wobble
+[GAME] t=  57.41 real=  57.85 s=2 beat done: birds
+[GAME] t=  58.18 real=  58.62 s=2 CHILD rep completed (total 3)
+[GAME] t=  59.85 real=  60.28 s=2 raft: steady streak (+1 power)
+[GAME] t=  60.41 real=  60.85 s=2 beat: calm(landmark: false)
+[GAME] t=  60.41 real=  60.85 s=2 jungle script step 6/11: calm: Child's tracking lost and recovered
+[GAME] t=  60.41 real=  60.85 s=2 calm stretch
+[GAME] t=  61.41 real=  61.85 s=2 debug: CHILD tracking OFF (simulated)
+[GAME] t=  62.03 real=  62.47 s=2 CHILD tracking LOST
+[GAME] t=  62.03 real=  62.48 s=2 state: tracking lost (CHILD)
+[GAME] t=  62.03 real=  64.45 s=2 debug: CHILD tracking ON (simulated)
+[GAME] t=  62.03 real=  64.47 s=2 CHILD tracking recovered
+[GAME] t=  62.03 real=  64.48 s=2 state: ready (waiting for explicit resume)
+[GAME] t=  62.03 real=  65.95 s=2 resume (jungle script)
+[GAME] t=  62.05 real=  65.97 s=2 state: countdown
+[GAME] t=  62.36 real=  66.28 s=2 raft: steady streak (+1 power)
+[GAME] t=  65.03 real=  68.97 s=2 state: running
+[GAME] t=  65.05 real=  68.97 s=2 beat: birds
+[GAME] t=  65.05 real=  68.97 s=2 jungle script step 7/11: birds: pause inside the DUCK window
+[GAME] t=  65.05 real=  68.97 s=2 birds: warning (flock not yet visible)
+[GAME] t=  66.65 real=  70.57 s=2 birds: flock revealed above the canopy ahead
+[GAME] t=  69.05 real=  72.97 s=2 birds: DUCK cue, window open (#6)
+[GAME] t=  69.71 real=  73.63 s=2 birds: PARENT ducked (+1 power)
+[GAME] t=  69.95 real=  73.87 s=2 pause (jungle script)
+[GAME] t=  69.95 real=  73.88 s=2 birds: withdrawn (game halted)
+[GAME] t=  69.95 real=  73.88 s=2 state: paused
+[GAME] t=  69.95 real=  75.88 s=2 resume (jungle script)
+[GAME] t=  69.96 real=  75.90 s=2 state: countdown
+[GAME] t=  70.53 real=  76.47 s=2 ignored repCompleted from PARENT (state countdown(endsAt: 989815.1671284585))
+[GAME] t=  72.35 real=  78.28 s=2 raft: steady streak (+1 power)
+[GAME] t=  72.95 real=  78.90 s=2 state: running
+[GAME] t=  72.96 real=  78.90 s=2 beat: gator(StuntRunSpike.Zone.right)
+[GAME] t=  72.96 real=  78.90 s=2 jungle script step 8/11: gator RIGHT: nobody leans → SPLASH
+[GAME] t=  72.96 real=  78.90 s=2 gator: warning, RIGHT side (bubbles; not yet visible)
+[GAME] t=  74.56 real=  80.50 s=2 gator: eyes surface, swimming at the raft
+[GAME] t=  77.16 real=  83.10 s=2 gator: STRIKE on the right edge — raft dragged down
+[GAME] t=  77.63 real=  83.57 s=2 raft: DANGER (16°)
+[GAME] t=  79.23 real=  85.17 s=2 gator: SPLASHED
+[GAME] t=  79.23 real=  85.17 s=2 raft: SPLASH (−2 power); power 7/10
+[GAME] t=  79.56 real=  85.50 s=2 gator: lets go and sinks
+[GAME] t=  80.16 real=  86.10 s=2 beat done: gator(StuntRunSpike.Zone.right)
+[GAME] t=  83.16 real=  89.10 s=2 beat: calm(landmark: true)
+[GAME] t=  83.16 real=  89.10 s=2 jungle script step 9/11: calm stretch with a landmark
+[GAME] t=  83.16 real=  89.10 s=2 calm stretch: landmark ahead (Giant kapok tree)
+[GAME] t=  86.98 real=  92.92 s=2 raft: steady streak (+1 power)
+[GAME] t=  89.16 real=  95.10 s=2 beat done: calm(landmark: true)
+[GAME] t=  92.16 real=  98.10 s=2 beat: gatorThenBirds(StuntRunSpike.Zone.left)
+[GAME] t=  92.16 real=  98.10 s=2 jungle script step 10/11: gator LEFT + birds: both lean, both duck, then replay
+[GAME] t=  92.16 real=  98.10 s=2 gator: warning, LEFT side (bubbles; not yet visible)
+[GAME] t=  93.76 real=  99.70 s=2 gator: eyes surface, swimming at the raft
+[GAME] t=  96.36 real= 102.30 s=2 gator: STRIKE on the left edge — raft dragged down
+[GAME] t=  96.91 real= 102.85 s=2 raft: DANGER (-16°)
+[GAME] t=  97.03 real= 102.97 s=2 gator: PARENT leaned away (+1 power)
+[GAME] t=  97.21 real= 103.15 s=2 gator: CHILD leaned away (+1 power)
+[GAME] t=  97.56 real= 103.50 s=2 birds: warning (flock not yet visible)
+[GAME] t=  97.56 real= 103.50 s=2 TURBO (team power full)
+[GAME] t=  97.56 real= 103.50 s=2 RIVER SPIRIT (team power full)
+[GAME] t=  98.76 real= 104.70 s=2 gator: lets go and sinks
+[GAME] t=  99.18 real= 105.12 s=2 birds: flock revealed above the canopy ahead
+[GAME] t=  99.55 real= 105.48 s=2 gator: TEAM STEADY (+1 bonus); power 1/10
+[GAME] t= 101.58 real= 107.52 s=2 birds: DUCK cue, window open (#9)
+[GAME] t= 102.15 real= 108.08 s=2 birds: PARENT ducked (+1 power)
+[GAME] t= 102.65 real= 108.58 s=2 birds: CHILD ducked (+1 power)
+[GAME] t= 102.96 real= 108.90 s=2 PARENT rep completed (total 4)
+[GAME] t= 103.46 real= 109.40 s=2 CHILD rep completed (total 4)
+[GAME] t= 103.86 real= 109.80 s=2 birds: TEAM (+1 bonus); power 4/10
+[GAME] t= 104.68 real= 110.62 s=2 beat done: gatorThenBirds(StuntRunSpike.Zone.left)
+[GAME] t= 105.63 real= 111.57 s=2 raft: steady streak (+1 power)
+[GAME] t= 106.18 real= 112.12 s=3 replay (jungle script) → session 3
+[GAME] t= 106.20 real= 112.13 s=3 state: countdown
+[GAME] t= 109.18 real= 115.13 s=3 state: running
+[GAME] t= 110.68 real= 116.62 s=3 beat: birds
+[GAME] t= 110.68 real= 116.62 s=3 jungle script step 11/11: new session: birds, both duck
+[GAME] t= 110.68 real= 116.62 s=3 birds: warning (flock not yet visible)
+[GAME] t= 112.28 real= 118.22 s=3 birds: flock revealed above the canopy ahead
+[GAME] t= 114.68 real= 120.62 s=3 birds: DUCK cue, window open (#1)
+[GAME] t= 115.36 real= 121.30 s=3 birds: PARENT ducked (+1 power)
+[GAME] t= 115.66 real= 121.60 s=3 birds: CHILD ducked (+1 power)
+[GAME] t= 116.18 real= 122.12 s=3 PARENT rep completed (total 1)
+[GAME] t= 116.48 real= 122.42 s=3 CHILD rep completed (total 1)
+[GAME] t= 116.96 real= 122.90 s=3 birds: TEAM (+1 bonus); power 3/10
+[GAME] t= 117.78 real= 123.72 s=3 beat done: birds
+[GAME] t= 117.78 real= 123.72 s=3 jungle script finished
+[GAME] t= 118.18 real= 124.12 s=3 raft: steady streak (+1 power)
+[GAME] t= 120.78 real= 126.72 s=3 beat: gator(StuntRunSpike.Zone.left)
+[GAME] t= 120.78 real= 126.72 s=3 gator: warning, LEFT side (bubbles; not yet visible)
+[GAME] t= 122.36 real= 128.30 s=3 gator: eyes surface, swimming at the raft
+[GAME] t= 124.96 real= 130.90 s=3 gator: STRIKE on the left edge — raft dragged down
+[GAME] t= 125.81 real= 131.75 s=3 gator: PARENT leaned away (+1 power)
+[GAME] t= 125.81 real= 131.75 s=3 gator: CHILD leaned away (+1 power)
+[GAME] t= 127.36 real= 133.30 s=3 gator: lets go and sinks
+[GAME] t= 128.90 real= 134.83 s=3 gator: TEAM STEADY (+1 bonus); power 7/10
+[GAME] t= 128.90 real= 134.83 s=3 beat done: gator(StuntRunSpike.Zone.left)
+[GAME] t= 131.90 real= 137.83 s=3 beat: calm(landmark: true)
+[GAME] t= 131.90 real= 137.83 s=3 calm stretch: landmark ahead (Fallen giant)
+[GAME] t= 134.38 real= 140.32 s=3 raft: steady streak (+1 power)
+[GAME] t= 137.90 real= 143.83 s=3 beat done: calm(landmark: true)
+[GAME] t= 140.38 real= 146.32 s=3 raft: steady streak (+1 power)
+[GAME] t= 140.90 real= 146.83 s=3 beat: gatorThenBirds(StuntRunSpike.Zone.right)
+[GAME] t= 140.90 real= 146.83 s=3 gator: warning, RIGHT side (bubbles; not yet visible)
+[GAME] t= 142.50 real= 148.43 s=3 gator: eyes surface, swimming at the raft
+[GAME] t= 145.10 real= 151.03 s=3 gator: STRIKE on the right edge — raft dragged down
+[GAME] t= 145.65 real= 151.58 s=3 raft: DANGER (16°)
+[GAME] t= 145.93 real= 151.87 s=3 gator: PARENT leaned away (+1 power)
+[GAME] t= 145.93 real= 151.87 s=3 gator: CHILD leaned away (+1 power)
+[GAME] t= 146.28 real= 152.22 s=3 birds: warning (flock not yet visible)
+[GAME] t= 146.28 real= 152.22 s=3 TURBO (team power full)
+[GAME] t= 146.28 real= 152.22 s=3 RIVER SPIRIT (team power full)
+[GAME] t= 147.50 real= 153.43 s=3 gator: lets go and sinks
+[GAME] t= 147.90 real= 153.83 s=3 birds: flock revealed above the canopy ahead
+[GAME] t= 149.05 real= 154.98 s=3 gator: TEAM STEADY (+1 bonus); power 2/10
+[GAME] t= 150.30 real= 156.23 s=3 birds: DUCK cue, window open (#4)
+[GAME] t= 151.70 real= 157.63 s=3 birds: PARENT ducked (+1 power)
+[GAME] t= 152.51 real= 158.45 s=3 PARENT rep completed (total 2)
+[GAME] t= 152.90 real= 158.83 s=3 birds: partial: done [PARENT] missing [CHILD] → raft wobble
+[GAME] t= 153.40 real= 159.33 s=3 beat done: gatorThenBirds(StuntRunSpike.Zone.right)
+[GAME] t= 154.53 real= 160.47 s=3 raft: steady streak (+1 power)
+[GAME] t= 156.40 real= 162.33 s=3 beat: birds
+[GAME] t= 156.40 real= 162.33 s=3 birds: warning (flock not yet visible)
+[GAME] t= 158.00 real= 163.93 s=3 birds: flock revealed above the canopy ahead
+[GAME] t= 160.40 real= 166.33 s=3 birds: DUCK cue, window open (#5)
+[GAME] t= 160.98 real= 166.92 s=3 birds: PARENT ducked (+1 power)
+[GAME] t= 161.05 real= 166.98 s=3 birds: CHILD ducked (+1 power)
+[GAME] t= 161.80 real= 167.73 s=3 PARENT rep completed (total 3)
+[GAME] t= 161.86 real= 167.80 s=3 CHILD rep completed (total 2)
+[GAME] t= 162.68 real= 168.62 s=3 birds: TEAM (+1 bonus); power 7/10
+[GAME] t= 163.50 real= 169.43 s=3 beat done: birds
+[GAME] t= 166.50 real= 172.43 s=3 beat: calm(landmark: false)
+[GAME] t= 166.50 real= 172.43 s=3 calm stretch
+[GAME] t= 166.53 real= 172.47 s=3 raft: steady streak (+1 power)
+[GAME] t= 172.50 real= 178.43 s=3 beat done: calm(landmark: false)
+[GAME] t= 172.53 real= 178.47 s=3 raft: steady streak (+1 power)
+[GAME] t= 175.50 real= 181.43 s=3 beat: birds
+[GAME] t= 175.50 real= 181.43 s=3 birds: warning (flock not yet visible)
+[GAME] t= 177.10 real= 183.03 s=3 birds: flock revealed above the canopy ahead
+[GAME] t= 179.50 real= 185.43 s=3 birds: DUCK cue, window open (#6)

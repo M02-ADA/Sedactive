@@ -1,0 +1,55 @@
+[METRICS3D] fps=57.7 frame=17.3/183.3ms frames>17.5ms=44 models=627 mem=66MB
+[GAME3D] t=   7.11 challenge #1 warning
+[GAME3D] t=   7.69 PARENT contributed
+[GAME3D] t=   8.69 CHILD contributed
+[GAME3D] t=   9.61 challenge #1 resolved: team(Set([StuntRun3D.Zone.left, StuntRun3D.Zone.right])) bonus 1
+[METRICS3D] fps=59.8 frame=16.7/33.3ms frames>17.5ms=2 models=627 mem=70MB
+[METRICS3D] fps=59.8 frame=16.7/33.3ms frames>17.5ms=1 models=627 mem=72MB
+[GAME3D] t=  15.71 challenge #2 warning
+[GAME3D] t=  16.29 PARENT contributed
+[GAME3D] t=  17.28 CHILD contributed
+[GAME3D] t=  18.21 challenge #2 resolved: team(Set([StuntRun3D.Zone.right, StuntRun3D.Zone.left])) bonus 1
+[METRICS3D] fps=60.0 frame=16.7/16.7ms frames>17.5ms=0 models=627 mem=72MB
+[METRICS3D] fps=59.8 frame=16.7/33.4ms frames>17.5ms=1 models=627 mem=73MB
+[GAME3D] t=  26.56 challenge #3 warning
+[GAME3D] t=  27.13 PARENT contributed
+[GAME3D] t=  29.06 challenge #3 resolved: partial(contributed: Set([StuntRun3D.Zone.left]), missing: Set([StuntRun3D.Zone.right])) bonus 0
+[METRICS3D] fps=60.0 frame=16.7/16.7ms frames>17.5ms=0 models=627 mem=75MB
+[METRICS3D] fps=59.8 frame=16.7/33.4ms frames>17.5ms=1 models=627 mem=77MB
+[GAME3D] t=  38.50 challenge #4 warning
+[GAME3D] t=  39.08 PARENT contributed
+[GAME3D] t=  40.08 CHILD contributed
+[METRICS3D] fps=59.8 frame=16.7/31.8ms frames>17.5ms=2 models=627 mem=77MB
+[GAME3D] t=  40.99 challenge #4 resolved: team(Set([StuntRun3D.Zone.right, StuntRun3D.Zone.left])) bonus 1
+[METRICS3D] fps=59.6 frame=16.8/33.3ms frames>17.5ms=3 models=627 mem=78MB
+[GAME3D] t=  47.11 challenge #5 warning
+[GAME3D] t=  47.69 PARENT contributed
+[GAME3D] t=  48.69 CHILD contributed
+[GAME3D] t=  49.61 challenge #5 resolved: team(Set([StuntRun3D.Zone.left, StuntRun3D.Zone.right])) bonus 1
+[METRICS3D] fps=60.0 frame=16.7/16.7ms frames>17.5ms=0 models=627 mem=77MB
+[METRICS3D] fps=59.6 frame=16.8/33.4ms frames>17.5ms=3 models=627 mem=78MB
+[GAME3D] t=  55.73 challenge #6 warning
+[GAME3D] t=  56.31 PARENT contributed
+[GAME3D] t=  58.23 challenge #6 resolved: partial(contributed: Set([StuntRun3D.Zone.left]), missing: Set([StuntRun3D.Zone.right])) bonus 0
+[METRICS3D] fps=60.0 frame=16.7/16.8ms frames>17.5ms=0 models=627 mem=76MB
+[METRICS3D] fps=59.8 frame=16.7/33.3ms frames>17.5ms=1 models=627 mem=78MB
+[GAME3D] t=  67.66 challenge #7 warning
+[GAME3D] t=  68.24 PARENT contributed
+[GAME3D] t=  69.23 CHILD contributed
+[METRICS3D] fps=60.0 frame=16.7/16.8ms frames>17.5ms=0 models=627 mem=78MB
+[GAME3D] t=  70.16 challenge #7 resolved: team(Set([StuntRun3D.Zone.right, StuntRun3D.Zone.left])) bonus 1
+[METRICS3D] fps=59.8 frame=16.7/33.4ms frames>17.5ms=1 models=627 mem=78MB
+[GAME3D] t=  78.51 challenge #8 warning
+[GAME3D] t=  79.09 PARENT contributed
+[GAME3D] t=  80.09 CHILD contributed
+[METRICS3D] fps=60.0 frame=16.7/16.8ms frames>17.5ms=0 models=627 mem=78MB
+[GAME3D] t=  81.01 challenge #8 resolved: team(Set([StuntRun3D.Zone.right, StuntRun3D.Zone.left])) bonus 1
+[METRICS3D] fps=59.8 frame=16.7/33.3ms frames>17.5ms=1 models=627 mem=78MB
+[GAME3D] t=  87.13 challenge #9 warning
+[GAME3D] t=  87.69 PARENT contributed
+[GAME3D] t=  89.63 challenge #9 resolved: partial(contributed: Set([StuntRun3D.Zone.left]), missing: Set([StuntRun3D.Zone.right])) bonus 0
+[METRICS3D] fps=60.0 frame=16.7/16.7ms frames>17.5ms=0 models=627 mem=77MB
+[METRICS3D] fps=59.8 frame=16.7/33.3ms frames>17.5ms=1 models=627 mem=78MB
+[GAME3D] t=  99.06 challenge #10 warning
+[GAME3D] t=  99.64 PARENT contributed
+[METRICS3D] fps=60.0 frame=16.7/16.7ms frames>17.5ms=0 models=627 mem=79MB

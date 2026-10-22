@@ -1,0 +1,4 @@
+65d64
+< s2 jungle script step 12/16: gator RIGHT: nobody leans → SPLASH
+67a67
+> s2 jungle script step 12/16: gator RIGHT: nobody leans → SPLASH

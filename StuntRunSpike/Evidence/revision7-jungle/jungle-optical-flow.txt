@@ -1,0 +1,4 @@
+Optical flow (block matching on the final recording, 24 samples from t=30 s):
+deck-under-players mean dx +0.00  dy +0.00 px/frame (half-res; +dy = toward bottom/camera)  zero-shift change 0.8
+left-side-ground mean dx -3.58  dy +1.17 px/frame (half-res; +dy = toward bottom/camera)  zero-shift change 3.8
+right-side-ground mean dx +4.08  dy +1.42 px/frame (half-res; +dy = toward bottom/camera)  zero-shift change 4.5
