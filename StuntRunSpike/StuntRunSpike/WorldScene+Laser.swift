@@ -32,6 +32,9 @@ final class LaserGate {
     var poweredDown = false
     var resolved = false
     var shorted = false
+    /// A team result is known a moment before the beam arrives; the short-out waits until the beam has passed over the
+    /// heads / under the feet, so the players see the dodge they made.
+    var shortPending = false
     var outcome: TeamChallenge.Outcome?
     /// Last drawn beam intensity per lane (a team short-out decays from it; a beam that is already off stays off).
     var level: [Zone: CGFloat] = [:]
@@ -61,6 +64,8 @@ final class LaserGate {
     var nearBeams: [Zone: SKSpriteNode] = [:]
     var rails: [Zone: SKShapeNode] = [:]
     /// Iris gate parts: the ring, its aperture blades and the chase lamps around it.
+    /// Body-Fit gate hardware (shutter, sill, frame, locks).
+    var fit: BodyFitRig?
     var irisRing: SKSpriteNode?
     /// The ring runs through floor and ceiling slots: everything below the floor line is masked off.
     let irisCrop = SKCropNode()
@@ -78,6 +83,7 @@ final class LaserGate {
 
     /// Depth of the hardware (z): the gate rides with the corridor; a turret is clamped to its rail beside the cart.
     func depth(_ timing: LaserTiming) -> Double {
+        if step.bodyFit { return BodyFitGate.visualZ(at: t, timing: timing) }
         guard step.turret else { return timing.gateZ(at: t) }
         let endR = TurretSweep.endTime(timing: timing, stagger: step.stagger) - timing.revealTime
         return TurretSweep.depth(r: t - timing.revealTime, endR: endR, speed: timing.speed)
@@ -130,6 +136,7 @@ final class LaserGate {
                 rails[zone] = rail
             }
         }
+        if step.bodyFit { fit = BodyFitRig() }
         if step.iris {
             irisRing = SKSpriteNode(texture: Art.irisRing)
             for _ in 0..<6 {
@@ -159,7 +166,8 @@ final class LaserGate {
     /// One beam wall-to-wall (the right rig is its receiver); set at the reveal when both lanes need the same height.
     var sharedBeam = false
     var worldNodes: [SKNode] {
-        [frame] + Array(beams.values) + Array(nearBeams.values) + Array(caps.values) + Array(floorGlow.values) + Array(rails.values) + rigs.values.map(\.node)
+        if let fit { return [fit.root] }
+        return [frame] + Array(beams.values) + Array(nearBeams.values) + Array(caps.values) + Array(floorGlow.values) + Array(rails.values) + rigs.values.map(\.node)
             + (step.iris ? [irisCrop] : [])
     }
 
@@ -215,6 +223,10 @@ final class LaserRuntime {
     init() {
         timing = difficulty.apply(to: LaserTiming.fromDefaults())
         director.beats = LaserDirector.getaway(for: difficulty.level)
+        // `-laserTrial bodyfit` (or `-scenario bodyfit`): only the Body-Fit gate, repeated.
+        if UserDefaults.standard.string(forKey: "laserTrial") == "bodyfit" || UserDefaults.standard.string(forKey: "scenario") == "bodyfit" {
+            director.beats = LaserDirector.bodyFitTrial
+        }
     }
 
     /// The gate closest to the players that hasn't passed them yet (lighting, drone gaze, music, camera).
@@ -239,7 +251,7 @@ extension WorldScene {
     func buildLaser() {
         let start = CACurrentMediaTime()
         // Security hardware art is drawn once here, not on the first gate (no hitch mid-run).
-        SKTexture.preload(Art.laserTextures + [Art.irisRing, Art.irisBlade, Art.emitterHatch, Art.emitterArm, Art.emitterHead, Art.chargeRing, Art.indicatorLamp]) {}
+        SKTexture.preload(Art.laserTextures + Art.bodyFitTextures + [Art.irisRing, Art.irisBlade, Art.emitterHatch, Art.emitterArm, Art.emitterHead, Art.chargeRing, Art.indicatorLamp]) {}
         let world = LaserWorld()
         if worldRoot.parent == nil { addChild(worldRoot) }
         worldRoot.addChild(world.root)
@@ -263,6 +275,7 @@ extension WorldScene {
         rt.alarmWash.zPosition = Layer.flash - 30
         addChild(rt.alarmWash)
         buildHeist()
+        startTrialWithoutVault()
         gameLog(String(format: "mode: Laser Breakout (art %.0f ms)", (CACurrentMediaTime() - start) * 1000))
     }
 
@@ -305,7 +318,7 @@ extension WorldScene {
         case .lockdown?: base = 0.85
         case nil: base = 0
         }
-        if rt.finaleAt != nil { base = 0 }
+        if rt.finaleAt != nil || gameTime < rt.heist.safeUntil { base = 0 }
         let target = halted ? base * 0.4 : min(1, base + CGFloat(rt.alert.level) * 0.3)
         rt.alarm += (target - rt.alarm) * min(1, rawDT * 2)
         rt.flash = max(0, rt.flash - rawDT * 1.6)
@@ -388,6 +401,9 @@ extension WorldScene {
         case .override:
             rt.beat = beat
             startOverride()
+        case .checkpoint:
+            rt.beat = beat
+            startCheckpoint()
         case .escape:
             startEscape()
         }
@@ -413,6 +429,9 @@ extension WorldScene {
         if seq.steps.count == 1 {
             let step = seq.steps[0]
             switch step.pattern {
+            case _ where step.bodyFit:
+                showBanner("BODY-FIT GATE!", sub: "\(role(for: .left)): DUCK through the low gap  ·  \(role(for: .right)): JUMP the sill",
+                           color: VaultPalette.cyan, hold: hold)
             case _ where step.turret:
                 let move = step.pattern.action(for: .left) == .duck ? "DUCK" : "JUMP"
                 showBanner("TURRET SWEEP!", sub: step.stagger > 0 ? "It swings in lane by lane — \(move) as it passes you" : "It swings toward you — \(move) as it passes",
@@ -593,7 +612,8 @@ extension WorldScene {
             // Freeze each lane's beam height from that player's standing height (body-relative).
             for zone in Zone.allCases {
                 let action = gate.pattern.action(for: zone)
-                gate.beamH[zone] = action == .jump ? CGFloat(Corridor.lowBeamH) : CGFloat(Corridor.highBeamH(forHeadHeight: Double(standingHeadHeight(zone))))
+                let nose = Double(standingNoseH(zone))
+                gate.beamH[zone] = CGFloat(action == .jump ? Corridor.lowBeamH(forHeadHeight: nose) : Corridor.highBeamH(forHeadHeight: nose))
             }
             // One beam wall to wall (into a receiver) when both lanes need the same height; otherwise each lane keeps
             // its own body-relative height and the two emitters' beams meet mid-corridor. Turrets: one per lane.
@@ -603,8 +623,14 @@ extension WorldScene {
             let windows = Dictionary(uniqueKeysWithValues: Zone.allCases.map { zone in
                 (zone, isChildLane(zone) ? rt.difficulty.childWindow(timing.window) : timing.window)
             })
-            gate.encounter = LaserEncounter(id: rt.hazardCounter, pattern: gate.pattern, participants: Set(activeZones()), timing: timing,
-                                            duckMark: rt.freshness.mark(), crossings: gate.crossings, cueTime: gate.firstCue, laneWindows: windows)
+            // Body-Fit: the judging window is the contact window (the gate is at the bodies, not metres away).
+            var judgeTiming = timing
+            if gate.step.bodyFit { judgeTiming.window = BodyFitGate.window }
+            let laneWindows = gate.step.bodyFit
+                ? Dictionary(uniqueKeysWithValues: Zone.allCases.map { ($0, isChildLane($0) ? rt.difficulty.childWindow(BodyFitGate.window) : BodyFitGate.window) })
+                : windows
+            gate.encounter = LaserEncounter(id: rt.hazardCounter, pattern: gate.pattern, participants: Set(activeZones()), timing: judgeTiming,
+                                            duckMark: rt.freshness.mark(), crossings: gate.crossings, cueTime: gate.firstCue, laneWindows: laneWindows)
             gameLog(String(format: "laser #%d: %@ revealed at z %.1f (beams at P %.2f / C %.2f units; crossings P %.2f / C %.2f s)", gate.number,
                            gate.step.turret ? "turret" : "gate", gate.depth(timing), Double(gate.beamH[.left] ?? 0), Double(gate.beamH[.right] ?? 0),
                            gate.crossings[.left] ?? 0, gate.crossings[.right] ?? 0))
@@ -626,11 +652,11 @@ extension WorldScene {
             gameLog(String(format: "laser #%d: iris pods locked at P %.2f / C %.2f units", gate.number, Double(gate.beamH[.left] ?? 0), Double(gate.beamH[.right] ?? 0)))
             captureEvent("l-\(gate.number)-b1-iris-locked", after: 0.1)
         }
-        if gate.revealed, !gate.deployed, r >= gate.deployR {
+        if gate.revealed, !gate.deployed, r >= gate.deployR, !gate.step.bodyFit {
             gate.deployed = true
             audio.play(.deploy, dB: gate.step.turret ? -8 : -12)
         }
-        if gate.revealed, !gate.charging, r >= gate.chargeR {
+        if gate.revealed, !gate.charging, r >= gate.chargeR, !gate.step.bodyFit {
             gate.charging = true
             let high = Zone.allCases.contains { gate.pattern.action(for: $0) == .duck }
             audio.play(high ? .chargeHigh : .chargeLow, dB: -11)
@@ -671,7 +697,9 @@ extension WorldScene {
             let color = gate.pattern.isSplit ? VaultPalette.cyan : (gate.pattern == .floorSweep ? VaultPalette.gold : VaultPalette.laser)
             // The lanes carry each player's own move (chevrons over the head, the preview badge); the shared call is
             // short and sits high, smaller inside a sequence.
-            if gate.seqCount > 1 {
+            if gate.step.bodyFit {
+                showBanner("FIT THROUGH!", sub: nil, color: VaultPalette.cyan, hold: 0.9, size: 52)
+            } else if gate.seqCount > 1 {
                 showBanner(word, sub: nil, color: color, hold: 0.8, size: 48)
                 audio.play(.comboStep, dB: -8, variant: gate.seqIndex)
             } else if gate.step.turret, gate.step.stagger > 0 {
@@ -692,10 +720,25 @@ extension WorldScene {
         }
         for zone in Zone.allCases where !gate.passedLanes.contains(zone) && gate.t >= gate.crossings[zone] ?? .infinity {
             gate.passedLanes.insert(zone)
+            // The beam is at this player's body now: log where the body really is against it, and light the body
+            // briefly in the beam's colour (a close pass).
+            if let c = physicallyClear(gate, zone), gate.encounter?.participants.contains(zone) == true {
+                gameLog(String(format: "laser #%d: crossing %@ — %@ %.2f vs beam %.2f (%@ by %.2f units)", gate.number, role(for: zone),
+                               gate.pattern.action(for: zone) == .duck ? "crown" : "soles", Double(c.body), Double(c.beam),
+                               c.clear ? "clear" : "IN THE BEAM", Double(abs(c.body - c.beam))))
+                if !gate.shorted { bodyLight(zone, c.clear ? gate.color(zone) : VaultPalette.laser, c.clear ? 0.2 : 0.4) }
+            }
             // Pass-by: one whoosh per crossing (a turret wave gives two, one per lane).
             if !gate.shorted, gate.step.turret || gate.passedLanes.count == 1 { audio.play(.passBy, dB: -8) }
         }
         if !gate.passed, gate.passedLanes.count == Zone.allCases.count { gate.passed = true }
+        if gate.shortPending, gate.t >= gate.lastCrossing + 0.12 {
+            gate.shortPending = false
+            gate.shorted = true
+            rt.flash = max(rt.flash, reduceMotion ? 0.3 : (gate.seqCount > 1 ? 0.5 : 1))
+            if !reduceMotion { for rig in gate.rigs.values where rig.node.alpha > 0.1 { burstSparks(at: rig.lens, color: VaultPalette.cyan, count: 5) } }
+            audio.play(.zap, dB: -16)
+        }
         let shutdownAt = gate.step.turret ? TurretSweep.endTime(timing: timing, stagger: gate.step.stagger) : gate.lastCrossing + 0.12
         if gate.passed, !gate.poweredDown, gate.t >= shutdownAt {
             gate.poweredDown = true
@@ -713,7 +756,9 @@ extension WorldScene {
         if gate.cued, var enc = gate.encounter {
             let airborne = Dictionary(uniqueKeysWithValues: Zone.allCases.map { ($0, slots[$0]?.jump.isAirborne ?? false) })
             let low = Dictionary(uniqueKeysWithValues: Zone.allCases.map { z in (z, [.down, .rising].contains(slots[z]?.detector.phase ?? .standing)) })
-            let events = enc.update(at: gate.t, airborne: airborne, low: low, freshness: &rt.freshness)
+            var clear: [Zone: Bool] = [:]
+            for zone in Zone.allCases { if let c = physicallyClear(gate, zone) { clear[zone] = c.clear } }
+            let events = enc.update(at: gate.t, airborne: airborne, low: low, clear: clear, freshness: &rt.freshness)
             gate.encounter = enc
             if !events.isEmpty { handleLaserEvents(gate, events: events) }
         }
@@ -752,7 +797,7 @@ extension WorldScene {
         if perfect {
             rt.combos += 1
             rt.flash = reduceMotion ? 0.5 : 1
-            for g in rt.gates { g.shorted = true }
+            for g in rt.gates where !g.shorted { g.shortPending = true }
             let title = seq.name == "GAUNTLET" ? "SECURITY BROKEN!" : (seq.name == "CROSSFIRE" ? "CROSSFIRE CLEARED!" : "COMBO CLEARED!")
             showBanner(title, sub: "\(seq.steps.count) for \(seq.steps.count) — together!", color: VaultPalette.cyan, hold: 1.4)
             audio.play(.team, dB: -1)
@@ -771,15 +816,14 @@ extension WorldScene {
         }
     }
 
-    /// Standing head height above the deck for a lane (world units), from the player's own body.
-    private func standingHeadHeight(_ zone: Zone) -> CGFloat {
-        guard let slot = slots[zone] else { return 1 }
-        let ppu = proj.ppu(proj.zp)
-        if slot.driver == .live, let pose = slot.livePose, let span = pose.standingSpan {
-            return max(0.6, CGFloat(span) * bodyRect.height / ppu)
+    /// Is this lane's body, as drawn, physically out of its beam right now? (crown under a high beam, soles over a
+    /// low one). Nil when the body can't be measured (nobody in that lane).
+    private func physicallyClear(_ gate: LaserGate, _ zone: Zone) -> (clear: Bool, body: CGFloat, beam: CGFloat)? {
+        let beam = gate.beamH[zone] ?? 0.9
+        switch gate.pattern.action(for: zone) {
+        case .duck: return bodyCrownH(zone).map { ($0 < beam, $0, beam) }
+        case .jump: return bodyFeetH(zone).map { ($0 > beam + 0.015, $0, beam) }
         }
-        let isChild = (zone == .right) != swapped
-        return isChild ? 0.82 : 1.18
     }
 
     private func handleLaserEvents(_ gate: LaserGate, events: [JumpJudgeEvent]) {
@@ -798,6 +842,7 @@ extension WorldScene {
                 run(.wait(forDuration: wait)) { [weak self] in
                     guard let self else { return }
                     self.popRating(zone, text: duck ? "DUCKED!" : "CLEARED!", color: VaultPalette.cyan, at: self.slots[zone]?.headPoint ?? .zero)
+                    self.bodyLight(zone, VaultPalette.cyan, 0.3)
                     self.audio.play(.pop, dB: -8)
                     self.laneFlash(zone, color: VaultPalette.cyan)
                 }
@@ -808,8 +853,13 @@ extension WorldScene {
                 // The beam connects: a bright zap on that player, a jolt, the alarm notices. No power is lost.
                 let early = events.contains(.labelled(zone, .tooEarly))
                 // Low, but in a squat that already cleared a beam (or began before the warning): holding earns nothing.
-                let held = gate.pattern.action(for: zone) == .duck && [.down, .rising].contains(slots[zone]?.detector.phase ?? .standing)
-                popRating(zone, text: early ? "TOO EARLY!" : (held ? "STAND · DUCK AGAIN!" : "ZAPPED!"), color: early ? VaultPalette.gold : VaultPalette.laser, at: slots[zone]?.headPoint ?? .zero)
+                let duck = gate.pattern.action(for: zone) == .duck
+                let lowNow = [.down, .rising].contains(slots[zone]?.detector.phase ?? .standing)
+                let freshLow = duck && lowNow && rt.freshness.isFreshLow(zone, low: true, since: gate.encounter?.duckMark ?? [:])
+                let held = duck && lowNow && !freshLow
+                // The right move, but the body was still in the beam: say what would have worked.
+                let shallow = freshLow ? "LOWER!" : (!duck && (slots[zone]?.jump.isAirborne ?? false) ? "HIGHER!" : nil)
+                popRating(zone, text: early ? "TOO EARLY!" : (shallow ?? (held ? "STAND · DUCK AGAIN!" : (gate.step.bodyFit ? "BLOCKED!" : "ZAPPED!"))), color: early ? VaultPalette.gold : VaultPalette.laser, at: slots[zone]?.headPoint ?? .zero)
                 slots[zone]?.nippedAt = now
                 if var slot = slots[zone] { slot.combo = 0; slots[zone] = slot }
                 hideCue(zone)
@@ -819,7 +869,7 @@ extension WorldScene {
                 gate.flaredAt = now
                 laser?.cameraDetect = 1          // the cameras flash red: detected
                 heistReact(.zapped)
-                gameLog("laser #\(gate.number): \(role(for: zone)) ZAPPED\(early ? " (too early)" : "")\(held ? " (still holding an earlier squat: no credit)" : "")")
+                gameLog("laser #\(gate.number): \(role(for: zone)) ZAPPED\(early ? " (too early)" : "")\(held ? " (still holding an earlier squat: no credit)" : "")\(shallow.map { " (moved, but the body stayed in the beam: \($0))" } ?? "")")
                 captureEvent("l-\(gate.number)-e-zap-\(role(for: zone))", after: 0.1)
             case .labelled(let zone, let result):
                 if result == .tooLate { popRating(zone, text: "TOO LATE!", color: VaultPalette.gold, at: slots[zone]?.headPoint ?? .zero) }
@@ -831,16 +881,16 @@ extension WorldScene {
                 case .team(let zones):
                     rt.stats.teamDodges += 1
                     rt.stats.chances += zones.count
-                    // The system glitches: this gate's hardware shorts out, the corridor flashes cyan — a beat, not a stop.
-                    gate.shorted = true
-                    if !reduceMotion { for rig in gate.rigs.values where rig.node.alpha > 0.1 { burstSparks(at: rig.lens, color: VaultPalette.cyan, count: 5) } }
-                    rt.flash = reduceMotion ? 0.3 : (inSequence ? 0.5 : 1)
+                    // The system glitches: this gate's hardware shorts out (once the beam has passed the players), the
+                    // corridor flashes cyan — a beat, not a stop.
+                    gate.shortPending = true
                     if inSequence {
                         floatText("TEAM ✓ \(gate.seqIndex + 1)/\(gate.seqCount)", color: VaultPalette.cyan, at: CGPoint(x: size.width / 2, y: size.height * 0.30))
                         audio.play(.comboStep, dB: -4, variant: gate.seqIndex)
                         audio.play(.zap, dB: -16)
                     } else {
-                        showBanner(gate.pattern.isSplit ? "PERFECT SPLIT!" : "TEAM DODGE!", sub: gate.pattern.isSplit ? "Two moves, one team!" : "Security can't touch you!",
+                        showBanner(gate.step.bodyFit ? "BYPASS!" : (gate.pattern.isSplit ? "PERFECT SPLIT!" : "TEAM DODGE!"),
+                                   sub: gate.step.bodyFit ? "Perfect fit — you're both through!" : (gate.pattern.isSplit ? "Two moves, one team!" : "Security can't touch you!"),
                                    color: VaultPalette.cyan, hold: 1.0)
                         heistReact(gate.pattern.isSplit ? .perfectSplit : .teamDodge)
                         audio.play(.team, dB: -2)
@@ -905,9 +955,12 @@ extension WorldScene {
             guard let slot = slots[zone], slot.driver == .simulated, now - slot.lastManualSim > 20 else { continue }
             let crossing = gate.crossings[zone] ?? laserRuntime.timing.crossingTime
             let roll = Double.random(in: 0...1)
-            switch gate.pattern.action(for: zone) {
-            case .duck: gate.plannedSquats.append((zone, crossing - (roll < 0.88 ? Double.random(in: 0.45...0.7) : -0.2), 0.25))
-            case .jump: gate.plannedJumps.append((zone, crossing + (roll < 0.88 ? Double.random(in: -0.45 ... -0.2) : 0.35) - crouch))
+            switch (gate.pattern.action(for: zone), gate.step.bodyFit) {
+            case (.duck, false): gate.plannedSquats.append((zone, crossing - (roll < 0.88 ? Double.random(in: 0.45...0.7) : -0.2), 0.25))
+            case (.jump, false): gate.plannedJumps.append((zone, crossing + (roll < 0.88 ? Double.random(in: -0.45 ... -0.2) : 0.35) - crouch))
+            // Body-Fit: be in the pose while the gate is in contact.
+            case (.duck, true): gate.plannedSquats.append((zone, crossing - (roll < 0.88 ? Double.random(in: 0.4...0.55) : -0.3), 0.45))
+            case (.jump, true): gate.plannedJumps.append((zone, crossing + (roll < 0.88 ? Double.random(in: -0.08...0.15) : 0.8) - crouch))
             }
         }
     }
@@ -942,6 +995,7 @@ extension WorldScene {
     /// it reaches the players' plane exactly at the crossing, and a beam that looks far away is far away.
     private func updateLaserGate(_ gate: LaserGate, debug: inout [LaserWorld.DebugBeam], hum: inout (high: Float, low: Float)) {
         if gate.step.turret { updateTurret(gate, debug: &debug, hum: &hum); return }
+        if gate.step.bodyFit { updateBodyFitGate(gate, debug: &debug); return }
         let timing = laserRuntime.timing
         let z = CGFloat(timing.gateZ(at: gate.t))
         let visible = gate.revealed && z > 0.25
@@ -1343,7 +1397,7 @@ extension WorldScene {
             rt.seqNext = 0
             clearSequenceStrip()
         }
-        if rt.beat != .escape { rt.beat = nil }
+        if rt.beat == .checkpoint { restartCheckpointScan() } else if rt.beat != .escape { rt.beat = nil }
         rt.nextBeatAt = gameTime + 2.5
         laser?.drawDebugBeams([], proj: proj, timing: rt.timing)
         audio.setLaserHum(high: 0, low: 0, dt: 1)
@@ -1353,7 +1407,10 @@ extension WorldScene {
 
     func resetLaser() {
         let rt = laserRuntime
+        removeCheckpoint()
         resetHeist()
+        // A trial without the vault opener (e.g. the Body-Fit trial) starts with the cart already rolling.
+        startTrialWithoutVault()
         withdrawLaserHazards()
         rt.beat = nil
         rt.retry = nil
@@ -1374,10 +1431,22 @@ extension WorldScene {
         rt.nextBeatAt = gameTime + SessionFlow.countdownDuration + 1.0
     }
 
+    /// A trial without the vault opener (e.g. the Body-Fit trial) starts with the vault long open and far behind, and
+    /// the cart already rolling (otherwise the cart waits for a vault that never opens).
+    private func startTrialWithoutVault() {
+        let rt = laserRuntime
+        guard !rt.director.beats.contains(.vaultOpen) else { return }
+        rt.heist.vaultStart = gameTime - 100
+        rt.heist.vaultDistance = distance - 100
+        rt.heist.speedMul = 1
+    }
+
     func startLaserScript() {
         let rt = laserRuntime
         if rt.script == nil { autoplayBeforeScript = model?.autoplay ?? false }
-        rt.script = LaserScript()
+        let bodyFit = UserDefaults.standard.string(forKey: "scenario") == "bodyfit"
+        if bodyFit { rt.director.beats = LaserDirector.bodyFitTrial }
+        rt.script = LaserScript(bodyFit: bodyFit)
         model?.scriptRunning = true
         model?.autoplay = false
         for zone in Zone.allCases { slots[zone]?.simLost = false }
@@ -1405,7 +1474,30 @@ final class LaserScript {
     }
     enum Control { case none, pauseInWarning(Double, resume: Double), loseTracking(Zone, afterWarning: Double, recover: Double, resume: Double) }
 
-    static let steps: [Plan] = [
+    /// `-scenario bodyfit`: the Body-Fit gate alone — success, each partial, failure, pause, tracking loss, replay.
+    /// Offsets are from the crossing; the contact window is [−0.1, +0.45] s (Child +0.54 s).
+    static let bodyFitSteps: [Plan] = [
+        Plan(name: "BODY-FIT: Parent ducks through the low gap, Child jumps the sill → BYPASS", squat: [.left: (-0.45, 0.45)], jump: [.right: -0.05]),
+        Plan(name: "BODY-FIT: Parent stays standing (blocked by the shutter), Child jumps → partial", jump: [.right: -0.05]),
+        Plan(name: "BODY-FIT: Parent ducks, Child jumps TOO LATE (after the contact window) → partial", squat: [.left: (-0.45, 0.45)], jump: [.right: 0.75]),
+        Plan(name: "BODY-FIT: nobody moves → both blocked"),
+        Plan(name: "BODY-FIT: pause during the WARNING → withdrawn, resume", control: .pauseInWarning(0.9, resume: 2.0)),
+        Plan(name: "BODY-FIT again (retried after the pause): both through → BYPASS", squat: [.left: (-0.5, 0.45)], jump: [.right: 0.0]),
+        Plan(name: "BODY-FIT: Child's tracking lost on the approach → withdrawn → READY → resume",
+             control: .loseTracking(.right, afterWarning: 3.0, recover: 2.0, resume: 1.5)),
+        Plan(name: "BODY-FIT again (retried): Parent ducks; Child jumps a little late but inside the child's window → BYPASS",
+             squat: [.left: (-0.45, 0.45)], jump: [.right: 0.32]),
+        Plan(name: "new run: BODY-FIT both through → fresh ids and counters", squat: [.left: (-0.45, 0.45)], jump: [.right: -0.05]),
+    ]
+
+    let steps: [Plan]
+    let bodyFit: Bool
+    init(bodyFit: Bool = false) {
+        self.bodyFit = bodyFit
+        steps = bodyFit ? Self.bodyFitSteps : Self.getawaySteps
+    }
+
+    static let getawaySteps: [Plan] = [
         Plan(name: "HIGH BEAM (single duck): both duck → TEAM DODGE", squat: [.left: (-0.6, 0.25), .right: (-0.5, 0.25)]),
         Plan(name: "FLOOR LASER: Child's tracking lost on the approach → withdrawn → READY → resume",
              control: .loseTracking(.right, afterWarning: 3.0, recover: 2.0, resume: 1.5)),
@@ -1438,14 +1530,14 @@ final class LaserScript {
     private var plans: [ObjectIdentifier: Plan] = [:]
     private var timers: [(fireAt: Double, real: Bool, action: (WorldScene) -> Void)] = []
     private var replayed = false
-    var isFinished: Bool { index >= Self.steps.count && timers.isEmpty && leversPulled }
+    var isFinished: Bool { index >= steps.count && timers.isEmpty && (leversPulled || bodyFit) }
 
     func laserWarned(_ gate: LaserGate, scene: WorldScene) {
-        guard index < Self.steps.count else { return }
-        let step = Self.steps[index]
+        guard index < steps.count else { return }
+        let step = steps[index]
         index += 1
         plans[ObjectIdentifier(gate)] = step
-        scene.gameLog("laser script step \(index)/\(Self.steps.count): \(step.name)")
+        scene.gameLog("laser script step \(index)/\(steps.count): \(step.name)")
         switch step.control {
         case .pauseInWarning(let at, let resume):
             schedule(at: scene.gameTime + at, real: false) { scene in
@@ -1474,6 +1566,17 @@ final class LaserScript {
     }
 
     func laserFinished(scene: WorldScene) {}
+
+    /// Checkpoint scans: scan 1 — the Parent hides, the Child stays up (spotted, rescan); scan 2 — both hide → breach.
+    func checkpointCued(_ index: Int, scene: WorldScene) {
+        let plan: [Zone] = index == 0 ? [.left] : [.left, .right]
+        scene.gameLog("laser script: checkpoint scan \(index + 1) — \(plan.map { scene.role(for: $0) }.joined(separator: " + ")) hide\(index == 0 ? " (Child stays standing)" : "")")
+        for zone in plan {
+            guard var slot = scene.slots[zone] else { continue }
+            slot.sim = SimulatedSquat(start: scene.gameTime, holdDuration: 2.9)
+            scene.slots[zone] = slot
+        }
+    }
 
     func escaped(scene: WorldScene) {
         guard !replayed else { return }

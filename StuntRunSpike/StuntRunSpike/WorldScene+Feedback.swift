@@ -263,6 +263,7 @@ extension WorldScene {
                 placeholder.xScale = (1 + 0.10 * depth) / max(0.9, stretch)
                 placeholder.color = Palette.coral
                 placeholder.colorBlendFactor = sinceNip < 0.3 ? 0.5 * (1 - sinceNip / 0.3) : 0
+                if let tint = laserBodyTint(zone), tint.1 > placeholder.colorBlendFactor { placeholder.color = tint.0; placeholder.colorBlendFactor = tint.1 }
                 slot.headPoint = CGPoint(x: defaultFoot.x, y: defaultFoot.y + raise + placeholder.size.height * (1 - 0.32 * depth) + 40)
             }
             slots[zone] = slot

@@ -1,0 +1,302 @@
+t=   0.00 real=-1128223.19 s=1 mode: Laser Breakout (art 314 ms)
+t=   0.02 real=   0.41 s=1 state: countdown
+t=   0.67 real=   1.53 s=2 replay (laser script start) → session 2
+t=   0.69 real=   1.55 s=2 state: countdown
+t=   3.04 real=   4.66 s=2 state: running
+t=   4.68 real=   6.20 s=2 laser: vault door opening
+t=   7.28 real=   9.26 s=2 laser: vault open — cart launches
+t=   7.50 real=   9.71 s=2 laser phase: ALARM TRIGGERED
+t=  11.10 real=  13.80 s=2 laser beat: single highBeam (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t=  11.14 real=  13.84 s=2 laser script step 1/18: HIGH BEAM (single duck): both duck → TEAM DODGE
+t=  11.14 real=  13.84 s=2 laser #1: warning highBeam (nothing visible yet)
+t=  12.84 real=  16.01 s=2 laser: blast doors slam shut behind the cart
+t=  12.94 real=  16.11 s=2 laser #1: gate revealed at z 30.0 (beams at P 0.93 / C 0.65 units; crossings P 6.12 / C 6.12 s)
+t=  15.88 real=  19.49 s=2 laser #1: cue, crossing in 1.38 s
+t=  16.94 real=  21.03 s=2 laser #1: PARENT ducked clear (+1)
+t=  17.04 real=  21.13 s=2 laser #1: CHILD ducked clear (+1)
+t=  17.04 real=  21.13 s=2 laser #1: TEAM (+1 bonus); alert 0.00
+t=  17.39 real=  21.74 s=2 laser #1: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t=  17.39 real=  21.74 s=2 laser #1: crossing CHILD — crown 0.43 vs beam 0.65 (clear by 0.21 units)
+t=  21.62 real=  27.03 s=2 laser beat: single floorSweep (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t=  21.63 real=  27.05 s=2 laser script step 2/18: FLOOR LASER: Child's tracking lost on the approach → withdrawn → READY → resume
+t=  21.63 real=  27.05 s=2 laser #2: warning floorSweep (nothing visible yet)
+t=  23.45 real=  29.09 s=2 laser #2: gate revealed at z 29.9 (beams at P 0.10 / C 0.07 units; crossings P 6.12 / C 6.12 s)
+t=  24.65 real=  30.51 s=2 debug: CHILD tracking OFF (simulated)
+t=  25.03 real=  31.13 s=2 CHILD tracking LOST
+t=  25.03 real=  31.14 s=2 laser #2: withdrawn (game halted)
+t=  25.03 real=  31.14 s=2 state: tracking lost (CHILD)
+t=  25.03 real=  33.13 s=2 debug: CHILD tracking ON (simulated)
+t=  25.03 real=  33.15 s=2 CHILD tracking recovered
+t=  25.03 real=  33.16 s=2 state: ready (waiting for explicit resume)
+t=  25.03 real=  34.63 s=2 resume (laser script)
+t=  25.05 real=  34.65 s=2 state: countdown
+t=  27.54 real=  37.63 s=2 state: running
+t=  27.55 real=  37.63 s=2 laser beat: single floorSweep (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t=  27.57 real=  37.64 s=2 laser script step 3/18: FLOOR LASER again (single jump, retried): both jump → TEAM DODGE
+t=  27.57 real=  37.64 s=2 laser #3: warning floorSweep (nothing visible yet)
+t=  29.38 real=  39.93 s=2 laser #3: gate revealed at z 30.0 (beams at P 0.10 / C 0.07 units; crossings P 6.12 / C 6.12 s)
+t=  32.31 real=  43.31 s=2 laser #3: cue, crossing in 1.38 s
+t=  33.46 real=  44.68 s=2 PARENT jump: takeoff
+t=  33.46 real=  44.68 s=2 laser #3: PARENT jumped clear (+1)
+t=  33.51 real=  44.73 s=2 CHILD jump: takeoff
+t=  33.51 real=  44.73 s=2 laser #3: CHILD jumped clear (+1)
+t=  33.51 real=  44.73 s=2 laser #3: TEAM (+1 bonus); alert 0.00
+t=  33.73 real=  44.94 s=2 laser #3: crossing PARENT — soles 0.39 vs beam 0.10 (clear by 0.30 units)
+t=  33.73 real=  44.94 s=2 laser #3: crossing CHILD — soles 0.46 vs beam 0.07 (clear by 0.39 units)
+t=  33.86 real=  45.99 s=2 PARENT jump: landed (air 1.32 s)
+t=  33.86 real=  45.99 s=2 CHILD jump: landed (air 1.27 s)
+t=  33.96 real=  46.33 s=2 PARENT jump: cycle complete (jumps 1)
+t=  37.96 real=  50.56 s=2 laser beat: single highBeam+sweep (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t=  37.97 real=  50.58 s=2 laser script step 4/18: SCANNER SWEEP (high): the beam swings in and locks; nobody moves → MISSED, alert rises
+t=  37.97 real=  50.58 s=2 laser #4: warning highBeam (sweep) (nothing visible yet)
+t=  39.78 real=  52.83 s=2 laser #4: gate revealed at z 30.0 (beams at P 0.93 / C 0.65 units; crossings P 6.12 / C 6.12 s)
+t=  42.41 real=  55.90 s=2 laser #4: sweep locked at the judged height (0.93 units) 1.34 s before judging opens
+t=  42.71 real=  56.20 s=2 laser #4: cue, crossing in 1.39 s
+t=  44.10 real=  57.86 s=2 laser #4: crossing PARENT — crown 1.18 vs beam 0.93 (IN THE BEAM by 0.25 units)
+t=  44.10 real=  57.86 s=2 laser #4: crossing CHILD — crown 0.82 vs beam 0.65 (IN THE BEAM by 0.17 units)
+t=  44.40 real=  58.16 s=2 laser #4: PARENT ZAPPED
+t=  44.40 real=  58.16 s=2 laser #4: CHILD ZAPPED
+t=  44.40 real=  58.16 s=2 laser #4: partial: clear [] zapped [CHILD,PARENT]; alert 0.36
+t=  45.01 real=  59.91 s=2 laser #4: PARENT label noJump
+t=  45.01 real=  59.91 s=2 laser #4: CHILD label noJump
+t=  48.21 real=  63.35 s=2 laser phase: SECURITY PURSUIT
+t=  51.33 real=  66.91 s=2 laser beat: single highBeam+turret-wave (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t=  51.35 real=  66.93 s=2 laser script step 5/18: TURRET SWEEP wave (high): Parent's lane first, Child's 0.9 s later; each ducks as it passes → TEAM
+t=  51.35 real=  66.93 s=2 laser #5: warning highBeam (turret) (nothing visible yet)
+t=  53.16 real=  69.23 s=2 laser #5: turret revealed at z 13.8 (beams at P 0.93 / C 0.65 units; crossings P 6.19 / C 7.09 s)
+t=  54.76 real=  70.83 s=2 laser #5: turrets clamped to the rail 2.5 units ahead of the players
+t=  55.81 real=  72.34 s=2 laser #5: turrets rotating toward the players (34°/s)
+t=  56.15 real=  72.68 s=2 laser #5: cue, crossing in 1.39 s
+t=  57.26 real=  74.24 s=2 laser #5: PARENT ducked clear (+1)
+t=  57.62 real=  74.88 s=2 laser #5: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t=  58.16 real=  75.68 s=2 laser #5: CHILD ducked clear (+1)
+t=  58.16 real=  75.68 s=2 laser #5: TEAM (+1 bonus); alert 0.28
+t=  58.54 real=  76.56 s=2 laser #5: crossing CHILD — crown 0.43 vs beam 0.65 (clear by 0.21 units)
+t=  63.85 real=  82.29 s=2 laser beat: DOUBLE PULSE highBeam, highBeam (spacing 2.80 s, difficulty warn×1.00 gap×1.00)
+t=  63.87 real=  82.31 s=2 laser script step 6/18: DOUBLE PULSE 1/2: both duck; Parent HOLDS the squat for 3 s
+t=  63.87 real=  82.31 s=2 laser #6: warning highBeam — step 1/2 (nothing visible yet)
+t=  65.67 real=  84.35 s=2 laser #6: gate revealed at z 30.0 (beams at P 0.93 / C 0.65 units; crossings P 6.12 / C 6.12 s)
+t=  66.67 real=  85.56 s=2 laser script step 7/18: DOUBLE PULSE 2/2: Parent still in the same squat → no credit; Child stands and ducks again → partial
+t=  66.67 real=  85.56 s=2 laser #7: warning highBeam — step 2/2 (nothing visible yet)
+t=  68.48 real=  88.08 s=2 laser #7: gate revealed at z 29.9 (beams at P 0.93 / C 0.65 units; crossings P 6.12 / C 6.12 s)
+t=  68.59 real=  88.19 s=2 laser #6: cue, crossing in 1.40 s
+t=  69.67 real=  89.51 s=2 laser #6: PARENT ducked clear (+1)
+t=  69.77 real=  89.61 s=2 laser #6: CHILD ducked clear (+1)
+t=  69.77 real=  89.61 s=2 laser #6: TEAM (+1 bonus); alert 0.20
+t=  69.87 real=  89.96 s=2 TURBO (team power full)
+t=  69.87 real=  89.96 s=2 GHOST MODE (team power full)
+t=  70.07 real=  91.38 s=2 laser #6: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.29 units)
+t=  70.07 real=  91.38 s=2 laser #6: crossing CHILD — crown 0.46 vs beam 0.65 (clear by 0.18 units)
+t=  71.39 real=  92.91 s=2 laser #7: cue, crossing in 1.39 s
+t=  72.52 real=  94.25 s=2 laser #7: CHILD ducked clear (+1)
+t=  72.80 real=  95.03 s=2 laser #7: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t=  72.80 real=  95.03 s=2 laser #7: crossing CHILD — crown 0.45 vs beam 0.65 (clear by 0.19 units)
+t=  73.10 real=  95.33 s=2 laser #7: PARENT ZAPPED (still holding an earlier squat: no credit)
+t=  73.10 real=  95.33 s=2 laser #7: partial: clear [CHILD] zapped [PARENT]; alert 0.38
+t=  73.10 real=  95.33 s=2 laser sequence DOUBLE PULSE: PARENT 1/2 · CHILD 2/2
+t=  73.69 real=  96.73 s=2 laser #7: PARENT label noJump
+t=  76.91 real= 100.16 s=2 laser beat: single splitGrid(parentHigh: true) (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t=  76.92 real= 100.18 s=2 laser script step 8/18: SPLIT GRID (Parent high): pause during the WARNING → withdrawn, resume
+t=  76.92 real= 100.18 s=2 laser #8: warning splitGrid(parentHigh: true) (nothing visible yet)
+t=  77.83 real= 101.51 s=2 pause (laser script)
+t=  77.83 real= 101.53 s=2 laser #8: withdrawn (game halted)
+t=  77.83 real= 101.53 s=2 state: paused
+t=  77.83 real= 103.51 s=2 resume (laser script)
+t=  77.85 real= 103.53 s=2 state: countdown
+t=  80.39 real= 106.51 s=2 state: running
+t=  80.40 real= 106.51 s=2 laser beat: single splitGrid(parentHigh: true) (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t=  80.42 real= 106.53 s=2 laser script step 9/18: SPLIT GRID again (retried after the pause): Parent ducks, Child jumps → PERFECT SPLIT
+t=  80.42 real= 106.53 s=2 laser #9: warning splitGrid(parentHigh: true) (nothing visible yet)
+t=  82.23 real= 108.78 s=2 laser #9: gate revealed at z 30.0 (beams at P 0.93 / C 0.07 units; crossings P 6.12 / C 6.12 s)
+t=  85.15 real= 112.20 s=2 laser #9: cue, crossing in 1.40 s
+t=  86.27 real= 113.78 s=2 laser #9: PARENT ducked clear (+1)
+t=  86.32 real= 113.83 s=2 CHILD jump: takeoff
+t=  86.32 real= 113.83 s=2 laser #9: CHILD jumped clear (+1)
+t=  86.32 real= 113.83 s=2 laser #9: TEAM (+1 bonus); alert 0.30
+t=  86.67 real= 114.44 s=2 laser #9: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t=  86.67 real= 114.44 s=2 laser #9: crossing CHILD — soles 0.24 vs beam 0.07 (clear by 0.17 units)
+t=  86.77 real= 115.18 s=2 CHILD jump: landed (air 1.35 s)
+t=  86.98 real= 115.38 s=2 CHILD jump: cycle complete (jumps 1)
+t=  90.96 real= 119.81 s=2 laser beat: COMBO highBeam, floorSweep, highBeam (spacing 3.00 s, difficulty warn×1.00 gap×1.00)
+t=  90.98 real= 119.83 s=2 laser script step 10/18: COMBO 1/3 (DUCK): both duck → team
+t=  90.98 real= 119.83 s=2 laser #10: warning highBeam — step 1/3 (nothing visible yet)
+t=  92.79 real= 121.88 s=2 laser #10: gate revealed at z 29.9 (beams at P 0.93 / C 0.65 units; crossings P 6.12 / C 6.12 s)
+t=  94.00 real= 123.31 s=2 laser script step 11/18: COMBO 2/3 (JUMP): both jump → team
+t=  94.00 real= 123.31 s=2 laser #11: warning floorSweep — step 2/3 (nothing visible yet)
+t=  95.71 real= 125.48 s=2 laser #10: cue, crossing in 1.39 s
+t=  95.81 real= 125.58 s=2 laser #11: gate revealed at z 29.9 (beams at P 0.10 / C 0.07 units; crossings P 6.12 / C 6.12 s)
+t=  96.78 real= 127.03 s=2 laser #10: CHILD ducked clear (+1)
+t=  96.83 real= 127.08 s=2 laser #10: PARENT ducked clear (+1)
+t=  96.83 real= 127.08 s=2 laser #10: TEAM (+1 bonus); alert 0.22
+t=  97.00 real= 127.25 s=2 laser script step 12/18: COMBO 3/3 (DUCK): Parent ducks, Child squats TOO EARLY → partial (combo 2/3)
+t=  97.00 real= 127.25 s=2 laser #12: warning highBeam — step 3/3 (nothing visible yet)
+t=  97.18 real= 127.66 s=2 laser #10: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t=  97.18 real= 127.66 s=2 laser #10: crossing CHILD — crown 0.43 vs beam 0.65 (clear by 0.21 units)
+t=  98.73 real= 130.64 s=2 laser #11: cue, crossing in 1.39 s
+t=  98.80 real= 130.71 s=2 laser #12: gate revealed at z 30.0 (beams at P 0.93 / C 0.65 units; crossings P 6.12 / C 6.12 s)
+t=  99.89 real= 132.01 s=2 PARENT jump: takeoff
+t=  99.89 real= 132.01 s=2 CHILD jump: takeoff
+t=  99.89 real= 132.01 s=2 laser #11: CHILD jumped clear (+1)
+t=  99.89 real= 132.01 s=2 laser #11: PARENT jumped clear (+1)
+t=  99.89 real= 132.01 s=2 laser #11: TEAM (+1 bonus); alert 0.14
+t= 100.21 real= 132.58 s=2 laser #11: crossing PARENT — soles 0.32 vs beam 0.10 (clear by 0.22 units)
+t= 100.21 real= 132.58 s=2 laser #11: crossing CHILD — soles 0.32 vs beam 0.07 (clear by 0.25 units)
+t= 100.21 real= 132.58 s=2 TURBO (team power full)
+t= 100.21 real= 132.58 s=2 GHOST MODE (team power full)
+t= 100.31 real= 133.91 s=2 PARENT jump: landed (air 1.90 s)
+t= 100.31 real= 133.91 s=2 CHILD jump: landed (air 1.90 s)
+t= 100.53 real= 134.13 s=2 PARENT jump: cycle complete (jumps 2)
+t= 100.53 real= 134.13 s=2 CHILD jump: cycle complete (jumps 2)
+t= 101.72 real= 135.55 s=2 laser #12: cue, crossing in 1.40 s
+t= 102.84 real= 137.11 s=2 laser #12: PARENT ducked clear (+1)
+t= 103.12 real= 137.39 s=2 laser #12: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t= 103.12 real= 137.39 s=2 laser #12: crossing CHILD — crown 0.82 vs beam 0.65 (IN THE BEAM by 0.17 units)
+t= 103.43 real= 137.95 s=2 laser #12: CHILD ZAPPED (too early)
+t= 103.43 real= 137.95 s=2 laser #12: CHILD label tooEarly
+t= 103.43 real= 137.95 s=2 laser #12: partial: clear [PARENT] zapped [CHILD]; alert 0.32
+t= 103.43 real= 137.95 s=2 laser sequence COMBO: PARENT 3/3 · CHILD 2/3
+t= 107.23 real= 142.55 s=2 laser: checkpoint ahead (participants 2)
+t= 112.39 real= 147.96 s=2 laser: checkpoint — cart stopped; cover tops at P 0.94 / C 0.66 units (80% of standing height)
+t= 114.39 real= 150.18 s=2 laser script: checkpoint scan 1 — PARENT hide (Child stays standing)
+t= 114.39 real= 150.18 s=2 laser: checkpoint scan 1 — HIDE! (scan in 1.6 s)
+t= 117.41 real= 153.60 s=2 laser: checkpoint scan 1 — CHILD SPOTTED (concealed 0% of the scan)
+t= 117.41 real= 153.60 s=2 laser: checkpoint scan 1 — PARENT HIDDEN (concealed 100% of the scan)
+t= 117.79 real= 154.21 s=2 laser script: checkpoint scan 2 — PARENT + CHILD hide
+t= 117.79 real= 154.21 s=2 laser: checkpoint scan 2 — HIDE! (scan in 1.6 s)
+t= 120.80 real= 157.63 s=2 laser: checkpoint scan 2 — CHILD HIDDEN (concealed 100% of the scan)
+t= 120.80 real= 157.63 s=2 laser: checkpoint scan 2 — PARENT HIDDEN (concealed 100% of the scan)
+t= 120.80 real= 157.63 s=2 laser: checkpoint BREACHED — both hidden, both locks released
+t= 123.70 real= 160.74 s=2 laser phase: FINAL LOCKDOWN
+t= 126.81 real= 164.08 s=2 laser beat: CROSSFIRE splitGrid(parentHigh: true), splitGrid(parentHigh: false) (spacing 3.00 s, difficulty warn×1.00 gap×1.00)
+t= 126.83 real= 164.10 s=2 laser script step 13/18: CROSSFIRE 1/2 (Parent high): Parent DUCKS, Child JUMPS
+t= 126.83 real= 164.10 s=2 laser #13: warning splitGrid(parentHigh: true) — step 1/2 (nothing visible yet)
+t= 128.64 real= 166.15 s=2 laser #13: gate revealed at z 29.9 (beams at P 0.93 / C 0.07 units; crossings P 6.12 / C 6.12 s)
+t= 129.84 real= 167.34 s=2 laser script step 14/18: CROSSFIRE 2/2 (Child high): Parent JUMPS, Child DUCKS → CROSSFIRE CLEARED
+t= 129.84 real= 167.34 s=2 laser #14: warning splitGrid(parentHigh: false) — step 2/2 (nothing visible yet)
+t= 130.44 real= 167.95 s=2 laser #13: iris aperture open
+t= 131.03 real= 168.76 s=2 laser #13: iris pods locked at P 0.93 / C 0.07 units
+t= 131.56 real= 169.53 s=2 laser #13: cue, crossing in 1.39 s
+t= 131.73 real= 169.91 s=2 laser #14: gate revealed at z 29.5 (beams at P 0.10 / C 0.65 units; crossings P 6.12 / C 6.12 s)
+t= 132.68 real= 171.10 s=2 laser #13: PARENT ducked clear (+1)
+t= 132.72 real= 171.13 s=2 CHILD jump: takeoff
+t= 132.72 real= 171.13 s=2 laser #13: CHILD jumped clear (+1)
+t= 132.72 real= 171.13 s=2 laser #13: TEAM (+1 bonus); alert 0.34
+t= 132.97 real= 171.38 s=2 laser #13: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t= 132.97 real= 171.38 s=2 laser #13: crossing CHILD — soles 0.42 vs beam 0.07 (clear by 0.35 units)
+t= 133.07 real= 171.74 s=2 TURBO (team power full)
+t= 133.07 real= 171.74 s=2 GHOST MODE (team power full)
+t= 133.17 real= 172.46 s=2 CHILD jump: landed (air 1.33 s)
+t= 133.27 real= 172.83 s=2 CHILD jump: cycle complete (jumps 3)
+t= 133.46 real= 173.01 s=2 laser #14: iris aperture open
+t= 134.06 real= 173.61 s=2 laser #14: iris pods locked at P 0.10 / C 0.65 units
+t= 134.57 real= 174.36 s=2 laser #14: cue, crossing in 1.40 s
+t= 135.70 real= 175.95 s=2 laser #14: CHILD ducked clear (+1)
+t= 135.73 real= 175.98 s=2 PARENT jump: takeoff
+t= 135.73 real= 175.98 s=2 laser #14: PARENT jumped clear (+1)
+t= 135.73 real= 175.98 s=2 laser #14: TEAM (+1 bonus); alert 0.26
+t= 135.73 real= 175.98 s=2 laser sequence CROSSFIRE: COMBO CLEARED (+2 team bonus)
+t= 136.08 real= 176.59 s=2 laser #14: crossing PARENT — soles 0.24 vs beam 0.10 (clear by 0.14 units)
+t= 136.08 real= 176.59 s=2 laser #14: crossing CHILD — crown 0.43 vs beam 0.65 (clear by 0.21 units)
+t= 136.18 real= 177.66 s=2 PARENT jump: landed (air 1.68 s)
+t= 136.39 real= 177.86 s=2 PARENT jump: cycle complete (jumps 3)
+t= 140.39 real= 181.86 s=2 laser beat: GAUNTLET highBeam+turret, floorSweep, splitGrid(parentHigh: false) (spacing 3.00 s, difficulty warn×1.00 gap×1.00)
+t= 140.40 real= 181.88 s=2 laser script step 15/18: GAUNTLET 1/3 (turret sweep, high): both duck
+t= 140.40 real= 181.88 s=2 laser #15: warning highBeam (turret) — step 1/3 (nothing visible yet)
+t= 142.21 real= 183.95 s=2 laser #15: turret revealed at z 14.0 (beams at P 0.93 / C 0.65 units; crossings P 6.19 / C 6.19 s)
+t= 143.49 real= 185.23 s=2 laser script step 16/18: GAUNTLET 2/3 (floor laser): both jump
+t= 143.49 real= 185.23 s=2 laser #16: warning floorSweep — step 2/3 (nothing visible yet)
+t= 143.81 real= 185.54 s=2 laser #15: turrets clamped to the rail 2.5 units ahead of the players
+t= 144.81 real= 186.78 s=2 laser #15: turrets rotating toward the players (34°/s)
+t= 145.20 real= 187.16 s=2 laser #15: cue, crossing in 1.40 s
+t= 145.30 real= 187.26 s=2 laser #16: gate revealed at z 29.9 (beams at P 0.10 / C 0.07 units; crossings P 6.12 / C 6.12 s)
+t= 146.26 real= 188.23 s=2 laser #15: PARENT ducked clear (+1)
+t= 146.31 real= 188.28 s=2 laser #15: CHILD ducked clear (+1)
+t= 146.31 real= 188.28 s=2 laser #15: TEAM (+1 bonus); alert 0.18
+t= 146.50 real= 188.46 s=2 laser script step 17/18: GAUNTLET 3/3 (split, Child high): Parent jumps, Child ducks → SECURITY BROKEN → lockdown gate
+t= 146.50 real= 188.46 s=2 laser #17: warning splitGrid(parentHigh: false) — step 3/3 (nothing visible yet)
+t= 146.60 real= 188.56 s=2 laser #15: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t= 146.60 real= 188.56 s=2 laser #15: crossing CHILD — crown 0.43 vs beam 0.65 (clear by 0.21 units)
+t= 148.21 real= 190.18 s=2 laser #16: cue, crossing in 1.40 s
+t= 148.31 real= 190.28 s=2 laser #17: gate revealed at z 29.9 (beams at P 0.10 / C 0.65 units; crossings P 6.12 / C 6.12 s)
+t= 149.38 real= 191.35 s=2 PARENT jump: takeoff
+t= 149.38 real= 191.35 s=2 laser #16: PARENT jumped clear (+1)
+t= 149.40 real= 191.36 s=2 CHILD jump: takeoff
+t= 149.40 real= 191.36 s=2 laser #16: CHILD jumped clear (+1)
+t= 149.40 real= 191.36 s=2 laser #16: TEAM (+1 bonus); alert 0.10
+t= 149.61 real= 191.58 s=2 laser #16: crossing PARENT — soles 0.44 vs beam 0.10 (clear by 0.34 units)
+t= 149.61 real= 191.58 s=2 laser #16: crossing CHILD — soles 0.46 vs beam 0.07 (clear by 0.39 units)
+t= 149.75 real= 191.71 s=2 TURBO (team power full)
+t= 149.75 real= 191.71 s=2 GHOST MODE (team power full)
+t= 149.76 real= 191.73 s=2 PARENT jump: landed (air 0.38 s)
+t= 149.78 real= 191.75 s=2 CHILD jump: landed (air 0.38 s)
+t= 149.96 real= 191.93 s=2 PARENT jump: cycle complete (jumps 4)
+t= 149.98 real= 191.95 s=2 CHILD jump: cycle complete (jumps 4)
+t= 151.23 real= 193.19 s=2 laser #17: cue, crossing in 1.39 s
+t= 152.40 real= 194.36 s=2 PARENT jump: takeoff
+t= 152.40 real= 194.36 s=2 laser #17: PARENT jumped clear (+1)
+t= 152.40 real= 194.36 s=2 laser #17: CHILD ducked clear (+1)
+t= 152.40 real= 194.36 s=2 laser #17: TEAM (+1 bonus); alert 0.02
+t= 152.40 real= 194.36 s=2 laser sequence GAUNTLET: COMBO CLEARED (+3 team bonus)
+t= 152.66 real= 194.63 s=2 laser #17: crossing PARENT — soles 0.39 vs beam 0.10 (clear by 0.30 units)
+t= 152.66 real= 194.63 s=2 laser #17: crossing CHILD — crown 0.43 vs beam 0.65 (clear by 0.21 units)
+t= 152.78 real= 194.75 s=2 PARENT jump: landed (air 0.38 s)
+t= 152.98 real= 194.95 s=2 PARENT jump: cycle complete (jumps 5)
+t= 157.03 real= 199.00 s=2 laser: lockdown gate ahead (participants 2)
+t= 162.18 real= 204.15 s=2 laser: override — levers down, waiting for both players
+t= 162.18 real= 204.15 s=2 laser script: lockdown gate — Parent pulls ×2, Child pulls ×2 (one held squat counts once)
+t= 163.88 real= 205.85 s=2 laser: override — PARENT cranks (1/2)
+t= 165.88 real= 207.85 s=2 laser: override — PARENT cranks (2/2)
+t= 165.88 real= 207.85 s=2 laser: override — PARENT's lock released
+t= 167.23 real= 209.20 s=2 laser: override — CHILD cranks (1/2)
+t= 168.68 real= 210.65 s=2 laser: override — CHILD cranks (2/2)
+t= 168.68 real= 210.65 s=2 laser: override — CHILD's lock released
+t= 168.68 real= 210.65 s=2 laser: override — GATE OPEN
+t= 171.40 real= 213.36 s=2 laser: escape — exit doors ahead
+t= 175.86 real= 217.83 s=2 laser: ESCAPED — dodges 26/30, team dodges 12, alert 0.02
+t= 176.21 real= 218.18 s=2 TURBO (team power full)
+t= 176.21 real= 218.18 s=2 GHOST MODE (team power full)
+t= 182.88 real= 224.85 s=2 laser: getaway complete
+t= 182.88 real= 224.85 s=3 replay (laser script (after the escape)) → session 3
+t= 182.90 real= 224.86 s=3 state: countdown
+t= 185.86 real= 227.85 s=3 state: running
+t= 186.88 real= 228.85 s=3 laser: vault door opening
+t= 189.50 real= 231.46 s=3 laser: vault open — cart launches
+t= 189.71 real= 231.68 s=3 laser phase: ALARM TRIGGERED
+t= 193.31 real= 235.28 s=3 laser beat: single highBeam (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t= 193.33 real= 235.30 s=3 laser script step 18/18: new run: HIGH BEAM both duck → fresh ids and counters
+t= 193.33 real= 235.30 s=3 laser #1: warning highBeam (nothing visible yet)
+t= 195.05 real= 237.01 s=3 laser: blast doors slam shut behind the cart
+t= 195.15 real= 237.11 s=3 laser #1: gate revealed at z 29.9 (beams at P 0.93 / C 0.65 units; crossings P 6.12 / C 6.12 s)
+t= 198.06 real= 240.03 s=3 laser #1: cue, crossing in 1.39 s
+t= 199.13 real= 241.10 s=3 laser #1: CHILD ducked clear (+1)
+t= 199.18 real= 241.14 s=3 laser #1: PARENT ducked clear (+1)
+t= 199.18 real= 241.14 s=3 laser #1: TEAM (+1 bonus); alert 0.00
+t= 199.53 real= 241.50 s=3 laser #1: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t= 199.53 real= 241.50 s=3 laser #1: crossing CHILD — crown 0.43 vs beam 0.65 (clear by 0.21 units)
+t= 200.78 real= 242.75 s=3 laser script finished
+t= 203.78 real= 245.75 s=3 laser beat: single floorSweep (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t= 203.80 real= 245.76 s=3 laser #2: warning floorSweep (nothing visible yet)
+t= 205.61 real= 247.58 s=3 laser #2: gate revealed at z 29.9 (beams at P 0.10 / C 0.07 units; crossings P 6.12 / C 6.12 s)
+t= 208.53 real= 250.50 s=3 laser #2: cue, crossing in 1.39 s
+t= 209.65 real= 251.61 s=3 CHILD jump: takeoff
+t= 209.65 real= 251.61 s=3 laser #2: CHILD jumped clear (+1)
+t= 209.68 real= 251.65 s=3 PARENT jump: takeoff
+t= 209.68 real= 251.65 s=3 laser #2: PARENT jumped clear (+1)
+t= 209.68 real= 251.65 s=3 laser #2: TEAM (+1 bonus); alert 0.00
+t= 209.98 real= 251.94 s=3 laser #2: crossing PARENT — soles 0.33 vs beam 0.10 (clear by 0.23 units)
+t= 209.98 real= 251.94 s=3 laser #2: crossing CHILD — soles 0.24 vs beam 0.07 (clear by 0.17 units)
+t= 210.03 real= 252.00 s=3 CHILD jump: landed (air 0.38 s)
+t= 210.06 real= 252.03 s=3 PARENT jump: landed (air 0.38 s)
+t= 210.25 real= 252.21 s=3 CHILD jump: cycle complete (jumps 1)
+t= 210.28 real= 252.25 s=3 PARENT jump: cycle complete (jumps 1)
+t= 214.25 real= 256.21 s=3 laser beat: single highBeam+sweep (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t= 214.26 real= 256.23 s=3 laser #3: warning highBeam (sweep) (nothing visible yet)
+t= 216.08 real= 258.05 s=3 laser #3: gate revealed at z 29.9 (beams at P 0.93 / C 0.65 units; crossings P 6.12 / C 6.12 s)
+t= 218.70 real= 260.66 s=3 laser #3: sweep locked at the judged height (0.93 units) 1.34 s before judging opens
+t= 219.00 real= 260.96 s=3 laser #3: cue, crossing in 1.39 s
+t= 220.05 real= 262.01 s=3 laser #3: PARENT ducked clear (+1)
+t= 220.08 real= 262.05 s=3 laser #3: CHILD ducked clear (+1)
+t= 220.08 real= 262.05 s=3 laser #3: TEAM (+1 bonus); alert 0.00
+t= 220.48 real= 262.45 s=3 laser #3: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t= 220.48 real= 262.45 s=3 laser #3: crossing CHILD — crown 0.43 vs beam 0.65 (clear by 0.21 units)
+t= 224.70 real= 266.66 s=3 laser phase: SECURITY PURSUIT

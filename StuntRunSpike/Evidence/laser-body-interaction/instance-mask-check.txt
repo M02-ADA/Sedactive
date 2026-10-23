@@ -1,0 +1,5 @@
+Mac (this machine), per frame: person segmentation .balanced 9.3 ms · person instance masks 6.2 ms
+  poses: 1
+  instance masks: 2 (326 ms incl. pose)
+  instance 1: x 0.60…0.81, 23048 px
+  instance 2: x 0.29…0.56, 20792 px

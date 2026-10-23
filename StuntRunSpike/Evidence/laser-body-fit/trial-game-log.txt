@@ -1,0 +1,175 @@
+t=   0.00 real=-1137849.01 s=1 mode: Laser Breakout (art 319 ms)
+t=   0.02 real=   0.44 s=1 state: countdown
+t=   1.02 real=   1.45 s=2 replay (laser script start) → session 2
+t=   1.02 real=   1.45 s=2 state: countdown
+t=   4.00 real=   4.45 s=2 state: running
+t=   5.02 real=   5.45 s=2 laser phase: ALARM TRIGGERED
+t=   7.62 real=   8.05 s=2 laser beat: single splitGrid(parentHigh: true) (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t=   7.68 real=   8.10 s=2 laser script step 1/9: BODY-FIT: Parent ducks through the low gap, Child jumps the sill → BYPASS
+t=   7.68 real=   8.10 s=2 laser #1: warning splitGrid(parentHigh: true) (nothing visible yet)
+t=   9.49 real=   9.90 s=2 laser #1: gate revealed at z 30.0 (beams at P 0.93 / C 0.07 units; crossings P 6.12 / C 6.12 s)
+t=   9.97 real=  10.38 s=2 laser: blast doors slam shut behind the cart
+t=  12.42 real=  12.83 s=2 laser #1: cue, crossing in 1.39 s
+t=  13.72 real=  14.13 s=2 laser #1: PARENT ducked clear (+1)
+t=  13.82 real=  14.23 s=2 laser #1: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t=  13.82 real=  14.23 s=2 laser #1: crossing CHILD — soles 0.15 vs beam 0.07 (clear by 0.09 units)
+t=  13.82 real=  14.23 s=2 laser #1: body-fit gate in contact (z 1.87, holding 0.75 s)
+t=  13.84 real=  14.25 s=2 CHILD jump: takeoff
+t=  13.84 real=  14.25 s=2 laser #1: CHILD jumped clear (+1)
+t=  13.84 real=  14.25 s=2 laser #1: TEAM (+1 bonus); alert 0.00
+t=  14.17 real=  14.58 s=2 laser #1: body-fit CHILD THROUGH the jump window
+t=  14.17 real=  14.58 s=2 laser #1: body-fit PARENT THROUGH the low gap
+t=  14.17 real=  14.58 s=2 laser #1: body-fit BYPASS — both through, both locks withdrawn
+t=  14.22 real=  14.63 s=2 CHILD jump: landed (air 0.38 s)
+t=  14.44 real=  14.85 s=2 CHILD jump: cycle complete (jumps 1)
+t=  18.37 real=  18.78 s=2 laser beat: single splitGrid(parentHigh: true) (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t=  18.39 real=  18.80 s=2 laser script step 2/9: BODY-FIT: Parent stays standing (blocked by the shutter), Child jumps → partial
+t=  18.39 real=  18.80 s=2 laser #2: warning splitGrid(parentHigh: true) (nothing visible yet)
+t=  20.20 real=  20.61 s=2 laser #2: gate revealed at z 29.9 (beams at P 0.93 / C 0.07 units; crossings P 6.12 / C 6.12 s)
+t=  23.12 real=  23.53 s=2 laser #2: cue, crossing in 1.39 s
+t=  24.52 real=  24.93 s=2 laser #2: crossing PARENT — crown 1.18 vs beam 0.93 (IN THE BEAM by 0.25 units)
+t=  24.52 real=  24.93 s=2 laser #2: crossing CHILD — soles 0.15 vs beam 0.07 (clear by 0.09 units)
+t=  24.52 real=  24.93 s=2 laser #2: body-fit gate in contact (z 1.88, holding 0.75 s)
+t=  24.54 real=  24.95 s=2 CHILD jump: takeoff
+t=  24.54 real=  24.95 s=2 laser #2: CHILD jumped clear (+1)
+t=  24.82 real=  25.23 s=2 laser #2: body-fit CHILD THROUGH the jump window
+t=  24.92 real=  25.33 s=2 CHILD jump: landed (air 0.38 s)
+t=  24.97 real=  25.38 s=2 laser #2: body-fit PARENT BLOCKED by the shutter
+t=  25.05 real=  25.46 s=2 laser #2: PARENT ZAPPED
+t=  25.05 real=  25.46 s=2 laser #2: partial: clear [CHILD] zapped [PARENT]; alert 0.18
+t=  25.14 real=  25.55 s=2 CHILD jump: cycle complete (jumps 2)
+t=  25.55 real=  25.96 s=2 laser #2: PARENT label noJump
+t=  28.62 real=  29.03 s=2 laser beat: single splitGrid(parentHigh: true) (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t=  28.64 real=  29.05 s=2 laser script step 3/9: BODY-FIT: Parent ducks, Child jumps TOO LATE (after the contact window) → partial
+t=  28.64 real=  29.05 s=2 laser #3: warning splitGrid(parentHigh: true) (nothing visible yet)
+t=  30.44 real=  30.85 s=2 laser #3: gate revealed at z 30.0 (beams at P 0.93 / C 0.07 units; crossings P 6.12 / C 6.12 s)
+t=  33.37 real=  33.78 s=2 laser #3: cue, crossing in 1.39 s
+t=  34.67 real=  35.08 s=2 laser #3: PARENT ducked clear (+1)
+t=  34.77 real=  35.18 s=2 laser #3: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t=  34.77 real=  35.18 s=2 laser #3: crossing CHILD — soles 0.00 vs beam 0.07 (IN THE BEAM by 0.07 units)
+t=  34.77 real=  35.18 s=2 laser #3: body-fit gate in contact (z 1.88, holding 0.75 s)
+t=  35.07 real=  35.48 s=2 laser #3: body-fit PARENT THROUGH the low gap
+t=  35.30 real=  35.71 s=2 laser #3: CHILD ZAPPED
+t=  35.30 real=  35.71 s=2 laser #3: partial: clear [PARENT] zapped [CHILD]; alert 0.36
+t=  35.30 real=  35.71 s=2 laser #3: body-fit CHILD BLOCKED by the sill
+t=  35.59 real=  36.00 s=2 CHILD jump: takeoff
+t=  35.59 real=  36.00 s=2 laser #3: CHILD label tooLate
+t=  35.97 real=  36.38 s=2 CHILD jump: landed (air 0.38 s)
+t=  36.19 real=  36.60 s=2 CHILD jump: cycle complete (jumps 3)
+t=  38.87 real=  39.28 s=2 laser beat: single splitGrid(parentHigh: true) (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t=  38.89 real=  39.30 s=2 laser script step 4/9: BODY-FIT: nobody moves → both blocked
+t=  38.89 real=  39.30 s=2 laser #4: warning splitGrid(parentHigh: true) (nothing visible yet)
+t=  40.69 real=  41.10 s=2 laser #4: gate revealed at z 30.0 (beams at P 0.93 / C 0.07 units; crossings P 6.12 / C 6.12 s)
+t=  43.62 real=  44.03 s=2 laser #4: cue, crossing in 1.39 s
+t=  45.02 real=  45.43 s=2 laser #4: crossing PARENT — crown 1.18 vs beam 0.93 (IN THE BEAM by 0.25 units)
+t=  45.02 real=  45.43 s=2 laser #4: crossing CHILD — soles 0.00 vs beam 0.07 (IN THE BEAM by 0.07 units)
+t=  45.02 real=  45.43 s=2 laser #4: body-fit gate in contact (z 1.88, holding 0.75 s)
+t=  45.47 real=  45.88 s=2 laser #4: body-fit PARENT BLOCKED by the shutter
+t=  45.55 real=  45.96 s=2 laser #4: CHILD ZAPPED
+t=  45.55 real=  45.96 s=2 laser #4: PARENT ZAPPED
+t=  45.55 real=  45.96 s=2 security alert: crossedHigh
+t=  45.55 real=  45.96 s=2 laser #4: partial: clear [] zapped [CHILD,PARENT]; alert 0.72
+t=  45.55 real=  45.96 s=2 laser #4: body-fit CHILD BLOCKED by the sill
+t=  46.05 real=  46.46 s=2 laser #4: CHILD label noJump
+t=  46.05 real=  46.46 s=2 laser #4: PARENT label noJump
+t=  49.12 real=  49.53 s=2 laser beat: single splitGrid(parentHigh: true) (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t=  49.14 real=  49.55 s=2 laser script step 5/9: BODY-FIT: pause during the WARNING → withdrawn, resume
+t=  49.14 real=  49.55 s=2 laser #5: warning splitGrid(parentHigh: true) (nothing visible yet)
+t=  50.04 real=  50.45 s=2 pause (laser script)
+t=  50.04 real=  50.46 s=2 laser #5: withdrawn (game halted)
+t=  50.04 real=  50.46 s=2 state: paused
+t=  50.04 real=  52.45 s=2 resume (laser script)
+t=  50.05 real=  52.46 s=2 state: countdown
+t=  53.02 real=  55.45 s=2 state: running
+t=  53.04 real=  55.45 s=2 laser beat: single splitGrid(parentHigh: true) (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t=  53.05 real=  55.46 s=2 laser script step 6/9: BODY-FIT again (retried after the pause): both through → BYPASS
+t=  53.05 real=  55.46 s=2 laser #6: warning splitGrid(parentHigh: true) (nothing visible yet)
+t=  54.87 real=  57.28 s=2 laser #6: gate revealed at z 29.9 (beams at P 0.93 / C 0.07 units; crossings P 6.12 / C 6.12 s)
+t=  57.79 real=  60.20 s=2 laser #6: cue, crossing in 1.39 s
+t=  59.09 real=  61.50 s=2 laser #6: PARENT ducked clear (+1)
+t=  59.19 real=  61.60 s=2 laser #6: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t=  59.19 real=  61.60 s=2 laser #6: crossing CHILD — soles 0.00 vs beam 0.07 (IN THE BEAM by 0.07 units)
+t=  59.19 real=  61.60 s=2 laser #6: body-fit gate in contact (z 1.88, holding 0.75 s)
+t=  59.25 real=  61.66 s=2 CHILD jump: takeoff
+t=  59.25 real=  61.66 s=2 laser #6: CHILD jumped clear (+1)
+t=  59.25 real=  61.66 s=2 laser #6: TEAM (+1 bonus); alert 0.64
+t=  59.52 real=  61.93 s=2 laser #6: body-fit CHILD THROUGH the jump window
+t=  59.52 real=  61.93 s=2 laser #6: body-fit PARENT THROUGH the low gap
+t=  59.52 real=  61.93 s=2 laser #6: body-fit BYPASS — both through, both locks withdrawn
+t=  59.64 real=  62.05 s=2 CHILD jump: landed (air 0.38 s)
+t=  59.85 real=  62.26 s=2 CHILD jump: cycle complete (jumps 4)
+t=  63.70 real=  66.11 s=2 laser beat: single splitGrid(parentHigh: true) (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t=  63.72 real=  66.13 s=2 laser script step 7/9: BODY-FIT: Child's tracking lost on the approach → withdrawn → READY → resume
+t=  63.72 real=  66.13 s=2 laser #7: warning splitGrid(parentHigh: true) (nothing visible yet)
+t=  65.54 real=  67.95 s=2 laser #7: gate revealed at z 29.9 (beams at P 0.93 / C 0.07 units; crossings P 6.12 / C 6.12 s)
+t=  66.72 real=  69.13 s=2 debug: CHILD tracking OFF (simulated)
+t=  67.34 real=  69.75 s=2 CHILD tracking LOST
+t=  67.34 real=  69.76 s=2 laser #7: withdrawn (game halted)
+t=  67.34 real=  69.76 s=2 state: tracking lost (CHILD)
+t=  67.34 real=  71.75 s=2 debug: CHILD tracking ON (simulated)
+t=  67.34 real=  71.76 s=2 CHILD tracking recovered
+t=  67.34 real=  71.78 s=2 state: ready (waiting for explicit resume)
+t=  67.34 real=  73.25 s=2 resume (laser script)
+t=  67.35 real=  73.26 s=2 state: countdown
+t=  70.32 real=  76.25 s=2 state: running
+t=  70.34 real=  76.25 s=2 laser beat: single splitGrid(parentHigh: true) (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t=  70.35 real=  76.26 s=2 laser script step 8/9: BODY-FIT again (retried): Parent ducks; Child jumps a little late but inside the child's window → BYPASS
+t=  70.35 real=  76.26 s=2 laser #8: warning splitGrid(parentHigh: true) (nothing visible yet)
+t=  72.17 real=  78.08 s=2 laser #8: gate revealed at z 29.9 (beams at P 0.93 / C 0.07 units; crossings P 6.12 / C 6.12 s)
+t=  75.09 real=  81.00 s=2 laser #8: cue, crossing in 1.39 s
+t=  76.39 real=  82.30 s=2 laser #8: PARENT ducked clear (+1)
+t=  76.49 real=  82.40 s=2 laser #8: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t=  76.49 real=  82.40 s=2 laser #8: crossing CHILD — soles 0.00 vs beam 0.07 (IN THE BEAM by 0.07 units)
+t=  76.49 real=  82.40 s=2 laser #8: body-fit gate in contact (z 1.88, holding 0.75 s)
+t=  76.79 real=  82.70 s=2 laser #8: body-fit PARENT THROUGH the low gap
+t=  76.87 real=  82.78 s=2 CHILD jump: takeoff
+t=  76.87 real=  82.78 s=2 laser #8: CHILD jumped clear (+1)
+t=  76.87 real=  82.78 s=2 laser #8: TEAM (+1 bonus); alert 0.56
+t=  76.87 real=  82.78 s=2 laser #8: body-fit CHILD THROUGH the jump window
+t=  76.87 real=  82.78 s=2 laser #8: body-fit BYPASS — both through, both locks withdrawn
+t=  77.22 real=  83.13 s=2 TURBO (team power full)
+t=  77.22 real=  83.13 s=2 GHOST MODE (team power full)
+t=  77.25 real=  83.16 s=2 CHILD jump: landed (air 0.38 s)
+t=  77.45 real=  83.36 s=2 CHILD jump: cycle complete (jumps 5)
+t=  80.80 real=  86.71 s=2 laser: escape — exit doors ahead
+t=  85.20 real=  91.11 s=2 laser: ESCAPED — dodges 8/12, team dodges 3, alert 0.56
+t=  92.22 real=  98.13 s=2 laser: getaway complete
+t=  92.22 real=  98.13 s=3 replay (laser script (after the escape)) → session 3
+t=  92.24 real=  98.15 s=3 state: countdown
+t=  95.22 real= 101.15 s=3 state: running
+t=  96.22 real= 102.13 s=3 laser phase: ALARM TRIGGERED
+t=  98.82 real= 104.73 s=3 laser beat: single splitGrid(parentHigh: true) (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t=  98.84 real= 104.75 s=3 laser script step 9/9: new run: BODY-FIT both through → fresh ids and counters
+t=  98.84 real= 104.75 s=3 laser #1: warning splitGrid(parentHigh: true) (nothing visible yet)
+t= 100.65 real= 106.56 s=3 laser #1: gate revealed at z 29.9 (beams at P 0.93 / C 0.07 units; crossings P 6.12 / C 6.12 s)
+t= 101.17 real= 107.08 s=3 laser: blast doors slam shut behind the cart
+t= 103.57 real= 109.48 s=3 laser #1: cue, crossing in 1.39 s
+t= 104.87 real= 110.78 s=3 laser #1: PARENT ducked clear (+1)
+t= 104.97 real= 110.88 s=3 laser #1: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t= 104.97 real= 110.88 s=3 laser #1: crossing CHILD — soles 0.15 vs beam 0.07 (clear by 0.09 units)
+t= 104.97 real= 110.88 s=3 laser #1: body-fit gate in contact (z 1.88, holding 0.75 s)
+t= 104.99 real= 110.90 s=3 CHILD jump: takeoff
+t= 104.99 real= 110.90 s=3 laser #1: CHILD jumped clear (+1)
+t= 104.99 real= 110.90 s=3 laser #1: TEAM (+1 bonus); alert 0.00
+t= 105.34 real= 111.25 s=3 laser #1: body-fit PARENT THROUGH the low gap
+t= 105.34 real= 111.25 s=3 laser #1: body-fit CHILD THROUGH the jump window
+t= 105.34 real= 111.25 s=3 laser #1: body-fit BYPASS — both through, both locks withdrawn
+t= 105.37 real= 111.28 s=3 CHILD jump: landed (air 0.38 s)
+t= 105.57 real= 111.48 s=3 CHILD jump: cycle complete (jumps 1)
+t= 106.52 real= 112.43 s=3 laser script finished
+t= 109.52 real= 115.43 s=3 laser beat: single splitGrid(parentHigh: true) (spacing 0.00 s, difficulty warn×1.00 gap×1.00)
+t= 109.54 real= 115.45 s=3 laser #2: warning splitGrid(parentHigh: true) (nothing visible yet)
+t= 111.35 real= 117.26 s=3 laser #2: gate revealed at z 29.9 (beams at P 0.93 / C 0.07 units; crossings P 6.12 / C 6.12 s)
+t= 114.27 real= 120.18 s=3 laser #2: cue, crossing in 1.39 s
+t= 115.57 real= 121.48 s=3 laser #2: PARENT ducked clear (+1)
+t= 115.65 real= 121.56 s=3 CHILD jump: takeoff
+t= 115.65 real= 121.56 s=3 laser #2: CHILD jumped clear (+1)
+t= 115.65 real= 121.56 s=3 laser #2: TEAM (+1 bonus); alert 0.00
+t= 115.67 real= 121.58 s=3 laser #2: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t= 115.67 real= 121.58 s=3 laser #2: crossing CHILD — soles 0.26 vs beam 0.07 (clear by 0.19 units)
+t= 115.67 real= 121.58 s=3 laser #2: body-fit gate in contact (z 1.88, holding 0.75 s)
+t= 116.04 real= 121.95 s=3 CHILD jump: landed (air 0.38 s)
+t= 116.05 real= 121.96 s=3 laser #2: body-fit CHILD THROUGH the jump window
+t= 116.05 real= 121.96 s=3 laser #2: body-fit PARENT THROUGH the low gap
+t= 116.05 real= 121.96 s=3 laser #2: body-fit BYPASS — both through, both locks withdrawn
+t= 116.25 real= 122.16 s=3 CHILD jump: cycle complete (jumps 2)

@@ -263,7 +263,7 @@ final class WorldScene: SKScene {
         }
         buildHUD()
         layoutForSize()
-        if ["coop", "sweeps", "laser", "moon"].contains(UserDefaults.standard.string(forKey: "scenario")) {
+        if ["coop", "sweeps", "laser", "moon", "bodyfit"].contains(UserDefaults.standard.string(forKey: "scenario")) {
             run(.wait(forDuration: 1.0)) { [weak self] in self?.startScript() }
         }
     }

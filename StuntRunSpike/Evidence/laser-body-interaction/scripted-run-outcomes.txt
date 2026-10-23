@@ -1,0 +1,43 @@
+t=  11.14 s=2 laser script step 1/18: HIGH BEAM (single duck): both duck → TEAM DODGE
+t=  17.04 s=2 laser #1: TEAM (+1 bonus); alert 0.00
+t=  27.57 s=2 laser script step 3/18: FLOOR LASER again (single jump, retried): both jump → TEAM DODGE
+t=  33.51 s=2 laser #3: TEAM (+1 bonus); alert 0.00
+t=  44.10 s=2 laser #4: crossing PARENT — crown 1.18 vs beam 0.93 (IN THE BEAM by 0.25 units)
+t=  44.10 s=2 laser #4: crossing CHILD — crown 0.82 vs beam 0.65 (IN THE BEAM by 0.17 units)
+t=  44.40 s=2 laser #4: partial: clear [] zapped [CHILD,PARENT]; alert 0.36
+t=  51.35 s=2 laser script step 5/18: TURRET SWEEP wave (high): Parent's lane first, Child's 0.9 s later; each ducks as it passes → TEAM
+t=  58.16 s=2 laser #5: TEAM (+1 bonus); alert 0.28
+t=  66.67 s=2 laser script step 7/18: DOUBLE PULSE 2/2: Parent still in the same squat → no credit; Child stands and ducks again → partial
+t=  69.77 s=2 laser #6: TEAM (+1 bonus); alert 0.20
+t=  73.10 s=2 laser #7: partial: clear [CHILD] zapped [PARENT]; alert 0.38
+t=  73.10 s=2 laser sequence DOUBLE PULSE: PARENT 1/2 · CHILD 2/2
+t=  86.32 s=2 laser #9: TEAM (+1 bonus); alert 0.30
+t=  96.83 s=2 laser #10: TEAM (+1 bonus); alert 0.22
+t=  97.00 s=2 laser script step 12/18: COMBO 3/3 (DUCK): Parent ducks, Child squats TOO EARLY → partial (combo 2/3)
+t=  99.89 s=2 laser #11: TEAM (+1 bonus); alert 0.14
+t= 103.12 s=2 laser #12: crossing CHILD — crown 0.82 vs beam 0.65 (IN THE BEAM by 0.17 units)
+t= 103.43 s=2 laser #12: partial: clear [PARENT] zapped [CHILD]; alert 0.32
+t= 103.43 s=2 laser sequence COMBO: PARENT 3/3 · CHILD 2/3
+t= 107.23 s=2 laser: checkpoint ahead (participants 2)
+t= 112.39 s=2 laser: checkpoint — cart stopped; cover tops at P 0.94 / C 0.66 units (80% of standing height)
+t= 114.39 s=2 laser script: checkpoint scan 1 — PARENT hide (Child stays standing)
+t= 114.39 s=2 laser: checkpoint scan 1 — HIDE! (scan in 1.6 s)
+t= 117.41 s=2 laser: checkpoint scan 1 — CHILD SPOTTED (concealed 0% of the scan)
+t= 117.41 s=2 laser: checkpoint scan 1 — PARENT HIDDEN (concealed 100% of the scan)
+t= 117.79 s=2 laser script: checkpoint scan 2 — PARENT + CHILD hide
+t= 117.79 s=2 laser: checkpoint scan 2 — HIDE! (scan in 1.6 s)
+t= 120.80 s=2 laser: checkpoint scan 2 — CHILD HIDDEN (concealed 100% of the scan)
+t= 120.80 s=2 laser: checkpoint scan 2 — PARENT HIDDEN (concealed 100% of the scan)
+t= 120.80 s=2 laser: checkpoint BREACHED — both hidden, both locks released
+t= 132.72 s=2 laser #13: TEAM (+1 bonus); alert 0.34
+t= 135.73 s=2 laser #14: TEAM (+1 bonus); alert 0.26
+t= 135.73 s=2 laser sequence CROSSFIRE: COMBO CLEARED (+2 team bonus)
+t= 146.31 s=2 laser #15: TEAM (+1 bonus); alert 0.18
+t= 149.40 s=2 laser #16: TEAM (+1 bonus); alert 0.10
+t= 152.40 s=2 laser #17: TEAM (+1 bonus); alert 0.02
+t= 152.40 s=2 laser sequence GAUNTLET: COMBO CLEARED (+3 team bonus)
+t= 175.86 s=2 laser: ESCAPED — dodges 26/30, team dodges 12, alert 0.02
+t= 199.18 s=3 laser #1: TEAM (+1 bonus); alert 0.00
+t= 200.78 s=3 laser script finished
+t= 209.68 s=3 laser #2: TEAM (+1 bonus); alert 0.00
+t= 220.08 s=3 laser #3: TEAM (+1 bonus); alert 0.00

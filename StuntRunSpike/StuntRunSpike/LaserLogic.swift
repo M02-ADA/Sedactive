@@ -29,13 +29,21 @@ nonisolated enum Corridor {
     static let revealZ = 30.0
     /// Low beams sweep the deck at shin height; high beams at a share of each player's own standing height.
     static let lowBeamH = 0.13
-    static let highBeamShare = 0.8
+    /// 0.85 of the standing nose height: across the mouth/chin of a standing player, and still above the top of the
+    /// head in a real squat (head ≈ 0.73 of standing + ~0.08 to the crown), so the beam visibly passes over it.
+    static let highBeamShare = 0.85
 
     static func laneX(_ zone: Zone) -> Double { zone == .left ? -laneX : laneX }
 
     /// Height of a high beam for a player whose head is `headH` above the deck: below the standing head (it would
     /// hit them standing), above the head of the same player in a full squat (≈ 0.66 of standing height).
     static func highBeamH(forHeadHeight headH: Double) -> Double { max(0.45, headH * highBeamShare) }
+
+    /// Low beam at ankle height for this body (a hop that clears it is a real, small jump — never a high one).
+    static func lowBeamH(forHeadHeight headH: Double) -> Double { min(lowBeamH, max(0.06, headH * 0.09)) }
+
+    /// Crown of the head above the nose, as a share of the standing nose height (for "is the head under the beam").
+    static let crownShare = 0.08
 }
 
 // MARK: - Hazards
@@ -160,13 +168,17 @@ nonisolated struct LaserEncounter: Sendable {
 
     /// `airborne`: jump state; `low`: in a squat past the bottom (phase down/rising). Duck lanes also need the squat
     /// to be fresh (see DuckFreshness); cleared ducks consume their squat.
-    mutating func update(at t: Double, airborne: [Zone: Bool], low: [Zone: Bool], freshness: inout DuckFreshness) -> [JumpJudgeEvent] {
+    /// `clear`: whether each lane's body is physically out of the beam right now (crown under a high beam, feet over
+    /// a low one), measured from the body actually drawn. A move only counts if the body is also clear — the beam the
+    /// players see passing over a head or under feet is the beam that is judged. Lanes without a measurement pass.
+    mutating func update(at t: Double, airborne: [Zone: Bool], low: [Zone: Bool], clear: [Zone: Bool] = [:], freshness: inout DuckFreshness) -> [JumpJudgeEvent] {
         var ok: [Zone: Bool] = [:]
         for zone in Zone.allCases {
             switch pattern.action(for: zone) {
             case .jump: ok[zone] = airborne[zone] ?? false
             case .duck: ok[zone] = freshness.isFreshLow(zone, low: low[zone] ?? false, since: duckMark)
             }
+            if clear[zone] == false { ok[zone] = false }
             // The judge runs with the widest lane's window: in the part of it outside this lane's own window the move
             // doesn't count. (Outside the widest window the raw state still goes through: it labels TOO EARLY.)
             let w = window(zone), tc = crossing(zone), wide = judge.window
@@ -227,6 +239,9 @@ nonisolated enum LaserBeat: Equatable, Sendable {
     case override
     /// The final exit: the doors open and the finale plays.
     case escape
+    /// Security checkpoint: the cart stops at a sealed gate, cover panels rise in front of the players, scanners lock
+    /// onto them; hiding behind the cover (a held squat) during the scan breaks the lock. Both hidden → breach.
+    case checkpoint
 }
 
 nonisolated struct LaserDirector: Sendable {
@@ -242,6 +257,7 @@ nonisolated struct LaserDirector: Sendable {
         .laser(.highBeam), .laser(.floorSweep), .sequence(.sweep(.highBeam)),
         .phase(.pursuit), .breather(1.5),
         .sequence(.turret(.highBeam, wave: true)), .sequence(.doublePulse(.highBeam)), .laser(.splitGrid(parentHigh: true)), .sequence(.alternating),
+        .checkpoint,
         .phase(.lockdown), .breather(1.5),
         .sequence(.crossfire), .sequence(.gauntlet),
         .override, .escape,
@@ -253,7 +269,7 @@ nonisolated struct LaserDirector: Sendable {
         .vaultOpen, .phase(.alarm), .breather(2.0),
         .laser(.highBeam), .laser(.floorSweep), .laser(.highBeam),
         .phase(.pursuit), .breather(1.5),
-        .sequence(.turret(.highBeam, wave: false)), .laser(.splitGrid(parentHigh: true)), .laser(.floorSweep),
+        .sequence(.turret(.highBeam, wave: false)), .laser(.splitGrid(parentHigh: true)), .laser(.floorSweep), .checkpoint,
         .phase(.lockdown), .breather(1.5),
         .laser(.splitGrid(parentHigh: false)), .sequence(.sweep(.highBeam)),
         .override, .escape,
@@ -262,11 +278,14 @@ nonisolated struct LaserDirector: Sendable {
         .vaultOpen, .phase(.alarm), .breather(2.0),
         .laser(.highBeam), .laser(.floorSweep), .sequence(.turret(.highBeam, wave: true)),
         .phase(.pursuit), .breather(1.5),
-        .sequence(.doublePulse(.floorSweep)), .sequence(.alternating4), .sequence(.turret(.floorSweep, wave: true)),
+        .sequence(.doublePulse(.floorSweep)), .sequence(.alternating4), .checkpoint, .sequence(.turret(.floorSweep, wave: true)),
         .phase(.lockdown), .breather(1.5),
         .sequence(.crossfire3), .sequence(.gauntletHard),
         .override, .escape,
     ]
+
+    /// `-scenario bodyfit`: the Body-Fit gate on its own (the cart is already running), then the escape and a replay.
+    static let bodyFitTrial: [LaserBeat] = [.phase(.alarm), .breather(1.0)] + Array(repeating: LaserBeat.sequence(.bodyFit), count: 6) + [.escape]
 
     static func getaway(for level: LaserDifficulty.Level) -> [LaserBeat] {
         switch level {
@@ -298,6 +317,7 @@ nonisolated struct LaserDirector: Sendable {
             case .sequence(let s): total + timing.endTime + timing.recovery + s.spacing * Double(s.steps.count - 1)
             case .vaultOpen: total + 3.5
             case .override: total + 8
+            case .checkpoint: total + 12
             case .phase, .escape: total
             }
         }
@@ -381,6 +401,9 @@ nonisolated struct LaserStep: Equatable, Sendable {
     /// An iris security gate: an approaching gate whose ring opens its aperture and orbits its emitter pods to the lane
     /// heights before firing (same timeline and judging as a gate).
     var iris = false
+    /// A Body-Fit security gate: one opening per lane shaped for that lane's move (a low gap under a shutter to DUCK
+    /// through, a high gap over a laser sill to JUMP through). Same judging as a split grid; its own presentation.
+    var bodyFit = false
 
     /// The first lane crossing on this step's own clock (sequences space crossings, not warnings).
     func firstCrossing(_ timing: LaserTiming) -> Double {
@@ -448,6 +471,8 @@ nonisolated struct LaserSequence: Equatable, Sendable {
     static func turret(_ p: LaserPattern, wave: Bool) -> LaserSequence {
         LaserSequence(name: "TURRET", steps: [LaserStep(pattern: p, turret: true, stagger: wave ? 0.9 : 0)], spacing: 0)
     }
+    /// Body-Fit gate: Parent ducks through the low gap, Child jumps the sill.
+    static let bodyFit = LaserSequence(name: "BODY-FIT", steps: [LaserStep(pattern: .splitGrid(parentHigh: true), bodyFit: true)], spacing: 0)
     /// Hard: longer mixed sequences.
     static let alternating4 = LaserSequence(name: "COMBO", steps: [LaserStep(pattern: .highBeam), LaserStep(pattern: .floorSweep), LaserStep(pattern: .highBeam), LaserStep(pattern: .floorSweep)], spacing: 2.85)
     static let crossfire3 = LaserSequence(name: "CROSSFIRE", steps: [LaserStep(pattern: .splitGrid(parentHigh: true), iris: true), LaserStep(pattern: .splitGrid(parentHigh: false), iris: true), LaserStep(pattern: .splitGrid(parentHigh: true), iris: true)], spacing: 2.85)
@@ -519,5 +544,77 @@ nonisolated struct LaserDifficulty: Equatable, Sendable {
         out.recovery *= recoveryScale
         out.speed *= speedScale
         return out.isValid ? out : t
+    }
+}
+
+// MARK: - Security checkpoint: hide behind cover
+
+/// Timeline of one checkpoint after the cart has stopped (seconds): cover panels and scanners deploy, the scanners
+/// track the players, "HIDE!" is called, then a fixed, telegraphed scan window. A missed scan is repeated once
+/// (`rescanAfter` later); after the last scan the gate opens either way, so nobody is ever stuck.
+nonisolated enum CheckpointTiming {
+    static let deployEnd = 1.2, cueAt = 2.0, scanStart = 3.6, scanEnd = 5.0
+    static let rescanAfter = 3.4, maxScans = 2
+
+    static func scanWindow(_ index: Int) -> (start: Double, end: Double) {
+        let o = Double(index) * rescanAfter
+        return (scanStart + o, scanEnd + o)
+    }
+}
+
+/// One scan. A player is HIDDEN when their head stays below their own cover panel for `required` of the window
+/// (measured from the body actually drawn: a frame of pose jitter is forgiven, standing up mid-scan is not).
+nonisolated struct CoverScan: Sendable {
+    let participants: Set<Zone>
+    let start: Double, end: Double
+    var required = 0.85
+    private(set) var concealedTime: [Zone: Double] = [:]
+    private var last: Double?
+
+    init(participants: Set<Zone>, start: Double, end: Double) {
+        self.participants = participants
+        self.start = start
+        self.end = end
+    }
+
+    /// Per frame (checkpoint clock): who is concealed right now.
+    mutating func update(at t: Double, concealed: [Zone: Bool]) {
+        defer { last = t }
+        guard let prev = last else { return }
+        let a = max(prev, start), b = min(t, end)
+        guard b > a else { return }
+        for zone in participants where concealed[zone] == true { concealedTime[zone, default: 0] += b - a }
+    }
+
+    func isDone(at t: Double) -> Bool { t >= end }
+    func isHidden(_ zone: Zone) -> Bool { (concealedTime[zone] ?? 0) >= required * (end - start) - 1e-9 }
+    var hidden: Set<Zone> { Set(participants.filter(isHidden)) }
+    var allHidden: Bool { !participants.isEmpty && hidden == participants }
+}
+
+// MARK: - Body-Fit gate: contact moment
+
+/// Where the Body-Fit gate is drawn (z) on its encounter clock. Up to the crossing it rides with the corridor exactly
+/// like any gate (so it reaches the players' plane at the judged moment). Then it SLAMS to a stop just in front of the
+/// players and holds there — clamped around their bodies — for the whole judging window (child allowance included),
+/// so whatever is judged is seen happening inside the gate's openings. Then it releases and shoots past the camera.
+nonisolated enum BodyFitGate {
+    /// How far in front of the players it settles during the hold, and how long it holds.
+    static let settle = 0.18
+    static let hold = 0.75
+    /// Settles in this long after touching the players' plane (a hard, rigid stop — no overshoot).
+    static let slam = 0.08
+    /// The judging window IS the contact window: a move counts only from just before the gate touches the players'
+    /// plane until shortly before it releases (child allowance included), never while it is still metres away.
+    static let window = JumpWindow(clearBefore: 0.1, clearAfter: 0.45, lateLabelWindow: 0.5, earlyLookback: 1.2)
+
+    static func visualZ(at t: Double, timing: LaserTiming) -> Double {
+        let tc = timing.crossingTime
+        guard t > tc else { return timing.gateZ(at: t) }
+        let k = t - tc
+        if k < slam { return Corridor.playerZ - settle * (k / slam) }
+        if k < hold { return Corridor.playerZ - settle }
+        let e = k - hold
+        return Corridor.playerZ - settle - 3 * e - 9 * e * e      // releases and accelerates past the camera
     }
 }

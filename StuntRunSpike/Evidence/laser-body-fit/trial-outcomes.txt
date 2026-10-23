@@ -1,0 +1,66 @@
+t=   7.68 real=   8.10 s=2 laser script step 1/9: BODY-FIT: Parent ducks through the low gap, Child jumps the sill → BYPASS
+t=  13.82 real=  14.23 s=2 laser #1: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t=  13.82 real=  14.23 s=2 laser #1: crossing CHILD — soles 0.15 vs beam 0.07 (clear by 0.09 units)
+t=  13.82 real=  14.23 s=2 laser #1: body-fit gate in contact (z 1.87, holding 0.75 s)
+t=  13.84 real=  14.25 s=2 laser #1: TEAM (+1 bonus); alert 0.00
+t=  14.17 real=  14.58 s=2 laser #1: body-fit CHILD THROUGH the jump window
+t=  14.17 real=  14.58 s=2 laser #1: body-fit PARENT THROUGH the low gap
+t=  14.17 real=  14.58 s=2 laser #1: body-fit BYPASS — both through, both locks withdrawn
+t=  18.39 real=  18.80 s=2 laser script step 2/9: BODY-FIT: Parent stays standing (blocked by the shutter), Child jumps → partial
+t=  24.52 real=  24.93 s=2 laser #2: crossing PARENT — crown 1.18 vs beam 0.93 (IN THE BEAM by 0.25 units)
+t=  24.52 real=  24.93 s=2 laser #2: crossing CHILD — soles 0.15 vs beam 0.07 (clear by 0.09 units)
+t=  24.52 real=  24.93 s=2 laser #2: body-fit gate in contact (z 1.88, holding 0.75 s)
+t=  24.82 real=  25.23 s=2 laser #2: body-fit CHILD THROUGH the jump window
+t=  24.97 real=  25.38 s=2 laser #2: body-fit PARENT BLOCKED by the shutter
+t=  25.05 real=  25.46 s=2 laser #2: partial: clear [CHILD] zapped [PARENT]; alert 0.18
+t=  28.64 real=  29.05 s=2 laser script step 3/9: BODY-FIT: Parent ducks, Child jumps TOO LATE (after the contact window) → partial
+t=  34.77 real=  35.18 s=2 laser #3: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t=  34.77 real=  35.18 s=2 laser #3: crossing CHILD — soles 0.00 vs beam 0.07 (IN THE BEAM by 0.07 units)
+t=  34.77 real=  35.18 s=2 laser #3: body-fit gate in contact (z 1.88, holding 0.75 s)
+t=  35.07 real=  35.48 s=2 laser #3: body-fit PARENT THROUGH the low gap
+t=  35.30 real=  35.71 s=2 laser #3: partial: clear [PARENT] zapped [CHILD]; alert 0.36
+t=  35.30 real=  35.71 s=2 laser #3: body-fit CHILD BLOCKED by the sill
+t=  38.89 real=  39.30 s=2 laser script step 4/9: BODY-FIT: nobody moves → both blocked
+t=  45.02 real=  45.43 s=2 laser #4: crossing PARENT — crown 1.18 vs beam 0.93 (IN THE BEAM by 0.25 units)
+t=  45.02 real=  45.43 s=2 laser #4: crossing CHILD — soles 0.00 vs beam 0.07 (IN THE BEAM by 0.07 units)
+t=  45.02 real=  45.43 s=2 laser #4: body-fit gate in contact (z 1.88, holding 0.75 s)
+t=  45.47 real=  45.88 s=2 laser #4: body-fit PARENT BLOCKED by the shutter
+t=  45.55 real=  45.96 s=2 laser #4: partial: clear [] zapped [CHILD,PARENT]; alert 0.72
+t=  45.55 real=  45.96 s=2 laser #4: body-fit CHILD BLOCKED by the sill
+t=  49.14 real=  49.55 s=2 laser script step 5/9: BODY-FIT: pause during the WARNING → withdrawn, resume
+t=  50.04 real=  50.46 s=2 laser #5: withdrawn (game halted)
+t=  53.05 real=  55.46 s=2 laser script step 6/9: BODY-FIT again (retried after the pause): both through → BYPASS
+t=  59.19 real=  61.60 s=2 laser #6: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t=  59.19 real=  61.60 s=2 laser #6: crossing CHILD — soles 0.00 vs beam 0.07 (IN THE BEAM by 0.07 units)
+t=  59.19 real=  61.60 s=2 laser #6: body-fit gate in contact (z 1.88, holding 0.75 s)
+t=  59.25 real=  61.66 s=2 laser #6: TEAM (+1 bonus); alert 0.64
+t=  59.52 real=  61.93 s=2 laser #6: body-fit CHILD THROUGH the jump window
+t=  59.52 real=  61.93 s=2 laser #6: body-fit PARENT THROUGH the low gap
+t=  59.52 real=  61.93 s=2 laser #6: body-fit BYPASS — both through, both locks withdrawn
+t=  63.72 real=  66.13 s=2 laser script step 7/9: BODY-FIT: Child's tracking lost on the approach → withdrawn → READY → resume
+t=  67.34 real=  69.76 s=2 laser #7: withdrawn (game halted)
+t=  70.35 real=  76.26 s=2 laser script step 8/9: BODY-FIT again (retried): Parent ducks; Child jumps a little late but inside the child's window → BYPASS
+t=  76.49 real=  82.40 s=2 laser #8: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t=  76.49 real=  82.40 s=2 laser #8: crossing CHILD — soles 0.00 vs beam 0.07 (IN THE BEAM by 0.07 units)
+t=  76.49 real=  82.40 s=2 laser #8: body-fit gate in contact (z 1.88, holding 0.75 s)
+t=  76.79 real=  82.70 s=2 laser #8: body-fit PARENT THROUGH the low gap
+t=  76.87 real=  82.78 s=2 laser #8: TEAM (+1 bonus); alert 0.56
+t=  76.87 real=  82.78 s=2 laser #8: body-fit CHILD THROUGH the jump window
+t=  76.87 real=  82.78 s=2 laser #8: body-fit BYPASS — both through, both locks withdrawn
+t=  85.20 real=  91.11 s=2 laser: ESCAPED — dodges 8/12, team dodges 3, alert 0.56
+t=  98.84 real= 104.75 s=3 laser script step 9/9: new run: BODY-FIT both through → fresh ids and counters
+t= 104.97 real= 110.88 s=3 laser #1: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t= 104.97 real= 110.88 s=3 laser #1: crossing CHILD — soles 0.15 vs beam 0.07 (clear by 0.09 units)
+t= 104.97 real= 110.88 s=3 laser #1: body-fit gate in contact (z 1.88, holding 0.75 s)
+t= 104.99 real= 110.90 s=3 laser #1: TEAM (+1 bonus); alert 0.00
+t= 105.34 real= 111.25 s=3 laser #1: body-fit PARENT THROUGH the low gap
+t= 105.34 real= 111.25 s=3 laser #1: body-fit CHILD THROUGH the jump window
+t= 105.34 real= 111.25 s=3 laser #1: body-fit BYPASS — both through, both locks withdrawn
+t= 106.52 real= 112.43 s=3 laser script finished
+t= 115.65 real= 121.56 s=3 laser #2: TEAM (+1 bonus); alert 0.00
+t= 115.67 real= 121.58 s=3 laser #2: crossing PARENT — crown 0.63 vs beam 0.93 (clear by 0.30 units)
+t= 115.67 real= 121.58 s=3 laser #2: crossing CHILD — soles 0.26 vs beam 0.07 (clear by 0.19 units)
+t= 115.67 real= 121.58 s=3 laser #2: body-fit gate in contact (z 1.88, holding 0.75 s)
+t= 116.05 real= 121.96 s=3 laser #2: body-fit CHILD THROUGH the jump window
+t= 116.05 real= 121.96 s=3 laser #2: body-fit PARENT THROUGH the low gap
+t= 116.05 real= 121.96 s=3 laser #2: body-fit BYPASS — both through, both locks withdrawn

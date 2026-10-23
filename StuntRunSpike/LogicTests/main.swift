@@ -1419,5 +1419,65 @@ do {
     check(ev2.contains(.labelled(.right, .tooEarly)), "an early squat is labelled TOO EARLY with the child allowance on (\(ev2))")
 }
 
+// 64. Real-body interaction: beams are body-relative and physically clearable (the crown of a squatting head is
+//     under the high beam, the low beam is at ankle height); a move only counts while the body is also physically
+//     clear; the checkpoint scan hides each player independently and forgives a frame of jitter, not standing up.
+do {
+    for head in [1.18, 0.82] {
+        let beam = Corridor.highBeamH(forHeadHeight: head)
+        let squatCrown = head * 0.728 + head * Corridor.crownShare
+        let standCrown = head * (1 + Corridor.crownShare)
+        check(squatCrown < beam && beam < standCrown - 0.05, "head \(head): squatting crown \(squatCrown) < beam \(beam) < standing crown \(standCrown)")
+        check(Corridor.lowBeamH(forHeadHeight: head) <= 0.11, "low beam at ankle height for head \(head)")
+    }
+    let timing = LaserTiming()
+    var f = DuckFreshness()
+    var enc = LaserEncounter(id: 1, pattern: .highBeam, participants: [.left, .right], timing: timing, duckMark: f.mark())
+    f.descentStarted(.left); f.descentStarted(.right)
+    var events: [JumpJudgeEvent] = []
+    var t = timing.cueTime
+    while t < timing.crossingTime + 1 {
+        // Both in a fresh squat; the Child's crown is still in the beam (a shallow squat).
+        events += enc.update(at: t, airborne: [:], low: [.left: true, .right: true], clear: [.left: true, .right: false], freshness: &f)
+        t += 1.0 / 60
+    }
+    check(events.contains { if case .cleared(.left, _) = $0 { true } else { false } } && events.contains(.nipped(.right)), "a squat whose head stays in the beam doesn't count")
+    var scan = CoverScan(participants: [.left, .right], start: 3.6, end: 5.0)
+    var k = 3.0
+    while k <= 5.2 {
+        let jitter = abs(k - 4.3) < 0.04          // one pose glitch for the Parent
+        let stoodUp = k > 4.2                     // the Child stands up halfway through
+        scan.update(at: k, concealed: [.left: !jitter, .right: !stoodUp])
+        k += 1.0 / 60
+    }
+    check(scan.isDone(at: 5.0) && scan.isHidden(.left) && !scan.isHidden(.right) && !scan.allHidden, "jitter forgiven, standing up mid-scan spotted (\(scan.concealedTime))")
+    check(CheckpointTiming.cueAt < CheckpointTiming.scanStart - 1.2 && CheckpointTiming.scanWindow(1).start > CheckpointTiming.scanEnd + 1.5,
+          "HIDE! is called well before the scan; a rescan leaves time to stand up and hide again")
+    for level in [LaserDifficulty.Level.easy, .normal, .hard] { check(LaserDirector.getaway(for: level).contains(.checkpoint), "\(level) has a checkpoint") }
+}
+
+// 65. Body-Fit gate: it reaches the players' plane exactly at the judged crossing, is in contact with their bodies
+//     (within 0.2 units, never behind them again) for the entire judging window including the child's allowance,
+//     then leaves past the camera; Parent ducks, Child jumps; the trial is a run of single Body-Fit gates.
+do {
+    let timing = LaserTiming()
+    check(abs(BodyFitGate.visualZ(at: timing.crossingTime, timing: timing) - Corridor.playerZ) < 1e-9, "at the players' plane at the crossing")
+    check(abs(BodyFitGate.visualZ(at: timing.revealTime, timing: timing) - timing.gateZ(at: timing.revealTime)) < 1e-9, "approaches like any gate")
+    let child = LaserDifficulty.easy.childWindow(BodyFitGate.window)
+    check(BodyFitGate.window.clearBefore <= 0.1, "nothing counts while the gate is still far away")
+    var t = timing.crossingTime
+    var inContact = true
+    while t <= timing.crossingTime + child.clearAfter {
+        let z = BodyFitGate.visualZ(at: t, timing: timing)
+        if z > Corridor.playerZ + 1e-9 || Corridor.playerZ - z > 0.2 { inContact = false }
+        t += 1.0 / 120
+    }
+    check(inContact, "in contact with the bodies for the whole post-crossing window (easy child allowance \(child.clearAfter) s)")
+    check(BodyFitGate.visualZ(at: timing.crossingTime + 1.6, timing: timing) < 0.3, "then gone past the camera")
+    let step = LaserSequence.bodyFit.steps[0]
+    check(step.bodyFit && step.pattern.action(for: .left) == .duck && step.pattern.action(for: .right) == .jump, "Parent DUCK, Child JUMP")
+    check(LaserDirector.bodyFitTrial.filter { $0 == .sequence(.bodyFit) }.count == 6 && LaserDirector.bodyFitTrial.last == .escape, "trial: six Body-Fit gates, then the escape")
+}
+
 print(failures == 0 ? "All logic tests passed" : "\(failures) failure(s)")
 exit(failures == 0 ? 0 : 1)

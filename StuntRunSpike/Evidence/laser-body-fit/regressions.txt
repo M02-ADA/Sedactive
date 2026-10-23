@@ -1,0 +1,17 @@
+== perf
+  15 fps=60.0	frame=16.7/16.7ms	mem=71MB
+   5 fps=60.0	frame=16.7/16.7ms	mem=72MB
+   3 fps=59.9	frame=16.7/16.7ms	mem=71MB
+   1 fps=64.4	frame=16.0/16.7ms	mem=71MB
+STUNT RUN IDENTICAL (45 lines)
+JUNGLE COOP IDENTICAL (      87 lines)
+SWEEPS IDENTICAL (48 lines)
+MOONBOUND DIFFERS
+16c16
+< s2 moon: FINAL SPRINT (14 s left)
+---
+> s2 moon: FINAL SPRINT (15 s left)
+19a20,21
+> s3 moon: LEAD → PARENT
+> s3 moon script: all steps done
+DONE

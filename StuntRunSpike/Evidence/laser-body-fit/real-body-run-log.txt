@@ -1,0 +1,21 @@
+t=   7.97 real=   8.31 s=1 laser #1: gate revealed at z 29.9 (beams at P 0.60 / C 0.09 units; crossings P 6.12 / C 6.12 s)
+t=  10.88 real=  11.23 s=1 laser #1: cue, crossing in 1.40 s
+t=  12.28 real=  12.63 s=1 laser #1: crossing PARENT — crown 0.76 vs beam 0.60 (IN THE BEAM by 0.16 units)
+t=  12.28 real=  12.63 s=1 laser #1: crossing CHILD — soles -0.00 vs beam 0.09 (IN THE BEAM by 0.09 units)
+t=  12.28 real=  12.63 s=1 laser #1: body-fit gate in contact (z 1.89, holding 0.75 s)
+t=  12.73 real=  13.08 s=1 laser #1: body-fit PARENT BLOCKED by the shutter
+t=  12.83 real=  13.18 s=1 laser #1: body-fit CHILD BLOCKED by the sill
+t=  18.20 real=  18.55 s=1 laser #2: gate revealed at z 30.0 (beams at P 0.60 / C 0.09 units; crossings P 6.12 / C 6.12 s)
+t=  21.13 real=  21.48 s=1 laser #2: cue, crossing in 1.39 s
+t=  22.53 real=  22.88 s=1 laser #2: crossing PARENT — crown 0.76 vs beam 0.60 (IN THE BEAM by 0.16 units)
+t=  22.53 real=  22.88 s=1 laser #2: crossing CHILD — soles 0.00 vs beam 0.09 (IN THE BEAM by 0.09 units)
+t=  22.53 real=  22.88 s=1 laser #2: body-fit gate in contact (z 1.88, holding 0.75 s)
+t=  22.98 real=  23.33 s=1 laser #2: body-fit PARENT BLOCKED by the shutter
+t=  23.07 real=  23.41 s=1 laser #2: body-fit CHILD BLOCKED by the sill
+t=  28.45 real=  28.80 s=1 laser #3: gate revealed at z 30.0 (beams at P 0.60 / C 0.09 units; crossings P 6.12 / C 6.12 s)
+t=  31.38 real=  31.73 s=1 laser #3: cue, crossing in 1.39 s
+t=  32.78 real=  33.13 s=1 laser #3: crossing PARENT — crown 0.76 vs beam 0.60 (IN THE BEAM by 0.16 units)
+t=  32.78 real=  33.13 s=1 laser #3: crossing CHILD — soles 0.00 vs beam 0.09 (IN THE BEAM by 0.09 units)
+t=  32.78 real=  33.13 s=1 laser #3: body-fit gate in contact (z 1.88, holding 0.75 s)
+t=  33.23 real=  33.58 s=1 laser #3: body-fit PARENT BLOCKED by the shutter
+t=  33.32 real=  33.66 s=1 laser #3: body-fit CHILD BLOCKED by the sill

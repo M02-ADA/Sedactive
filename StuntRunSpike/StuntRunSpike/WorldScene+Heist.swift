@@ -35,6 +35,15 @@ final class HeistRuntime {
     var handles: [Zone: SKSpriteNode] = [:]
     var handleDrop: CGFloat = 0
 
+    // Security checkpoint (cover panels, scanners) and the calm after a breach.
+    var checkpoint: CheckpointState?
+    var safeUntil = 0.0
+    /// Brief light on each body (laser pass, success, spotted).
+    var light: [Zone: (color: UIColor, amount: CGFloat, at: Double)] = [:]
+    /// Each live player's standing nose height (world units), remembered while they stand: beams and cover are set
+    /// from it, so someone who is mid-squat when a gate appears still gets a beam they can duck under.
+    var standingRef: [Zone: CGFloat] = [:]
+
     // The way out.
     let skyline = SKSpriteNode(texture: Art.citySkyline)
 
@@ -236,6 +245,7 @@ extension WorldScene {
         updateVault()
         updateBulkheads()
         updateOverride(dt: dt)
+        updateCheckpoint(dt: dt)
         updateSkyline()
         updateDrone(dt: dt)
         layoutHeistBodies()
@@ -377,6 +387,7 @@ extension WorldScene {
     private func updateOverride(dt: CGFloat) {
         let rt = laserRuntime, h = rt.heist
         guard let o = h.override else {
+            guard h.checkpoint == nil else { return }   // the checkpoint uses the same gate and locks
             for half in h.gateHalves { half.isHidden = true }
             for zone in Zone.allCases { h.dials[zone]?.isHidden = true; h.handles[zone]?.isHidden = true }
             return
@@ -594,10 +605,19 @@ extension WorldScene {
             let laneX = proj.screen(x: CGFloat(Corridor.laneX(zone)), h: 0, z: proj.zp).x
             let p0 = laneX - foot.x, q0 = proj.feetY - foot.y
             h.pull[zone] = (h.pull[zone] ?? p0) + (p0 - (h.pull[zone] ?? p0)) * 0.25
-            h.lift[zone] = (h.lift[zone] ?? q0) + (q0 - (h.lift[zone] ?? q0)) * 0.25
+            // Grounding follows the feet only while they are on the deck: during a jump the offset holds, so the real
+            // body rises off the cart (and over a low beam) instead of being pulled back down to the floor.
+            let jumping = (slots[zone]?.jump.isAirborne ?? false) || abs(slots[zone]?.jump.lift ?? 0) > 0.05
+            if !jumping, slots[zone]?.detector.phase == .standing, let span = slots[zone]?.livePose?.standingSpan {
+                let current = CGFloat(span) * bodyRect.height / proj.ppu(proj.zp)
+                // Follows the tallest recent standing height; drifts down slowly (a player stepping back gets smaller).
+                h.standingRef[zone] = max(current, (h.standingRef[zone] ?? current) - 0.02 / 60)
+            }
+            if !jumping || h.lift[zone] == nil { h.lift[zone] = (h.lift[zone] ?? q0) + (q0 - (h.lift[zone] ?? q0)) * 0.25 }
             let p = h.pull[zone] ?? 0, q = h.lift[zone] ?? 0
             body.size = bodyRect.size
             body.position = CGPoint(x: bodyRect.midX + p, y: bodyRect.minY + q)
+            if let tint = laserBodyTint(zone) { body.color = tint.0; body.colorBlendFactor = tint.1 } else { body.colorBlendFactor = 0 }
             let other: Zone = zone == .left ? .right : .left
             let alone = slots[other]?.driver != .live
             let x0 = zone == .left || alone ? bodyRect.minX : splitX

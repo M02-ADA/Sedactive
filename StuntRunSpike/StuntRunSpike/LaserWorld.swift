@@ -48,6 +48,7 @@ final class LaserWorld {
     let debugFar = SKShapeNode()
     let debugJudge = SKShapeNode()
     let debugPlane = SKShapeNode()
+    let debugBody = SKShapeNode()
     var debugLabels: [SKLabelNode] = []
     var debugOn = UserDefaults.standard.bool(forKey: "laserDebug")
     /// Security response: the cameras turn to the lane under threat (−1 left, +1 right, 0 none) and flash red when
@@ -113,7 +114,7 @@ final class LaserWorld {
         root.addChild(debugBeams)
         // Far beams (blue: cannot collide), beams inside the judging window (red), the interaction plane (magenta).
         for (node, color, width) in [(debugFar, UIColor(red: 0.3, green: 0.6, blue: 1, alpha: 1), CGFloat(2)), (debugJudge, UIColor.red, 5),
-                                     (debugPlane, UIColor.magenta.withAlphaComponent(0.8), 2)] {
+                                     (debugPlane, UIColor.magenta.withAlphaComponent(0.8), 2), (debugBody, UIColor.cyan, 3)] {
             node.strokeColor = color
             node.lineWidth = width
             node.zPosition = Layer.flash - 19
@@ -321,7 +322,7 @@ final class LaserWorld {
 
     /// The active beams as debug lines (drawn exactly where gameplay says they are).
     struct DebugBeam {
-        enum State { case far, near, judging }
+        enum State { case far, near, judging, body }
         var x0: CGFloat, h0: CGFloat, x1: CGFloat, h1: CGFloat, z: CGFloat, z1: CGFloat
         var state: State
         var label: String
@@ -331,11 +332,11 @@ final class LaserWorld {
     /// interact yet, with the players' interaction plane and the judging window's depth band on the floor.
     func drawDebugBeams(_ beams: [DebugBeam], proj: Projection, timing: LaserTiming) {
         guard debugOn else {
-            for node in [debugBeams, debugFar, debugJudge, debugPlane] { node.path = nil }
+            for node in [debugBeams, debugFar, debugJudge, debugPlane, debugBody] { node.path = nil }
             debugLabels.forEach { $0.isHidden = true }
             return
         }
-        let paths = [DebugBeam.State.far: CGMutablePath(), .near: CGMutablePath(), .judging: CGMutablePath()]
+        let paths = [DebugBeam.State.far: CGMutablePath(), .near: CGMutablePath(), .judging: CGMutablePath(), .body: CGMutablePath()]
         let F = CGFloat(Corridor.floorH)
         for b in beams {
             guard let path = paths[b.state] else { continue }
@@ -343,7 +344,7 @@ final class LaserWorld {
             // A drop line to the floor shows the beam's depth against the corridor.
             path.move(to: proj.screen(x: b.x0, h: b.h0, z: b.z)); path.addLine(to: proj.screen(x: b.x0, h: F, z: b.z))
         }
-        debugFar.path = paths[.far]; debugBeams.path = paths[.near]; debugJudge.path = paths[.judging]
+        debugFar.path = paths[.far]; debugBeams.path = paths[.near]; debugJudge.path = paths[.judging]; debugBody.path = paths[.body]
         // Interaction plane (z = player plane) wall to wall, and the window's depth band (beam depth while judging).
         let plane = CGMutablePath()
         let W = CGFloat(Corridor.halfWidth), C = CGFloat(Corridor.ceilingH), zp = CGFloat(Corridor.playerZ)
