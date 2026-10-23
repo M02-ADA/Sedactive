@@ -14,6 +14,8 @@ nonisolated struct PipelineStats: Sendable {
     var maskHeight = 0
     var sourceWidth = 0
     var sourceHeight = 0
+    /// The orientation guard is rotating frames 180° (the feed arrived upside down).
+    var orientationFlipped = false
 }
 
 nonisolated struct VisionSnapshot: Sendable {
@@ -94,6 +96,12 @@ nonisolated final class CameraPipeline: NSObject, AVCaptureVideoDataOutputSample
     private let sequenceHandler = VNSequenceRequestHandler()
     private let segmentationRequest = VNGeneratePersonSegmentationRequest()
     private let poseRequest = VNDetectHumanBodyPoseRequest()
+    /// Separate request for the upside-down probe, so the regular results are never overwritten.
+    private let probeRequest = VNDetectHumanBodyPoseRequest()
+    private var orientationGuard = OrientationGuard(flipped: UserDefaults.standard.bool(forKey: "cameraFlip"))
+    private let orientationGuardEnabled = UserDefaults.standard.object(forKey: "orientationGuard") == nil || UserDefaults.standard.bool(forKey: "orientationGuard")
+    private var rotatedPool: CVPixelBufferPool?
+    private var syntheticIsFixture = false
     private var rotationCoordinator: AVCaptureDevice.RotationCoordinator?
     private var rotationObservation: NSKeyValueObservation?
     private var syntheticTimer: DispatchSourceTimer?
@@ -144,6 +152,24 @@ nonisolated final class CameraPipeline: NSObject, AVCaptureVideoDataOutputSample
 
     func start() async -> Source {
         #if targetEnvironment(simulator)
+        if let recorded = Self.loadRecorded() {
+            // `-recordedFrame <dir>`: a real camera frame already segmented and pose-tracked by Vision on a Mac
+            // (frame.rgba + poses.txt, same compositing as `composite`). Vision models don't run in the Simulator, so
+            // this is how the game-side live-body path (zones, cutout placement, grounding, occlusion, HUD) is checked
+            // with real bodies. Local files only; nothing is bundled.
+            queue.async { if self.syntheticTimer == nil { self.startRecorded(recorded) } }
+            return .camera
+        }
+        if let fixture = Self.loadFixture() {
+            // `-cameraFixture <path>` (optionally `-cameraFixtureFlip YES` to feed it upside down): a still photo of
+            // real people goes through the same Vision → cutout → texture path as the camera, so orientation,
+            // segmentation, zone assignment and grounding can be checked in the Simulator. The image stays local.
+            queue.async {
+                self.syntheticIsFixture = true
+                if self.syntheticTimer == nil { self.startSynthetic(card: fixture) }
+            }
+            return .camera
+        }
         let card = await Self.makeTestCard(width: 640, height: 480)
         queue.async { if self.syntheticTimer == nil { self.startSynthetic(card: card) } }
         return .synthetic
@@ -256,8 +282,11 @@ nonisolated final class CameraPipeline: NSObject, AVCaptureVideoDataOutputSample
         droppedFrames += 1
     }
 
-    private func process(_ pixelBuffer: CVPixelBuffer, captureTime: Double, runVision: Bool) {
+    private func process(_ sourceBuffer: CVPixelBuffer, captureTime: Double, runVision: Bool) {
         let start = CACurrentMediaTime()
+        // Orientation guard: once an upside-down feed has been confirmed, every frame is turned 180° before Vision
+        // and compositing, so poses, masks and the cutout all come out upright together.
+        let pixelBuffer = orientationGuard.flipped ? (rotated180(sourceBuffer) ?? sourceBuffer) : sourceBuffer
         let wantsCutout = self.wantsCutout
         var stats = PipelineStats()
         stats.sourceWidth = CVPixelBufferGetWidth(pixelBuffer)
@@ -266,6 +295,10 @@ nonisolated final class CameraPipeline: NSObject, AVCaptureVideoDataOutputSample
         if runVision {
             try? sequenceHandler.perform([poseRequest], on: pixelBuffer, orientation: .up)
         }
+        let fit = aspectFill(sourceWidth: Double(stats.sourceWidth), sourceHeight: Double(stats.sourceHeight))
+        let people = runVision ? extractPeople(fit: fit) : []
+        if runVision, orientationGuardEnabled { checkOrientation(pixelBuffer, upright: people) }
+        stats.orientationFlipped = orientationGuard.flipped
         let afterPose = CACurrentMediaTime()
 
         var mask: CVPixelBuffer?
@@ -276,8 +309,6 @@ nonisolated final class CameraPipeline: NSObject, AVCaptureVideoDataOutputSample
         }
         let afterSegmentation = CACurrentMediaTime()
 
-        let fit = aspectFill(sourceWidth: Double(stats.sourceWidth), sourceHeight: Double(stats.sourceHeight))
-        let people = runVision ? extractPeople(fit: fit) : []
         let hasCutout = composite(pixelBuffer, mask: mask, fit: fit)
         let end = CACurrentMediaTime()
 
@@ -294,6 +325,47 @@ nonisolated final class CameraPipeline: NSObject, AVCaptureVideoDataOutputSample
         sequence += 1
         store.publish(VisionSnapshot(sequence: sequence, captureTime: captureTime, completedTime: end,
                                      people: people, hasCutout: hasCutout, stats: stats))
+    }
+
+    // MARK: - Orientation guard (see OrientationGuard)
+
+    private func checkOrientation(_ buffer: CVPixelBuffer, upright: [PersonPose]) {
+        let solid = upright.filter { $0.joints.count >= 6 }.count
+        guard orientationGuard.observe(people: solid) == .probe else { return }
+        // Probe: the same frame turned 180°. Only bodies with several confident joints count.
+        try? VNImageRequestHandler(cvPixelBuffer: buffer, orientation: .down).perform([probeRequest])
+        let found = (probeRequest.results ?? []).filter { observation in
+            guard let points = try? observation.recognizedPoints(.all) else { return false }
+            return points.values.filter { $0.confidence > 0.3 }.count >= 6
+        }.count
+        if orientationGuard.probeResult(people: found) == .flip {
+            print("[CAMERA] orientation guard: \(orientationGuard.flipped ? "people only found upside down → rotating frames 180°" : "people found upright again → rotation removed")")
+        }
+    }
+
+    /// The frame turned 180° (a rotation, not a mirror: left/right handedness is preserved).
+    private func rotated180(_ buffer: CVPixelBuffer) -> CVPixelBuffer? {
+        let width = CVPixelBufferGetWidth(buffer), height = CVPixelBufferGetHeight(buffer)
+        if rotatedPool == nil || (rotatedPool.map { pool -> Bool in
+            let attrs = CVPixelBufferPoolGetPixelBufferAttributes(pool) as? [String: Any]
+            return (attrs?[kCVPixelBufferWidthKey as String] as? Int) != width || (attrs?[kCVPixelBufferHeightKey as String] as? Int) != height
+        } ?? true) {
+            let attributes: [String: Any] = [
+                kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA,
+                kCVPixelBufferWidthKey as String: width,
+                kCVPixelBufferHeightKey as String: height,
+                kCVPixelBufferIOSurfacePropertiesKey as String: [:] as [String: Any],
+            ]
+            rotatedPool = nil
+            CVPixelBufferPoolCreate(nil, nil, attributes as CFDictionary, &rotatedPool)
+        }
+        guard let pool = rotatedPool else { return nil }
+        var out: CVPixelBuffer?
+        CVPixelBufferPoolCreatePixelBuffer(nil, pool, &out)
+        guard let out else { return nil }
+        let image = CIImage(cvPixelBuffer: buffer).oriented(.down)
+        ciContext.render(image, to: out, bounds: CGRect(x: 0, y: 0, width: width, height: height), colorSpace: colorSpace)
+        return out
     }
 
     /// Scale + offset that aspect-fills the source into the fixed output texture (centre crop).
@@ -402,13 +474,58 @@ nonisolated final class CameraPipeline: NSObject, AVCaptureVideoDataOutputSample
                                    bytesPerRow: CVPixelBufferGetBytesPerRow(buffer), space: colorSpace,
                                    bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue | CGBitmapInfo.byteOrder32Little.rawValue) {
             context.draw(card, in: CGRect(x: 0, y: 0, width: 640, height: 480))
-            // A moving bar makes dropped or stale frames visible.
-            let x = (now.truncatingRemainder(dividingBy: 2) / 2) * 600
-            context.setFillColor(CGColor(red: 1, green: 0.82, blue: 0.25, alpha: 1))
-            context.fill(CGRect(x: x, y: 40, width: 40, height: 40))
+            if !syntheticIsFixture {
+                // A moving bar makes dropped or stale frames visible.
+                let x = (now.truncatingRemainder(dividingBy: 2) / 2) * 600
+                context.setFillColor(CGColor(red: 1, green: 0.82, blue: 0.25, alpha: 1))
+                context.fill(CGRect(x: x, y: 40, width: 40, height: 40))
+            }
         }
         CVPixelBufferUnlockBaseAddress(buffer, [])
         process(buffer, captureTime: now, runVision: true)
+    }
+
+    private static func loadRecorded() -> (bytes: [UInt8], people: [PersonPose])? {
+        guard let dir = UserDefaults.standard.string(forKey: "recordedFrame"),
+              let data = FileManager.default.contents(atPath: dir + "/frame.rgba"), data.count == outputWidth * outputHeight * 4 else { return nil }
+        let text = (try? String(contentsOfFile: dir + "/poses.txt", encoding: .utf8)) ?? ""
+        var people: [Int: [Joint: JointPoint]] = [:]
+        for line in text.split(separator: "\n") {
+            let f = line.split(separator: " ")
+            guard f.count == 5, let i = Int(f[0]), let joint = Int(f[1]).flatMap(Joint.init(rawValue:)),
+                  let x = Double(f[2]), let y = Double(f[3]), let c = Double(f[4]) else { continue }
+            people[i, default: [:]][joint] = JointPoint(x: x, y: y, confidence: c)
+        }
+        let poses = people.keys.sorted().compactMap { k -> PersonPose? in
+            guard let joints = people[k], joints.count >= 4 else { return nil }
+            return PersonPose(joints: joints, aspect: Double(outputWidth) / Double(outputHeight))
+        }
+        return ([UInt8](data), poses)
+    }
+
+    private func startRecorded(_ recorded: (bytes: [UInt8], people: [PersonPose])) {
+        let timer = DispatchSource.makeTimerSource(queue: queue)
+        timer.schedule(deadline: .now() + 0.2, repeating: 1.0 / 30)
+        timer.setEventHandler { [weak self] in
+            guard let self else { return }
+            let now = CACurrentMediaTime()
+            recorded.bytes.withUnsafeBytes { memcpy(self.store.back, $0.baseAddress!, self.store.byteCount) }
+            var stats = PipelineStats()
+            stats.sourceWidth = Self.outputWidth
+            stats.sourceHeight = Self.outputHeight
+            self.sequence += 1
+            self.store.publish(VisionSnapshot(sequence: self.sequence, captureTime: now, completedTime: now, people: recorded.people, hasCutout: true, stats: stats))
+        }
+        syntheticTimer = timer
+        timer.resume()
+    }
+
+    private static func loadFixture() -> CGImage? {
+        guard let path = UserDefaults.standard.string(forKey: "cameraFixture"), let image = UIImage(contentsOfFile: path)?.cgImage else { return nil }
+        guard UserDefaults.standard.bool(forKey: "cameraFixtureFlip") else { return image }
+        // Simulate an upside-down camera feed.
+        let ci = CIImage(cgImage: image).oriented(.down)
+        return CIContext().createCGImage(ci, from: ci.extent)
     }
 
     @MainActor private static func makeTestCard(width: Int, height: Int) -> CGImage? {

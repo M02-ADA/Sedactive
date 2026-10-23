@@ -946,5 +946,478 @@ do {
     check(dl < -0.5 && dr > 0.5, "the flock splits to both sides over the players (\(dl), \(dr))")
 }
 
+// Helper: run one laser encounter at 60 Hz with planned squats (start times) and jumps (airborne spans) per lane.
+@MainActor func runLaser(_ pattern: LaserPattern, squats: [Zone: [Double]] = [:], jumps: [Zone: [(Double, Double)]] = [:],
+                         freshness: inout DuckFreshness, from start: Double = 0) -> (LaserEncounter, [JumpJudgeEvent]) {
+    let timing = LaserTiming()
+    var detectors: [Zone: SquatDetector] = [.left: SquatDetector(), .right: SquatDetector()]
+    for z in Zone.allCases { _ = detectors[z]!.update(depth: 0, at: start - 2); _ = detectors[z]!.update(depth: 0, at: start - 1) }
+    var enc: LaserEncounter?
+    var events: [JumpJudgeEvent] = []
+    var t = start
+    while t <= start + timing.endTime {
+        let local = t - start
+        if enc == nil, local >= 0 { enc = LaserEncounter(id: 1, pattern: pattern, participants: [.left, .right], timing: timing, duckMark: freshness.mark()) }
+        var low: [Zone: Bool] = [:], air: [Zone: Bool] = [:]
+        for z in Zone.allCases {
+            let sims = squats[z, default: []].map { SimulatedSquat(start: start + $0) }
+            let depth = sims.compactMap { $0.depth(at: t) }.max() ?? 0
+            for e in detectors[z]!.update(depth: depth, at: t) where e == .descentStarted { freshness.descentStarted(z) }
+            low[z] = [.down, .rising].contains(detectors[z]!.phase)
+            air[z] = jumps[z, default: []].contains { local >= $0.0 && local < $0.1 }
+        }
+        if local >= timing.cueTime { events += enc!.update(at: local, airborne: air, low: low, freshness: &freshness) }
+        t += 1.0 / 60
+    }
+    return (enc!, events)
+}
+
+// 48. Laser Breakout space: the judged moment is the gate reaching the players' plane; warning → reveal → cue →
+//     crossing in order; high beams sit between each player's squatting and standing head (body-relative).
+do {
+    let t = LaserTiming()
+    check(t.isValid, "default laser timing valid")
+    check(abs(t.gateZ(at: t.crossingTime) - Corridor.playerZ) < 1e-9, "gate is at the players' plane exactly at the crossing")
+    check(abs(t.gateZ(at: t.revealTime) - Corridor.revealZ) < 1e-9, "gate appears at the reveal depth")
+    check(t.revealTime < t.cueTime && t.cueTime < t.crossingTime && t.cueTime - t.revealTime > 2, "warning → reveal → cue → crossing, with time to read it")
+    for head in [1.18, 0.82, 1.0, 0.7] {
+        let beam = Corridor.highBeamH(forHeadHeight: head)
+        check(beam < head - 0.08 && beam > head * 0.728, "high beam for head \(head): \(beam) is under the standing head and over the squatting head")
+    }
+    check(Corridor.lowBeamH < 0.2, "low beam at shin height")
+    check(LaserPattern.splitGrid(parentHigh: true).action(for: .left) == .duck && LaserPattern.splitGrid(parentHigh: true).action(for: .right) == .jump,
+          "split grid: Parent ducks, Child jumps")
+    check(LaserPattern.splitGrid(parentHigh: false).action(for: .left) == .jump, "split grid mirrored")
+}
+
+// 49. Judging: each lane needs its own move at its own beam; both → TEAM; one → partial (credit kept); wrong move
+//     (jumping a high beam, squatting a low one) never counts.
+do {
+    let t = LaserTiming()
+    let c = t.crossingTime
+    var f1 = DuckFreshness()
+    let (_, e1) = runLaser(.splitGrid(parentHigh: true), squats: [.left: [c - 0.55]], jumps: [.right: [(c - 0.3, c + 0.15)]], freshness: &f1)
+    check(e1.contains(.resolved(.team([.left, .right]), bonus: 1)), "split: Parent ducks, Child jumps → TEAM \(e1)")
+    var f2 = DuckFreshness()
+    let (_, e2) = runLaser(.splitGrid(parentHigh: true), squats: [.left: [c - 0.55]], freshness: &f2)
+    check(e2.contains(.resolved(.partial(contributed: [.left], missing: [.right]), bonus: 0)), "split: only the Parent → partial, Parent keeps credit")
+    var f3 = DuckFreshness()
+    let (enc3, _) = runLaser(.splitGrid(parentHigh: true), squats: [.right: [c - 0.55]], jumps: [.left: [(c - 0.3, c + 0.15)]], freshness: &f3)
+    check(enc3.results[.left] != .cleared && enc3.results[.right] != .cleared, "wrong moves (Parent jumps the high beam, Child squats the low one) don't count")
+    var f4 = DuckFreshness()
+    let (_, e4) = runLaser(.highBeam, squats: [.left: [c - 0.6], .right: [c - 0.45]], freshness: &f4)
+    check(e4.contains(.resolved(.team([.left, .right]), bonus: 1)), "high beam: both duck → TEAM")
+}
+
+// 50. No reward for holding: one long squat held through two beams clears the first only; a squat begun before an
+//     encounter's warning doesn't count for it; a squat begun during the warning and held to the crossing does.
+do {
+    let t = LaserTiming()
+    let c = t.crossingTime
+    var f = DuckFreshness()
+    // Encounter 1 starts at 0; encounter 2 starts 4 s later. The Parent squats once (deep, held ~9 s).
+    var holdDetector = SquatDetector()
+    _ = holdDetector.update(depth: 0, at: -2); _ = holdDetector.update(depth: 0, at: -1)
+    var enc1 = LaserEncounter(id: 1, pattern: .highBeam, participants: [.left], timing: t, duckMark: f.mark())
+    var enc2: LaserEncounter?
+    var cleared: [Int] = []
+    var time = 0.0
+    while time < 4 + t.endTime {
+        let depth = (time >= c - 0.6 && time < c + 9) ? 0.9 : 0
+        for e in holdDetector.update(depth: depth, at: time) where e == .descentStarted { f.descentStarted(.left) }
+        let low = [Zone.left: [.down, .rising].contains(holdDetector.phase)]
+        if enc2 == nil, time >= 4 { enc2 = LaserEncounter(id: 2, pattern: .highBeam, participants: [.left], timing: t, duckMark: f.mark()) }
+        if time >= t.cueTime, time <= t.endTime {
+            if enc1.update(at: time, airborne: [:], low: low, freshness: &f).contains(where: { if case .cleared = $0 { true } else { false } }) { cleared.append(1) }
+        }
+        if var e2 = enc2, time - 4 >= t.cueTime {
+            if e2.update(at: time - 4, airborne: [:], low: low, freshness: &f).contains(where: { if case .cleared = $0 { true } else { false } }) { cleared.append(2) }
+            enc2 = e2
+        }
+        time += 1.0 / 60
+    }
+    check(cleared == [1], "a held squat clears the first beam only: \(cleared)")
+    var g = DuckFreshness()
+    g.descentStarted(.left)                       // squatted before the warning
+    let staleMark = g.mark()
+    check(!g.isFreshLow(.left, low: true, since: staleMark), "a squat from before the warning doesn't count")
+    g.descentStarted(.left)
+    check(g.isFreshLow(.left, low: true, since: staleMark), "a new squat after the warning does")
+    var f5 = DuckFreshness()
+    let (_, e5) = runLaser(.highBeam, squats: [.left: [t.revealTime + 0.2], .right: [c - 0.5]], freshness: &f5)
+    check(e5.contains(.resolved(.team([.left, .right]), bonus: 1)) == false, "a squat finished long before the crossing (stood up again) doesn't dodge")
+}
+
+// 51. Security Alert: misses raise it, team dodges cool it, it saturates instead of ending the run, threshold
+//     events fire once; it is presentation only (no timing input).
+do {
+    var a = SecurityAlert()
+    var events: [SecurityAlert.Event] = []
+    for _ in 0..<4 { events += a.record(missed: 1, team: false, cleared: 1) }
+    check(abs(a.level - 0.72) < 1e-9 && events == [.crossedHigh], "four single misses: 0.72, high crossed once \(events)")
+    events = a.record(missed: 2, team: false, cleared: 0)
+    check(a.level == 1 && events == [.maxed], "saturates at 1 and reports it once")
+    check(a.record(missed: 2, team: false, cleared: 0).isEmpty && a.level == 1, "stays at 1, no repeat event")
+    _ = a.record(missed: 0, team: true, cleared: 2)
+    check(abs(a.level - 0.92) < 1e-9, "a team dodge cools it down")
+    a.reset()
+    check(a.level == 0, "reset for a new run")
+}
+
+// 52. The getaway: three phases in order, duck and jump taught alone before any split grid, the run ends in the
+//     escape, and its length at the default timing is a short session (configurable through timing).
+do {
+    let beats = LaserDirector.getaway
+    let phases = beats.compactMap { if case .phase(let p) = $0 { p } else { nil } }
+    check(phases == [.alarm, .pursuit, .lockdown], "phases in order: \(phases)")
+    let lasers = beats.compactMap { if case .laser(let p) = $0 { p } else { nil } }
+    let firstSplit = lasers.firstIndex { $0.isSplit } ?? 0
+    check(lasers.prefix(firstSplit).contains(.highBeam) && lasers.prefix(firstSplit).contains(.floorSweep), "duck and jump taught before the first split grid")
+    check(beats.last == .escape, "ends with the escape")
+    let alarmEnd = beats.firstIndex(of: .phase(.pursuit)) ?? 0
+    check(!beats.prefix(alarmEnd).contains { if case .laser(let p) = $0 { p.isSplit } else { false } }, "no split grids in the first phase")
+    let length = LaserDirector.runDuration(beats, timing: LaserTiming())
+    check(length > 100 && length < 220, "a getaway lasts \(Int(length)) s at default timing")
+    var d = LaserDirector()
+    var count = 0
+    while d.next() != nil { count += 1 }
+    check(count == beats.count && d.isFinished, "director plays every beat once")
+    d.reset()
+    check(d.next() == .vaultOpen, "reset restarts the getaway (vault opener first)")
+}
+
+// MARK: - Moonbound
+
+/// Simulated squats (the same depth curves the simulator and the scripts use) through the real detector.
+@MainActor func moonReps(_ squats: [SimulatedSquat], until end: Double) -> (reps: [Double], aborted: Int) {
+    var d = SquatDetector()
+    var reps: [Double] = [], aborted = 0
+    var t = 0.0
+    while t < end {
+        let depth = squats.compactMap { $0.depth(at: t) }.max() ?? 0
+        for e in d.update(depth: depth, at: t) {
+            if e == .repCompleted { reps.append(t) }
+            if e == .aborted { aborted += 1 }
+        }
+        t += 1.0 / 60
+    }
+    return (reps, aborted)
+}
+
+// 53. Squat → thrust input: one completed squat is one rep; holding a squat for 8 s is still one rep (no repeated
+//     boosts); a shallow squat is no rep (aborted); two separate squats are two reps.
+do {
+    let one = moonReps([SimulatedSquat(start: 1)], until: 4)
+    check(one.reps.count == 1, "one squat → one rep (\(one.reps.count))")
+    let held = moonReps([SimulatedSquat(start: 1, holdDuration: 8)], until: 12)
+    check(held.reps.count == 1, "a held squat → one rep (\(held.reps.count))")
+    check((held.reps.first ?? 0) > 9, "the rep is credited only on standing up again")
+    let shallow = moonReps([SimulatedSquat(start: 1, peak: 0.35)], until: 4)
+    check(shallow.reps.isEmpty && shallow.aborted == 1, "a shallow squat → no rep, one abort")
+    let two = moonReps([SimulatedSquat(start: 1), SimulatedSquat(start: 3.5)], until: 6)
+    check(two.reps.count == 2, "two squats → two reps")
+}
+
+// 54. Race basics: one rep = one boost for that player only; progress is independent; the lead changes hands with
+//     hysteresis; the first to the Moon wins exactly once; reps after the finish (or before the start) do nothing.
+do {
+    var race = MoonRace(config: RaceConfig(goalReps: 10))
+    check(race.rep(.left, at: 0).isEmpty, "no thrust before the start")
+    race.start(at: 0)
+    var t = 0.0
+    func boosts(_ e: [RaceEvent]) -> Int { e.filter { if case .boost = $0 { true } else { false } }.count }
+    t += 3; let e1 = race.rep(.left, at: t)
+    check(boosts(e1) == 1 && race.reps[.left] == 1 && race.reps[.right] == 0, "one rep → one boost, for that player only")
+    check(e1.contains(.leadChange(.left)), "first lead taken")
+    check((race.progress[.right] ?? 1) == 0, "the opponent's progress is untouched")
+    t += 3; let e2 = race.rep(.right, at: t)
+    t += 3; let e3 = race.rep(.right, at: t)
+    check(!e2.contains(.leadChange(.right)), "a fresh lead isn't crowned on the overtaking rep itself")
+    check((e2 + e3).filter { $0 == .leadChange(.right) }.count == 1, "overtake held (3 s) → exactly one lead change")
+    check(race.leader == .right, "leader is right")
+    // Trading reps every 0.6 s, neck and neck: the lanes swap, the crown doesn't flicker.
+    var flicker = MoonRace(config: RaceConfig(goalReps: 40))
+    flicker.start(at: 0)
+    var swaps = 0
+    var tf = 0.0
+    for k in 0..<20 {
+        tf += 0.6
+        for e in flicker.rep(k % 2 == 0 ? .left : .right, at: tf) + flicker.tick(at: tf) { if case .leadChange = e { swaps += 1 } }
+    }
+    check(swaps <= 1, "alternating reps don't make the crown flicker (\(swaps) changes)")
+    var leadChanges = 0, finishes = 0
+    for k in 0..<30 {
+        t += 3
+        for e in race.rep(k % 3 == 0 ? .right : .left, at: t) {
+            if case .leadChange = e { leadChanges += 1 }
+            if case .finished = e { finishes += 1 }
+        }
+    }
+    check(finishes == 1 && race.result?.reason == .moon, "the race finishes once, at the Moon")
+    check(race.rep(.right, at: t + 3).isEmpty && race.tick(at: t + 100).isEmpty, "nothing after the finish")
+    check(race.result?.winner == .left, "the faster climber wins (\(String(describing: race.result?.winner)))")
+}
+
+// 55. Fairness and safety: a trailing player gets a capped slipstream bonus; frantic reps give less thrust than
+//     controlled ones; a child squatting slower (every 3.2 s) against a parent (every 2.4 s) stays in the race.
+do {
+    let cfg = RaceConfig()
+    var race = MoonRace(config: cfg)
+    race.start(at: 0)
+    var t = 0.0
+    for _ in 0..<6 { t += 2.5; _ = race.rep(.left, at: t) }
+    t += 2.5
+    let trailing = race.rep(.right, at: t).compactMap { e -> Double? in if case .boost(_, _, let c, _) = e { c } else { nil } }.first ?? 0
+    check(trailing > 0.1 && trailing <= cfg.catchUpMax, "trailing player's slipstream \(trailing) (capped at \(cfg.catchUpMax))")
+    var calm = MoonRace(config: cfg), frantic = MoonRace(config: cfg)
+    calm.start(at: 0); frantic.start(at: 0)
+    for k in 1...8 { _ = calm.rep(.left, at: Double(k) * 2.0); _ = frantic.rep(.left, at: Double(k) * 0.7) }
+    check((frantic.progress[.left] ?? 0) < (calm.progress[.left] ?? 0) * 0.8, "frantic reps (0.7 s) earn clearly less than controlled ones (2 s)")
+    var family = MoonRace(config: cfg)
+    family.start(at: 0)
+    var nextP = 2.4, nextC = 3.2
+    var maxGap = 0.0
+    while family.isRunning {
+        let tt = min(nextP, nextC)
+        if nextP <= nextC { _ = family.rep(.left, at: tt); nextP += 2.4 } else { _ = family.rep(.right, at: tt); nextC += 3.2 }
+        _ = family.tick(at: tt)
+        maxGap = max(maxGap, abs(family.gap))
+    }
+    check(maxGap < 0.2, "slower child never falls hopelessly behind (max gap \(String(format: "%.2f", maxGap)) of the trip)")
+    check(family.result != nil && (family.result!.at) <= cfg.duration + 0.01, "the round ends within the cap")
+}
+
+// 56. Ascent: the climb starts at once, eases to the earned progress without overshooting or sinking, holds still
+//     when nothing is earned (a break never loses altitude), and phases run in order to the arrival.
+do {
+    var a = RocketAscent()
+    a.earn(1, goal: 40)
+    a.step(dt: 1.0 / 60, climbTime: 0.9)
+    check(a.shown > 0, "the climb starts on the first frame after a rep")
+    var last = a.shown
+    var monotonic = true
+    for _ in 0..<240 { a.step(dt: 1.0 / 60, climbTime: 0.9); if a.shown < last - 1e-12 || a.shown > a.target + 1e-12 { monotonic = false }; last = a.shown }
+    check(monotonic, "never sinks, never overshoots")
+    check(abs(a.shown - a.target) < 1e-3, "reaches the earned progress within ~2 s")
+    let rest = a.shown
+    for _ in 0..<600 { a.step(dt: 1.0 / 60, climbTime: 0.9) }
+    check(a.shown == rest, "a 10 s break keeps the altitude")
+    var phases: [MoonPhase] = []
+    var c = RocketAscent()
+    for i in 1...40 { c.earn(Double(i), goal: 40); for _ in 0..<120 { c.step(dt: 1.0 / 60, climbTime: 0.9) }; if phases.last != c.phase { phases.append(c.phase) } }
+    check(phases == [.launch, .sky, .upperAtmosphere, .space, .approach, .arrived], "phases in order: \(phases)")
+    // Increasingly dramatic: a rep late in the trip climbs much farther than one at lift-off.
+    let early = RocketAscent.altitude(2 / 40) - RocketAscent.altitude(1 / 40)
+    let late = RocketAscent.altitude(36 / 40) - RocketAscent.altitude(35 / 40)
+    check(late > early * 20, "late rep climbs \(Int(late)) vs \(String(format: "%.1f", early)) units at lift-off")
+    check(RocketAscent.altitude(MoonPhase.sky.start) > 10, "the launch tower (~12 units) is cleared by the sky phase")
+}
+
+// 57. Vertical camera: every world object moves DOWN on screen as the rocket climbs, nearer objects faster
+//     (parallax), the deck/feet line never moves, and the horizon dips with altitude while the world pitch keeps
+//     Earth's limb in view.
+do {
+    let f = 930.0, horizon = 578.0
+    for z in [3.0, 20, 150] {
+        let y0 = AscentCamera.screenY(objectAltitude: 30, z: z, deck: 10, f: f, horizonY: horizon)
+        let y1 = AscentCamera.screenY(objectAltitude: 30, z: z, deck: 11, f: f, horizonY: horizon)
+        check(y1 < y0, "climbing moves an object at z \(z) down")
+    }
+    check(abs(AscentCamera.screenVelocity(z: 3, climbRate: 5, f: f)) > abs(AscentCamera.screenVelocity(z: 30, climbRate: 5, f: f)) * 9, "near layers move ~1/z faster")
+    let feet0 = AscentCamera.screenY(objectAltitude: 10, z: 1.9, deck: 10, f: f, horizonY: horizon)
+    let feet1 = AscentCamera.screenY(objectAltitude: 500, z: 1.9, deck: 500, f: f, horizonY: horizon)
+    check(abs(feet0 - feet1) < 1e-9, "the deck (feet) line is fixed on screen at any altitude")
+    check(AscentCamera.horizonDip(altitude: 0) < 0.03, "the launch pad looks flat")
+    check(AscentCamera.horizonDip(altitude: 300) > AscentCamera.horizonDip(altitude: 50), "the horizon dips as the rocket climbs")
+    check(AscentCamera.worldPitch(altitude: 50) == 0, "no camera pitch low down")
+    let top = RocketAscent.topAltitude
+    check(abs(AscentCamera.horizonDip(altitude: top) - AscentCamera.worldPitch(altitude: top) - AscentCamera.limbHold) < 1e-9, "in space the limb holds at 14° below eye level")
+}
+
+// 58. Orientation guard: an upright feed never flips; an upside-down feed (nobody upright, people found when
+//     turned 180°) flips after the confirmation probes; an empty room never flips; one glitchy probe doesn't count;
+//     rotating the device back removes the correction the same way.
+do {
+    var upright = OrientationGuard()
+    var decisions: [OrientationGuard.Decision] = []
+    for _ in 0..<300 { decisions.append(upright.observe(people: 2)) }
+    check(!upright.flipped && !decisions.contains(.probe), "upright feed: no probes, no flip")
+
+    var inverted = OrientationGuard()
+    var frames = 0
+    while !inverted.flipped && frames < 200 {
+        frames += 1
+        if inverted.observe(people: 0) == .probe { _ = inverted.probeResult(people: 2) }
+    }
+    check(inverted.flipped, "upside-down feed is corrected")
+    check(frames >= 30 && frames <= 40, "after ~1 s of evidence (\(frames) frames at 30 fps), not on the first empty frame")
+    var after = 0
+    for _ in 0..<300 { if inverted.observe(people: 2) == .probe { after += 1 } }
+    check(inverted.flipped && after == 0, "once corrected, upright people keep it stable")
+
+    var empty = OrientationGuard()
+    for _ in 0..<600 { if empty.observe(people: 0) == .probe { _ = empty.probeResult(people: 0) } }
+    check(!empty.flipped, "an empty room never flips the camera")
+
+    var glitch = OrientationGuard()
+    var hits = [2, 0, 2, 0, 2, 0, 2, 0]
+    for _ in 0..<200 { if glitch.observe(people: 0) == .probe, !hits.isEmpty { _ = glitch.probeResult(people: hits.removeFirst()) } }
+    check(!glitch.flipped, "isolated probe hits (pose glitches) never flip")
+
+    var back = OrientationGuard(flipped: true)
+    for _ in 0..<60 { if back.observe(people: 0) == .probe { _ = back.probeResult(people: 1) } }
+    check(!back.flipped, "device turned back: the correction is removed")
+}
+
+// 59. The clock: the final sprint starts once (15 s left or 85 % of the trip); at the cap the higher rocket wins,
+//     a dead heat has no winner; "neck and neck" fires on closing a gap, not at the start, and not repeatedly.
+do {
+    var r = MoonRace(config: RaceConfig(goalReps: 100, duration: 30))
+    r.start(at: 0)
+    var sprints = 0
+    var t = 0.0
+    while r.isRunning {
+        t += 0.5
+        if Int(t * 2) % 5 == 0 { _ = r.rep(.left, at: t) }
+        for e in r.tick(at: t) { if e == .finalSprint { sprints += 1 } }
+    }
+    check(sprints == 1, "one final sprint")
+    check(r.result?.reason == .time && r.result?.winner == .left, "time cap: the higher rocket wins")
+    var dead = MoonRace(config: RaceConfig(duration: 10))
+    dead.start(at: 0)
+    _ = dead.rep(.left, at: 3); _ = dead.rep(.right, at: 3.1)
+    _ = dead.tick(at: 10)
+    check(dead.result != nil && dead.result?.winner == nil, "a dead heat has no winner")
+    var close = MoonRace(config: RaceConfig(goalReps: 20))
+    close.start(at: 0)
+    var necks = 0
+    var tt = 0.0
+    for k in 0..<5 { tt += 2.5; _ = close.rep(.left, at: tt); _ = k }
+    for _ in 0..<8 { tt += 2.5; for e in close.rep(.right, at: tt) where e == .neckAndNeck { necks += 1 } }
+    check(necks == 1, "neck and neck announced once as the gap closes (\(necks))")
+}
+
+// 60. Dual security override: each lock needs its own player's reps; a lock can't be over-cranked; the gate opens
+//     once, only when both are released; a solo session needs only the one player; non-participants do nothing.
+do {
+    var o = DualOverride(participants: [.left, .right])
+    check(o.crank(.left) == [.crank(.left, 1)], "first crank")
+    check(o.crank(.left) == [.crank(.left, 2), .unlocked(.left)], "left lock released")
+    check(o.crank(.left).isEmpty, "a released lock can't be over-cranked (no repeated reward)")
+    check(!o.isOpen, "gate stays shut until both are released")
+    _ = o.crank(.right)
+    let last = o.crank(.right)
+    check(last == [.crank(.right, 2), .unlocked(.right), .open] && o.isOpen, "both released → the gate opens once")
+    check(o.crank(.right).isEmpty, "nothing after it opens")
+    var solo = DualOverride(participants: [.right])
+    check(solo.crank(.left).isEmpty, "non-participant reps are ignored")
+    _ = solo.crank(.right)
+    check(solo.crank(.right).contains(.open), "a solo session opens with one player")
+    check(LaserDirector.getaway.first == .vaultOpen && LaserDirector.getaway.suffix(2) == [.override, .escape], "vault opener first, override before the escape")
+}
+
+// 61. Experimental reach-and-pull (pose only, not wired into gameplay): reach above the head then pull below the
+//     shoulders = one pull; a slow pull or a wave at shoulder height doesn't count; a held arm doesn't repeat.
+do {
+    func armPose(wristY: Double) -> PersonPose {
+        PersonPose(joints: [.nose: JointPoint(x: 0.5, y: 0.80, confidence: 0.9), .neck: JointPoint(x: 0.5, y: 0.74, confidence: 0.9),
+                            .leftShoulder: JointPoint(x: 0.45, y: 0.72, confidence: 0.9), .rightShoulder: JointPoint(x: 0.55, y: 0.72, confidence: 0.9),
+                            .leftHip: JointPoint(x: 0.47, y: 0.50, confidence: 0.9), .rightHip: JointPoint(x: 0.53, y: 0.50, confidence: 0.9),
+                            .rightWrist: JointPoint(x: 0.6, y: wristY, confidence: 0.9)])
+    }
+    var d = ReachPullDetector()
+    var pulls = 0
+    var t = 0.0
+    for y in [0.70, 0.86, 0.88, 0.80, 0.70, 0.62, 0.62, 0.62] { t += 0.15; if d.update(pose: armPose(wristY: y), at: t) { pulls += 1 } }
+    check(pulls == 1, "reach then pull = one pull (\(pulls))")
+    var slow = ReachPullDetector()
+    var slowPulls = 0
+    for (k, y) in [0.86, 0.86, 0.86, 0.86, 0.86, 0.86, 0.86, 0.86, 0.86, 0.86, 0.86, 0.86, 0.62].enumerated() { if slow.update(pose: armPose(wristY: y), at: Double(k) * 0.2) { slowPulls += 1 } }
+    check(slowPulls == 0, "a pull after holding the arm up for 2.4 s doesn't count")
+    var wave = ReachPullDetector()
+    var waves = 0
+    for (k, y) in [0.72, 0.62, 0.72, 0.62, 0.72, 0.62].enumerated() { if wave.update(pose: armPose(wristY: y), at: Double(k) * 0.2) { waves += 1 } }
+    check(waves == 0, "waving at shoulder height isn't a pull")
+}
+
+// 62. Choreography: every sequence in the getaway is physically feasible (each lane gets enough recovery between
+//     moves, at every difficulty), the crossfire gives the players opposite sequences, the double pulse demands two
+//     separate moves, and difficulty never just speeds things up.
+do {
+    let seqs = LaserDirector.getaway.compactMap { if case .sequence(let s) = $0 { s } else { nil } }
+    check(seqs.count >= 4, "the getaway has sequences (\(seqs.count))")
+    for s in seqs {
+        for d in [LaserDifficulty.easy, .normal, .hard] { check(s.isFeasible(spacingScale: d.spacingScale), "\(s.name) feasible at spacing ×\(d.spacingScale)") }
+    }
+    let cf = LaserSequence.crossfire
+    check(cf.actions(for: .left) == [.duck, .jump] && cf.actions(for: .right) == [.jump, .duck], "crossfire: Parent DUCK→JUMP, Child JUMP→DUCK")
+    check(LaserSequence.alternating.actions(for: .left) == [.duck, .jump, .duck], "alternating combo duck → jump → duck")
+    let tooTight = LaserSequence(name: "x", steps: [LaserStep(pattern: .highBeam), LaserStep(pattern: .highBeam)], spacing: 1.5)
+    check(!tooTight.isFeasible(), "two ducks 1.5 s apart are rejected (no unsafe rapid squats)")
+    // A held squat can't clear both beams of a double pulse (each needs a fresh squat).
+    var fresh = DuckFreshness()
+    fresh.descentStarted(.left)
+    let mark1: [Zone: Int] = [:]
+    check(fresh.isFreshLow(.left, low: true, since: mark1), "first beam: the squat counts")
+    fresh.consume(.left)
+    check(!fresh.isFreshLow(.left, low: true, since: mark1), "second beam: the same held squat doesn't")
+    fresh.descentStarted(.left)
+    check(fresh.isFreshLow(.left, low: true, since: mark1), "second beam: a new squat does")
+    let base = LaserTiming(), hard = LaserDifficulty.hard.apply(to: base), easy = LaserDifficulty.easy.apply(to: base)
+    check(hard.speed / base.speed < 1.1 && easy.warningDuration > base.warningDuration, "difficulty changes telegraph and spacing first, speed only a little")
+    check(hard.isValid && easy.isValid, "difficulty presets keep the timeline valid")
+}
+
+// 63. Rotating turret sweep: the lane crossings follow from the rotation (lane-staggered for a wave, the near lane's
+//     beam actually passes through the lane centre at that moment), every getaway level is feasible, easy plays one
+//     laser at a time, hard is harder through choreography, and the child's window is more generous than the parent's.
+do {
+    let timing = LaserTiming()
+    let c = TurretSweep.crossings(timing: timing, stagger: 0.9)
+    check(abs((c[.right]! - c[.left]!) - 0.9) < 1e-9, "a wave reaches the Child's lane 0.9 s after the Parent's")
+    let r = c[.left]! - timing.revealTime
+    let theta = TurretSweep.angle(at: r)
+    let x = -Corridor.halfWidth + cos(theta) * hypot(Corridor.halfWidth - Corridor.laneX, TurretSweep.ahead)
+    let z = Corridor.playerZ + TurretSweep.ahead - sin(theta) * hypot(Corridor.halfWidth - Corridor.laneX, TurretSweep.ahead)
+    check(abs(x + Corridor.laneX) < 1e-6 && abs(z - Corridor.playerZ) < 1e-6, "at the crossing the beam passes the lane centre (x \(x), z \(z))")
+    check(TurretSweep.angle(at: TurretSweep.rotateAt - 0.1) == 0 && TurretSweep.fireAt < TurretSweep.rotateAt, "fires straight across before it rotates")
+    check(c[.left]! - timing.cueLead > timing.revealTime + TurretSweep.fireAt, "the cue comes after the turret has fired (it is visible)")
+    for level in [LaserDifficulty.Level.easy, .normal, .hard] {
+        let d = level == .easy ? LaserDifficulty.easy : level == .hard ? LaserDifficulty.hard : .normal
+        for case .sequence(let s) in LaserDirector.getaway(for: level) { check(s.isFeasible(spacingScale: d.spacingScale), "\(level) \(s.name) feasible") }
+    }
+    check(!LaserDirector.getawayEasy.contains { if case .sequence(let s) = $0 { s.steps.count > 1 } else { false } }, "easy: one laser at a time")
+    func moves(_ beats: [LaserBeat]) -> Int { beats.reduce(0) { n, b in if case .sequence(let s) = b { n + s.steps.count } else if case .laser = b { n + 1 } else { n } } }
+    check(moves(LaserDirector.getawayHard) > moves(LaserDirector.getaway) && moves(LaserDirector.getaway) > moves(LaserDirector.getawayEasy), "hard asks for more moves than normal, normal more than easy")
+    let longest = LaserDirector.getawayHard.compactMap { if case .sequence(let s) = $0 { s.steps.count } else { nil } }.max() ?? 0
+    check(longest >= 4, "hard has a four-step sequence")
+    // Child allowance: a late jump that is outside the parent's window still counts for the child.
+    let d = LaserDifficulty.normal
+    var f = DuckFreshness()
+    var enc = LaserEncounter(id: 1, pattern: .floorSweep, participants: [.left, .right], timing: timing, duckMark: f.mark(),
+                             laneWindows: [.left: timing.window, .right: d.childWindow(timing.window)])
+    let late = timing.crossingTime + timing.window.clearAfter + 0.035
+    var events: [JumpJudgeEvent] = []
+    var t = timing.cueTime
+    while t < timing.crossingTime + 1 {
+        events += enc.update(at: t, airborne: [.left: abs(t - late) < 0.02, .right: abs(t - late) < 0.02], low: [:], freshness: &f)
+        t += 1.0 / 60
+    }
+    check(events.contains { if case .cleared(.right, _) = $0 { true } else { false } } && events.contains(.nipped(.left)), "the same late jump: Child clears (wider window), Parent doesn't")
+    // A squat that is over before even the child's window still gets its TOO EARLY label.
+    var f2 = DuckFreshness()
+    var enc2 = LaserEncounter(id: 2, pattern: .highBeam, participants: [.right], timing: timing, duckMark: f2.mark(),
+                              laneWindows: [.right: d.childWindow(timing.window)])
+    f2.descentStarted(.right)
+    var ev2: [JumpJudgeEvent] = []
+    t = timing.cueTime
+    while t < timing.crossingTime + 1 {
+        let low = t > timing.crossingTime - 1.2 && t < timing.crossingTime - 0.7
+        ev2 += enc2.update(at: t, airborne: [:], low: [.right: low], freshness: &f2)
+        t += 1.0 / 60
+    }
+    check(ev2.contains(.labelled(.right, .tooEarly)), "an early squat is labelled TOO EARLY with the child allowance on (\(ev2))")
+}
+
 print(failures == 0 ? "All logic tests passed" : "\(failures) failure(s)")
 exit(failures == 0 ? 0 : 1)

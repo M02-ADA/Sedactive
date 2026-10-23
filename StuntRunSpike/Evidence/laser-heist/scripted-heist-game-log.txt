@@ -1,0 +1,164 @@
+[GAME] t=   0.00 real=-1086661.80 s=1 mode: Laser Breakout (art 310 ms)
+[GAME] t=   0.02 real=   0.38 s=1 state: countdown
+[GAME] t=   0.68 real=   1.54 s=2 replay (laser script start) → session 2
+[GAME] t=   0.71 real=   1.55 s=2 state: countdown
+[GAME] t=   3.08 real=   4.70 s=2 state: running
+[GAME] t=   4.68 real=   6.20 s=2 laser: vault door opening
+[GAME] t=   7.28 real=   9.29 s=2 laser: vault open — cart launches
+[GAME] t=   7.48 real=   9.72 s=2 laser phase: ALARM TRIGGERED
+[GAME] t=  11.59 real=  14.52 s=2 laser script step 1/13: HIGH BEAM: both duck → TEAM DODGE
+[GAME] t=  11.59 real=  14.52 s=2 laser #1: warning highBeam (nothing visible yet)
+[GAME] t=  12.83 real=  15.99 s=2 laser: blast doors slam shut behind the cart
+[GAME] t=  13.39 real=  16.55 s=2 laser #1: gate revealed (beams at P 0.94 / C 0.66 units)
+[GAME] t=  16.33 real=  20.00 s=2 laser #1: cue, crossing in 1.39 s
+[GAME] t=  17.39 real=  21.57 s=2 laser #1: PARENT ducked clear (+1)
+[GAME] t=  17.49 real=  21.67 s=2 laser #1: CHILD ducked clear (+1)
+[GAME] t=  17.49 real=  21.67 s=2 laser #1: TEAM (+1 bonus); alert 0.00
+[GAME] t=  21.93 real=  27.37 s=2 laser script step 2/13: FLOOR LASER: both jump → TEAM DODGE
+[GAME] t=  21.93 real=  27.37 s=2 laser #2: warning floorSweep (nothing visible yet)
+[GAME] t=  23.74 real=  29.42 s=2 laser #2: gate revealed (beams at P 0.13 / C 0.13 units)
+[GAME] t=  26.66 real=  32.77 s=2 laser #2: cue, crossing in 1.39 s
+[GAME] t=  27.82 real=  34.37 s=2 PARENT jump: takeoff
+[GAME] t=  27.82 real=  34.37 s=2 laser #2: PARENT jumped clear (+1)
+[GAME] t=  27.87 real=  34.42 s=2 CHILD jump: takeoff
+[GAME] t=  27.87 real=  34.42 s=2 laser #2: CHILD jumped clear (+1)
+[GAME] t=  27.87 real=  34.42 s=2 laser #2: TEAM (+1 bonus); alert 0.00
+[GAME] t=  28.31 real=  35.62 s=2 PARENT jump: landed (air 1.25 s)
+[GAME] t=  28.31 real=  35.62 s=2 CHILD jump: landed (air 1.20 s)
+[GAME] t=  28.51 real=  35.82 s=2 PARENT jump: cycle complete (jumps 1)
+[GAME] t=  28.51 real=  35.82 s=2 CHILD jump: cycle complete (jumps 1)
+[GAME] t=  32.32 real=  40.09 s=2 laser script step 3/13: HIGH BEAM: Parent on time, Child TOO LATE → partial
+[GAME] t=  32.32 real=  40.09 s=2 laser #3: warning highBeam (nothing visible yet)
+[GAME] t=  34.13 real=  42.12 s=2 laser #3: gate revealed (beams at P 0.94 / C 0.66 units)
+[GAME] t=  37.05 real=  45.50 s=2 laser #3: cue, crossing in 1.39 s
+[GAME] t=  38.18 real=  47.07 s=2 laser #3: PARENT ducked clear (+1)
+[GAME] t=  38.70 real=  47.82 s=2 laser #3: CHILD ZAPPED
+[GAME] t=  38.70 real=  47.82 s=2 laser #3: partial: clear [PARENT] zapped [CHILD]; alert 0.18
+[GAME] t=  39.00 real=  48.57 s=2 laser #3: CHILD label tooLate
+[GAME] t=  42.51 real=  52.52 s=2 laser phase: SECURITY PURSUIT
+[GAME] t=  45.62 real=  56.05 s=2 laser script step 4/13: SPLIT GRID (Parent high): Parent ducks, Child jumps → PERFECT SPLIT
+[GAME] t=  45.62 real=  56.05 s=2 laser #4: warning splitGrid(parentHigh: true) (nothing visible yet)
+[GAME] t=  47.43 real=  58.09 s=2 laser #4: gate revealed (beams at P 0.94 / C 0.13 units)
+[GAME] t=  50.35 real=  61.45 s=2 laser #4: cue, crossing in 1.39 s
+[GAME] t=  51.47 real=  63.00 s=2 laser #4: PARENT ducked clear (+1)
+[GAME] t=  51.52 real=  63.05 s=2 CHILD jump: takeoff
+[GAME] t=  51.52 real=  63.05 s=2 laser #4: CHILD jumped clear (+1)
+[GAME] t=  51.52 real=  63.05 s=2 laser #4: TEAM (+1 bonus); alert 0.10
+[GAME] t=  51.87 real=  63.64 s=2 TURBO (team power full)
+[GAME] t=  51.87 real=  63.64 s=2 GHOST MODE (team power full)
+[GAME] t=  51.97 real=  64.29 s=2 CHILD jump: landed (air 1.23 s)
+[GAME] t=  52.07 real=  64.60 s=2 CHILD jump: cycle complete (jumps 2)
+[GAME] t=  56.08 real=  69.04 s=2 laser script step 5/13: FLOOR LASER: Parent TOO EARLY, Child doesn't jump → both zapped, alert up
+[GAME] t=  56.08 real=  69.04 s=2 laser #5: warning floorSweep (nothing visible yet)
+[GAME] t=  57.89 real=  71.07 s=2 laser #5: gate revealed (beams at P 0.13 / C 0.13 units)
+[GAME] t=  60.81 real=  74.67 s=2 laser #5: cue, crossing in 1.39 s
+[GAME] t=  61.07 real=  74.94 s=2 PARENT jump: takeoff
+[GAME] t=  61.51 real=  75.60 s=2 PARENT jump: landed (air 0.67 s)
+[GAME] t=  61.71 real=  75.80 s=2 PARENT jump: cycle complete (jumps 2)
+[GAME] t=  62.46 real=  76.55 s=2 laser #5: CHILD ZAPPED
+[GAME] t=  62.46 real=  76.55 s=2 laser #5: PARENT ZAPPED (too early)
+[GAME] t=  62.46 real=  76.55 s=2 laser #5: PARENT label tooEarly
+[GAME] t=  62.46 real=  76.55 s=2 laser #5: partial: clear [] zapped [CHILD,PARENT]; alert 0.46
+[GAME] t=  63.06 real=  78.39 s=2 laser #5: CHILD label noJump
+[GAME] t=  66.26 real=  81.82 s=2 laser script step 6/13: SPLIT GRID (Child high): Parent ducks (wrong move) and HOLDS it; Child ducks → partial
+[GAME] t=  66.26 real=  81.82 s=2 laser #6: warning splitGrid(parentHigh: false) (nothing visible yet)
+[GAME] t=  68.08 real=  83.89 s=2 laser #6: gate revealed (beams at P 0.13 / C 0.66 units)
+[GAME] t=  70.99 real=  87.47 s=2 laser #6: cue, crossing in 1.39 s
+[GAME] t=  72.16 real=  88.87 s=2 laser #6: CHILD ducked clear (+1)
+[GAME] t=  72.64 real=  89.59 s=2 laser #6: PARENT ZAPPED
+[GAME] t=  72.64 real=  89.59 s=2 security alert: crossedHigh
+[GAME] t=  72.64 real=  89.59 s=2 laser #6: partial: clear [CHILD] zapped [PARENT]; alert 0.64
+[GAME] t=  73.24 real=  90.85 s=2 laser #6: PARENT label noJump
+[GAME] t=  76.44 real=  94.27 s=2 laser script step 7/13: HIGH BEAM: Parent still holding the same squat → no credit; Child ducks → partial (no reward for holding)
+[GAME] t=  76.44 real=  94.27 s=2 laser #7: warning highBeam (nothing visible yet)
+[GAME] t=  78.25 real=  96.32 s=2 laser #7: gate revealed (beams at P 0.94 / C 0.66 units)
+[GAME] t=  81.17 real=  99.97 s=2 laser #7: cue, crossing in 1.39 s
+[GAME] t=  82.28 real= 101.34 s=2 laser #7: CHILD ducked clear (+1)
+[GAME] t=  82.82 real= 102.09 s=2 laser #7: PARENT ZAPPED (still holding an earlier squat: no credit)
+[GAME] t=  82.82 real= 102.09 s=2 laser #7: partial: clear [CHILD] zapped [PARENT]; alert 0.82
+[GAME] t=  83.42 real= 103.40 s=2 laser #7: PARENT label noJump
+[GAME] t=  86.62 real= 106.82 s=2 laser phase: FINAL LOCKDOWN
+[GAME] t=  89.74 real= 110.37 s=2 laser script step 8/13: LOCKDOWN SPLIT (Parent high): pause during the WARNING → withdrawn, resume
+[GAME] t=  89.74 real= 110.37 s=2 laser #8: warning splitGrid(parentHigh: true) (nothing visible yet)
+[GAME] t=  90.64 real= 111.49 s=2 pause (laser script)
+[GAME] t=  90.64 real= 111.50 s=2 laser #8: withdrawn (game halted)
+[GAME] t=  90.64 real= 111.50 s=2 state: paused
+[GAME] t=  90.64 real= 113.49 s=2 resume (laser script)
+[GAME] t=  90.65 real= 113.50 s=2 state: countdown
+[GAME] t=  93.11 real= 116.49 s=2 state: running
+[GAME] t=  93.15 real= 116.50 s=2 laser script step 9/13: LOCKDOWN SPLIT again (retried after the pause): Parent ducks, Child jumps → PERFECT SPLIT
+[GAME] t=  93.15 real= 116.50 s=2 laser #9: warning splitGrid(parentHigh: true) (nothing visible yet)
+[GAME] t=  94.96 real= 118.57 s=2 laser #9: gate revealed (beams at P 0.94 / C 0.13 units)
+[GAME] t=  97.88 real= 122.20 s=2 laser #9: cue, crossing in 1.39 s
+[GAME] t=  98.99 real= 123.55 s=2 laser #9: PARENT ducked clear (+1)
+[GAME] t=  99.04 real= 123.60 s=2 CHILD jump: takeoff
+[GAME] t=  99.04 real= 123.60 s=2 laser #9: CHILD jumped clear (+1)
+[GAME] t=  99.04 real= 123.60 s=2 laser #9: TEAM (+1 bonus); alert 0.74
+[GAME] t=  99.49 real= 124.82 s=2 CHILD jump: landed (air 1.22 s)
+[GAME] t=  99.59 real= 125.15 s=2 CHILD jump: cycle complete (jumps 3)
+[GAME] t= 103.62 real= 129.39 s=2 laser script step 10/13: FLOOR LASER: Child's tracking lost on the approach → withdrawn → READY → resume
+[GAME] t= 103.62 real= 129.39 s=2 laser #10: warning floorSweep (nothing visible yet)
+[GAME] t= 105.43 real= 131.65 s=2 laser #10: gate revealed (beams at P 0.13 / C 0.13 units)
+[GAME] t= 106.62 real= 133.07 s=2 debug: CHILD tracking OFF (simulated)
+[GAME] t= 107.24 real= 133.69 s=2 CHILD tracking LOST
+[GAME] t= 107.24 real= 133.70 s=2 laser #10: withdrawn (game halted)
+[GAME] t= 107.24 real= 133.70 s=2 state: tracking lost (CHILD)
+[GAME] t= 107.24 real= 135.69 s=2 debug: CHILD tracking ON (simulated)
+[GAME] t= 107.24 real= 135.70 s=2 CHILD tracking recovered
+[GAME] t= 107.24 real= 135.72 s=2 state: ready (waiting for explicit resume)
+[GAME] t= 107.24 real= 137.19 s=2 resume (laser script)
+[GAME] t= 107.25 real= 137.20 s=2 state: countdown
+[GAME] t= 109.80 real= 140.20 s=2 state: running
+[GAME] t= 109.81 real= 140.20 s=2 laser script step 11/13: FLOOR LASER again (retried after tracking returned): both jump → TEAM DODGE
+[GAME] t= 109.81 real= 140.20 s=2 laser #11: warning floorSweep (nothing visible yet)
+[GAME] t= 111.63 real= 142.50 s=2 laser #11: gate revealed (beams at P 0.13 / C 0.13 units)
+[GAME] t= 114.55 real= 145.85 s=2 laser #11: cue, crossing in 1.39 s
+[GAME] t= 115.70 real= 147.30 s=2 PARENT jump: takeoff
+[GAME] t= 115.70 real= 147.30 s=2 CHILD jump: takeoff
+[GAME] t= 115.70 real= 147.30 s=2 laser #11: CHILD jumped clear (+1)
+[GAME] t= 115.70 real= 147.30 s=2 laser #11: PARENT jumped clear (+1)
+[GAME] t= 115.70 real= 147.30 s=2 laser #11: TEAM (+1 bonus); alert 0.66
+[GAME] t= 115.95 real= 148.67 s=2 PARENT jump: landed (air 1.37 s)
+[GAME] t= 115.95 real= 148.67 s=2 CHILD jump: landed (air 1.37 s)
+[GAME] t= 115.97 real= 148.69 s=2 PARENT jump: takeoff
+[GAME] t= 115.97 real= 148.69 s=2 CHILD jump: takeoff
+[GAME] t= 116.08 real= 148.80 s=2 PARENT jump: landed (air 0.12 s)
+[GAME] t= 116.08 real= 148.80 s=2 CHILD jump: landed (air 0.12 s)
+[GAME] t= 116.30 real= 149.02 s=2 PARENT jump: cycle complete (jumps 3)
+[GAME] t= 116.30 real= 149.02 s=2 CHILD jump: cycle complete (jumps 4)
+[GAME] t= 120.24 real= 153.17 s=2 laser script step 12/13: LOCKDOWN SPLIT (Child high): Parent jumps, Child ducks → PERFECT SPLIT → escape
+[GAME] t= 120.24 real= 153.17 s=2 laser #12: warning splitGrid(parentHigh: false) (nothing visible yet)
+[GAME] t= 122.05 real= 155.45 s=2 laser #12: gate revealed (beams at P 0.13 / C 0.66 units)
+[GAME] t= 124.97 real= 158.60 s=2 laser #12: cue, crossing in 1.39 s
+[GAME] t= 126.12 real= 159.99 s=2 PARENT jump: takeoff
+[GAME] t= 126.12 real= 159.99 s=2 laser #12: PARENT jumped clear (+1)
+[GAME] t= 126.14 real= 160.00 s=2 laser #12: CHILD ducked clear (+1)
+[GAME] t= 126.14 real= 160.00 s=2 laser #12: TEAM (+1 bonus); alert 0.58
+[GAME] t= 126.49 real= 160.59 s=2 TURBO (team power full)
+[GAME] t= 126.49 real= 160.59 s=2 GHOST MODE (team power full)
+[GAME] t= 126.59 real= 161.24 s=2 PARENT jump: landed (air 1.25 s)
+[GAME] t= 126.69 real= 161.57 s=2 PARENT jump: cycle complete (jumps 4)
+[GAME] t= 130.69 real= 165.57 s=2 laser: lockdown gate ahead (participants 2)
+[GAME] t= 135.85 real= 170.99 s=2 laser: override — levers down, waiting for both players
+[GAME] t= 135.85 real= 170.99 s=2 laser script: lockdown gate — Parent pulls ×2, Child pulls ×2 (one held squat counts once)
+[GAME] t= 137.55 real= 172.90 s=2 laser: override — PARENT cranks (1/2)
+[GAME] t= 139.55 real= 174.90 s=2 laser: override — PARENT cranks (2/2)
+[GAME] t= 139.55 real= 174.90 s=2 laser: override — PARENT's lock released
+[GAME] t= 140.89 real= 176.45 s=2 laser: override — CHILD cranks (1/2)
+[GAME] t= 142.34 real= 177.90 s=2 laser: override — CHILD cranks (2/2)
+[GAME] t= 142.34 real= 177.90 s=2 laser: override — CHILD's lock released
+[GAME] t= 142.34 real= 177.90 s=2 laser: override — GATE OPEN
+[GAME] t= 145.07 real= 181.10 s=2 laser: escape — exit doors ahead
+[GAME] t= 149.53 real= 185.79 s=2 laser: ESCAPED — dodges 15/20, team dodges 6, alert 0.58
+[GAME] t= 156.54 real= 193.29 s=2 laser: getaway complete
+[GAME] t= 156.54 real= 193.29 s=3 replay (laser script (after the escape)) → session 3
+[GAME] t= 156.56 real= 193.30 s=3 state: countdown
+[GAME] t= 159.08 real= 196.29 s=3 state: running
+[GAME] t= 160.55 real= 197.74 s=3 laser: vault door opening
+[GAME] t= 163.17 real= 200.57 s=3 laser: vault open — cart launches
+[GAME] t= 163.37 real= 200.99 s=3 laser phase: ALARM TRIGGERED
+[GAME] t= 167.47 real= 205.30 s=3 laser script step 13/13: new run: HIGH BEAM both duck → fresh ids and counters
+[GAME] t= 167.47 real= 205.30 s=3 laser #1: warning highBeam (nothing visible yet)
+[GAME] t= 168.71 real= 206.77 s=3 laser: blast doors slam shut behind the cart
+[GAME] t= 169.27 real= 207.34 s=3 laser #1: gate revealed (beams at P 0.94 / C 0.66 units)
+[GAME] t= 172.19 real= 210.49 s=3 laser #1: cue, crossing in 1.40 s

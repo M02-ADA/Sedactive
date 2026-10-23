@@ -110,7 +110,8 @@ final class WorldScene: SKScene {
     let farZ: CGFloat = 100
     let roofHalf: CGFloat = 1.6
     let groundDrop: CGFloat = 1.8
-    let playerX: CGFloat = 0.65
+    /// Lane centre of each player (world units). Moonbound's rocket decks sit a little wider apart.
+    var playerX: CGFloat { gameMode == .moonbound ? MoonWorld.laneX : 0.65 }
     let baseSpeed: CGFloat = 10
     /// The train is a fixed set of carriages carrying the players; its front (and the locomotive) sits this far ahead.
     let trainFront: CGFloat = 24
@@ -191,6 +192,7 @@ final class WorldScene: SKScene {
     var lockCount = 0
     var pendingTurbo = false
     var autoplayBeforeScript = false
+    var lastOrientationFlipped: Bool?
     // Hero TEAM DUCK.
     lazy var teamDuckBake = TeamDuckBake()
     var hitStopUntil: TimeInterval = 0
@@ -226,7 +228,14 @@ final class WorldScene: SKScene {
     var gameMode: GameMode = .stuntRun
     var jungle: JungleWorld?
     lazy var jungleRuntime = JungleRuntime()
-    var anyScriptRunning: Bool { script != nil || (gameMode == .jungleDrift && jungleRuntime.script != nil) }
+    var laser: LaserWorld?
+    lazy var laserRuntime = LaserRuntime()
+    var moon: MoonWorld?
+    lazy var moonRuntime = MoonRuntime()
+    var anyScriptRunning: Bool {
+        script != nil || (gameMode == .jungleDrift && jungleRuntime.script != nil) || (gameMode == .laserBreakout && laserRuntime.script != nil)
+            || (gameMode == .moonbound && moonRuntime.script != nil)
+    }
 
     var reduceMotion: Bool { model?.reduceMotion ?? false }
     var mode: ViewMode { model?.mode ?? .immersive }
@@ -240,6 +249,12 @@ final class WorldScene: SKScene {
         if gameMode == .jungleDrift {
             buildPlayers()
             buildJungle()
+        } else if gameMode == .laserBreakout {
+            buildPlayers()
+            buildLaser()
+        } else if gameMode == .moonbound {
+            buildPlayers()
+            buildMoon()
         } else {
             _ = teamDuckBake   // load + preload the baked sheet before it is needed
             buildWorld()
@@ -248,7 +263,7 @@ final class WorldScene: SKScene {
         }
         buildHUD()
         layoutForSize()
-        if ["coop", "sweeps"].contains(UserDefaults.standard.string(forKey: "scenario")) {
+        if ["coop", "sweeps", "laser", "moon"].contains(UserDefaults.standard.string(forKey: "scenario")) {
             run(.wait(forDuration: 1.0)) { [weak self] in self?.startScript() }
         }
     }
@@ -396,6 +411,13 @@ final class WorldScene: SKScene {
 
     private func layoutForSize() {
         proj.configure(size: size)
+        if gameMode == .moonbound {
+            // Vertical race framing: eye level higher and feet higher, so each player rides on top of a visible
+            // rocket (its nozzles and exhaust below them) and the ground falls away beneath; same pinhole model.
+            proj.horizonY = size.height * 0.72
+            proj.feetY = size.height * 0.34
+            proj.recompute()
+        }
         sky.position = CGPoint(x: 0, y: proj.horizonY - 2)
         sky.size = CGSize(width: size.width, height: size.height - proj.horizonY + 2)
         floorNode.position = .zero
@@ -429,6 +451,8 @@ final class WorldScene: SKScene {
         layoutPlaceholders()
         layoutHUD()
         if gameMode == .jungleDrift { layoutJungle() }
+        if gameMode == .laserBreakout { layoutLaser() }
+        if gameMode == .moonbound { layoutMoon() }
     }
 
     func setBodyRect(height: CGFloat, minY: CGFloat) {
@@ -482,6 +506,10 @@ final class WorldScene: SKScene {
         updateSpeed(dt: dt)
         if gameMode == .jungleDrift {
             updateJungle(dt: CGFloat(dt), motionDT: CGFloat(motionDT))
+        } else if gameMode == .laserBreakout {
+            updateLaser(dt: CGFloat(dt), motionDT: CGFloat(motionDT))
+        } else if gameMode == .moonbound {
+            updateMoon(dt: CGFloat(dt), motionDT: CGFloat(motionDT))
         } else {
             advanceWorld(dt: CGFloat(motionDT))
             updateGates(dt: CGFloat(motionDT))
@@ -526,6 +554,12 @@ final class WorldScene: SKScene {
         lastSnapshot = snapshot
         bodyTexture.modifyPixelData(Self.makeCopier(pipeline.store))
         meter.recordSnapshot(snapshot, uploadedAt: now)
+        if snapshot.stats.orientationFlipped != lastOrientationFlipped {
+            if lastOrientationFlipped != nil || snapshot.stats.orientationFlipped {
+                gameLog("camera orientation guard: \(snapshot.stats.orientationFlipped ? "feed was upside down → frames rotated 180°" : "feed upright")")
+            }
+            lastOrientationFlipped = snapshot.stats.orientationFlipped
+        }
 
         if mode == .immersive {
             bodySprite.isHidden = !snapshot.hasCutout
@@ -545,7 +579,12 @@ final class WorldScene: SKScene {
 
     private func updateSpeed(dt: TimeInterval) {
         let reduce = reduceMotion
-        let cruise = gameMode == .jungleDrift ? jungleCruise : baseSpeed * (reduce ? 0.7 : 1)
+        let cruise = switch gameMode {
+        case .jungleDrift: jungleCruise
+        case .laserBreakout: laserCruise * laserRuntime.speedScale * laserRuntime.heist.cartSpeed(gameTime: gameTime)
+        case .moonbound: CGFloat(0)   // vertical travel: the ascent drives the world, not worldSpeed
+        case .stuntRun: baseSpeed * (reduce ? 0.7 : 1)
+        }
         var target = cruise
         // Boosts never run during an encounter: the obstacle's timing is defined at cruise speed.
         if now < boostUntil, !encounterActive { target *= reduce ? min(boostMultiplier, 1.25) : boostMultiplier }
@@ -554,7 +593,7 @@ final class WorldScene: SKScene {
 
         // FOV kick: widen the view while boosting so the world visibly rushes outward (game-feel speed cue).
         let boosting = now < boostUntil && !reduce && !isWorldPaused
-        let fovTarget: CGFloat = boosting ? 0.8 : 1
+        let fovTarget: CGFloat = boosting ? 0.8 : (gameMode == .laserBreakout ? laserRuntime.fov : 1)
         proj.fovScale += (fovTarget - proj.fovScale) * CGFloat(min(1, dt * (boosting ? 3 : 1.5)))
         proj.recompute()
     }

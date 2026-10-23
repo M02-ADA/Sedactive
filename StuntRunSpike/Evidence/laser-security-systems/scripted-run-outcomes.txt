@@ -1,0 +1,66 @@
+t=  11.17 s=2 laser script step 1/18: HIGH BEAM (single duck): both duck → TEAM DODGE
+t=  16.96 s=2 laser #1: PARENT ducked clear (+1)
+t=  17.06 s=2 laser #1: CHILD ducked clear (+1)
+t=  17.06 s=2 laser #1: TEAM (+1 bonus); alert 0.00
+t=  21.57 s=2 laser script step 2/18: FLOOR LASER: Child's tracking lost on the approach → withdrawn → READY → resume
+t=  24.97 s=2 laser #2: withdrawn (game halted)
+t=  27.56 s=2 laser script step 3/18: FLOOR LASER again (single jump, retried): both jump → TEAM DODGE
+t=  33.45 s=2 laser #3: PARENT jumped clear (+1)
+t=  33.50 s=2 laser #3: CHILD jumped clear (+1)
+t=  33.50 s=2 laser #3: TEAM (+1 bonus); alert 0.00
+t=  44.39 s=2 laser #4: PARENT ZAPPED
+t=  44.39 s=2 laser #4: CHILD ZAPPED
+t=  44.39 s=2 laser #4: partial: clear [] zapped [CHILD,PARENT]; alert 0.36
+t=  51.34 s=2 laser script step 5/18: TURRET SWEEP wave (high): Parent's lane first, Child's 0.9 s later; each ducks as it passes → TEAM
+t=  57.25 s=2 laser #5: PARENT ducked clear (+1)
+t=  58.15 s=2 laser #5: CHILD ducked clear (+1)
+t=  58.15 s=2 laser #5: TEAM (+1 bonus); alert 0.28
+t=  66.74 s=2 laser script step 7/18: DOUBLE PULSE 2/2: Parent still in the same squat → no credit; Child stands and ducks again → partial
+t=  69.73 s=2 laser #6: PARENT ducked clear (+1)
+t=  69.83 s=2 laser #6: CHILD ducked clear (+1)
+t=  69.83 s=2 laser #6: TEAM (+1 bonus); alert 0.20
+t=  72.60 s=2 laser #7: CHILD ducked clear (+1)
+t=  73.18 s=2 laser #7: PARENT ZAPPED (still holding an earlier squat: no credit)
+t=  73.18 s=2 laser #7: partial: clear [CHILD] zapped [PARENT]; alert 0.38
+t=  73.18 s=2 laser sequence DOUBLE PULSE: PARENT 1/2 · CHILD 2/2
+t=  77.01 s=2 laser script step 8/18: SPLIT GRID (Parent high): pause during the WARNING → withdrawn, resume
+t=  78.01 s=2 laser #8: withdrawn (game halted)
+t=  86.43 s=2 laser #9: PARENT ducked clear (+1)
+t=  86.48 s=2 laser #9: CHILD jumped clear (+1)
+t=  86.48 s=2 laser #9: TEAM (+1 bonus); alert 0.30
+t=  96.95 s=2 laser #10: CHILD ducked clear (+1)
+t=  97.00 s=2 laser #10: PARENT ducked clear (+1)
+t=  97.00 s=2 laser #10: TEAM (+1 bonus); alert 0.22
+t=  97.19 s=2 laser script step 12/18: COMBO 3/3 (DUCK): Parent ducks, Child squats TOO EARLY → partial (combo 2/3)
+t= 100.06 s=2 laser #11: CHILD jumped clear (+1)
+t= 100.06 s=2 laser #11: PARENT jumped clear (+1)
+t= 100.06 s=2 laser #11: TEAM (+1 bonus); alert 0.14
+t= 103.03 s=2 laser #12: PARENT ducked clear (+1)
+t= 103.61 s=2 laser #12: CHILD ZAPPED (too early)
+t= 103.61 s=2 laser #12: partial: clear [PARENT] zapped [CHILD]; alert 0.32
+t= 103.61 s=2 laser sequence COMBO: PARENT 3/3 · CHILD 2/3
+t= 116.39 s=2 laser #13: PARENT ducked clear (+1)
+t= 116.44 s=2 laser #13: CHILD jumped clear (+1)
+t= 116.44 s=2 laser #13: TEAM (+1 bonus); alert 0.24
+t= 119.40 s=2 laser #14: CHILD ducked clear (+1)
+t= 119.45 s=2 laser #14: PARENT jumped clear (+1)
+t= 119.45 s=2 laser #14: TEAM (+1 bonus); alert 0.16
+t= 119.45 s=2 laser sequence CROSSFIRE: COMBO CLEARED (+2 team bonus)
+t= 129.97 s=2 laser #15: PARENT ducked clear (+1)
+t= 130.02 s=2 laser #15: CHILD ducked clear (+1)
+t= 130.02 s=2 laser #15: TEAM (+1 bonus); alert 0.08
+t= 133.07 s=2 laser #16: PARENT jumped clear (+1)
+t= 133.11 s=2 laser #16: CHILD jumped clear (+1)
+t= 133.11 s=2 laser #16: TEAM (+1 bonus); alert 0.00
+t= 136.09 s=2 laser #17: PARENT jumped clear (+1)
+t= 136.09 s=2 laser #17: CHILD ducked clear (+1)
+t= 136.09 s=2 laser #17: TEAM (+1 bonus); alert 0.00
+t= 136.09 s=2 laser sequence GAUNTLET: COMBO CLEARED (+3 team bonus)
+t= 159.56 s=2 laser: ESCAPED — dodges 26/30, team dodges 12, alert 0.00
+t= 182.81 s=3 laser #1: CHILD ducked clear (+1)
+t= 182.86 s=3 laser #1: PARENT ducked clear (+1)
+t= 182.86 s=3 laser #1: TEAM (+1 bonus); alert 0.00
+t= 184.46 s=3 laser script finished
+t= 193.26 s=3 laser #2: PARENT jumped clear (+1)
+t= 193.91 s=3 laser #2: CHILD ZAPPED
+t= 193.91 s=3 laser #2: partial: clear [PARENT] zapped [CHILD]; alert 0.18

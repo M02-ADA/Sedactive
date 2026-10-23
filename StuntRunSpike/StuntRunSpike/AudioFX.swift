@@ -6,6 +6,11 @@ final class AudioFX {
     enum Sound: CaseIterable {
         case tick, whoosh, lock, chime, pop, team, bonk, turbo, impact, shatter, caw, splash, creak, growl, chomp, gurgle, hiss, flutter, rumble, knock, roll, swish, slap
         case boil, leap, snap, hop, land, nip
+        case siren, zap, beamOn, doorSlam, alarmOff
+        case thrust, touchdown
+        case countBeep, launchRoar, overtake, phaseUp, sprintHorn, victory
+        case servo, clunk, hydraulic, droneChirp
+        case laserWarn, deploy, chargeHigh, chargeLow, ignite, passBy, powerDown, sweepScan, comboStep
     }
 
     private let engine = AVAudioEngine()
@@ -20,6 +25,21 @@ final class AudioFX {
     /// Looping jungle bed (insects, distant birds, water), on its own voice under the SFX.
     private let ambience = AVAudioPlayerNode()
     private var ambienceBuffer: AVAudioPCMBuffer?
+    // Adaptive music (Moonbound): four sample-locked stems on their own bus, crossfaded by gameplay intensity, plus a
+    // looping engine roar. Vertical layering: the arrangement thickens as the race heats up.
+    private let musicBus = AVAudioMixerNode()
+    private var stems: [AVAudioPlayerNode] = []
+    private var stemLevels: [Float] = [0, 0, 0, 0]
+    private var stemTargets: [Float] = [0, 0, 0, 0]
+    private let engineLoop = AVAudioPlayerNode()
+    private var engineLevel: Float = 0
+    private var duckUntil: TimeInterval = 0
+    private(set) var musicPlaying = false
+    /// Laser hums (one per beam height, distinct timbres), looping at zero volume until a beam is live.
+    private let humHigh = AVAudioPlayerNode()
+    private let humLow = AVAudioPlayerNode()
+    private var humsStarted = false
+    private var humLevels: (high: Float, low: Float) = (0, 0)
 
     init() {
         let session = AVAudioSession.sharedInstance()
@@ -36,6 +56,24 @@ final class AudioFX {
         }
         engine.attach(ambience)
         engine.connect(ambience, to: sfxBus, format: format)
+        engine.attach(musicBus)
+        engine.connect(musicBus, to: engine.mainMixerNode, format: format)
+        for _ in 0..<4 {
+            let stem = AVAudioPlayerNode()
+            engine.attach(stem)
+            engine.connect(stem, to: musicBus, format: format)
+            stem.volume = 0
+            stems.append(stem)
+        }
+        engine.attach(engineLoop)
+        engine.connect(engineLoop, to: sfxBus, format: format)
+        engineLoop.volume = 0
+        for hum in [humHigh, humLow] {
+            engine.attach(hum)
+            engine.connect(hum, to: sfxBus, format: format)
+            hum.volume = 0
+        }
+        musicBus.outputVolume = Self.gain(dB: -9)
         // Headroom: the bus sits at -4 dB so stacked team effects do not clip.
         sfxBus.outputVolume = Self.gain(dB: -4)
         synthesizeAll()
@@ -56,7 +94,196 @@ final class AudioFX {
         ambience.play()
     }
 
-    func stopAmbience() { ambience.stop() }
+    func stopAmbience() { ambience.stop(); stopMusic() }
+
+    // MARK: - Adaptive music
+
+    enum MusicStyle { case moon, heist }
+    private var musicBuffers: [AVAudioPCMBuffer]?
+    private var musicStyle: MusicStyle = .moon
+    private var engineBuffer: AVAudioPCMBuffer?
+
+    /// Starts the four stems together (sample-locked to one start time) and the engine loop. The stems are
+    /// synthesized once (~0.1 s) at mode start, before the countdown.
+    func startMusic(style: MusicStyle = .moon) {
+        guard engine.isRunning, !musicPlaying else { return }
+        musicPlaying = true
+        if musicBuffers == nil || musicStyle != style { musicBuffers = style == .heist ? makeHeistStems() : makeMusicStems(); musicStyle = style }
+        if engineBuffer == nil { engineBuffer = makeEngineLoop() }
+        guard let buffers = musicBuffers, let roar = engineBuffer else { return }
+        let start = AVAudioTime(hostTime: mach_absolute_time() + AVAudioTime.hostTime(forSeconds: 0.15))
+        for (stem, buffer) in zip(stems, buffers) {
+            stem.scheduleBuffer(buffer, at: nil, options: [.loops])
+            stem.play(at: start)
+        }
+        engineLoop.scheduleBuffer(roar, at: nil, options: [.loops])
+        engineLoop.play()
+    }
+
+    func stopMusic() {
+        musicPlaying = false
+        stems.forEach { $0.stop() }
+        engineLoop.stop()
+    }
+
+    /// Per frame. `intensity` 0 … 1 (speed + race heat) thickens the drive layer; `close` brings in the arpeggio;
+    /// `sprint` the final-sprint layer; `engine` 0 … 1 the roar. Levels glide (no zipper noise).
+    func updateMusic(dt: Double, intensity: Float, close: Bool, sprint: Bool, engine: Float, now: TimeInterval) {
+        guard musicPlaying else { return }
+        let duck: Float = now < duckUntil ? Self.gain(dB: -7) : 1
+        let mute: Float = isMuted ? 0 : 1
+        stemTargets = [0.9, min(1, 0.25 + intensity), close || intensity > 0.65 ? 0.8 : 0.1, sprint ? 1 : 0]
+        let k = Float(min(1, dt * 2.5))
+        for i in 0..<4 {
+            stemLevels[i] += (stemTargets[i] - stemLevels[i]) * k
+            stems[i].volume = stemLevels[i] * duck * mute
+        }
+        engineLevel += (engine - engineLevel) * Float(min(1, dt * 6))
+        engineLoop.volume = Self.gain(dB: -16) * (0.25 + 0.75 * engineLevel) * mute
+    }
+
+    /// Live beam hum per height (0 … 1 each, from beam proximity and intensity). Levels glide; silent when muted.
+    func setLaserHum(high: Float, low: Float, dt: Double) {
+        guard engine.isRunning else { return }
+        if !humsStarted, high > 0 || low > 0 {
+            humsStarted = true
+            humHigh.scheduleBuffer(makeHum(base: 118, buzz: 0.35), at: nil, options: [.loops])
+            humLow.scheduleBuffer(makeHum(base: 74, buzz: 0.6), at: nil, options: [.loops])
+            humHigh.play(); humLow.play()
+        }
+        let k = Float(min(1, dt * 8))
+        humLevels.high += (high - humLevels.high) * k
+        humLevels.low += (low - humLevels.low) * k
+        let mute: Float = isMuted ? 0 : 1
+        humHigh.volume = Self.gain(dB: -14) * humLevels.high * mute
+        humLow.volume = Self.gain(dB: -12) * humLevels.low * mute
+    }
+
+    /// An electrical hum: a buzzy fundamental with a slow beating partial; whole cycles in 2 s so it loops cleanly.
+    private func makeHum(base: Double, buzz: Double) -> AVAudioPCMBuffer {
+        render(2.0) { t in
+            let f = base
+            let tone = sin(2 * .pi * f * t) + buzz * sin(2 * .pi * f * 3 * t) + 0.25 * sin(2 * .pi * (f * 2 + 1) * t)
+            let mains = 0.15 * sin(2 * .pi * 100 * t)
+            return tanh(1.6 * tone) * 0.4 * (0.8 + 0.2 * sin(2 * .pi * 3 * t)) + mains
+        }
+    }
+
+    /// Dips the music under an announcement or a big stinger.
+    func duckMusic(for seconds: Double, now: TimeInterval) { duckUntil = max(duckUntil, now + seconds) }
+
+    private func makeMusicStems() -> [AVAudioPCMBuffer] {
+        // 128 BPM, 4 bars of 4/4 = 7.5 s. Progression (A minor): Am – F – C – G, one chord per bar.
+        let beat = 60.0 / 128, bar = beat * 4, length = bar * 4
+        let roots = [110.0, 87.31, 130.81, 98.0]
+        let chords: [[Double]] = [[220, 261.63, 329.63], [174.61, 220, 261.63], [261.63, 329.63, 392], [196, 246.94, 293.66]]
+        func chordIndex(_ t: Double) -> Int { min(3, Int(t / bar)) }
+        // Base: kick on every beat + a gliding saw bass (8ths).
+        let base = render(length) { t in
+            let bt = t.truncatingRemainder(dividingBy: beat)
+            let kick = sin(2 * .pi * (48 + 110 * exp(-bt * 30)) * bt) * exp(-bt * 9) * 0.9
+            let f = roots[chordIndex(t)] / 2
+            let et = t.truncatingRemainder(dividingBy: beat / 2)
+            let phase = (f * t).truncatingRemainder(dividingBy: 1)
+            let bass = (2 * phase - 1) * 0.35 * exp(-et * 5) * min(1, et * 80)
+            return kick + bass
+        }
+        // Drive: off-beat hats + snare on 2 and 4.
+        var noise = SeededGenerator(seed: 11)
+        let drive = render(length) { t in
+            let ht = t.truncatingRemainder(dividingBy: beat / 2)
+            let hat = (noise.next() * 2 - 1) * exp(-ht * 70) * 0.28 * (Int(t / (beat / 2)) % 2 == 1 ? 1 : 0.4)
+            let bt = t.truncatingRemainder(dividingBy: beat * 2)
+            let snare = bt > beat ? ((noise.next() * 2 - 1) * 0.5 + sin(2 * .pi * 190 * (bt - beat)) * 0.4) * exp(-(bt - beat) * 14) : 0
+            return hat + snare * 0.8
+        }
+        // Lead: a bright 16th-note arpeggio over the chord.
+        let lead = render(length) { t in
+            let s = beat / 4
+            let n = Int(t / s)
+            let chord = chords[chordIndex(t)]
+            let f = chord[n % 3] * (n % 8 >= 6 ? 2 : 1)
+            let lt = t.truncatingRemainder(dividingBy: s)
+            let sq = sin(2 * .pi * f * t) + 0.3 * sin(2 * .pi * f * 3 * t)
+            return sq * exp(-lt * 18) * 0.22
+        }
+        // Sprint: 16th hats, a bass octave stab and a rising riser across the loop.
+        var noise2 = SeededGenerator(seed: 23)
+        let sprint = render(length) { t in
+            let s = beat / 4
+            let ht = t.truncatingRemainder(dividingBy: s)
+            let hat = (noise2.next() * 2 - 1) * exp(-ht * 90) * 0.22
+            let f = roots[chordIndex(t)]
+            let bt = t.truncatingRemainder(dividingBy: beat)
+            let stab = sin(2 * .pi * f * t) * exp(-bt * 7) * 0.25
+            let x = t.truncatingRemainder(dividingBy: bar) / bar
+            let riser = sin(2 * .pi * (400 + 900 * x) * t) * 0.05 * x
+            return hat + stab + riser
+        }
+        return [base, drive, lead, sprint]
+    }
+
+    /// Heist score: 112 BPM, E minor (Em – C – Am – B), a walking bass and rim clicks under a minor spy riff.
+    /// Stems: base (bass + kick), drive (hats + rim), lead (the riff), sprint (driving 16ths + brass-like stabs).
+    private func makeHeistStems() -> [AVAudioPCMBuffer] {
+        let beat = 60.0 / 112, bar = beat * 4, length = bar * 4
+        let roots = [82.41, 65.41, 110.0, 61.74]
+        func chordIndex(_ t: Double) -> Int { min(3, Int(t / bar)) }
+        let walk = [1.0, 1.5, 2.0, 1.5]
+        let base = render(length) { t in
+            let bt = t.truncatingRemainder(dividingBy: beat)
+            let kick = Int(t / beat) % 2 == 0 ? sin(2 * .pi * (45 + 100 * exp(-bt * 32)) * bt) * exp(-bt * 10) * 0.85 : 0
+            let step = Int(t / (beat / 2)) % 4
+            let f = roots[chordIndex(t)] * walk[step]
+            let et = t.truncatingRemainder(dividingBy: beat / 2)
+            let bass = (sin(2 * .pi * f * t) + 0.35 * sin(2 * .pi * f * 2 * t)) * exp(-et * 6) * 0.4 * min(1, et * 90)
+            return kick + bass
+        }
+        var noise = SeededGenerator(seed: 41)
+        let drive = render(length) { t in
+            let ht = t.truncatingRemainder(dividingBy: beat / 2)
+            let hat = (noise.next() * 2 - 1) * exp(-ht * 80) * 0.22
+            let rt = t.truncatingRemainder(dividingBy: beat * 2)
+            let rim = rt > beat ? sin(2 * .pi * 1700 * (rt - beat)) * exp(-(rt - beat) * 60) * 0.35 : 0
+            return hat + rim
+        }
+        // A sly minor riff (E minor pentatonic with a chromatic step), one phrase per bar.
+        let riff: [Double] = [329.63, 392.0, 369.99, 329.63, 293.66, 329.63, 0, 246.94]
+        let lead = render(length) { t in
+            let s = beat / 2
+            let n = Int(t / s) % riff.count
+            let f = riff[n] * (chordIndex(t) == 3 ? 1.06 : 1)
+            guard f > 0 else { return 0 }
+            let lt = t.truncatingRemainder(dividingBy: s)
+            let tone = sin(2 * .pi * f * t + 0.8 * sin(2 * .pi * f * 2 * t))
+            return tone * exp(-lt * 7) * 0.2 * min(1, lt * 120)
+        }
+        var noise2 = SeededGenerator(seed: 59)
+        let sprint = render(length) { t in
+            let s = beat / 4
+            let ht = t.truncatingRemainder(dividingBy: s)
+            let hat = (noise2.next() * 2 - 1) * exp(-ht * 95) * 0.2
+            let f = roots[chordIndex(t)] * 4
+            let bt = t.truncatingRemainder(dividingBy: beat)
+            let saw = 2 * ((f * t).truncatingRemainder(dividingBy: 1)) - 1
+            let stab = Int(t / beat) % 4 == 3 ? tanh(2 * saw) * exp(-bt * 9) * 0.18 : 0
+            return hat + stab
+        }
+        return [base, drive, lead, sprint]
+    }
+
+    private func makeEngineLoop() -> AVAudioPCMBuffer {
+        var low = 0.0, lower = 0.0
+        var rng = SeededGenerator(seed: 5)
+        return render(2.0) { t in
+            low += ((rng.next() * 2 - 1) - low) * 0.08
+            lower += (low - lower) * 0.25
+            let throb = 0.75 + 0.25 * sin(2 * .pi * 11 * t)
+            // Fade the loop's ends into each other so it never clicks.
+            let edge = min(1, min(t, 2 - t) / 0.05)
+            return (lower * 3.0 * throb + sin(2 * .pi * 42 * t) * 0.15) * edge
+        }
+    }
 
     private func makeAmbience() -> AVAudioPCMBuffer {
         var rng = SeededGenerator(seed: 99)
@@ -76,8 +303,10 @@ final class AudioFX {
         }
     }
 
-    func play(_ sound: Sound, dB: Float = 0) {
-        guard !isMuted, engine.isRunning, let buffer = buffers[sound]?.randomElement() else { return }
+    /// `variant`: a specific pitch variant (e.g. a rising step in a combo); random when nil.
+    func play(_ sound: Sound, dB: Float = 0, variant: Int? = nil) {
+        guard !isMuted, engine.isRunning, let set = buffers[sound], !set.isEmpty else { return }
+        let buffer = variant.map { set[min(max(0, $0), set.count - 1)] } ?? set.randomElement()!
         let voice = voices[nextVoice]
         nextVoice = (nextVoice + 1) % voices.count
         voice.volume = Self.gain(dB: dB)
@@ -309,6 +538,208 @@ final class AudioFX {
                 let body = sin(2 * .pi * 140 * p * t) * exp(-t * 30)
                 return (low * exp(-t * 28) * 0.9 + body * 0.5)
             }
+        }
+        // Laser Breakout. A playful two-tone heist siren (never a harsh emergency wail), an electric zap, the hum of
+        // emitters charging, a heavy blast-door slam and a falling "all clear" when the alarm shuts off.
+        buffers[.siren] = [render(1.3) { t in
+            let f = (t.truncatingRemainder(dividingBy: 0.5) < 0.25) ? 880.0 : 660.0
+            let tone = sin(2 * .pi * f * t) + 0.35 * sin(2 * .pi * f * 2 * t)
+            return tanh(1.4 * tone) * 0.22 * min(1, t / 0.03) * min(1, (1.3 - t) / 0.15)
+        }]
+        buffers[.zap] = [1.0, 1.12, 0.9].map { p in
+            var phase = 0.0
+            return render(0.28) { t in
+                let f = (1800 - 1500 * min(1, t / 0.25)) * p
+                phase += f / 44_100
+                let saw = 2 * (phase - floor(phase + 0.5))
+                let crackle = Double.random(in: -1...1) * (sin(2 * .pi * 60 * t) > 0.3 ? 0.5 : 0.1)
+                return (saw * 0.45 + crackle * 0.35) * exp(-t * 9)
+            }
+        }
+        buffers[.beamOn] = [1.0, 1.06].map { p in
+            render(0.55) { t in
+                let f = (220 + 520 * min(1, t / 0.45)) * p
+                let hum = sin(2 * .pi * f * t) * 0.5 + sin(2 * .pi * 120 * t) * 0.2
+                return hum * min(1, t / 0.08) * (t > 0.45 ? max(0, (0.55 - t) / 0.1) : 1) * 0.3
+            }
+        }
+        buffers[.doorSlam] = [1.0, 0.9].map { p in
+            var low = 0.0
+            return render(0.9) { t in
+                low += (Double.random(in: -1...1) - low) * 0.12
+                let boom = sin(2 * .pi * (55 + 40 * exp(-t * 20)) * p * t) * exp(-t * 5)
+                let clang = sin(2 * .pi * 410 * p * t) * exp(-t * 14) * 0.25 + sin(2 * .pi * 633 * p * t) * exp(-t * 18) * 0.15
+                return boom * 0.75 + clang + low * exp(-t * 12) * 0.6
+            }
+        }
+        buffers[.alarmOff] = [render(0.9) { t in
+            let f = 880 - 440 * min(1, t / 0.6)
+            return sin(2 * .pi * f * t) * exp(-t * 3) * 0.3 * min(1, t / 0.02)
+        }]
+        // Moonbound. Thrust: a punchy ignition crack into a rising roar (filtered noise + a low rumble) — one per rep,
+        // with variants so steady squatting never sounds mechanical. Touchdown: a soft heavy thump with a dusty hiss.
+        buffers[.thrust] = [0.92, 1.0, 1.08].map { p in
+            var low = 0.0, lower = 0.0
+            return render(0.8) { t in
+                low += (Double.random(in: -1...1) - low) * (0.25 * p * exp(-t * 3) + 0.05)
+                lower += (low - lower) * 0.3
+                let crack = t < 0.02 ? Double.random(in: -1...1) * (1 - t / 0.02) : 0
+                let rumble = sin(2 * .pi * (48 + 30 * t) * p * t) * 0.5
+                let swell = min(1, t / 0.04) * exp(-t * 3.2)
+                return (lower * 2.6 + rumble) * swell + crack * 0.7
+            }
+        }
+        buffers[.touchdown] = [render(1.0) { t in
+            var v = sin(2 * .pi * (60 + 30 * exp(-t * 14)) * t) * exp(-t * 6) * 0.8
+            v += Double.random(in: -1...1) * exp(-t * 4) * 0.18 * min(1, t / 0.05)
+            return v
+        }]
+        // Moonbound race stingers.
+        buffers[.countBeep] = [render(0.25) { t in sin(2 * .pi * 880 * t) * exp(-t * 14) * 0.5 }]
+        buffers[.launchRoar] = [render(2.4) { t in
+            var v = sin(2 * .pi * (38 + 20 * t) * t) * 0.6 * min(1, t / 0.05) * exp(-t * 0.8)
+            v += Double.random(in: -1...1) * 0.35 * exp(-t * 0.9) * min(1, t / 0.02)
+            return v
+        }]
+        buffers[.overtake] = [1.0, 1.06].map { p in
+            var low = 0.0
+            return render(0.9) { t in
+                let x = t / 0.9
+                low += (Double.random(in: -1...1) - low) * (0.05 + 0.3 * x) * p
+                let sweep = low * sin(.pi * x) * 0.9
+                let stab = t > 0.32 ? [523.25, 659.25, 783.99].reduce(0) { $0 + sin(2 * .pi * $1 * p * (t - 0.32)) } * exp(-(t - 0.32) * 5) * 0.16 : 0
+                return sweep + stab
+            }
+        }
+        buffers[.phaseUp] = [render(1.0) { t in
+            [523.25, 659.25, 783.99, 1046.5].enumerated().reduce(0.0) { sum, n in
+                let lt = t - Double(n.offset) * 0.09
+                return lt < 0 ? sum : sum + sin(2 * .pi * n.element * lt) * exp(-lt * 4) * 0.18
+            }
+        }]
+        buffers[.sprintHorn] = [render(1.2) { t in
+            let f = 220 + 220 * min(1, t / 0.5)
+            let saw = 2 * ((f * t).truncatingRemainder(dividingBy: 1)) - 1
+            return tanh(1.5 * saw) * 0.25 * min(1, t / 0.03) * (t > 0.9 ? max(0, (1.2 - t) / 0.3) : 1)
+        }]
+        buffers[.victory] = [render(2.6) { t in
+            let notes: [(Double, Double)] = [(523.25, 0), (659.25, 0.16), (783.99, 0.32), (1046.5, 0.5), (1318.5, 0.5), (783.99, 0.5)]
+            return notes.reduce(0.0) { sum, n in
+                let lt = t - n.1
+                guard lt >= 0 else { return sum }
+                let env = n.1 < 0.5 ? exp(-lt * 6) : exp(-lt * 1.6)
+                return sum + (sin(2 * .pi * n.0 * lt) + 0.3 * sin(2 * .pi * n.0 * 2 * lt)) * env * 0.15
+            }
+        }]
+        // Heist mechanisms: a servo whine (emitters deploying), a heavy lever/lock clunk, the lockdown gate's
+        // hydraulic hiss-and-rumble, and the drone's little two-note chirp (its mood, not a threat).
+        buffers[.servo] = [1.0, 1.08].map { p in
+            render(0.5) { t in
+                let f = (300 + 500 * min(1, t / 0.35)) * p
+                let whine = sin(2 * .pi * f * t) * 0.25 + sin(2 * .pi * f * 2.01 * t) * 0.08
+                return whine * min(1, t / 0.03) * (t > 0.38 ? max(0, (0.5 - t) / 0.12) : 1)
+            }
+        }
+        buffers[.clunk] = [1.0, 0.9, 1.1].map { p in
+            var low = 0.0
+            return render(0.4) { t in
+                low += (Double.random(in: -1...1) - low) * 0.4
+                let body = sin(2 * .pi * (90 + 60 * exp(-t * 30)) * p * t) * exp(-t * 14)
+                let ring = sin(2 * .pi * 740 * p * t) * exp(-t * 30) * 0.2
+                return body * 0.8 + ring + low * exp(-t * 50) * 0.5
+            }
+        }
+        buffers[.hydraulic] = [render(1.8) { t in
+            var v = Double.random(in: -1...1) * 0.3 * exp(-t * 1.6) * min(1, t / 0.05)
+            v += sin(2 * .pi * (40 + 12 * t) * t) * 0.45 * min(1, t / 0.3) * exp(-t * 0.9)
+            return v
+        }]
+        buffers[.droneChirp] = [1.0, 1.12].map { p in
+            render(0.3) { t in
+                let f = (t < 0.12 ? 1400 : 1050) * p
+                return sin(2 * .pi * f * t) * 0.22 * exp(-(t.truncatingRemainder(dividingBy: 0.12)) * 18)
+            }
+        }
+        // Laser lifecycle: warning beep → deploy (latch + motor) → charge (rising whine; the high beam's is brighter
+        // than the low beam's) → ignition (snap + fizz) → pass-by (doppler zap) → power-down (falling whine);
+        // the sweep's scanning warble and the combo's step beep.
+        buffers[.laserWarn] = [
+            render(0.42) { t in
+                let on = t < 0.12 || (t > 0.2 && t < 0.32)
+                let f = t < 0.16 ? 1560.0 : 1170.0
+                return on ? sin(2 * .pi * f * t) * 0.28 * (0.6 + 0.4 * sin(2 * .pi * 2 * f * t)) : 0
+            },
+            // Later pulses / steps: three quick rising blips.
+            render(0.4) { t in
+                let k = Int(t / 0.12), lt = t - Double(k) * 0.12
+                guard k < 3, lt < 0.08 else { return 0 }
+                let f = [1560.0, 1860.0, 2090.0][k]
+                return sin(2 * .pi * f * t) * 0.26 * min(1, lt / 0.005) * min(1, (0.08 - lt) / 0.01)
+            },
+        ]
+        buffers[.deploy] = [1.0, 0.94].map { p in
+            var low = 0.0
+            var phase = 0.0
+            return render(0.55) { t in
+                low += (Double.random(in: -1...1) - low) * 0.5
+                let latch = low * exp(-t * 60) * 0.7 + sin(2 * .pi * 1900 * p * t) * exp(-t * 45) * 0.2
+                let mt = max(0, t - 0.06)
+                phase += (180 + 260 * min(1, mt / 0.35)) * p / 44_100
+                let motor = (2 * (phase - floor(phase + 0.5))) * 0.16 * min(1, mt / 0.04) * (mt > 0.38 ? max(0, (0.49 - mt) / 0.11) : 1) * (t > 0.06 ? 1 : 0)
+                let settle = t > 0.47 ? sin(2 * .pi * 120 * p * t) * exp(-(t - 0.47) * 30) * 0.4 : 0
+                return latch + motor + settle
+            }
+        }
+        for (sound, base) in [(Sound.chargeHigh, 520.0), (.chargeLow, 260.0)] {
+            buffers[sound] = [1.0, 1.04].map { p in
+                var phase = 0.0
+                return render(0.75) { t in
+                    let f = base * p * (1 + 2.2 * pow(t / 0.75, 1.6))
+                    phase += f / 44_100
+                    let tone = sin(2 * .pi * phase) + 0.3 * sin(4 * .pi * phase)
+                    let tremolo = 0.7 + 0.3 * sin(2 * .pi * (8 + 30 * t) * t)
+                    return tone * tremolo * 0.22 * min(1, t / 0.1) * min(1, (0.75 - t) / 0.04)
+                }
+            }
+        }
+        buffers[.ignite] = [1.0, 1.1].map { p in
+            var low = 0.0
+            return render(0.4) { t in
+                low += (Double.random(in: -1...1) - low) * 0.6
+                let snap = low * exp(-t * 40) * 0.8
+                let body = sin(2 * .pi * (240 - 120 * min(1, t / 0.2)) * p * t) * exp(-t * 8) * 0.4
+                let fizz = Double.random(in: -1...1) * 0.12 * exp(-t * 6) * (sin(2 * .pi * 90 * t) > 0 ? 1 : 0.3)
+                return snap + body + fizz
+            }
+        }
+        buffers[.passBy] = [0.95, 1.05].map { p in
+            var phase = 0.0
+            var low = 0.0
+            return render(0.5) { t in
+                let x = t / 0.5
+                let f = (900 - 520 * x) * p          // falls as it passes (doppler)
+                phase += f / 44_100
+                low += (Double.random(in: -1...1) - low) * 0.15
+                let env = pow(sin(.pi * min(1, x * 1.6)), 2) * (x < 0.62 ? 1 : max(0, (1 - x) / 0.38))
+                return (2 * (phase - floor(phase + 0.5)) * 0.18 + low * 0.5) * env
+            }
+        }
+        buffers[.powerDown] = [1.0].map { _ in
+            var phase = 0.0
+            return render(0.6) { t in
+                phase += (700 * exp(-t * 4.5) + 40) / 44_100
+                return sin(2 * .pi * phase) * 0.24 * exp(-t * 3) * min(1, t / 0.02)
+            }
+        }
+        buffers[.sweepScan] = [1.0].map { _ in
+            var phase = 0.0
+            return render(1.2) { t in
+                phase += (430 + 160 * sin(2 * .pi * 2.5 * t)) / 44_100
+                return sin(2 * .pi * phase) * 0.18 * min(1, t / 0.1) * min(1, (1.2 - t) / 0.15)
+            }
+        }
+        buffers[.comboStep] = [1.0, 1.122, 1.26].map { p in
+            render(0.16) { t in (sin(2 * .pi * 988 * p * t) + 0.4 * sin(2 * .pi * 1976 * p * t)) * exp(-t * 22) * 0.3 }
         }
         // Hero TEAM DUCK layers. Three seeded variants each so repeated successes never sound identical.
         buffers[.impact] = [0.92, 1.0, 1.08].map { p in

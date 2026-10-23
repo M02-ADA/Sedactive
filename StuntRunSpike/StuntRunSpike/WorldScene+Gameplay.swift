@@ -154,7 +154,7 @@ extension WorldScene {
                 slot.lastLiveSeen = now
                 slot.driver = .live
                 let events = slot.detector.update(pose: pose, at: now)
-                let jumpEvents = gameMode == .jungleDrift ? slot.jump.update(pose: pose, at: now) : []
+                let jumpEvents = gameMode == .jungleDrift || gameMode == .laserBreakout ? slot.jump.update(pose: pose, at: now) : []
                 slots[zone] = slot
                 handle(events, zone: zone, captureTime: snapshot.captureTime)
                 handleJump(jumpEvents, zone: zone, captureTime: snapshot.captureTime)
@@ -236,6 +236,16 @@ extension WorldScene {
             }
             if gameMode == .jungleDrift {
                 handleJungle(event, zone: zone)
+                continue
+            }
+            if gameMode == .moonbound {
+                if event == .repCompleted, let captureTime { meter.recordFeedbackLatency(ms: (now - captureTime) * 1000) }
+                handleMoon(event, zone: zone)
+                continue
+            }
+            if gameMode == .laserBreakout {
+                if event == .descentStarted, let captureTime { meter.recordFeedbackLatency(ms: (now - captureTime) * 1000) }
+                handleLaser(event, zone: zone)
                 continue
             }
             let gate = activeWindowGate()
@@ -583,6 +593,8 @@ extension WorldScene {
         hideTeamLock()
         if encounter != nil { gameLog("encounter withdrawn (game halted)") }
         if gameMode == .jungleDrift { withdrawJungleHazards() }
+        if gameMode == .laserBreakout { withdrawLaserHazards() }
+        if gameMode == .moonbound { withdrawMoon() }
         encounter = nil
         hideIncomingMarker()
     }

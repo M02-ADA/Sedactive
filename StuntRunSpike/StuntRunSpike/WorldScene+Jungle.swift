@@ -4,7 +4,19 @@ import SpriteKit
 nonisolated enum GameMode: String, CaseIterable, Identifiable, Sendable {
     case stuntRun = "Stunt Run"
     case jungleDrift = "Jungle Drift"
+    case laserBreakout = "Laser Breakout"
+    case moonbound = "Moonbound"
     var id: String { rawValue }
+
+    /// `-gameMode jungle|laser` at launch.
+    static var fromLaunchArgument: GameMode {
+        switch UserDefaults.standard.string(forKey: "gameMode") {
+        case "jungle": .jungleDrift
+        case "laser": .laserBreakout
+        case "moon": .moonbound
+        default: .stuntRun
+        }
+    }
 }
 
 /// Bird flock hazard (DUCK). Same phase model as Stunt Run gates (EncounterTiming) and the same TeamChallenge.

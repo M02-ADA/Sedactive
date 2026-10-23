@@ -1,0 +1,83 @@
+[GAME] t=   0.00 real=-1077244.30 s=1 mode: Moonbound (art 14 ms, goal 40 effective reps, co-op window 1.6 s)
+[GAME] t=   0.02 real=   0.09 s=1 state: countdown
+[GAME] t=   0.35 real=   1.40 s=2 replay (moon script start) → session 2
+[GAME] t=   0.38 real=   1.41 s=2 state: countdown
+[GAME] t=   2.66 real=   4.68 s=2 state: running
+[GAME] t=   2.76 real=   4.68 s=2 moon script step 1/10: PARENT squat → left engine fires (solo thrust)
+[GAME] t=   5.26 real=   7.18 s=2 moon: PARENT rep → LEFT engine fires (progress 0.000 → 0.025)
+[GAME] t=   6.76 real=   9.26 s=2 moon script step 2/10: CHILD squat → right engine fires (solo thrust)
+[GAME] t=   8.25 real=  10.75 s=2 moon: CHILD rep → RIGHT engine fires (progress 0.025 → 0.050)
+[GAME] t=  10.17 real=  13.30 s=2 moon script step 3/10: CHILD medium-depth squat → still counts, rated GOOD (not PERFECT)
+[GAME] t=  11.63 real=  15.06 s=2 moon: CHILD rep → RIGHT engine fires (progress 0.050 → 0.075)
+[GAME] t=  13.57 real=  17.65 s=2 moon script step 4/10: BOTH within 0.8 s → one DUAL THRUST bonus
+[GAME] t=  14.95 real=  19.03 s=2 moon: PARENT rep → LEFT engine fires (progress 0.075 → 0.100)
+[GAME] t=  15.75 real=  20.13 s=2 moon: DUAL THRUST (PARENT then CHILD, 0.80 s apart) → bonus; duals 1; progress 0.100 → 0.138
+[GAME] t=  16.10 real=  21.13 s=2 moon phase: SKY ASCENT (altitude 13 units, effective reps 5.5)
+[GAME] t=  17.19 real=  22.51 s=2 moon script step 5/10: PARENT shallow squat → no thrust (sputter)
+[GAME] t=  18.57 real=  23.90 s=2 moon: PARENT shallow squat — engine sputters, no thrust
+[GAME] t=  20.20 real=  25.81 s=2 moon script step 6/10: CHILD holds a squat for 6 s → exactly one thrust, on standing
+[GAME] t=  27.42 real=  33.98 s=2 moon: CHILD rep → RIGHT engine fires (progress 0.138 → 0.163)
+[GAME] t=  29.21 real=  36.06 s=2 moon script step 7/10: PARENT squat, then PAUSE mid-climb → frozen; resume
+[GAME] t=  30.59 real=  37.75 s=2 moon: PARENT rep → LEFT engine fires (progress 0.163 → 0.188)
+[GAME] t=  30.61 real=  37.76 s=2 pause (moon script)
+[GAME] t=  30.61 real=  37.78 s=2 state: paused
+[GAME] t=  30.61 real=  39.76 s=2 resume (moon script)
+[GAME] t=  30.63 real=  39.78 s=2 state: countdown
+[GAME] t=  32.96 real=  42.76 s=2 state: running
+[GAME] t=  34.22 real=  44.31 s=2 moon script step 8/10: CHILD tracking lost → halt → READY → resume (no altitude lost)
+[GAME] t=  34.84 real=  44.93 s=2 debug: CHILD tracking OFF (simulated)
+[GAME] t=  35.44 real=  45.53 s=2 CHILD tracking LOST
+[GAME] t=  35.44 real=  45.55 s=2 state: tracking lost (CHILD)
+[GAME] t=  35.44 real=  47.55 s=2 debug: CHILD tracking ON (simulated)
+[GAME] t=  35.44 real=  47.56 s=2 CHILD tracking recovered
+[GAME] t=  35.44 real=  47.58 s=2 state: ready (waiting for explicit resume)
+[GAME] t=  35.44 real=  49.05 s=2 resume (moon script)
+[GAME] t=  35.45 real=  49.06 s=2 state: countdown
+[GAME] t=  37.86 real=  52.06 s=2 state: running
+[GAME] t=  38.23 real=  52.41 s=2 moon script step 9/10: Climb to the Moon: paired squats every 3 s (Parent, Child 0.7 s later)
+[GAME] t=  39.82 real=  54.41 s=2 moon: PARENT rep → LEFT engine fires (progress 0.188 → 0.212)
+[GAME] t=  40.54 real=  55.41 s=2 moon: DUAL THRUST (PARENT then CHILD, 0.72 s apart) → bonus; duals 2; progress 0.212 → 0.250
+[GAME] t=  42.85 real=  58.33 s=2 moon: PARENT rep → LEFT engine fires (progress 0.250 → 0.275)
+[GAME] t=  43.55 real=  59.31 s=2 moon: DUAL THRUST (PARENT then CHILD, 0.71 s apart) → bonus; duals 3; progress 0.275 → 0.312
+[GAME] t=  45.86 real=  62.25 s=2 moon: PARENT rep → LEFT engine fires (progress 0.312 → 0.338)
+[GAME] t=  46.57 real=  63.55 s=2 moon: DUAL THRUST (PARENT then CHILD, 0.71 s apart) → bonus; duals 4; progress 0.338 → 0.375
+[GAME] t=  48.87 real=  66.08 s=2 moon: PARENT rep → LEFT engine fires (progress 0.375 → 0.400)
+[GAME] t=  49.58 real=  67.45 s=2 moon: DUAL THRUST (PARENT then CHILD, 0.72 s apart) → bonus; duals 5; progress 0.400 → 0.438
+[GAME] t=  49.91 real=  68.05 s=2 moon phase: UPPER ATMOSPHERE (altitude 107 units, effective reps 17.5)
+[GAME] t=  51.88 real=  70.56 s=2 moon: PARENT rep → LEFT engine fires (progress 0.438 → 0.463)
+[GAME] t=  52.57 real=  71.53 s=2 moon: DUAL THRUST (PARENT then CHILD, 0.69 s apart) → bonus; duals 6; progress 0.463 → 0.500
+[GAME] t=  54.89 real=  74.43 s=2 moon: PARENT rep → LEFT engine fires (progress 0.500 → 0.525)
+[GAME] t=  55.59 real=  75.40 s=2 moon: DUAL THRUST (PARENT then CHILD, 0.70 s apart) → bonus; duals 7; progress 0.525 → 0.562
+[GAME] t=  57.90 real=  78.26 s=2 moon: PARENT rep → LEFT engine fires (progress 0.562 → 0.588)
+[GAME] t=  58.62 real=  79.26 s=2 moon: DUAL THRUST (PARENT then CHILD, 0.72 s apart) → bonus; duals 8; progress 0.588 → 0.625
+[GAME] t=  59.25 real=  80.43 s=2 moon phase: OUTER SPACE (altitude 317 units, effective reps 25.0)
+[GAME] t=  60.90 real=  82.38 s=2 moon: PARENT rep → LEFT engine fires (progress 0.625 → 0.650)
+[GAME] t=  61.61 real=  83.65 s=2 moon: DUAL THRUST (PARENT then CHILD, 0.71 s apart) → bonus; duals 9; progress 0.650 → 0.688
+[GAME] t=  64.00 real=  86.60 s=2 moon: PARENT rep → LEFT engine fires (progress 0.688 → 0.713)
+[GAME] t=  64.61 real=  87.50 s=2 moon: DUAL THRUST (PARENT then CHILD, 0.62 s apart) → bonus; duals 10; progress 0.713 → 0.750
+[GAME] t=  66.91 real=  90.35 s=2 moon: PARENT rep → LEFT engine fires (progress 0.750 → 0.775)
+[GAME] t=  67.63 real=  91.33 s=2 moon: DUAL THRUST (PARENT then CHILD, 0.72 s apart) → bonus; duals 11; progress 0.775 → 0.812
+[GAME] t=  69.91 real=  94.21 s=2 moon: PARENT rep → LEFT engine fires (progress 0.812 → 0.838)
+[GAME] t=  70.63 real=  95.23 s=2 moon: DUAL THRUST (PARENT then CHILD, 0.71 s apart) → bonus; duals 12; progress 0.838 → 0.875
+[GAME] t=  70.99 real=  95.86 s=2 moon phase: MOON APPROACH (altitude 1087 units, effective reps 35.0)
+[GAME] t=  72.93 real=  98.38 s=2 moon: PARENT rep → LEFT engine fires (progress 0.875 → 0.900)
+[GAME] t=  73.64 real=  99.40 s=2 moon: DUAL THRUST (PARENT then CHILD, 0.71 s apart) → bonus; duals 13; progress 0.900 → 0.938
+[GAME] t=  75.93 real= 102.26 s=2 moon: PARENT rep → LEFT engine fires (progress 0.938 → 0.963)
+[GAME] t=  76.65 real= 103.58 s=2 moon: DUAL THRUST (PARENT then CHILD, 0.71 s apart) → bonus; duals 14; progress 0.963 → 1.000
+[GAME] t=  78.11 real= 105.31 s=2 moon: ARRIVED at the Moon (reps P 16 · C 17, duals 14)
+[GAME] t=  79.92 real= 107.70 s=2 moon: landing burn
+[GAME] t=  82.91 real= 111.16 s=2 moon: TOUCHDOWN — flag planted
+[GAME] t=  90.11 real= 119.63 s=2 moon: trip complete
+[GAME] t=  90.11 real= 119.63 s=3 replay (moon script (after touchdown)) → session 3
+[GAME] t=  90.11 real= 119.63 s=3 moon script step 10/10: new trip: PARENT squat → fresh counters
+[GAME] t=  90.13 real= 119.65 s=3 state: countdown
+[GAME] t=  92.30 real= 122.76 s=3 state: running
+[GAME] t=  95.59 real= 126.28 s=3 moon: PARENT rep → LEFT engine fires (progress 0.000 → 0.025)
+[GAME] t=  96.93 real= 127.91 s=3 moon script: all steps done
+[GAME] t=  96.93 real= 127.91 s=3 moon script finished
+[GAME] t=  99.05 real= 130.33 s=3 moon: PARENT rep → LEFT engine fires (progress 0.025 → 0.050)
+[GAME] t=  99.63 real= 131.23 s=3 moon: DUAL THRUST (PARENT then CHILD, 0.58 s apart) → bonus; duals 1; progress 0.050 → 0.087
+[GAME] t= 101.78 real= 134.08 s=3 moon: PARENT rep → LEFT engine fires (progress 0.087 → 0.113)
+[GAME] t= 102.32 real= 134.93 s=3 moon: DUAL THRUST (PARENT then CHILD, 0.54 s apart) → bonus; duals 2; progress 0.113 → 0.150
+[GAME] t= 102.57 real= 135.53 s=3 moon phase: SKY ASCENT (altitude 13 units, effective reps 6.0)
+[GAME] t= 104.95 real= 138.55 s=3 moon: PARENT rep → LEFT engine fires (progress 0.150 → 0.175)

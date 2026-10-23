@@ -273,9 +273,9 @@ extension WorldScene {
             pad.xScale = 1 + 0.22 * depth
             pad.yScale = 1 + 0.22 * depth
             pad.alpha = slot.driver == .absent ? 0.35 + 0.25 * sin(CGFloat(now) * 4) : 0.75 + 0.25 * depth
-            pad.isHidden = false
+            pad.isHidden = gameMode == .moonbound || gameMode == .laserBreakout   // the rocket deck / cart lanes are the standing zone there
             padLabels[zone]?.position = CGPoint(x: slot.footPoint.x, y: slot.footPoint.y - pad.size.height * 0.62)
-            padLabels[zone]?.isHidden = slot.footPoint.y - pad.size.height * 0.62 < 10
+            padLabels[zone]?.isHidden = gameMode == .moonbound || gameMode == .laserBreakout || slot.footPoint.y - pad.size.height * 0.62 < 10
 
             if let cue = hudNodes.cues[zone], !cue.isHidden {
                 cue.position = CGPoint(x: slot.headPoint.x, y: min(size.height - 150, slot.headPoint.y + 50))
@@ -470,6 +470,14 @@ extension WorldScene {
     /// Meter full: a longer surge plus an environment transition (dusk ↔ night).
     func turbo() {
         updateMeter(animated: true)
+        if gameMode == .laserBreakout {
+            showBanner("GHOST MODE!", sub: "Team power full — the cameras lose you", color: VaultPalette.cyan, hold: 1.4)
+            audio.play(.turbo, dB: -6)
+            laserRuntime.flash = reduceMotion ? 0.4 : 1
+            gameLog("GHOST MODE (team power full)")
+            captureEvent("l-ghost-mode", after: 0.6)
+            return
+        }
         if gameMode == .jungleDrift {
             showBanner("RIVER SPIRIT!", sub: "Team power full — the jungle cheers you on", color: Palette.yellow, hold: 1.4)
             audio.play(.turbo, dB: -6)
@@ -494,10 +502,10 @@ extension WorldScene {
 
     // MARK: - Effect helpers
 
-    func showBanner(_ text: String, sub: String?, color: UIColor, hold: TimeInterval?) {
+    func showBanner(_ text: String, sub: String?, color: UIColor, hold: TimeInterval?, size fontSize: CGFloat = 76) {
         let banner = hudNodes.banner, subBanner = hudNodes.subBanner
         banner.removeAllActions(); subBanner.removeAllActions()
-        banner.attributedText = arcadeText(text, size: 76, color: color, strokeWidth: -4)
+        banner.attributedText = arcadeText(text, size: fontSize, color: color, strokeWidth: -4)
         subBanner.attributedText = sub.map { arcadeText($0, size: 26, color: .white, strokeWidth: -5) }
         let appear: SKAction = reduceMotion
             ? .sequence([.scale(to: 1, duration: 0), .fadeIn(withDuration: 0.15)])

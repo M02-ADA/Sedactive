@@ -1,0 +1,35 @@
+[GAME] t=   0.00 real=-1071200.67 s=1 mode: Laser Breakout (art 8 ms)
+[GAME] t=   0.02 real=   0.13 s=1 state: countdown
+[GAME] t=   0.33 real=   1.37 s=2 replay (laser script start) → session 2
+[GAME] t=   0.35 real=   1.38 s=2 state: countdown
+[GAME] t=   2.73 real=   4.60 s=2 state: running
+[GAME] t=   4.35 real=   6.12 s=2 laser phase: ALARM TRIGGERED
+[GAME] t=   8.45 real=  10.98 s=2 laser script step 1/13: HIGH BEAM: both duck → TEAM DODGE
+[GAME] t=   8.45 real=  10.98 s=2 laser #1: warning highBeam (nothing visible yet)
+[GAME] t=   9.37 real=  12.15 s=2 laser: blast doors slam shut behind the cart
+[GAME] t=  10.25 real=  13.03 s=2 laser #1: gate revealed (beams at P 0.94 / C 0.66 units)
+[GAME] t=  13.18 real=  16.48 s=2 laser #1: cue, crossing in 1.39 s
+[GAME] t=  14.24 real=  18.07 s=2 laser #1: PARENT ducked clear (+1)
+[GAME] t=  14.34 real=  18.17 s=2 laser #1: CHILD ducked clear (+1)
+[GAME] t=  14.34 real=  18.17 s=2 laser #1: TEAM (+1 bonus); alert 0.00
+[GAME] t=  18.64 real=  23.83 s=2 laser script step 2/13: FLOOR LASER: both jump → TEAM DODGE
+[GAME] t=  18.64 real=  23.83 s=2 laser #2: warning floorSweep (nothing visible yet)
+[GAME] t=  20.45 real=  25.88 s=2 laser #2: gate revealed (beams at P 0.13 / C 0.13 units)
+[GAME] t=  23.38 real=  29.32 s=2 laser #2: cue, crossing in 1.38 s
+[GAME] t=  24.54 real=  30.97 s=2 PARENT jump: takeoff
+[GAME] t=  24.54 real=  30.97 s=2 laser #2: PARENT jumped clear (+1)
+[GAME] t=  24.59 real=  31.02 s=2 CHILD jump: takeoff
+[GAME] t=  24.59 real=  31.02 s=2 laser #2: CHILD jumped clear (+1)
+[GAME] t=  24.59 real=  31.02 s=2 laser #2: TEAM (+1 bonus); alert 0.00
+[GAME] t=  25.02 real=  32.32 s=2 PARENT jump: landed (air 1.35 s)
+[GAME] t=  25.02 real=  32.32 s=2 CHILD jump: landed (air 1.30 s)
+[GAME] t=  25.23 real=  32.52 s=2 PARENT jump: cycle complete (jumps 1)
+[GAME] t=  25.23 real=  32.52 s=2 CHILD jump: cycle complete (jumps 1)
+[GAME] t=  28.83 real=  36.60 s=2 laser script step 3/13: HIGH BEAM: Parent on time, Child TOO LATE → partial
+[GAME] t=  28.83 real=  36.60 s=2 laser #3: warning highBeam (nothing visible yet)
+[GAME] t=  30.63 real=  38.67 s=2 laser #3: gate revealed (beams at P 0.94 / C 0.66 units)
+[GAME] t=  33.55 real=  42.07 s=2 laser #3: cue, crossing in 1.40 s
+[GAME] t=  34.67 real=  43.73 s=2 laser #3: PARENT ducked clear (+1)
+[GAME] t=  35.20 real=  44.52 s=2 laser #3: CHILD ZAPPED
+[GAME] t=  35.20 real=  44.52 s=2 laser #3: partial: clear [PARENT] zapped [CHILD]; alert 0.18
+[GAME] t=  35.50 real=  45.30 s=2 laser #3: CHILD label tooLate

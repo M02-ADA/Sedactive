@@ -460,7 +460,7 @@ extension WorldScene {
     // MARK: - Jump input → feedback (credit itself is judged per leap from the airborne state)
 
     func handleJump(_ events: [JumpEvent], zone: Zone, captureTime: Double?) {
-        guard gameMode == .jungleDrift else { return }
+        guard gameMode == .jungleDrift || gameMode == .laserBreakout else { return }
         for event in events {
             switch event {
             case .takeoff:
@@ -468,10 +468,12 @@ extension WorldScene {
                 // Front-loaded: the pad flares and a hop sounds on the very frame the feet are detected leaving.
                 padPulse(zone)
                 audio.play(.hop, dB: -12)
-                if let p = jungleRuntime.piranhas, p.cued,
+                if gameMode == .jungleDrift, let p = jungleRuntime.piranhas, p.cued,
                    p.leaps.contains(where: { $0.isOpen && $0.participants.contains(zone) && $0.results[zone] == nil }) {
                     lockProvisional(zone)
-                } else if sweepAwaitsJump(from: zone) {
+                } else if gameMode == .jungleDrift, sweepAwaitsJump(from: zone) {
+                    lockProvisional(zone)
+                } else if gameMode == .laserBreakout, laserAwaitsJump(from: zone) {
                     lockProvisional(zone)
                 }
                 gameLog("\(role(for: zone)) jump: takeoff")

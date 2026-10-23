@@ -1,0 +1,41 @@
+t=   9.95 real=  10.29 s=1 laser beat: single highBeam (spacing 0.00 s, difficulty warn×0.85 gap×0.85)
+t=  15.18 real=  15.52 s=1 laser #1: TEAM (+1 bonus); alert 0.00
+t=  19.20 real=  19.54 s=1 laser beat: single floorSweep (spacing 0.00 s, difficulty warn×0.85 gap×0.85)
+t=  24.53 real=  24.87 s=1 laser #2: TEAM (+1 bonus); alert 0.00
+t=  28.45 real=  28.79 s=1 laser beat: single highBeam+turret-wave (spacing 0.00 s, difficulty warn×0.85 gap×0.85)
+t=  34.90 real=  35.24 s=1 laser #3: TEAM (+1 bonus); alert 0.00
+t=  43.15 real=  43.49 s=1 laser beat: DOUBLE PULSE floorSweep, floorSweep (spacing 2.38 s, difficulty warn×0.85 gap×0.85)
+t=  49.00 real=  49.34 s=1 laser #4: partial: clear [PARENT] zapped [CHILD]; alert 0.18
+t=  50.91 real=  51.26 s=1 laser #5: TEAM (+1 bonus); alert 0.10
+t=  50.91 real=  51.26 s=1 laser sequence DOUBLE PULSE: PARENT 2/2 · CHILD 1/2
+t=  54.58 real=  54.92 s=1 laser beat: COMBO highBeam, floorSweep, highBeam, floorSweep (spacing 2.42 s, difficulty warn×0.85 gap×0.85)
+t=  59.85 real=  60.19 s=1 laser #6: TEAM (+1 bonus); alert 0.02
+t=  62.33 real=  62.67 s=1 laser #7: TEAM (+1 bonus); alert 0.00
+t=  64.70 real=  65.04 s=1 laser #8: TEAM (+1 bonus); alert 0.00
+t=  67.26 real=  67.61 s=1 laser #9: TEAM (+1 bonus); alert 0.00
+t=  67.26 real=  67.61 s=1 laser sequence COMBO: COMBO CLEARED (+4 team bonus)
+t=  71.21 real=  71.56 s=1 laser beat: single floorSweep+turret-wave (spacing 0.00 s, difficulty warn×0.85 gap×0.85)
+t=  77.86 real=  78.21 s=1 laser #10: TEAM (+1 bonus); alert 0.00
+t=  85.90 real=  86.24 s=1 laser beat: CROSSFIRE splitGrid(parentHigh: true), splitGrid(parentHigh: false), splitGrid(parentHigh: true) (spacing 2.42 s, difficulty warn×0.85 gap×0.85)
+t=  91.20 real=  91.54 s=1 laser #11: TEAM (+1 bonus); alert 0.00
+t=  93.70 real=  94.04 s=1 laser #12: TEAM (+1 bonus); alert 0.00
+t=  96.10 real=  96.44 s=1 laser #13: TEAM (+1 bonus); alert 0.00
+t=  96.10 real=  96.44 s=1 laser sequence CROSSFIRE: COMBO CLEARED (+3 team bonus)
+t= 100.11 real= 100.46 s=1 laser beat: GAUNTLET highBeam+turret, splitGrid(parentHigh: true), floorSweep, splitGrid(parentHigh: false) (spacing 2.42 s, difficulty warn×0.85 gap×0.85)
+t= 105.83 real= 106.17 s=1 laser #14: TEAM (+1 bonus); alert 0.00
+t= 108.33 real= 108.67 s=1 laser #15: TEAM (+1 bonus); alert 0.00
+t= 110.68 real= 111.02 s=1 laser #16: TEAM (+1 bonus); alert 0.00
+t= 113.65 real= 113.99 s=1 laser #17: partial: clear [] zapped [CHILD,PARENT]; alert 0.36
+t= 113.65 real= 113.99 s=1 laser sequence GAUNTLET: PARENT 3/4 · CHILD 3/4
+t= 131.36 real= 131.71 s=1 laser: ESCAPED — dodges 31/34, team dodges 15, alert 0.36
+t= 148.81 real= 149.16 s=2 laser beat: single highBeam (spacing 0.00 s, difficulty warn×0.85 gap×0.85)
+t= 154.11 real= 154.46 s=2 laser #1: TEAM (+1 bonus); alert 0.00
+t= 158.08 real= 158.42 s=2 laser beat: single floorSweep (spacing 0.00 s, difficulty warn×0.85 gap×0.85)
+t= 163.45 real= 163.79 s=2 laser #2: TEAM (+1 bonus); alert 0.00
+t= 167.33 real= 167.67 s=2 laser beat: single highBeam+turret-wave (spacing 0.00 s, difficulty warn×0.85 gap×0.85)
+t= 173.85 real= 174.19 s=2 laser #3: TEAM (+1 bonus); alert 0.00
+t= 182.01 real= 182.36 s=2 laser beat: DOUBLE PULSE floorSweep, floorSweep (spacing 2.38 s, difficulty warn×0.85 gap×0.85)
+t= 187.31 real= 187.66 s=2 laser #4: TEAM (+1 bonus); alert 0.00
+t= 190.25 real= 190.59 s=2 laser #5: partial: clear [PARENT] zapped [CHILD]; alert 0.18
+t= 190.25 real= 190.59 s=2 laser sequence DOUBLE PULSE: PARENT 2/2 · CHILD 1/2
+t= 193.45 real= 193.79 s=2 laser beat: COMBO highBeam, floorSweep, highBeam, floorSweep (spacing 2.42 s, difficulty warn×0.85 gap×0.85)

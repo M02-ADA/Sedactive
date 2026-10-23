@@ -52,12 +52,13 @@ final class GameModel {
     var systemReduceMotion = false
     var reduceMotionOverride = false
     var autoplay = true
-    var showMetrics = true
+    /// Developer overlays start hidden in Moonbound (polished presentation); the gear button / `h` opens them.
+    var showMetrics = GameMode.fromLaunchArgument == .stuntRun || GameMode.fromLaunchArgument == .jungleDrift
     var swapRoles = false
     var soundOn = true
-    var controlsExpanded = true
+    var controlsExpanded = GameMode.fromLaunchArgument == .stuntRun || GameMode.fromLaunchArgument == .jungleDrift
     /// Which game the scene plays (`-gameMode jungle` at launch; the dev panel switches by recreating the scene).
-    var gameMode: GameMode = UserDefaults.standard.string(forKey: "gameMode") == "jungle" ? .jungleDrift : .stuntRun
+    var gameMode: GameMode = .fromLaunchArgument
     /// TEAM DUCK presentation: hero (baked 3D debris + layered FX) or Revision 3's original (`-heroFX legacy`).
     var heroFX = true
     /// Mirrors the scene's play state for the controls (updated only on transitions).

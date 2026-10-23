@@ -1,0 +1,99 @@
+[GAME] t=   0.00 real=-1083250.90 s=1 mode: Moonbound race (art 308 ms; first to the Moon, 24 full-thrust squats, 75 s cap)
+[GAME] t=   0.02 real=   0.38 s=1 state: countdown
+[METRICS] fps=59.7 frame=17.8/37.5ms hitch/min=120.0 vision=10.0fps pose=11.0ms seg=16.4ms comp=31.1ms cap→tex=61.6ms feedback(avg)=n/a dropped=0 mem=64MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=   2.67 real=   3.03 s=1 state: running
+[GAME] t=   2.68 real=   3.03 s=1 moon: LIFT-OFF — race started (75 s)
+[GAME] t=   4.57 real=   4.92 s=1 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.000 → 0.042
+[GAME] t=   4.57 real=   4.92 s=1 moon: LEAD → PARENT
+[GAME] t=   5.17 real=   5.52 s=1 moon: CHILD rep → thrust 0.044 (slipstream +6%, pace ×1.00): 0.000 → 0.044
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=21.4 vision=30.0fps pose=4.8ms seg=0.2ms comp=25.9ms cap→tex=34.9ms feedback(avg)=n/a dropped=0 mem=66MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=   7.32 real=   7.67 s=1 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.042 → 0.083
+[GAME] t=   7.73 real=   8.08 s=1 moon: CHILD rep → thrust 0.044 (slipstream +6%, pace ×1.00): 0.044 → 0.088
+[GAME] t=   7.73 real=   8.08 s=1 moon: neck and neck
+[GAME] t=  10.25 real=  10.60 s=1 moon: PARENT rep → thrust 0.042 (slipstream +1%, pace ×1.00): 0.083 → 0.125
+[GAME] t=  10.27 real=  10.62 s=1 moon: CHILD rep → thrust 0.044 (slipstream +5%, pace ×1.00): 0.088 → 0.132
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=11.2 vision=30.0fps pose=5.3ms seg=0.2ms comp=28.6ms cap→tex=43.9ms feedback(avg)=n/a dropped=0 mem=66MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  10.78 real=  11.13 s=1 moon phase: SKY ASCENT (camera altitude 14 units)
+[GAME] t=  13.13 real=  13.48 s=1 moon: CHILD rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.132 → 0.174
+[GAME] t=  13.32 real=  13.67 s=1 moon: PARENT rep → thrust 0.044 (slipstream +7%, pace ×1.00): 0.125 → 0.170
+[GAME] t=  15.77 real=  16.12 s=1 moon: PARENT rep → thrust 0.042 (slipstream +1%, pace ×1.00): 0.170 → 0.212
+[METRICS] fps=60.1 frame=16.7/16.7ms hitch/min=7.6 vision=29.1fps pose=4.6ms seg=0.2ms comp=26.6ms cap→tex=40.8ms feedback(avg)=n/a dropped=0 mem=66MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  15.98 real=  16.33 s=1 moon: CHILD rep → thrust 0.044 (slipstream +5%, pace ×1.00): 0.174 → 0.217
+[GAME] t=  18.22 real=  18.57 s=1 moon: PARENT rep → thrust 0.042 (slipstream +1%, pace ×1.00): 0.212 → 0.254
+[GAME] t=  19.12 real=  19.47 s=1 moon: CHILD rep → thrust 0.044 (slipstream +5%, pace ×1.00): 0.217 → 0.261
+[GAME] t=  19.12 real=  19.47 s=1 moon: neck and neck
+[GAME] t=  20.48 real=  20.83 s=1 moon: PARENT rep → thrust 0.042 (slipstream +1%, pace ×1.00): 0.254 → 0.296
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=5.7 vision=29.0fps pose=4.5ms seg=0.2ms comp=26.8ms cap→tex=34.6ms feedback(avg)=n/a dropped=0 mem=66MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  22.32 real=  22.67 s=1 moon: CHILD rep → thrust 0.044 (slipstream +5%, pace ×1.00): 0.261 → 0.305
+[GAME] t=  23.60 real=  23.95 s=1 moon: PARENT rep → thrust 0.042 (slipstream +1%, pace ×1.00): 0.296 → 0.338
+[GAME] t=  25.05 real=  25.40 s=1 moon: CHILD rep → thrust 0.044 (slipstream +5%, pace ×1.00): 0.305 → 0.349
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=4.6 vision=30.0fps pose=4.8ms seg=0.2ms comp=26.0ms cap→tex=35.0ms feedback(avg)=n/a dropped=0 mem=66MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  26.53 real=  26.88 s=1 moon: PARENT rep → thrust 0.042 (slipstream +1%, pace ×1.00): 0.338 → 0.380
+[GAME] t=  26.72 real=  27.07 s=1 moon: cloud break
+[GAME] t=  27.87 real=  28.22 s=1 moon: CHILD rep → thrust 0.044 (slipstream +4%, pace ×1.00): 0.349 → 0.392
+[GAME] t=  29.07 real=  29.42 s=1 moon: PARENT rep → thrust 0.042 (slipstream +2%, pace ×1.00): 0.380 → 0.423
+[GAME] t=  30.97 real=  31.32 s=1 moon: CHILD rep → thrust 0.043 (slipstream +4%, pace ×1.00): 0.392 → 0.436
+[GAME] t=  30.97 real=  31.32 s=1 moon: neck and neck
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=3.9 vision=28.0fps pose=4.9ms seg=0.2ms comp=29.7ms cap→tex=39.5ms feedback(avg)=n/a dropped=0 mem=66MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  31.32 real=  31.67 s=1 moon phase: UPPER ATMOSPHERE (camera altitude 109 units)
+[GAME] t=  31.65 real=  32.00 s=1 moon: PARENT rep → thrust 0.042 (slipstream +2%, pace ×1.00): 0.423 → 0.465
+[GAME] t=  34.33 real=  34.68 s=1 moon: CHILD rep → thrust 0.043 (slipstream +4%, pace ×1.00): 0.436 → 0.479
+[GAME] t=  34.83 real=  35.18 s=1 moon: PARENT rep → thrust 0.042 (slipstream +2%, pace ×1.00): 0.465 → 0.508
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=3.3 vision=26.0fps pose=5.0ms seg=0.2ms comp=28.3ms cap→tex=43.6ms feedback(avg)=n/a dropped=0 mem=66MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  37.13 real=  37.48 s=1 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.508 → 0.549
+[GAME] t=  37.25 real=  37.60 s=1 moon: CHILD rep → thrust 0.046 (slipstream +10%, pace ×1.00): 0.479 → 0.525
+[GAME] t=  39.58 real=  39.93 s=1 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.549 → 0.591
+[GAME] t=  40.20 real=  40.55 s=1 moon: CHILD rep → thrust 0.046 (slipstream +9%, pace ×1.00): 0.525 → 0.570
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=2.9 vision=29.0fps pose=4.7ms seg=0.2ms comp=28.6ms cap→tex=40.4ms feedback(avg)=n/a dropped=0 mem=66MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  42.07 real=  42.42 s=1 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.591 → 0.633
+[GAME] t=  43.32 real=  43.67 s=1 moon: CHILD rep → thrust 0.045 (slipstream +9%, pace ×1.00): 0.570 → 0.616
+[GAME] t=  43.32 real=  43.67 s=1 moon: neck and neck
+[GAME] t=  43.52 real=  43.87 s=1 moon: entered space
+[GAME] t=  43.88 real=  44.23 s=1 moon phase: OUTER SPACE (camera altitude 319 units)
+[GAME] t=  44.97 real=  45.32 s=1 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.633 → 0.674
+[GAME] t=  45.90 real=  46.25 s=1 moon: CHILD rep → thrust 0.045 (slipstream +8%, pace ×1.00): 0.616 → 0.661
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=2.6 vision=32.0fps pose=4.5ms seg=0.2ms comp=26.2ms cap→tex=38.4ms feedback(avg)=n/a dropped=0 mem=66MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  47.85 real=  48.20 s=1 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.674 → 0.716
+[GAME] t=  49.30 real=  49.65 s=1 moon: CHILD rep → thrust 0.045 (slipstream +8%, pace ×1.00): 0.661 → 0.705
+[GAME] t=  50.17 real=  50.52 s=1 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.716 → 0.758
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=2.3 vision=31.0fps pose=4.8ms seg=0.2ms comp=27.3ms cap→tex=45.0ms feedback(avg)=n/a dropped=0 mem=66MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  51.98 real=  52.33 s=1 moon: CHILD rep → thrust 0.045 (slipstream +7%, pace ×1.00): 0.705 → 0.750
+[GAME] t=  52.88 real=  53.23 s=1 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.758 → 0.799
+[GAME] t=  55.30 real=  55.65 s=1 moon: CHILD rep → thrust 0.045 (slipstream +7%, pace ×1.00): 0.750 → 0.795
+[GAME] t=  55.30 real=  55.65 s=1 moon: neck and neck
+[GAME] t=  55.65 real=  56.00 s=1 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.799 → 0.841
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=2.1 vision=29.0fps pose=4.9ms seg=0.2ms comp=27.8ms cap→tex=40.3ms feedback(avg)=n/a dropped=0 mem=66MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  58.27 real=  58.62 s=1 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.841 → 0.883
+[GAME] t=  58.27 real=  58.62 s=1 moon: FINAL SPRINT (19 s left)
+[GAME] t=  58.27 real=  58.62 s=1 moon: CHILD rep → thrust 0.047 (slipstream +12%, pace ×1.00): 0.795 → 0.842
+[GAME] t=  59.13 real=  59.48 s=1 moon phase: MOON APPROACH (camera altitude 1088 units)
+[GAME] t=  61.18 real=  61.53 s=1 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.883 → 0.924
+[GAME] t=  61.25 real=  61.60 s=1 moon: CHILD rep → thrust 0.046 (slipstream +12%, pace ×1.00): 0.842 → 0.888
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=22.0fps pose=5.4ms seg=0.3ms comp=36.4ms cap→tex=50.3ms feedback(avg)=n/a dropped=0 mem=65MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  63.67 real=  64.02 s=1 moon: CHILD rep → thrust 0.044 (slipstream +5%, pace ×1.00): 0.888 → 0.932
+[GAME] t=  64.38 real=  64.73 s=1 moon: PARENT rep → thrust 0.042 (slipstream +1%, pace ×1.00): 0.924 → 0.966
+[GAME] t=  66.38 real=  66.73 s=1 moon: CHILD rep → thrust 0.044 (slipstream +5%, pace ×1.00): 0.932 → 0.975
+[GAME] t=  66.38 real=  66.73 s=1 moon: neck and neck
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=29.0fps pose=5.1ms seg=0.2ms comp=28.1ms cap→tex=43.0ms feedback(avg)=n/a dropped=0 mem=66MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  66.92 real=  67.27 s=1 moon: PARENT rep → thrust 0.042 (slipstream +1%, pace ×1.00): 0.966 → 1.000
+[GAME] t=  66.92 real=  67.27 s=1 moon: FINISH — PARENT (first to the Moon, margin 0.025); squats P 24 · C 22
+[GAME] t=  70.52 real=  70.87 s=1 moon: landing burn
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=28.0fps pose=5.1ms seg=0.2ms comp=30.1ms cap→tex=44.9ms feedback(avg)=n/a dropped=0 mem=66MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  73.52 real=  73.87 s=1 moon: TOUCHDOWN
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=26.0fps pose=5.4ms seg=0.2ms comp=30.3ms cap→tex=43.3ms feedback(avg)=n/a dropped=0 mem=66MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  78.93 real=  79.28 s=1 moon: race complete
+[GAME] t=  78.93 real=  79.28 s=2 replay (moon race complete) → session 2
+[GAME] t=  78.95 real=  79.30 s=2 state: countdown
+[GAME] t=  81.92 real=  82.28 s=2 state: running
+[GAME] t=  81.93 real=  82.28 s=2 moon: LIFT-OFF — race started (75 s)
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=29.0fps pose=5.3ms seg=0.3ms comp=27.7ms cap→tex=43.2ms feedback(avg)=n/a dropped=0 mem=66MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  83.82 real=  84.17 s=2 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.000 → 0.042
+[GAME] t=  83.82 real=  84.17 s=2 moon: LEAD → PARENT
+[GAME] t=  84.42 real=  84.77 s=2 moon: CHILD rep → thrust 0.044 (slipstream +6%, pace ×1.00): 0.000 → 0.044
+[GAME] t=  86.27 real=  86.62 s=2 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.042 → 0.083
+[METRICS] fps=60.1 frame=16.7/16.7ms hitch/min=0.0 vision=29.1fps pose=4.8ms seg=0.2ms comp=27.2ms cap→tex=39.2ms feedback(avg)=n/a dropped=0 mem=66MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  87.78 real=  88.13 s=2 moon: CHILD rep → thrust 0.044 (slipstream +6%, pace ×1.00): 0.044 → 0.088
+[GAME] t=  87.78 real=  88.13 s=2 moon: neck and neck
+[GAME] t=  88.93 real=  89.28 s=2 moon: PARENT rep → thrust 0.042 (slipstream +1%, pace ×1.00): 0.083 → 0.125
+[GAME] t=  90.33 real=  90.68 s=2 moon: CHILD rep → thrust 0.044 (slipstream +5%, pace ×1.00): 0.088 → 0.132
+[GAME] t=  90.70 real=  91.05 s=2 moon phase: SKY ASCENT (camera altitude 15 units)

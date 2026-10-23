@@ -185,6 +185,8 @@ extension WorldScene {
         flow.replay(at: now)
         gameLog("replay (\(source)) → session \(flow.session)")
         if gameMode == .jungleDrift { resetJungle() }
+        if gameMode == .laserBreakout { resetLaser() }
+        if gameMode == .moonbound { resetMoon() }
         captureEvent("replay", after: 0.6)
         for gate in gates {
             gate.challenge?.cancel()
@@ -227,6 +229,14 @@ extension WorldScene {
     func startScript() {
         if gameMode == .jungleDrift {
             startJungleScript()
+            return
+        }
+        if gameMode == .laserBreakout {
+            startLaserScript()
+            return
+        }
+        if gameMode == .moonbound {
+            startMoonScript()
             return
         }
         if let directory = model?.evidenceDirectory {

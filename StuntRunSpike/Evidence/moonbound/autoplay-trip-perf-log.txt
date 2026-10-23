@@ -1,0 +1,69 @@
+[GAME] t=   0.00 real=-1077480.03 s=1 mode: Moonbound (art 16 ms, goal 40 effective reps, co-op window 1.6 s)
+[GAME] t=   0.02 real=   0.08 s=1 state: countdown
+[METRICS] fps=64.7 frame=16.5/16.7ms hitch/min=0.0 vision=7.8fps pose=13.7ms seg=18.5ms comp=37.1ms cap→tex=79.0ms feedback(avg)=n/a dropped=0 mem=52MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=   2.98 real=   3.04 s=1 state: running
+[GAME] t=   5.08 real=   5.12 s=1 moon: PARENT rep → LEFT engine fires (progress 0.000 → 0.025)
+[METRICS] fps=60.1 frame=16.7/16.7ms hitch/min=0.0 vision=27.1fps pose=5.2ms seg=0.3ms comp=32.3ms cap→tex=48.1ms feedback(avg)=n/a dropped=0 mem=53MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=   5.68 real=   5.72 s=1 moon: DUAL THRUST (PARENT then CHILD, 0.60 s apart) → bonus; duals 1; progress 0.025 → 0.062
+[GAME] t=   8.43 real=   8.47 s=1 moon: PARENT rep → LEFT engine fires (progress 0.062 → 0.087)
+[GAME] t=   9.13 real=   9.17 s=1 moon: DUAL THRUST (PARENT then CHILD, 0.70 s apart) → bonus; duals 2; progress 0.087 → 0.125
+[GAME] t=   9.76 real=   9.81 s=1 moon phase: SKY ASCENT (altitude 12 units, effective reps 5.0)
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=25.2fps pose=5.1ms seg=0.3ms comp=31.3ms cap→tex=46.5ms feedback(avg)=n/a dropped=0 mem=54MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  11.21 real=  11.26 s=1 moon: PARENT rep → LEFT engine fires (progress 0.125 → 0.150)
+[GAME] t=  11.79 real=  11.84 s=1 moon: DUAL THRUST (PARENT then CHILD, 0.58 s apart) → bonus; duals 3; progress 0.150 → 0.188
+[GAME] t=  14.43 real=  14.47 s=1 moon: CHILD rep → RIGHT engine fires (progress 0.188 → 0.212)
+[GAME] t=  14.71 real=  14.76 s=1 moon: DUAL THRUST (CHILD then PARENT, 0.28 s apart) → bonus; duals 4; progress 0.212 → 0.250
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=27.1fps pose=5.2ms seg=0.3ms comp=31.4ms cap→tex=45.8ms feedback(avg)=n/a dropped=0 mem=55MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  17.74 real=  17.79 s=1 moon: PARENT rep → LEFT engine fires (progress 0.250 → 0.275)
+[GAME] t=  17.98 real=  18.02 s=1 moon: DUAL THRUST (PARENT then CHILD, 0.23 s apart) → bonus; duals 5; progress 0.275 → 0.312
+[GAME] t=  20.73 real=  20.77 s=1 moon: PARENT rep → LEFT engine fires (progress 0.312 → 0.338)
+[GAME] t=  20.91 real=  20.96 s=1 moon: DUAL THRUST (PARENT then CHILD, 0.18 s apart) → bonus; duals 6; progress 0.338 → 0.375
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=24.0fps pose=6.3ms seg=0.3ms comp=37.0ms cap→tex=51.5ms feedback(avg)=n/a dropped=0 mem=55MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  23.79 real=  23.84 s=1 moon: CHILD rep → RIGHT engine fires (progress 0.375 → 0.400)
+[GAME] t=  24.23 real=  24.27 s=1 moon: DUAL THRUST (CHILD then PARENT, 0.43 s apart) → bonus; duals 7; progress 0.400 → 0.438
+[GAME] t=  24.58 real=  24.62 s=1 moon phase: UPPER ATMOSPHERE (altitude 108 units, effective reps 17.5)
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=27.1fps pose=5.1ms seg=0.3ms comp=31.5ms cap→tex=46.7ms feedback(avg)=n/a dropped=0 mem=56MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  26.66 real=  26.71 s=1 moon: CHILD rep → RIGHT engine fires (progress 0.438 → 0.463)
+[GAME] t=  27.83 real=  27.87 s=1 moon: DUAL THRUST (CHILD then PARENT, 1.17 s apart) → bonus; duals 8; progress 0.463 → 0.500
+[GAME] t=  29.58 real=  29.62 s=1 moon: CHILD rep → RIGHT engine fires (progress 0.500 → 0.525)
+[GAME] t=  30.44 real=  30.49 s=1 moon: DUAL THRUST (CHILD then PARENT, 0.87 s apart) → bonus; duals 9; progress 0.525 → 0.562
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=24.0fps pose=5.7ms seg=0.3ms comp=34.3ms cap→tex=50.1ms feedback(avg)=n/a dropped=0 mem=56MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  32.21 real=  32.26 s=1 moon: CHILD rep → RIGHT engine fires (progress 0.562 → 0.588)
+[GAME] t=  33.76 real=  33.81 s=1 moon: DUAL THRUST (CHILD then PARENT, 1.55 s apart) → bonus; duals 10; progress 0.588 → 0.625
+[GAME] t=  34.39 real=  34.44 s=1 moon phase: OUTER SPACE (altitude 317 units, effective reps 25.0)
+[GAME] t=  35.33 real=  35.37 s=1 moon: CHILD rep → RIGHT engine fires (progress 0.625 → 0.650)
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=23.2fps pose=5.2ms seg=0.3ms comp=35.4ms cap→tex=49.3ms feedback(avg)=n/a dropped=0 mem=56MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  36.49 real=  36.54 s=1 moon: DUAL THRUST (CHILD then PARENT, 1.17 s apart) → bonus; duals 11; progress 0.650 → 0.688
+[GAME] t=  38.66 real=  38.71 s=1 moon: CHILD rep → RIGHT engine fires (progress 0.688 → 0.713)
+[GAME] t=  39.86 real=  39.91 s=1 moon: DUAL THRUST (CHILD then PARENT, 1.20 s apart) → bonus; duals 12; progress 0.713 → 0.750
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=27.1fps pose=4.8ms seg=0.3ms comp=30.5ms cap→tex=42.4ms feedback(avg)=n/a dropped=0 mem=55MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  41.74 real=  41.79 s=1 moon: CHILD rep → RIGHT engine fires (progress 0.750 → 0.775)
+[GAME] t=  42.48 real=  42.52 s=1 moon: DUAL THRUST (CHILD then PARENT, 0.73 s apart) → bonus; duals 13; progress 0.775 → 0.812
+[GAME] t=  44.68 real=  44.72 s=1 moon: CHILD rep → RIGHT engine fires (progress 0.812 → 0.838)
+[GAME] t=  45.91 real=  45.96 s=1 moon: DUAL THRUST (CHILD then PARENT, 1.23 s apart) → bonus; duals 14; progress 0.838 → 0.875
+[GAME] t=  46.26 real=  46.31 s=1 moon phase: MOON APPROACH (altitude 1085 units, effective reps 35.0)
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=27.1fps pose=4.8ms seg=0.3ms comp=31.4ms cap→tex=44.9ms feedback(avg)=n/a dropped=0 mem=55MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  48.28 real=  48.32 s=1 moon: CHILD rep → RIGHT engine fires (progress 0.875 → 0.900)
+[GAME] t=  49.11 real=  49.16 s=1 moon: DUAL THRUST (CHILD then PARENT, 0.83 s apart) → bonus; duals 15; progress 0.900 → 0.938
+[GAME] t=  51.24 real=  51.29 s=1 moon: CHILD rep → RIGHT engine fires (progress 0.938 → 0.963)
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=25.2fps pose=5.0ms seg=0.3ms comp=31.0ms cap→tex=46.1ms feedback(avg)=n/a dropped=0 mem=55MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  52.39 real=  52.44 s=1 moon: DUAL THRUST (CHILD then PARENT, 1.15 s apart) → bonus; duals 16; progress 0.963 → 1.000
+[GAME] t=  53.86 real=  53.91 s=1 moon: ARRIVED at the Moon (reps P 16 · C 16, duals 16)
+[GAME] t=  55.66 real=  55.71 s=1 moon: landing burn
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=25.2fps pose=4.9ms seg=0.3ms comp=31.7ms cap→tex=46.0ms feedback(avg)=n/a dropped=0 mem=55MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  58.66 real=  58.71 s=1 moon: TOUCHDOWN — flag planted
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=24.0fps pose=5.1ms seg=0.3ms comp=34.1ms cap→tex=48.1ms feedback(avg)=n/a dropped=0 mem=55MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  65.88 real=  65.92 s=1 moon: trip complete
+[GAME] t=  65.88 real=  65.92 s=2 replay (moon trip complete) → session 2
+[GAME] t=  65.89 real=  65.94 s=2 state: countdown
+[METRICS] fps=59.9 frame=16.7/16.7ms hitch/min=0.0 vision=26.0fps pose=5.0ms seg=0.3ms comp=31.0ms cap→tex=46.2ms feedback(avg)=n/a dropped=0 mem=55MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  68.86 real=  68.92 s=2 state: running
+[GAME] t=  70.96 real=  71.01 s=2 moon: PARENT rep → LEFT engine fires (progress 0.000 → 0.025)
+[GAME] t=  71.56 real=  71.61 s=2 moon: DUAL THRUST (PARENT then CHILD, 0.60 s apart) → bonus; duals 1; progress 0.025 → 0.062
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=27.1fps pose=5.0ms seg=0.3ms comp=31.8ms cap→tex=46.0ms feedback(avg)=n/a dropped=0 mem=55MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  74.36 real=  74.41 s=2 moon: CHILD rep → RIGHT engine fires (progress 0.062 → 0.087)
+[GAME] t=  74.54 real=  74.59 s=2 moon: DUAL THRUST (CHILD then PARENT, 0.18 s apart) → bonus; duals 2; progress 0.087 → 0.125
+[GAME] t=  75.23 real=  75.27 s=2 moon phase: SKY ASCENT (altitude 12 units, effective reps 5.0)
+[METRICS] fps=60.1 frame=16.7/16.7ms hitch/min=0.0 vision=27.1fps pose=4.7ms seg=0.3ms comp=31.2ms cap→tex=45.9ms feedback(avg)=n/a dropped=0 mem=55MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  77.21 real=  77.26 s=2 moon: CHILD rep → RIGHT engine fires (progress 0.125 → 0.150)
+[GAME] t=  77.84 real=  77.89 s=2 moon: DUAL THRUST (CHILD then PARENT, 0.63 s apart) → bonus; duals 3; progress 0.150 → 0.188

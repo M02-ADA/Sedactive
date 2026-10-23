@@ -1,6 +1,6 @@
 # Memahami prototype StuntRunSpike dan merancang arsitekturmu sendiri
 
-**Snapshot kode: 22 Oktober 2026 (Revisi 11).** Panduan ini disusun dengan membaca source prototype yang ada. Tujuannya membantu kamu memahami pembagian tanggung jawab dan alasan di baliknya, lalu memilih struktur yang sesuai untuk aplikasi barumu.
+**Snapshot kode: 23 Oktober 2026 (Revisi 11 + Moonbound + Laser Breakout).** Panduan ini disusun dengan membaca source prototype yang ada. Tujuannya membantu kamu memahami pembagian tanggung jawab dan alasan di baliknya, lalu memilih struktur yang sesuai untuk aplikasi barumu.
 
 Ada dua jenis penjelasan di sini:
 
@@ -31,7 +31,16 @@ Untuk pembacaan pertama, ikuti bagian 1–5, lalu lompat ke bagian 10–12. Deta
 
 StuntRunSpike adalah prototype game gerak kooperatif untuk dua pemain (Parent dan Child) di iPad. Kamera menangkap tubuh, Vision membaca posisi sendi dan memotong siluet pemain, lalu detektor gerakan mengubah pose menjadi kejadian seperti "jongkok sampai bawah" atau "kaki lepas dari lantai". Aturan game menilai kejadian itu terhadap rintangan yang sedang aktif, dan dunia SpriteKit memberi respons.
 
-Ada dua mode dalam satu aplikasi: **Stunt Run** (atap kereta, gerbang yang harus dihindari dengan jongkok) dan **Jungle Drift** (rakit di sungai: jongkok untuk burung, condong untuk buaya yang menyeruduk, lompat untuk piranha, batang kayu, dan kibasan ekor buaya).
+Ada empat mode dalam satu aplikasi:
+
+| Mode | Inti permainan | Gerakan |
+| --- | --- | --- |
+| **Stunt Run** | Atap kereta, gerbang yang harus dihindari | Jongkok |
+| **Jungle Drift** | Rakit di sungai: burung, buaya yang menyeruduk, piranha, batang kayu, kibasan ekor buaya | Jongkok, condong, lompat |
+| **Moonbound** | Balapan roket ke Bulan; setiap jongkok yang terkontrol = dorongan | Jongkok (rep lengkap) |
+| **Laser Breakout** | Kabur dari brankas dengan kereta; sistem keamanan laser menyerang | Jongkok (sinar tinggi), lompat (sinar rendah) |
+
+Moonbound satu-satunya mode **kompetitif** (Parent vs Child dengan penyeimbang untuk yang tertinggal); tiga mode lain kooperatif.
 
 Berbeda dari aplikasi dengan riwayat dan progress, prototype ini **tidak punya siklus antarsesi**: tidak ada profil, riwayat, atau penyimpanan hasil. Yang ada adalah dua lajur dengan kebutuhan teknis berbeda, berjalan bersamaan di dalam satu sesi:
 
@@ -63,7 +72,7 @@ Prototype ini satu target app SwiftUI yang menampilkan satu `SKScene` lewat `Spr
 
 - **Aturan sebagai value type murni.** File `*Logic.swift`, `SquatDetector.swift`, `Pose.swift`, dan `JungleAnimation.swift` berisi `struct`/`enum` yang ditandai `nonisolated`, tanpa SpriteKit, Vision, atau UIKit. Semuanya dikompilasi juga ke dalam tes logika.
 - **Satu scene besar dipecah lewat extension.** `WorldScene` adalah satu kelas `SKScene` untuk kedua mode, dibagi ke beberapa file `WorldScene+*.swift`. Mode dipilih dengan `gameMode`.
-- **State mode Jungle di kelas bantu.** Extension Swift tidak boleh punya stored property, jadi semua state Jungle Drift dikumpulkan di `JungleRuntime`.
+- **State tiap mode di kelas bantu.** Extension Swift tidak boleh punya stored property, jadi state mode dikumpulkan di `JungleRuntime`, `MoonRuntime`, dan `LaserRuntime` (dengan `HeistRuntime` untuk set piece, drone, dan HUD Laser Breakout).
 - **Gambar digambar lewat kode.** File `Art*.swift` membuat tekstur dengan Core Graphics saat runtime; `Shaders*.swift` berisi shader SpriteKit untuk langit, lantai, dan sungai.
 - **SwiftUI hanya untuk bingkai dan panel developer.** `GameModel` (`@Observable`) menghubungkan panel SwiftUI dengan scene. Scene membaca setting sekali per frame dan menulis balik status dengan frekuensi rendah.
 
@@ -85,6 +94,9 @@ StuntRunSpike/
 │   ├── PiranhaLogic.swift          # JumpDetector, piranha (murni)
 │   ├── JumpSweepLogic.swift        # Penilaian lompat bersama, kayu, ekor buaya (murni)
 │   ├── JungleAnimation.swift       # Akting buaya dan burung sebagai fungsi waktu (murni)
+│   ├── MoonLogic.swift             # Balapan roket, fase perjalanan, kamera naik (murni)
+│   ├── LaserLogic.swift            # Koridor, encounter laser, sekuens, turret, director, kesulitan (murni)
+│   ├── OrientationGuard.swift      # Deteksi feed kamera terbalik dari gambarnya (murni)
 │   ├── WorldScene.swift            # SKScene: proyeksi, frame loop, properti bersama
 │   ├── WorldScene+Gameplay.swift   # Input → kejadian → aturan (Stunt Run)
 │   ├── WorldScene+Session.swift    # Pause, resume, replay, skrip, team lock
@@ -94,15 +106,20 @@ StuntRunSpike/
 │   ├── WorldScene+Piranha.swift, +JumpSweeps.swift # Bahaya lompat Jungle Drift
 │   ├── JungleWorld.swift, JungleLife.swift         # Sungai, tepian, satwa, landmark
 │   ├── JungleCreatures.swift       # Rig buaya dan burung (node SpriteKit)
+│   ├── WorldScene+Moon.swift, MoonWorld.swift      # Moonbound: runtime, lajur roket, langit/planet, skrip
+│   ├── WorldScene+Laser.swift      # Laser Breakout: gerbang/turret/iris, director, sekuens, skrip uji
+│   ├── WorldScene+Heist.swift      # Laser Breakout: brankas, gerbang override, drone, HUD, tubuh live
+│   ├── LaserWorld.swift            # Koridor shader, kamera keamanan, overlay debug perspektif
+│   ├── LaserFX.swift               # Shader sinar laser + rig emitter mekanis
 │   ├── Art*.swift, Shaders*.swift  # Tekstur dan shader yang dibuat lewat kode
-│   ├── AudioFX.swift               # Efek suara sintetis (AVAudioEngine)
+│   ├── AudioFX.swift               # Efek suara sintetis + musik adaptif 4 stem + dengung laser (AVAudioEngine)
 │   └── TeamDuckShatter.*           # Sprite sheet hasil bake 3D untuk efek TEAM DUCK
 ├── StuntRun3D/                     # Eksperimen versi RealityKit (target terpisah)
 ├── LogicTests/                     # run.sh + main.swift: tes logika di macOS
 ├── Tools/BakeTeamDuck/             # Tool pembuat sprite sheet efek TEAM DUCK
 ├── DesignerKit/                    # Spesifikasi aset untuk desainer
 ├── Evidence/                       # Screenshot, klip, dan log dari tiap revisi
-├── README.md, FINDINGS.md, JUNGLE_ART_DIRECTION.md
+├── README.md, FINDINGS.md, JUNGLE_ART_DIRECTION.md, TECHNOLOGY_BREAKDOWN.md
 └── StuntRunSpike-Mac.entitlements
 ```
 
@@ -121,6 +138,10 @@ Folder `StuntRunSpike/` sengaja datar; pengelompokan dilakukan lewat nama file (
 | Aturan lompat bersama | [JumpSweepLogic.swift](StuntRunSpike/JumpSweepLogic.swift) |
 | Pause, replay, skrip uji | [WorldScene+Session.swift](StuntRunSpike/WorldScene+Session.swift) |
 | Team Power, TURBO, HUD | [WorldScene+Feedback.swift](StuntRunSpike/WorldScene+Feedback.swift) |
+| Balapan Moonbound | [MoonLogic.swift](StuntRunSpike/MoonLogic.swift), [WorldScene+Moon.swift](StuntRunSpike/WorldScene+Moon.swift) |
+| Aturan dan pola laser | [LaserLogic.swift](StuntRunSpike/LaserLogic.swift) |
+| Laser di layar (gerbang, turret, iris, sekuens) | [WorldScene+Laser.swift](StuntRunSpike/WorldScene+Laser.swift), [LaserFX.swift](StuntRunSpike/LaserFX.swift) |
+| Kamera terbalik, fixture kamera | [OrientationGuard.swift](StuntRunSpike/OrientationGuard.swift), [CameraPipeline.swift](StuntRunSpike/CameraPipeline.swift) |
 
 ## 3. Siapa memiliki state dan mengatur apa?
 
@@ -134,6 +155,8 @@ Folder `StuntRunSpike/` sengaja datar; pengelompokan dilakukan lewat nama file (
 | `WorldScene` | `flow` (`SessionFlow`), `slots` per zona, `zoneTracker`, `roster`, `teamPower`, `gameTime`, rintangan Stunt Run (`encounter`, `gates`), skrip uji | Pusat koordinasi sesi dan presentasi |
 | `PlayerSlot` (per zona) | Detektor jongkok dan lompat, sumber input (`live`, `simulated`, `absent`), simulasi, hitungan rep, combo | Satu slot = satu posisi bermain, bukan satu orang tertentu |
 | `JungleRuntime` | Rakit (`RaftBalance`), director, timing tiap bahaya, bahaya aktif (burung, buaya, piranha, kayu, ekor), nilai lean, node HUD rakit, skrip Jungle | Kantong state mode Jungle |
+| `MoonRuntime` | `MoonRace` (progres tiap roket, pemimpin, final sprint, hasil), ketinggian kamera, penyiar, skrip Moon | Kantong state Moonbound |
+| `LaserRuntime` + `HeistRuntime` | Director dan beat aktif, gerbang yang sedang melaju (`gates`, bisa lebih dari satu dalam sekuens), `DuckFreshness`, `SecurityAlert`, kesulitan; set piece brankas, override, drone, HUD | Kantong state Laser Breakout |
 | `TeamChallenge` dan turunannya | Siapa sudah berkontribusi pada satu rintangan; hasil TEAM / partial / cancelled | Satu-satunya tempat yang menentukan kontribusi |
 
 Skor perlu dibaca dengan jelas: detektor hanya menghasilkan kejadian; `TeamChallenge.contribute(...)` mengembalikan Team Power yang boleh ditambahkan (sekali per pemain per rintangan), dan `resolve()` mengembalikan bonus tim satu kali. Scene memanggil `addTeamPower(_:)` dengan angka itu. Animasi, banner, dan suara tidak pernah menambah Team Power sendiri.
@@ -147,7 +170,7 @@ Skor perlu dibaca dengan jelas: detektor hanya menghasilkan kejadian; `TeamChall
 3. `.task` memanggil `pipeline.start()`. Di Simulator, kamera diganti test card sintetis. Di perangkat, aplikasi meminta izin kamera, mengonfigurasi sesi, lalu mulai capture. Jika kamera dipakai, autoplay dimatikan kecuali `-autoplay YES`.
 4. `SessionFlow` mulai dalam `countdown` 3 detik, lalu `running`.
 5. Setiap frame, `WorldScene.update(_:)` menjalankan urutan tetap: `updateFlow` → `pollPipeline` (snapshot baru → salin tekstur cutout, `applyLivePoses`) → `updateInputs` (slot yang disimulasikan) → update mode (`advanceWorld`/`updateGates` untuk Stunt Run, `updateJungle` untuk Jungle) → visual pemain, HUD, metrik.
-6. Rintangan datang berurutan. Stunt Run membuat satu gerbang per encounter. Jungle Drift memakai `JungleDirector` yang memutar 15 "beat" (burung, piranha, buaya, kayu, ekor, kombo, tenang).
+6. Rintangan datang berurutan. Stunt Run membuat satu gerbang per encounter. Jungle Drift memakai `JungleDirector` yang memutar 15 "beat" (burung, piranha, buaya, kayu, ekor, kombo, tenang). Laser Breakout memakai `LaserDirector` dengan daftar beat berbeda per tingkat kesulitan (vault → alarm → pursuit → lockdown → override → escape); satu beat bisa berupa **sekuens** beberapa gerbang yang saling tumpang tindih. Moonbound tidak punya rintangan: balapan berjalan dari rep sampai garis finis atau batas waktu 75 detik.
 7. Saat pause atau tracking hilang, rintangan aktif ditarik tanpa hasil (`withdrawGates` / `withdrawJungleHazards`). Setelah semua pemain kembali, state menjadi `ready` dan menunggu Resume eksplisit, lalu countdown lagi.
 8. Replay menaikkan nomor sesi, mengosongkan Team Power, hitungan, simulasi yang terjadwal, dan rintangan, lalu countdown.
 9. **Tidak ada yang disimpan.** Menutup aplikasi atau mengganti mode game (scene dibuat ulang) menghilangkan seluruh state sesi.
@@ -202,6 +225,18 @@ Yang terjadi pada tiap kejadian:
 Penilaian bahaya lompat dipakai bersama oleh piranha, kayu, dan ekor buaya (`JumpSweepJudge`): pemain lolos jika sedang di udara kapan saja dalam jendela **[waktu bahaya sampai di kakinya − 0,35 dtk, + 0,20 dtk]**. Setiap bahaya menghitung waktu sampainya dari lintasannya sendiri (lengkung ikan, guling kayu yang dipercepat, ayunan ekor).
 
 **Condong** (`LeanEstimator`): sudut torso dari leher ke pinggul. Di bawah 2,5° dianggap tegak; 12° = condong penuh. Nilai lean kedua pemain dijumlahkan menjadi gaya pada `RaftBalance`. Untuk serangan buaya, `GatorChallenge` mencatat kontribusi jika pemain menahan condong ke arah yang benar minimal 0,4 detik.
+
+### 5.4 Moonbound dan Laser Breakout: aturan yang berbeda, pola yang sama
+
+**Moonbound** (`MoonRace`): hanya `repCompleted` yang memberi dorongan, jadi jongkok yang ditahan tidak menghasilkan apa-apa. Rep yang terlalu rapat (lebih cepat dari ritme terkontrol) memberi dorongan lebih kecil, supaya tidak ada insentif jongkok terburu-buru. Pemain yang tertinggal mendapat bonus "slipstream" (maksimal +35%). Pemimpin baru berganti jika selisihnya bertahan 1 detik, supaya mahkota tidak berkedip saat keduanya bergantian rep.
+
+**Laser Breakout** (`LaserEncounter`, `TurretSweep`, `LaserSequence`):
+
+- **Yang digambar = yang dinilai.** Setiap gerbang punya jam encounter `t`. Kedalaman gerbang `gateZ(t)` dan waktu sinar sampai di bidang pemain (`crossingTime`) dihitung dari fungsi yang sama dengan yang dipakai renderer. Sinar yang terlihat jauh memang jauh, dan tidak pernah "mengenai" pemain.
+- **Turret berputar** dihitung lewat `TurretSweep.crossings(...)`: sinar melewati pusat lajur tepat saat sudutnya mencapai `atan(ahead / jarak dari dinding)`. Setiap lajur bisa punya waktu crossing sendiri (gelombang: Parent dulu, lalu Child).
+- **Satu jongkok = satu sinar.** `DuckFreshness` mencatat nomor jongkok; jongkok yang ditahan melewati dua sinar hanya menyelesaikan sinar pertama.
+- **Jendela per lajur.** Jendela anak dibuat lebih lebar (`LaserDifficulty.childWindowScale`, default 1,2×). Judge berjalan dengan jendela terlebar, dan setiap lajur hanya dihitung di jendelanya sendiri.
+- **Sekuens aman secara fisik.** `LaserSequence.minGap` menetapkan jeda minimal antar-gerakan di satu lajur (jongkok→jongkok 2,2 dtk, lompat→lompat 1,8, jongkok→lompat 2,4, lompat→jongkok 2,0). Tingkat kesulitan tidak boleh mempersempitnya.
 
 ## 6. Kamera, Vision, koordinat, dan identitas pemain
 
@@ -259,7 +294,13 @@ Hasil terukur di iPad Pro 13" untuk Stunt Run: render 60 fps, Vision sekitar 30 
 | Panel developer dan keyboard | `SimulatedSquat`, `SimulatedJump`, `SimulatedLean` lewat detektor yang sama |
 | Skrip uji (`-scenario coop`, `-scenario sweeps`) | Jadwal gerakan simulasi per langkah, dicatat ke game log |
 
+| Fixture kamera (`-recordedFrame <dir>`, `-cameraFixture <foto>`) | Frame kamera asli yang sudah diproses Vision di Mac diputar di Simulator, karena model Vision tidak berjalan di Simulator. Dipakai untuk mengecek cutout tubuh asli dan kamera terbalik |
+
 `PlayerSlot.driver` memilih sumber per zona setiap frame: pose kamera yang baru, simulasi (jika tidak ada kamera, autoplay, skrip, atau input manual dalam 20 detik terakhir), atau kosong.
+
+### 6.6 Kamera terbalik
+
+Di beberapa kombinasi perangkat dan orientasi, feed kamera bisa sampai terbalik 180°. `OrientationGuard` mendeteksinya dari gambar itu sendiri: jika pose tidak menemukan orang tegak beberapa frame berturut-turut, pipeline mencoba frame yang diputar 180°. Koreksi baru aktif setelah tiga percobaan berturut-turut menemukan orang, jadi momen kosong atau glitch pose tidak membalik gambar. Aturan yang sama mematikan koreksi lagi jika perangkat diputar.
 
 ## 7. State machine, waktu, dan interupsi
 
@@ -296,7 +337,7 @@ Saat kembali ke `running`, semua detektor di-`rearm()`: jongkok yang dimulai saa
 | Waktu permainan | Jadwal rintangan berikutnya, simulasi gerakan | `gameTime`, hanya maju saat tidak berhenti |
 | Jam encounter | Fase dan posisi rintangan, penilaian lompat | `t` per rintangan, maju sebesar `dt × kecepatan dunia / kecepatan jelajah` |
 
-Jam encounter mengikuti kecepatan dunia yang sebenarnya, sehingga rintangan tetap menempel pada pemandangan saat dunia melambat, berhenti, atau mengalami hit-stop. Waktu capture kamera (`captureTime`) hanya dipakai untuk mengukur jeda feedback.
+Jam encounter mengikuti kecepatan dunia yang sebenarnya, sehingga rintangan tetap menempel pada pemandangan saat dunia melambat, berhenti, atau mengalami hit-stop. Di Laser Breakout setiap gerbang dalam sekuens punya jamnya sendiri; gerbang berikutnya dimulai saat jam gerbang sebelumnya cukup jauh sehingga **waktu crossing**-nya berjarak `spacing` (bukan waktu peringatannya). Jika game berhenti di tengah sekuens, seluruh sekuens ditarik dan diulang dari langkah pertama. Waktu capture kamera (`captureTime`) hanya dipakai untuk mengukur jeda feedback.
 
 Jangan mencampur jenis waktu. Contoh: simulasi lompat dijadwalkan dengan waktu permainan, sedangkan detektor berjalan dengan waktu nyata; karena itu replay harus membuang lompatan yang dijadwalkan untuk sesi lama.
 
@@ -319,6 +360,8 @@ Dalam rancangan baru, tulis aturan untuk setiap transisi ini sebelum menghubungk
 | `TeamChallenge`, `GatorChallenge`, `JumpSweepJudge` | Penilaian satu rintangan |
 | `Gate`, `BirdHazard`, `GatorHazard`, `PiranhaHazard`, `LogHazard`, `TailHazard` | Rintangan aktif beserta node SpriteKit-nya |
 | `RaftBalance` | Sudut dan kecepatan rakit |
+| `MoonRace`, `RaceResult` | Progres balapan dan hasilnya (tidak disimpan) |
+| `LaserGate`, `LaserEncounter`, `DuckFreshness`, `SecurityAlert` | Satu gerbang/turret/iris beserta node-nya, penilaiannya, nomor jongkok, dan tingkat alarm |
 | `teamPower`, hitungan jongkok/lompat, combo | Hasil sesi, hilang saat replay |
 | `GameModel` | Setting yang dibaca dari launch argument dan panel; tidak ditulis ke disk |
 
@@ -342,6 +385,10 @@ Sebelum itu, tentukan dulu kapan sebuah sesi "selesai". Saat ini sesinya tanpa a
 | Feedback langsung | Lajur menyala saat mulai bergerak, team lock 0/2 → 2/2, label GREAT!, DUCKED!, CLEARED!, GO DEEPER!, TOO LATE!, suara | Apakah anak mengerti kenapa berhasil/gagal tanpa membaca? |
 | Hukuman | Hampir tidak ada. Gagal hanya memberi reaksi lucu. Satu-satunya pengurangan: SPLASH di Jungle (−2) | Apakah tanpa hukuman membuat tantangan terasa kosong? |
 | Hitungan rep | Jongkok dan lompat per pemain di kartu HUD | Apakah rep berarti "olahraga" bagi orang tua? |
+| Balapan (Moonbound) | Parent vs Child, mahkota pemimpin, final sprint, pemenang | Apakah kompetisi cocok untuk anak yang kalah cepat? (ada slipstream) |
+| Security Alert (Laser) | Naik saat sinar mengenai, turun saat TEAM; mengubah alarm, bukan kecepatan | Tekanan tanpa spiral kesulitan: cukup? |
+| Combo/sekuens (Laser) | COMBO CLEARED + bonus tim jika semua langkah sekuens berhasil bersama | Apakah sekuens panjang membuat anak frustrasi? |
+| Kesulitan (Laser) | `-laserDifficulty easy\|normal\|hard`: daftar beat berbeda, bukan hanya waktu | Siapa yang memilih tingkat, orang tua atau game? |
 
 High score, goal, streak, achievement, profil, dan riwayat **belum ada**.
 
@@ -375,6 +422,9 @@ Semua angka waktu (jendela aksi, jeda peringatan, jendela lompat) masih **provis
 | Semua gambar dibuat lewat kode saat startup | Untuk produksi, ganti dengan aset dari desainer (lihat `DesignerKit/`) dan texture atlas |
 | `GameModel` mencampur setting dan cermin status scene | Pisahkan setting pengguna dari status sesi yang diamati UI |
 | Tes logika dikompilasi dengan `swiftc` lewat skrip, bukan target tes Xcode | Cukup untuk spike; untuk proyek tim, jadikan package tes agar bisa jalan di CI |
+| `TurretSweep` dan `LaserTiming` adalah fungsi murni yang dipakai renderer dan judge sekaligus | Pertahankan: posisi visual dan waktu penilaian tidak bisa berbeda |
+| `WorldScene+Laser.swift` (~1.500 baris) memuat director, sekuens, tiga jenis hardware, HUD preview, dan skrip uji | Pecah per jenis hardware (gerbang, turret, iris) dan pisahkan skrip uji |
+| `LaserGate` memegang node SpriteKit sekaligus encounter-nya | Sama seperti kelas bahaya Jungle: pisahkan state aturan dari node presentasi |
 
 Engine aturan di prototype ini mudah diuji, tetapi tidak semuanya deterministik: beberapa spawn pemandangan memakai generator acak (sebagian dengan seed tetap), dan autoplay memakai `Double.random`. Skrip uji sengaja mematikan autoplay supaya hasilnya bisa dibandingkan antar-revisi.
 
@@ -511,26 +561,31 @@ Tes logika ada di [LogicTests/main.swift](LogicTests/main.swift) dan dijalankan 
 ./LogicTests/run.sh
 ```
 
-Skrip ini mengompilasi file murni (`Pose`, `SquatDetector`, `CoopLogic`, `JungleLogic`, `JungleAnimation`, `PiranhaLogic`, `JumpSweepLogic`) bersama `main.swift` dengan `swiftc`, lalu menjalankannya di macOS. Saat snapshot ini ada **47 kelompok tes**, semuanya lolos. Contoh yang dicakup:
+Skrip ini mengompilasi file murni (`Pose`, `SquatDetector`, `CoopLogic`, `JungleLogic`, `JungleAnimation`, `PiranhaLogic`, `JumpSweepLogic`, `LaserLogic`, `MoonLogic`, `OrientationGuard`) bersama `main.swift` dengan `swiftc`, lalu menjalankannya di macOS. Saat snapshot ini ada **63 kelompok tes**, semuanya lolos. Contoh yang dicakup:
 
 - Sudut lutut dihitung benar meski ruang koordinat tidak persegi; jongkok dangkal tidak menjadi rep; getaran di ambang tidak menambah rep.
 - Kontribusi tercatat sekali; partial mempertahankan kontribusi; cancel tidak menghapus yang sudah didapat.
 - Alur sesi: pause, tracking hilang, ready, resume eksplisit, replay; gerakan yang dimulai saat berhenti tidak menjadi rep.
 - Rakit, buaya, lean, piranha, kayu, ekor: jendela penilaian, label terlalu cepat/lambat, kombo tidak tumpang tindih.
 - Animasi: urutan state buaya, gigitan tepat pada waktu serangan, tidak ada lompatan antar-frame.
+- Moonbound: rep cepat memberi dorongan lebih kecil, slipstream dibatasi, pemimpin tidak berkedip, final sprint dan batas waktu.
+- Laser: jongkok yang ditahan tidak menyelesaikan dua sinar, sekuens di semua tingkat kesulitan layak secara fisik, turret melewati pusat lajur tepat pada waktu crossing, jendela anak lebih lebar tapi label TOO EARLY tetap muncul, easy hanya satu laser sekaligus.
+- Kamera terbalik: koreksi butuh tiga konfirmasi dan bisa kembali.
 
 ### 13.2 Uji integrasi dan hardware secara terpisah
 
 | Pengujian | Yang bisa dibuktikan |
 | --- | --- |
 | Tes logika di macOS | Aturan, detektor, timing, animator |
-| Skrip skenario di Simulator (`-scenario coop`, `-scenario sweeps`) | Alur lengkap dengan input simulasi; game log bisa dibandingkan antar-revisi |
+| Skrip skenario di Simulator (`-scenario coop`, `sweeps`, `moon`, `laser`) | Alur lengkap dengan input simulasi; game log bisa dibandingkan antar-revisi. Skrip Laser (18 langkah) mencakup semua pola, pause, tracking hilang, dan replay |
+| Overlay debug laser (`-laserDebug YES`) | Garis sinar di koordinat dunia: biru = belum bisa mengenai, merah = dalam jendela penilaian, magenta = bidang interaksi pemain |
+| Fixture kamera (`-recordedFrame`) | Cutout tubuh asli dan grounding di Simulator, tanpa menjalankan Vision |
 | Evidence harness (`-evidenceDir`) | Screenshot per kejadian dan metrik per detik |
 | Kamera nyata di iPad/Mac | Akurasi pose, jeda feedback, jarak main, dua tubuh nyata |
 
 Input simulasi selalu sempurna. Karena itu, skrip yang lolos di Simulator tidak membuktikan akurasi Vision pada manusia, apalagi anak-anak.
 
-Yang sudah divalidasi di perangkat: Stunt Run di iPad Pro 13" (60 fps, sekitar 69 ms jeda feedback, dua orang). Yang belum: deteksi lompat dan lean dari pose asli, seluruh Jungle Drift di iPad, uji dengan anak-anak, dan tes panas 10 menit. Detail dan angka lengkap ada di [FINDINGS.md](FINDINGS.md).
+Yang sudah divalidasi di perangkat: Stunt Run di iPad Pro 13" (60 fps, sekitar 69 ms jeda feedback, dua orang). Yang belum: deteksi lompat dan lean dari pose asli, seluruh Jungle Drift, Moonbound, dan Laser Breakout di iPad, uji dengan anak-anak, dan tes panas 10 menit. Di Simulator, Laser Breakout berjalan 60 fps dengan memori 67–70 MB. Detail dan angka lengkap ada di [FINDINGS.md](FINDINGS.md).
 
 ## 14. Urutan membaca kode dan latihan pemahaman
 
@@ -548,6 +603,8 @@ Yang sudah divalidasi di perangkat: Stunt Run di iPad Pro 13" (60 fps, sekitar 6
 | 8 | [JungleLogic.swift](StuntRunSpike/JungleLogic.swift), [JumpSweepLogic.swift](StuntRunSpike/JumpSweepLogic.swift) | Bagaimana tiga gerakan berbagi satu sesi? Bagaimana waktu bahaya lompat dihitung? |
 | 9 | [JungleAnimation.swift](StuntRunSpike/JungleAnimation.swift), [WorldScene+Jungle.swift](StuntRunSpike/WorldScene+Jungle.swift) | Bagaimana animasi dikunci ke waktu penilaian? Di mana director memulai beat? |
 | 10 | [StuntRunApp.swift](StuntRunSpike/StuntRunApp.swift), [GameModel.swift](StuntRunSpike/GameModel.swift) | Bagaimana aplikasi mulai hidup dan bagaimana panel bicara ke scene? |
+| 11 | [LaserLogic.swift](StuntRunSpike/LaserLogic.swift), [WorldScene+Laser.swift](StuntRunSpike/WorldScene+Laser.swift) | Bagaimana waktu crossing dihitung untuk gerbang dan turret? Kenapa jongkok yang ditahan tidak dihitung dua kali? |
+| 12 | [MoonLogic.swift](StuntRunSpike/MoonLogic.swift) | Bagaimana balapan tetap adil untuk pemain yang lebih lambat? |
 
 ### 14.2 Latihan kecil sebelum membuat ulang semuanya
 

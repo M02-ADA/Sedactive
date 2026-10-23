@@ -1,0 +1,102 @@
+[GAME] t=   0.00 real=-1083120.73 s=1 mode: Moonbound race (art 301 ms; first to the Moon, 24 full-thrust squats, 75 s cap)
+[GAME] t=   0.02 real=   0.45 s=1 state: countdown
+[GAME] t=   0.67 real=   1.62 s=2 replay (moon script start) → session 2
+[GAME] t=   0.70 real=   1.64 s=2 state: countdown
+[GAME] t=   3.03 real=   4.85 s=2 state: running
+[GAME] t=   3.13 real=   4.85 s=2 moon: LIFT-OFF — race started (75 s)
+[GAME] t=   3.13 real=   4.85 s=2 moon script step 1/10: PARENT squat → Parent's rocket fires and climbs; Child's unchanged
+[GAME] t=   5.31 real=   7.32 s=2 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.000 → 0.042
+[GAME] t=   5.31 real=   7.32 s=2 moon: LEAD → PARENT
+[GAME] t=   6.54 real=   9.10 s=2 moon script step 2/10: CHILD squat → slipstream catch-up (level again)
+[GAME] t=   7.94 real=  10.50 s=2 moon: CHILD rep → thrust 0.044 (slipstream +6%, pace ×1.00): 0.000 → 0.044
+[GAME] t=   9.15 real=  12.29 s=2 moon script step 3/10: BOTH squat together → both rockets climb
+[GAME] t=  10.55 real=  13.69 s=2 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.042 → 0.083
+[GAME] t=  10.65 real=  13.79 s=2 moon: CHILD rep → thrust 0.044 (slipstream +6%, pace ×1.00): 0.044 → 0.088
+[GAME] t=  10.65 real=  13.79 s=2 moon: neck and neck
+[GAME] t=  11.76 real=  16.25 s=2 moon script step 4/10: PARENT shallow squat → sputter, no thrust
+[GAME] t=  13.05 real=  17.84 s=2 moon: PARENT shallow squat — sputter, no thrust
+[GAME] t=  14.17 real=  18.95 s=2 moon script step 5/10: CHILD holds a squat 5 s → exactly one thrust, on standing
+[GAME] t=  20.31 real=  25.64 s=2 moon: CHILD rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.088 → 0.130
+[GAME] t=  21.31 real=  27.34 s=2 moon: LEAD → CHILD
+[GAME] t=  21.38 real=  27.40 s=2 moon script step 6/10: PARENT rapid reps (every 1.0 s) → reduced thrust on the rushed ones
+[GAME] t=  22.53 real=  28.82 s=2 moon: PARENT rep → thrust 0.044 (slipstream +6%, pace ×1.00): 0.083 → 0.128
+[GAME] t=  22.53 real=  28.82 s=2 moon: neck and neck
+[GAME] t=  22.88 real=  29.80 s=2 moon phase: SKY ASCENT (camera altitude 14 units)
+[GAME] t=  23.58 real=  31.12 s=2 moon: PARENT rep → thrust 0.034 (slipstream +0%, pace ×0.81): 0.128 → 0.162
+[GAME] t=  24.51 real=  32.34 s=2 moon: PARENT rep → thrust 0.030 (slipstream +0%, pace ×0.72): 0.162 → 0.191
+[GAME] t=  24.59 real=  32.42 s=2 moon: LEAD → PARENT
+[GAME] t=  25.54 real=  34.22 s=2 moon: PARENT rep → thrust 0.033 (slipstream +0%, pace ×0.80): 0.191 → 0.225
+[GAME] t=  26.18 real=  35.15 s=2 moon script step 7/10: CHILD squat, then PAUSE mid-climb → frozen; resume
+[GAME] t=  27.57 real=  36.54 s=2 moon: CHILD rep → thrust 0.047 (slipstream +13%, pace ×1.00): 0.130 → 0.177
+[GAME] t=  27.95 real=  37.50 s=2 pause (moon script)
+[GAME] t=  27.95 real=  37.52 s=2 state: paused
+[GAME] t=  27.95 real=  39.50 s=2 resume (moon script)
+[GAME] t=  27.96 real=  39.52 s=2 state: countdown
+[GAME] t=  30.36 real=  42.50 s=2 state: running
+[GAME] t=  30.69 real=  42.82 s=2 moon script step 8/10: PARENT tracking lost → halt → READY → resume (no progress lost)
+[GAME] t=  31.19 real=  43.32 s=2 debug: PARENT tracking OFF (simulated)
+[GAME] t=  31.51 real=  43.92 s=2 PARENT tracking LOST
+[GAME] t=  31.51 real=  43.94 s=2 state: tracking lost (PARENT)
+[GAME] t=  31.51 real=  45.94 s=2 debug: PARENT tracking ON (simulated)
+[GAME] t=  31.51 real=  45.95 s=2 PARENT tracking recovered
+[GAME] t=  31.51 real=  45.97 s=2 state: ready (waiting for explicit resume)
+[GAME] t=  31.51 real=  47.45 s=2 resume (moon script)
+[GAME] t=  31.52 real=  47.47 s=2 state: countdown
+[GAME] t=  33.91 real=  50.47 s=2 state: running
+[GAME] t=  34.21 real=  50.75 s=2 moon script step 9/10: Race to the finish: Child faster, then Parent faster, then both flat out → lead changes, sprint, winner
+[GAME] t=  35.51 real=  52.05 s=2 moon: CHILD rep → thrust 0.044 (slipstream +7%, pace ×1.00): 0.177 → 0.221
+[GAME] t=  35.51 real=  52.05 s=2 moon: neck and neck
+[GAME] t=  35.74 real=  52.60 s=2 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.225 → 0.266
+[GAME] t=  37.41 real=  55.12 s=2 moon: CHILD rep → thrust 0.044 (slipstream +6%, pace ×1.00): 0.221 → 0.266
+[GAME] t=  38.51 real=  56.50 s=2 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.266 → 0.308
+[GAME] t=  39.31 real=  57.89 s=2 moon: CHILD rep → thrust 0.044 (slipstream +6%, pace ×1.00): 0.266 → 0.310
+[GAME] t=  41.22 real=  60.07 s=2 moon: CHILD rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.310 → 0.351
+[GAME] t=  41.32 real=  60.17 s=2 moon: PARENT rep → thrust 0.044 (slipstream +6%, pace ×1.00): 0.308 → 0.352
+[GAME] t=  42.11 real=  61.94 s=2 moon: cloud break
+[GAME] t=  43.12 real=  63.20 s=2 moon: CHILD rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.351 → 0.393
+[GAME] t=  44.13 real=  64.77 s=2 moon: PARENT rep → thrust 0.044 (slipstream +6%, pace ×1.00): 0.352 → 0.396
+[GAME] t=  45.04 real=  65.97 s=2 moon: CHILD rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.393 → 0.435
+[GAME] t=  46.04 real=  67.60 s=2 moon: LEAD → CHILD
+[GAME] t=  46.97 real=  68.87 s=2 moon: PARENT rep → thrust 0.044 (slipstream +5%, pace ×1.00): 0.396 → 0.440
+[GAME] t=  46.97 real=  68.87 s=2 moon: neck and neck
+[GAME] t=  46.97 real=  68.87 s=2 moon: CHILD rep → thrust 0.042 (slipstream +1%, pace ×1.00): 0.435 → 0.477
+[GAME] t=  47.06 real=  68.95 s=2 moon phase: UPPER ATMOSPHERE (camera altitude 109 units)
+[GAME] t=  48.89 real=  72.40 s=2 moon: CHILD rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.477 → 0.519
+[GAME] t=  49.79 real=  73.60 s=2 moon: PARENT rep → thrust 0.046 (slipstream +11%, pace ×1.00): 0.440 → 0.486
+[GAME] t=  51.51 real=  75.94 s=2 moon: PARENT rep → thrust 0.044 (slipstream +5%, pace ×1.00): 0.486 → 0.530
+[GAME] t=  51.81 real=  76.54 s=2 moon: CHILD rep → thrust 0.042 (slipstream +2%, pace ×1.00): 0.519 → 0.561
+[GAME] t=  53.22 real=  78.55 s=2 moon: PARENT rep → thrust 0.043 (slipstream +4%, pace ×1.00): 0.530 → 0.573
+[GAME] t=  54.22 real=  79.87 s=2 moon: LEAD → PARENT
+[GAME] t=  54.77 real=  81.04 s=2 moon: CHILD rep → thrust 0.042 (slipstream +2%, pace ×1.00): 0.561 → 0.603
+[GAME] t=  55.00 real=  81.57 s=2 moon: PARENT rep → thrust 0.043 (slipstream +4%, pace ×1.00): 0.573 → 0.617
+[GAME] t=  55.75 real=  82.62 s=2 moon: entered space
+[GAME] t=  56.75 real=  84.25 s=2 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.617 → 0.659
+[GAME] t=  56.98 real=  84.77 s=2 moon phase: OUTER SPACE (camera altitude 321 units)
+[GAME] t=  57.61 real=  85.40 s=2 moon: CHILD rep → thrust 0.045 (slipstream +8%, pace ×1.00): 0.603 → 0.648
+[GAME] t=  57.61 real=  85.40 s=2 moon: neck and neck
+[GAME] t=  58.33 real=  87.17 s=2 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.659 → 0.700
+[GAME] t=  60.04 real=  89.50 s=2 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.700 → 0.742
+[GAME] t=  60.52 real=  90.29 s=2 moon: CHILD rep → thrust 0.047 (slipstream +13%, pace ×1.00): 0.648 → 0.695
+[GAME] t=  61.83 real=  92.25 s=2 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.742 → 0.784
+[GAME] t=  62.33 real=  93.09 s=2 moon: CHILD rep → thrust 0.047 (slipstream +12%, pace ×1.00): 0.695 → 0.742
+[GAME] t=  63.16 real=  94.57 s=2 moon: FINAL SPRINT (14 s left)
+[GAME] t=  63.69 real=  95.40 s=2 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.784 → 0.825
+[GAME] t=  64.14 real=  96.19 s=2 moon: CHILD rep → thrust 0.047 (slipstream +12%, pace ×1.00): 0.742 → 0.789
+[GAME] t=  65.46 real=  98.17 s=2 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.825 → 0.867
+[GAME] t=  65.95 real=  99.00 s=2 moon: CHILD rep → thrust 0.046 (slipstream +11%, pace ×1.00): 0.789 → 0.835
+[GAME] t=  67.30 real= 101.04 s=2 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.867 → 0.909
+[GAME] t=  67.52 real= 101.60 s=2 moon phase: MOON APPROACH (camera altitude 1099 units)
+[GAME] t=  67.77 real= 101.85 s=2 moon: CHILD rep → thrust 0.046 (slipstream +10%, pace ×1.00): 0.835 → 0.881
+[GAME] t=  67.77 real= 101.85 s=2 moon: neck and neck
+[GAME] t=  69.08 real= 104.50 s=2 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.909 → 0.950
+[GAME] t=  69.57 real= 105.29 s=2 moon: CHILD rep → thrust 0.046 (slipstream +10%, pace ×1.00): 0.881 → 0.927
+[GAME] t=  70.91 real= 107.34 s=2 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.950 → 0.992
+[GAME] t=  71.38 real= 108.12 s=2 moon: CHILD rep → thrust 0.045 (slipstream +9%, pace ×1.00): 0.927 → 0.972
+[GAME] t=  72.69 real= 109.72 s=2 moon: PARENT rep → thrust 0.042 (slipstream +0%, pace ×1.00): 0.992 → 1.000
+[GAME] t=  72.69 real= 109.72 s=2 moon: FINISH — PARENT (first to the Moon, margin 0.028); squats P 25 · C 22
+[GAME] t=  76.30 real= 114.44 s=2 moon: landing burn
+[GAME] t=  79.29 real= 117.87 s=2 moon: TOUCHDOWN
+[GAME] t=  84.70 real= 123.90 s=2 moon: race complete
+[GAME] t=  84.70 real= 123.90 s=3 replay (moon script (after the finish)) → session 3
+[GAME] t=  84.70 real= 123.90 s=3 moon script step 10/10: new race: both rockets reset; PARENT squat → fresh counters
+[GAME] t=  84.72 real= 123.92 s=3 state: countdown

@@ -13,7 +13,7 @@ struct StuntRunApp: App {
 struct ContentView: View {
     @State private var model = GameModel()
     @State private var pipeline = CameraPipeline()
-    @State private var scene: WorldScene = Self.makeScene(UserDefaults.standard.string(forKey: "gameMode") == "jungle" ? .jungleDrift : .stuntRun)
+    @State private var scene: WorldScene = Self.makeScene(.fromLaunchArgument)
     @State private var inputSource: CameraPipeline.Source = .none
 
     static func makeScene(_ mode: GameMode) -> WorldScene {
@@ -131,6 +131,8 @@ struct ControlPanel: View {
                             actionButton("P2 ◀ lean", key: "j", tint: Color(Palette.teal).opacity(0.75)) { scene.simulateLean(.right, direction: -1) }
                             actionButton("P2 lean ▶", key: "l", tint: Color(Palette.teal).opacity(0.75)) { scene.simulateLean(.right, direction: 1) }
                         }
+                    }
+                    if model.gameMode == .jungleDrift || model.gameMode == .laserBreakout {
                         HStack(spacing: 8) {
                             actionButton("P1 jump", key: "e", tint: Color(Palette.coral)) { scene.simulateJump(.left) }
                             actionButton("P2 jump", key: "i", tint: Color(Palette.teal)) { scene.simulateJump(.right) }
@@ -159,6 +161,12 @@ struct ControlPanel: View {
                             actionButton("Jump script", key: "g", tint: Color(Palette.mint).opacity(0.6)) {
                                 scene.startJungleScript(sweeps: true)
                             }
+                        }
+                        if model.gameMode == .laserBreakout {
+                            actionButton("Debug", key: "v", tint: Color(Palette.electric).opacity(0.6)) { scene.toggleLaserDebug() }
+                        }
+                        if model.gameMode == .moonbound {
+                            actionButton("Debug", key: "v", tint: Color(Palette.electric).opacity(0.6)) { scene.toggleMoonDebug() }
                         }
                     }
                     Text(model.playStateLabel).font(.caption.monospaced()).foregroundStyle(.secondary)

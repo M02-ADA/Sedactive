@@ -1,0 +1,79 @@
+[GAME] t=   0.00 real=-1072081.75 s=1 mode: Laser Breakout (art 9 ms)
+[GAME] t=   0.02 real=   0.07 s=1 state: countdown
+[METRICS] fps=58.4 frame=18.2/64.4ms hitch/min=60.0 vision=9.7fps pose=12.6ms seg=12.8ms comp=29.9ms cap→tex=66.5ms feedback(avg)=n/a dropped=0 mem=52MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=   2.98 real=   3.04 s=1 state: running
+[GAME] t=   3.51 real=   3.55 s=1 laser phase: ALARM TRIGGERED
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=10.7 vision=31.0fps pose=4.2ms seg=0.2ms comp=26.7ms cap→tex=46.0ms feedback(avg)=n/a dropped=0 mem=52MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=   7.61 real=   7.65 s=1 laser #1: warning highBeam (nothing visible yet)
+[GAME] t=   8.46 real=   8.50 s=1 laser: blast doors slam shut behind the cart
+[GAME] t=   9.41 real=   9.45 s=1 laser #1: gate revealed (beams at P 0.94 / C 0.66 units)
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=5.6 vision=30.0fps pose=4.2ms seg=0.2ms comp=26.3ms cap→tex=45.7ms feedback(avg)=n/a dropped=0 mem=52MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  12.35 real=  12.39 s=1 laser #1: cue, crossing in 1.39 s
+[GAME] t=  13.45 real=  13.49 s=1 laser #1: PARENT ducked clear (+1)
+[GAME] t=  13.55 real=  13.59 s=1 laser #1: CHILD ducked clear (+1)
+[GAME] t=  13.55 real=  13.59 s=1 laser #1: TEAM (+1 bonus); alert 0.00
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=3.8 vision=31.0fps pose=4.2ms seg=0.2ms comp=26.1ms cap→tex=45.9ms feedback(avg)=n/a dropped=0 mem=51MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  17.80 real=  17.84 s=1 laser #2: warning floorSweep (nothing visible yet)
+[GAME] t=  19.61 real=  19.65 s=1 laser #2: gate revealed (beams at P 0.13 / C 0.13 units)
+[METRICS] fps=59.9 frame=16.7/16.7ms hitch/min=2.9 vision=29.0fps pose=4.2ms seg=0.2ms comp=26.5ms cap→tex=45.8ms feedback(avg)=n/a dropped=0 mem=51MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  22.53 real=  22.57 s=1 laser #2: cue, crossing in 1.39 s
+[GAME] t=  23.61 real=  23.65 s=1 PARENT jump: takeoff
+[GAME] t=  23.61 real=  23.65 s=1 laser #2: PARENT jumped clear (+1)
+[GAME] t=  23.66 real=  23.70 s=1 CHILD jump: takeoff
+[GAME] t=  23.66 real=  23.70 s=1 laser #2: CHILD jumped clear (+1)
+[GAME] t=  23.66 real=  23.70 s=1 laser #2: TEAM (+1 bonus); alert 0.00
+[GAME] t=  24.00 real=  24.04 s=1 PARENT jump: landed (air 0.38 s)
+[GAME] t=  24.05 real=  24.09 s=1 CHILD jump: landed (air 0.38 s)
+[GAME] t=  24.21 real=  24.25 s=1 PARENT jump: cycle complete (jumps 1)
+[GAME] t=  24.25 real=  24.29 s=1 CHILD jump: cycle complete (jumps 1)
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=2.3 vision=31.0fps pose=4.2ms seg=0.2ms comp=26.3ms cap→tex=45.7ms feedback(avg)=n/a dropped=0 mem=51MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  27.98 real=  28.02 s=1 laser #3: warning highBeam (nothing visible yet)
+[GAME] t=  29.80 real=  29.84 s=1 laser #3: gate revealed (beams at P 0.94 / C 0.66 units)
+[METRICS] fps=60.1 frame=16.7/16.7ms hitch/min=1.9 vision=29.1fps pose=4.3ms seg=0.2ms comp=29.3ms cap→tex=42.1ms feedback(avg)=n/a dropped=0 mem=51MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  32.71 real=  32.75 s=1 laser #3: cue, crossing in 1.39 s
+[GAME] t=  33.76 real=  33.80 s=1 laser #3: CHILD ducked clear (+1)
+[GAME] t=  33.93 real=  33.97 s=1 laser #3: PARENT ducked clear (+1)
+[GAME] t=  33.93 real=  33.97 s=1 laser #3: TEAM (+1 bonus); alert 0.00
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=1.7 vision=30.0fps pose=4.2ms seg=0.2ms comp=26.5ms cap→tex=45.9ms feedback(avg)=n/a dropped=0 mem=51MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  38.16 real=  38.20 s=1 laser phase: SECURITY PURSUIT
+[GAME] t=  41.26 real=  41.30 s=1 laser #4: warning splitGrid(parentHigh: true) (nothing visible yet)
+[METRICS] fps=59.9 frame=16.7/16.7ms hitch/min=1.5 vision=30.0fps pose=4.2ms seg=0.2ms comp=26.4ms cap→tex=46.1ms feedback(avg)=n/a dropped=0 mem=51MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  43.06 real=  43.10 s=1 laser #4: gate revealed (beams at P 0.94 / C 0.13 units)
+[GAME] t=  46.00 real=  46.04 s=1 laser #4: cue, crossing in 1.39 s
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=1.3 vision=29.0fps pose=4.2ms seg=0.2ms comp=26.3ms cap→tex=45.9ms feedback(avg)=n/a dropped=0 mem=51MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  47.06 real=  47.10 s=1 laser #4: PARENT ducked clear (+1)
+[GAME] t=  47.23 real=  47.27 s=1 CHILD jump: takeoff
+[GAME] t=  47.23 real=  47.27 s=1 laser #4: CHILD jumped clear (+1)
+[GAME] t=  47.23 real=  47.27 s=1 laser #4: TEAM (+1 bonus); alert 0.00
+[GAME] t=  47.41 real=  47.45 s=1 TURBO (team power full)
+[GAME] t=  47.41 real=  47.45 s=1 GHOST MODE (team power full)
+[GAME] t=  47.61 real=  47.65 s=1 CHILD jump: landed (air 0.38 s)
+[GAME] t=  47.81 real=  47.85 s=1 CHILD jump: cycle complete (jumps 2)
+[GAME] t=  51.45 real=  51.49 s=1 laser #5: warning floorSweep (nothing visible yet)
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=1.2 vision=30.0fps pose=4.1ms seg=0.2ms comp=27.8ms cap→tex=42.6ms feedback(avg)=n/a dropped=0 mem=51MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  53.25 real=  53.29 s=1 laser #5: gate revealed (beams at P 0.13 / C 0.13 units)
+[GAME] t=  56.18 real=  56.22 s=1 laser #5: cue, crossing in 1.39 s
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=1.1 vision=31.0fps pose=4.2ms seg=0.2ms comp=26.4ms cap→tex=45.8ms feedback(avg)=n/a dropped=0 mem=51MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  57.35 real=  57.38 s=1 CHILD jump: takeoff
+[GAME] t=  57.35 real=  57.38 s=1 laser #5: CHILD jumped clear (+1)
+[GAME] t=  57.41 real=  57.45 s=1 PARENT jump: takeoff
+[GAME] t=  57.41 real=  57.45 s=1 laser #5: PARENT jumped clear (+1)
+[GAME] t=  57.41 real=  57.45 s=1 laser #5: TEAM (+1 bonus); alert 0.00
+[GAME] t=  57.73 real=  57.77 s=1 CHILD jump: landed (air 0.38 s)
+[GAME] t=  57.80 real=  57.84 s=1 PARENT jump: landed (air 0.38 s)
+[GAME] t=  57.95 real=  57.99 s=1 CHILD jump: cycle complete (jumps 3)
+[GAME] t=  58.00 real=  58.04 s=1 PARENT jump: cycle complete (jumps 2)
+[GAME] t=  61.63 real=  61.67 s=1 laser #6: warning splitGrid(parentHigh: false) (nothing visible yet)
+[METRICS] fps=59.9 frame=16.7/16.7ms hitch/min=0.0 vision=30.0fps pose=4.2ms seg=0.2ms comp=26.5ms cap→tex=45.9ms feedback(avg)=n/a dropped=0 mem=51MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  63.43 real=  63.47 s=1 laser #6: gate revealed (beams at P 0.13 / C 0.66 units)
+[GAME] t=  66.36 real=  66.40 s=1 laser #6: cue, crossing in 1.39 s
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=30.0fps pose=4.2ms seg=0.2ms comp=26.7ms cap→tex=45.0ms feedback(avg)=n/a dropped=0 mem=51MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  67.53 real=  67.57 s=1 laser #6: CHILD ducked clear (+1)
+[GAME] t=  67.61 real=  67.65 s=1 PARENT jump: takeoff
+[GAME] t=  67.61 real=  67.65 s=1 laser #6: PARENT jumped clear (+1)
+[GAME] t=  67.61 real=  67.65 s=1 laser #6: TEAM (+1 bonus); alert 0.00
+[GAME] t=  68.00 real=  68.04 s=1 PARENT jump: landed (air 0.38 s)
+[GAME] t=  68.21 real=  68.25 s=1 PARENT jump: cycle complete (jumps 3)
+[GAME] t=  71.81 real=  71.85 s=1 laser #7: warning highBeam (nothing visible yet)
+[METRICS] fps=60.0 frame=16.7/16.7ms hitch/min=0.0 vision=29.0fps pose=4.2ms seg=0.2ms comp=26.5ms cap→tex=45.7ms feedback(avg)=n/a dropped=0 mem=51MB thermal=nominal people=0 mask=— src=640×480
+[GAME] t=  73.61 real=  73.65 s=1 laser #7: gate revealed (beams at P 0.94 / C 0.66 units)
