@@ -54,7 +54,7 @@ Sedactive/                                      # Repository
 │   │   ├── MotionEngine.swift                   # Coordinates tracking and body measurement
 │   │   ├── PlayerTracker.swift                  # Matches detections to stable player identities
 │   │   ├── BodyMeasurementExtractor.swift       # Estimates geometry from pose and calibration
-│   │   ├── JumpDetector.swift                   # [optional] Recognizes jump phases/events
+│   │   ├── JumpDetector.swift                   # Required: validates airborne phase for low lasers
 │   │   └── SquatDetector.swift                  # [optional] Recognizes squat phases/repetitions
 │   │
 │   ├── Infrastructure/
@@ -83,9 +83,11 @@ Sedactive/                                      # Repository
 ├── SedactiveTests/                              # Separate unit-test target
 │   ├── MotionTests/
 │   │   ├── PlayerTrackerTests.swift             # Identity assignment and tracking loss
-│   │   └── BodyMeasurementExtractorTests.swift  # Valid/invalid crown and sole measurements
+│   │   ├── BodyMeasurementExtractorTests.swift  # Valid/invalid crown and sole measurements
+│   │   └── JumpDetectorTests.swift              # Jump phases, jitter, and invalid/reacquired input
 │   ├── CollisionTests/
-│   │   └── LaserCollisionJudgeTests.swift       # Clearance, timing, and unavailable evidence
+│   │   ├── LaserCollisionJudgeTests.swift       # Geometry plus required movement evidence
+│   │   └── CollisionTimingTests.swift          # Crossing time, input freshness, and time mapping
 │   ├── GameLogicTests/
 │   │   ├── LaserGameTests.swift                 # Shared health, scoring, and duplicate prevention
 │   │   └── LaserWaveDirectorTests.swift         # Encounter order and scheduling
@@ -140,7 +142,7 @@ CameraPipeline → PoseEstimator → PoseFrame
 
 There is also an image path: camera frame → person mask → transparent cutout → player node. This image path and the numeric body snapshot use matching source-frame identities and a shared placement mapping. The diagram is runtime data flow, not a requirement for the domain to import its outer adapters.
 
-Optional detectors run inside the motion-processing flow when the chosen mechanic needs action facts. The game decides what those facts mean for an encounter.
+`MotionEngine` runs `JumpDetector` as part of the required motion-processing flow. The resulting airborne phase and body geometry belong to the same timestamped player sample in `BodySnapshot`. An optional `SquatDetector` can supply repetitions or other future action facts. The game decides how these facts affect an encounter.
 
 ## Important distinctions
 
@@ -150,7 +152,7 @@ Optional detectors run inside the motion-processing flow when the chosen mechani
 
 `PoseFrame` contains plain raw pose values, including related `PersonPose`, joint, and confidence types if useful. There is no separate mandatory `PersonPose.swift` in this layout.
 
-`BodySnapshot` contains identified, timestamped, game-facing measurements. It is the same central handoff previously called `MotionSnapshot`; use **BodySnapshot** consistently from here onward.
+`BodySnapshot` contains identified, timestamped, game-facing measurements and jump state. Each player's sample carries geometry availability and a jump phase/validity, all referring to the same observation time and calibration/coordinate revision. A plain `JumpPhase` value can live alongside the sample types in this file; the domain does not depend on the `JumpDetector` implementation. This is the same central handoff previously called `MotionSnapshot`; use **BodySnapshot** consistently from here onward.
 
 ### Calibration work versus calibration result
 
@@ -160,7 +162,7 @@ The session coordinator owns the active setup/calibration flow. It passes comple
 
 ### Live service versus motion engine
 
-`BodyInputService` manages the live pipeline and its lifecycle. `MotionEngine` processes plain pose values, owns tracking/optional detector history, and produces body snapshots using supplied calibration values. Motion processing must not require a running camera or SpriteKit scene.
+`BodyInputService` manages live startup/shutdown and data flow: it connects capture, Vision, motion processing, and publication of the processed output. Publication is a local handoff, not a network upload. `MotionEngine` processes plain pose values, owns tracking/jump-detector history and any enabled squat-detector history, and produces body snapshots using supplied calibration values. It does not know how to start a camera and does not own an `AVCaptureSession`. Motion processing must not require a running camera or SpriteKit scene.
 
 The service handles asynchronous startup, errors, interruptions, and stopping. The coordinator cancels/stops it on exit and ignores old-session completion callbacks. Keep capture/image work off the UI executor, use bounded latest-data delivery, and give every snapshot its capture timestamp. The service must report failure even if no further frame arrives.
 
@@ -180,23 +182,50 @@ Use a collection of active encounters so overlapping gates can be supported. Kee
 
 `PlayerProjection` turns shared player-plane geometry into screen positions. Body measurement and cutout placement consume the same agreed mapping and calibration; measurement must not obtain its authoritative geometry by querying SpriteKit nodes.
 
+## Confirmed judgement and geometry contracts
+
+The current mechanics require:
+
+```text
+Low laser SAFE  = valid airborne phase AND sole clearance at crossing
+High laser SAFE = crown clearance at crossing
+```
+
+`JumpDetector` is therefore required. A high laser does not require a classified squat, a fresh squat, or a particular knee angle. `SquatDetector` remains optional for additional mechanics such as completed repetitions in an override objective.
+
+Before judging, validate the evidence needed by that rule: a high laser needs reliable crown geometry; a low laser needs reliable sole geometry and jump state. Missing or stale required evidence produces `Unavailable`, not an automatic SAFE or HIT. During asynchronous collection an evaluation can still be pending; `Unavailable` describes insufficient evidence for a judgement. An earlier airborne phase must not be combined with unrelated newer sole geometry to manufacture a SAFE result.
+
+Use one canonical game coordinate system:
+
+- Virtual player plane with Y increasing upward from the calibrated floor (`Y = 0`). These are game units, not claimed real-world meters.
+- `BodyGeometry.swift` defines crown/left-sole/right-sole measurements and placement/revision conventions in those units.
+- `LaserEncounter.swift` defines compatible beam geometry, thickness, player plane, and per-target crossing time.
+- `LaserCollisionJudge` compares those values directly.
+- `PlayerProjection` maps them to SpriteKit screen positions using the shared placement and perspective parameters. It must not independently redefine the collision body or beam height.
+
+For horizontal beams, clearance can be expressed as crown below the lower beam edge, or the lower of both sole heights above the upper beam edge, including the configured margin. Exact boundary and margin values are tuning decisions. Cosmetic effects must preserve the visible relationship between the judged beam and body.
+
+The camera does not necessarily deliver a sample exactly at crossing. The implementation needs one documented evidence-selection/tolerance policy based on capture time mapped to active game time. Do not bank an unrelated earlier clear as proof of safety at crossing. This supersedes the prototype's existing any-qualifying-sample success rule; tolerance/interpolation details remain to be decided and tested.
+
+`JumpDetectorTests` checks phase transitions, jitter, invalid input, and recovery. `CollisionTimingTests` checks per-player crossings, capture-to-game-time mapping, stale/delayed evidence, and pause/resume behavior. Replay fixtures must supply coherent jump state and geometry as well as timestamps.
+
 ## Naming and scope decisions
 
 - Use **BodyMeasurementExtractor.swift**. Do not also create `BodyGeometryEstimator.swift`; these names previously referred to the same responsibility.
 - Keep the calibration data model only in **Domain/Players/PlayerCalibration.swift**. The active sampling process is **Features/Setup/CalibrationSession.swift**.
 - Use **BodySnapshot.swift** for the shared game-facing handoff; do not add a parallel `MotionSnapshot.swift` with the same data.
-- `JumpDetector` and `SquatDetector` are optional. Geometry alone can establish clearance; detectors add takeoff/landing, fresh-action, or rep facts when mechanics require them. Fresh movement is still an open product decision.
+- `JumpDetector` is required for low-laser airborne validation. `SquatDetector` is optional; high-laser clearance does not require a particular squat form or fresh squat.
 - A separate `SessionPhase.swift` is not required initially. Its lifecycle enum can live in `SessionState.swift`.
 - `PlayViewModel` and `ResultsViewModel` are not required for this foundation. Add one only when the screen gains presentation work that needs its own owner. Never duplicate authoritative health/time there.
 - `ContentView.swift` is the existing starter screen; `RootView.swift` takes over its app-entry routing role when the foundation is wired. It is not a second root flow to maintain.
 - The test directory must be connected to an actual unit-test target. Merely creating test folders inside the app source does not make tests runnable.
 
-This reference fixes the folder layout and ownership boundaries. It does not settle fresh-action rules, timing tolerance, damage grouping, or the initial advanced encounter scope.
+This reference fixes the folder layout, ownership boundaries, and the current low/high laser prerequisites above. Timing tolerance, damage grouping, and the initial advanced encounter scope still need decisions.
 
 ## Build and review order
 
 Define players/calibrations, body snapshots, and one encounter first. Add replay input. Then implement a short replay-driven game, renderer, and debug overlay before integrating live capture. This lets the input developer and rendering developer work against the same examples.
 
-Initial tests should cover missing landmarks, identity ambiguity, per-player target timing, repeated-frame deduplication, health changes, pause/recovery, and stale-session work. Add detector-specific tests when those optional mechanics are implemented. Real tracking and visible cutout/laser alignment also need target-device checks.
+Initial tests should cover missing landmarks, identity ambiguity, jump phases, per-player target timing, repeated-frame deduplication, health changes, pause/recovery, and stale-session work. Add squat-detector tests if its optional mechanics are implemented. Real tracking and visible cutout/laser alignment also need target-device checks.
 
 For each foundation change, review: one owner per mutable value; no platform dependencies inside rules; explicit coordinates/time/frame identity; matched drawing and judgement; visible input failure; bounded/cancellable work; and fixture coverage for the behavior changed.
