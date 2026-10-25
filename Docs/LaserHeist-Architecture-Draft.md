@@ -2,6 +2,8 @@
 
 Prepared for discussion on 25 October 2026. This proposes responsibilities and data contracts; it does not scaffold or change the app implementation.
 
+**Follow-up:** [LaserHeist-Prototype-Comparison.md](LaserHeist-Prototype-Comparison.md) compares the actual `reference/kevin-prototype` source with Edward's current folders and supersedes the alternative layout below. The continuous-clearance policy in section 7 remains a proposal; the prototype banks a qualifying sample within a tolerance window. Fresh movement requirements also remain open. Do not treat either policy as an agreed implementation requirement.
+
 ## 1. Confirmed decisions and working assumptions
 
 Confirmed by Edward:
