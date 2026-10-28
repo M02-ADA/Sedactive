@@ -11,6 +11,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		FA69AAF33091B571008BD429 /* SedactiveTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SedactiveTests;
+			sourceTree = "<group>";
+		};
 		FAFDB9003084B8E100EC2199 /* Sedactive */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Sedactive;
@@ -34,6 +39,7 @@
 			children = (
 				FAFDB9003084B8E100EC2199 /* Sedactive */,
 				FAFDB8FF3084B8E100EC2199 /* Products */,
+				FA69AAF33091B571008BD429 /* SedactiveTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,6 +67,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				FA69AAF33091B571008BD429 /* SedactiveTests */,
 				FAFDB9003084B8E100EC2199 /* Sedactive */,
 			);
 			name = Sedactive;
