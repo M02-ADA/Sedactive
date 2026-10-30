@@ -12,3 +12,4 @@ Packages/
 
 # System
 .DS_Store
+**/*.xcodeproj/project.xcworkspace/
